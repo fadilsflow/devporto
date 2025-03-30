@@ -1,8 +1,14 @@
 "use client"
 import { Button } from "./ui/button";
-import { Moon, Sun } from "lucide-react";
+import { MoonStar, Sun, Laptop } from "lucide-react";
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 export default function ModeToggle() {
   const { theme, setTheme } = useTheme();
@@ -15,14 +21,38 @@ export default function ModeToggle() {
   if (!mounted) {
     return (
       <Button variant="ghost">
-        <Moon className="h-5 w-5" />
+        <MoonStar className="h-5 w-5" />
       </Button>
     );
   }
 
   return (
-    <Button className="p-0" variant="link" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
-      {theme === "dark" ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
-    </Button>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="link" className="p-0 rounded-none ">
+          {theme === "dark" ? (
+            <MoonStar className="h-5 w-5" />
+          ) : theme === "system" ? (
+            <Laptop className="h-5 w-5" />
+          ) : (
+            <Sun className="h-5 w-5" />
+          )}
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-[150px] bg-background rounded-none">
+        <DropdownMenuItem onClick={() => setTheme("light")}>
+          <Sun className="mr-2 h-4 w-4" />
+          <span>Light</span>
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("dark")}>
+          <MoonStar className="mr-2 h-4 w-4" />
+          <span>Dark</span>
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("system")}>
+          <Laptop className="mr-2 h-4 w-4" />
+          <span>System</span>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }   

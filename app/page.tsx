@@ -1,8 +1,9 @@
 
-import ModeToggle from "@/components/mode-toggle";
+
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { GithubIcon, LinkedinIcon, InstagramIcon, TwitterIcon } from "lucide-react";
+import ModeToggle from "@/components/mode-toggle";
 
 export default function Home() {
   return (
@@ -40,7 +41,7 @@ export default function Home() {
 
             </div>
 
-           
+
           </section>
         </div>
         <div className="md:grid-cols-[1fr_1.5fr] border-t  grid grid-cols-1">
