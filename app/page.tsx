@@ -1,6 +1,8 @@
 
 import ModeToggle from "@/components/mode-toggle";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { GithubIcon, LinkedinIcon, InstagramIcon, TwitterIcon } from "lucide-react";
 
 export default function Home() {
   return (
@@ -20,14 +22,25 @@ export default function Home() {
       </header>
 
 
-      <main className="min-h-screen   bg-gradient-to-b mx-0 md:mx-14 border-x from-background to-muted/50  text-sm">
-        <div className="space-y-5 pr-1 px-5 py-5">
+      <main className="min-h-screen   mx-0 md:mx-14 border-x   text-sm">
+        <div className="space-y-5 pr-1 px-5 py-5 bg-gradient-to-b from-background to-muted/40">
           <section>
             <div className="flex flex-col container text-center  items-center gap-2">
+
               <Image src={"/profile.png"} alt="profile" width={100} height={100} className="border bg-muted/50 rounded-full" />
+
               <h1 className="text-2xl text-muted-foreground font-black">Wahyu Akhmad Fadillah</h1>
               <p className="text-2xl text-muted-foreground">Full Stack Developer</p>
+              <div className="flex gap-2">
+                <Button variant={"link"} className="border-none"> <GithubIcon className="w-4 h-4" /></Button>
+                <Button variant={"link"} className="border-none"> <LinkedinIcon className="w-4 h-4" /></Button>
+                <Button variant={"link"} className="border-none"> <InstagramIcon className="w-4 h-4" /></Button>
+                <Button variant={"link"} className="border-none"> <TwitterIcon className="w-4 h-4" /></Button>
+              </div>
+
             </div>
+
+           
           </section>
         </div>
         <div className="md:grid-cols-[1fr_1.5fr] border-t  grid grid-cols-1">
