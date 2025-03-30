@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <header className="border-b flex justify-between items-center">
+      <header className="border-b flex justify-between items-center sticky top-0 bg-background">
         <h1 className="font-medium py-3 px-10">FADILS.XYZ</h1>
         <div className="items-center  hidden md:flex">
           <p className="border-l text-sm text-muted-foreground px-5 py-5">HOME</p>
