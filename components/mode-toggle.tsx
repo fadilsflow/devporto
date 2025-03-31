@@ -29,7 +29,7 @@ export default function ModeToggle() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="link" className="p-0 rounded-none ">
+        <Button variant="link" className="p-0 rounded-none text-muted-foreground ">
           {theme === "dark" ? (
             <MoonStar className="h-5 w-5" />
           ) : theme === "system" ? (
@@ -40,17 +40,17 @@ export default function ModeToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[150px] bg-background rounded-none">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
+        <DropdownMenuItem onClick={() => setTheme("light")} className="text-muted-foreground text-xs">
           <Sun className="mr-2 h-4 w-4" />
-          <span>Light</span>
+          <span >Light</span>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
+        <DropdownMenuItem onClick={() => setTheme("dark")} className="text-muted-foreground text-xs">
           <MoonStar className="mr-2 h-4 w-4" />
-          <span>Dark</span>
+          <span >Dark</span>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
+        <DropdownMenuItem onClick={() => setTheme("system")} className="text-muted-foreground text-xs">
           <Laptop className="mr-2 h-4 w-4" />
-          <span>System</span>
+          <span >System</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

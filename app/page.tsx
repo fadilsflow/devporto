@@ -10,13 +10,13 @@ export default function Home() {
     <div className="min-h-screen">
       {/* Header */}
       <header className="border-b flex justify-between items-center sticky top-0 bg-background">
-        <h1 className="font-medium py-3 px-10">FADILS.XYZ</h1>
+        <h1 className=" py-3 px-10 font-mono font-medium ">fadils<span className="text-muted-foreground text-xs ">.xyz</span></h1>
         <div className="items-center  hidden md:flex">
-          <p className="border-l text-sm text-muted-foreground px-5 py-5">HOME</p>
-          <p className="border-l text-sm text-muted-foreground px-5 py-5">ABOUT</p>
-          <p className="border-l text-sm text-muted-foreground px-5 py-5">PROJECTS</p>
-          <p className="border-l text-sm text-muted-foreground px-5 py-5  ">BLOG</p>
-          <p className="border-l text-sm text-muted-foreground px-2 py-3 ">
+          <p className="border-l text-xs text-muted-foreground px-5 py-5">HOME</p>
+          <p className="border-l text-xs text-muted-foreground px-5 py-5">ABOUT</p>
+          <p className="border-l text-xs text-muted-foreground px-5 py-5">PROJECTS</p>
+          <p className="border-l text-xs text-muted-foreground px-5 py-5  ">BLOG</p>
+          <p className="border-l text-xs text-muted-foreground px-2 py-3 ">
             <ModeToggle />
           </p>
         </div>
@@ -26,13 +26,13 @@ export default function Home() {
       <main className="min-h-screen   mx-0 md:mx-14 border-x   text-sm">
         <div className="space-y-5 pr-1 px-5 py-5 bg-gradient-to-b from-background to-muted/40">
           <section>
-            <div className="flex flex-col container text-center  items-center gap-2">
+            <div className="flex flex-col container text-center  items-center ">
 
               <Image src={"/profile.png"} alt="profile" width={100} height={100} className="border bg-muted/50 rounded-full" />
 
-              <h1 className="text-2xl text-muted-foreground font-black">Wahyu Akhmad Fadillah</h1>
-              <p className="text-2xl text-muted-foreground">Full Stack Developer</p>
-              <div className="flex gap-2">
+              <h1 className="mt-2 text-xs text-muted-foreground font-medium">WAHYU AKHMAD FADILLAH</h1>
+              <p className="text-xs text-foreground">Fullstack Web Developer</p>
+              <div className="flex gap-2 mt-2">
                 <Button variant={"link"} className="border-none"> <GithubIcon className="w-4 h-4" /></Button>
                 <Button variant={"link"} className="border-none"> <LinkedinIcon className="w-4 h-4" /></Button>
                 <Button variant={"link"} className="border-none"> <InstagramIcon className="w-4 h-4" /></Button>
@@ -96,7 +96,7 @@ export default function Home() {
               <div className="flex container justify-between items-center gap-4">
                 <div className="flex flex-col text-left space-y-2">
                   <h2 className="text-sm text-muted-foreground">BLOG</h2>
-                  <p className="text-muted-foreground">
+                  <p >
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquam, nihil doloribus explicabo consectetur culpa molestiae alias! Quam dolores nam eum laborum dolor, modi eveniet. Atque alias tempore esse laudantium?
                   </p>
                 </div>
