@@ -10,8 +10,10 @@ import GitHubCalendar, { Activity } from 'react-github-calendar';
 import { ResumeCard } from "@/components/ResumeCard";
 import { useCallback } from "react";
 
-import { TechnicalSkills } from "@/components/TechnicalSkills";
+
 import Blog from "@/components/Blog";
+import { BentoGrid } from "@/components/BentoGrid";
+import { projects } from "./data";
 export default function Home() {
   const selectLastHalfYear = useCallback((contributions: Activity[]) => {
     const currentYear = new Date().getFullYear();
@@ -158,13 +160,19 @@ export default function Home() {
 
             </div>
           </div>
+          <section id="projects">
+            <div className="flex min-h-0 border-t md:border-0 border-dashed flex-col gap-y-3 ">
+              {/* <h3 className="uppercase text-muted-foreground">Projects</h3> */}
+              <BentoGrid projects={projects} />
+            </div>
+          </section>
         </div>
 
         {/* Right Stripe Pattern */}
         <div className="hidden md:block w-14 relative" style={{
           backgroundImage: 'repeating-linear-gradient(45deg, rgba(100, 100, 120, 0.2) 0px, rgba(100, 100, 120, 0.2) 1px, transparent 1px, transparent 10px)'
         }}></div>
-      </main>
+      </main >
 
       <footer className="border-t">
         <div className="flex flex-col justify-center container items-center py-5 text-center gap-4">
@@ -173,6 +181,6 @@ export default function Home() {
           </p>
         </div>
       </footer>
-    </div>
+    </div >
   );
 }

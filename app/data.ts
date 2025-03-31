@@ -111,3 +111,35 @@ export const BLOG = [
         tags: ["Next.js", "Typescript", "Tailwind CSS"],
     }
 ]
+// app/data.ts
+export interface Project {
+    id: string;
+    title: string;
+    description: string;
+    imageUrl: string;
+    href: string;
+}
+
+export const projects: Project[] = [
+    {
+        id: "1",
+        title: "E-Commerce Platform",
+        description: "A fully responsive online shopping experience",
+        imageUrl: "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_1269.jpg",
+        href: "/commerce"
+    },
+    {
+        id: "2",
+        title: "Portfolio Website",
+        description: "Personal showcase of creative works",
+        imageUrl: "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_3010.jpg",
+        href: "/portfolio"
+    },
+    {
+        id: "3",
+        title: "Task Management App",
+        description: "Intuitive interface for organizing tasks",
+        imageUrl: "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_1269.jpg",
+        href: "/task-management"
+    },
+];

@@ -6,7 +6,7 @@ interface GridPatternProps extends React.SVGProps<SVGSVGElement> {
   width?: number;
   height?: number;
   x?: number;
-  y?: number;
+y?: number;
   squares?: Array<[x: number, y: number]>;
   strokeDasharray?: string;
   className?: string;
