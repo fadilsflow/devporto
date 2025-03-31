@@ -10,6 +10,8 @@ import GitHubCalendar, { Activity } from 'react-github-calendar';
 import { ResumeCard } from "@/components/ResumeCard";
 import { useCallback } from "react";
 
+import { TechnicalSkills } from "@/components/TechnicalSkills";
+import Blog from "@/components/Blog";
 export default function Home() {
   const selectLastHalfYear = useCallback((contributions: Activity[]) => {
     const currentYear = new Date().getFullYear();
@@ -89,7 +91,7 @@ export default function Home() {
             </section>
           </div>
 
-          <div className="md:grid-cols-[1fr_1.5fr] border-0 md:border-t border-dashed md:border-b grid grid-cols-1">
+          <div className="md:grid-cols-[1fr_1.5fr] border-0 md:border-t border-dashed  grid grid-cols-1">
             {/* Left Section */}
             <div className="space-y-5 md:border-r border-0">
               <section className="space-y-6 border-t border-dashed md:border-t-0 border-0 px-5 py-5">
@@ -102,10 +104,34 @@ export default function Home() {
                   </div>
                 </div>
               </section>
-            </div>
+              <section id="github-contributions" >
+                <div className="flex min-h-0 border-t border-b border-dashed flex-col gap-y-3 px-5 py-5 ">
+                  {/* <div className="flex flex-col">
+                    <h2 className="text-muted-foreground uppercase pb-3">Love 🤍</h2>
+                    <TechnicalSkills />
+                  </div> */}
+                  <div className="grid grid-cols-1 ">
+                    <div className="w-full  p-5">
 
+                      <GitHubCalendar
+                        username="fadilsflow"
+                        transformData={selectLastHalfYear}
+                        hideColorLegend
+                        blockMargin={5}
+                        blockRadius={0}
+                        blockSize={8}
+                        labels={{
+                          totalCount: '{{count}} github contributions in the last half year',
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+            </div>
             {/* Right Section */}
-            <div className="space-y-5">
+            <div className="space-y-5 border-b">
               <section id="work-experience" >
                 <div className="flex min-h-0 border-t md:border-0 border-dashed flex-col gap-y-3 px-5 py-5 ">
                   <h3 className="uppercase text-muted-foreground">Work Experience</h3>
@@ -123,25 +149,13 @@ export default function Home() {
                   ))}
                 </div>
               </section>
-              <section id="work-experience" >
-                <div className="flex min-h-0 border-t border-dashed flex-col gap-y-3 px-5 py-5 ">
-                  <div className="grid grid-cols-1 ">
-                    <div className="w-full">
-                      <GitHubCalendar
-                        username="fadilsflow"
-                        transformData={selectLastHalfYear}
-                        hideColorLegend
-                        blockMargin={5}
-                        blockRadius={0}
-                        blockSize={8}
-                        labels={{
-                          totalCount: '{{count}} contributions in the last half year',
-                        }}
-                      />
-                    </div>
-                  </div>
+              <section id="blog" >
+                <div className="flex min-h-0 border-t md:border-0 border-dashed flex-col gap-y-3 px-5 py-5 ">
+                  <h3 className="uppercase text-muted-foreground">Blog</h3>
+                  <Blog />
                 </div>
               </section>
+
             </div>
           </div>
         </div>

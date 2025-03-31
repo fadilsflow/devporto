@@ -1,4 +1,6 @@
+
 import { BriefcaseIcon, HomeIcon, UserIcon } from "lucide-react";
+
 
 type Work = {
     company: string;
@@ -11,7 +13,7 @@ type Work = {
     description: string;
 
 }
-
+export const BASE_URL = "https://fadil.xyz"
 export const NAME = "Wahyu Akhmad Fadillah";
 export const JOB = "Full Stack Developer"
 export const EMAIL = "wahyufadil1140@gmail.com"
@@ -86,4 +88,26 @@ export const NAVBAR = [
         label: "Projects"
     }
 
+]
+
+export const SKILLS = [
+    "Next.js",
+    "Typescript",
+    "Tailwind CSS",
+    "Node.js",
+    "Bun",
+    "PostgreSQL",
+]
+
+export const BLOG = [
+    {
+        id: 1,
+        title: "Hello World",
+        image: `/profile.png`,
+        description: "This is my first blog post",
+        href: `${BASE_URL}/blog/1`,
+        date: "Mar 31, 2025",
+        readingTime: "5 min read time",
+        tags: ["Next.js", "Typescript", "Tailwind CSS"],
+    }
 ]
