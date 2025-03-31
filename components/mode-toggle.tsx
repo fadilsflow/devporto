@@ -29,7 +29,7 @@ export default function ModeToggle() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="link" className="p-0 rounded-none text-muted-foreground ">
+        <Button variant="link" className="p-0  text-muted-foreground ">
           {theme === "dark" ? (
             <MoonStar className="h-5 w-5" />
           ) : theme === "system" ? (
@@ -39,7 +39,7 @@ export default function ModeToggle() {
           )}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[150px] bg-background rounded-none">
+      <DropdownMenuContent align="end" className="w-[150px] bg-background ">
         <DropdownMenuItem onClick={() => setTheme("light")} className="text-muted-foreground text-xs">
           <Sun className="mr-2 h-4 w-4" />
           <span >Light</span>

@@ -1,3 +1,5 @@
+import { BriefcaseIcon, HomeIcon, UserIcon } from "lucide-react";
+
 type Work = {
     company: string;
     href: string;
@@ -15,6 +17,9 @@ export const JOB = "Full Stack Developer"
 export const EMAIL = "wahyufadil1140@gmail.com"
 export const PHONE = "+62 812-3456-7890"
 export const TIMEZONE = "Asia/Jakarta (GMT+7)"
+export const GITHUB_USERNAME = "fadilsflow"
+
+
 export const SOCIAL_LINKS = [
     {
         href: "https://github.com/yourusername",
@@ -62,4 +67,23 @@ export const WORK = [
             "Implemented the Bitcoin discreet log contract (DLC) protocol specifications as an open source Typescript SDK. Dockerized all microservices and setup production kubernetes cluster. Architected a data lake using AWS S3 and Athena for historical backtesting of bitcoin trading strategies. Built a mobile app using react native and typescript.",
 
     },
+]
+
+export const NAVBAR = [
+    {
+        href: "/",
+        icon: HomeIcon,
+        label: "Home"
+    },
+    {
+        href: "/about",
+        icon: UserIcon,
+        label: "About"
+    },
+    {
+        href: "/projects",
+        icon: BriefcaseIcon,
+        label: "Projects"
+    }
+
 ]

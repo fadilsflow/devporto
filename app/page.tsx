@@ -1,20 +1,48 @@
+"use client";
+
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
+
 import { SocialLink } from "@/components/social-link";
 import ModeToggle from "@/components/mode-toggle";
 import { NAME, SOCIAL_LINKS, TIMEZONE, WORK } from "./data";
-import { Badge } from "@/components/ui/badge";
-import { ArrowUpRight } from "lucide-react";
-import { GridPattern } from "@/components/grid-pattern";
-import { cn } from "@/lib/utils";
+import GitHubCalendar, { Activity } from 'react-github-calendar';
+
 import { ResumeCard } from "@/components/ResumeCard";
+import { useCallback } from "react";
 
 export default function Home() {
+  const selectLastHalfYear = useCallback((contributions: Activity[]) => {
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth();
+    const shownMonths = 6;
+
+    return contributions.filter((activity: Activity) => {
+      const date = new Date(activity.date);
+      const monthOfDay = date.getMonth();
+      const yearOfDay = date.getFullYear();
+
+      // Jika bulan sekarang adalah Januari-Juni, kita perlu melihat tahun sebelumnya
+      if (currentMonth < shownMonths) {
+        return (
+          (yearOfDay === currentYear && monthOfDay <= currentMonth) ||
+          (yearOfDay === currentYear - 1 && monthOfDay > currentMonth - shownMonths)
+        );
+      }
+
+      // Untuk bulan Juli-Desember, kita hanya perlu melihat tahun sekarang
+      return (
+        yearOfDay === currentYear &&
+        monthOfDay > currentMonth - shownMonths &&
+        monthOfDay <= currentMonth
+      );
+    });
+  }, []);
+
   return (
     <div className="min-h-screen relative">
       {/* Header */}
       <header className="border-b border-t flex justify-between items-center sticky top-0 z-50 bg-background backdrop-blur-3xl">
-        <h1 className="py-1 px-10 font-mono font-medium">fadils<span className="text-muted-foreground text-xs">.xyz</span></h1>
+        <h1 className="py-3 px-10 font-mono font-medium">fadils<span className="text-muted-foreground text-xs">.xyz</span></h1>
         <div className="items-center hidden md:flex">
           <div className="flex border-l py-5 pl-10 text-xs gap-10 pr-10">
             <p >ABOUT</p>
@@ -61,20 +89,10 @@ export default function Home() {
             </section>
           </div>
 
-          <div className="md:grid-cols-[1fr_1.5fr] border-0 md:border-t grid grid-cols-1">
+          <div className="md:grid-cols-[1fr_1.5fr] border-0 md:border-t border-dashed md:border-b grid grid-cols-1">
             {/* Left Section */}
             <div className="space-y-5 md:border-r border-0">
-              <section className="space-y-6 border-t md:border-t-0 border-0 px-5 py-5">
-                <div className="flex container justify-between items-center gap-4">
-                  <div className="flex flex-col text-left space-y-2">
-                    <h2 className="text-muted-foreground">ABOUT</h2>
-                    <p className="font-medium text-normal">
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatibus pariatur cumque ratione quaerat quia beatae, ut rerum in voluptates maxime. Ex ea dolore dicta hic distinctio ipsa quia voluptatem ducimus!
-                    </p>
-                  </div>
-                </div>
-              </section>
-              <section className="space-y-6 border-t md:border-t-0 border-0 px-5 py-5">
+              <section className="space-y-6 border-t border-dashed md:border-t-0 border-0 px-5 py-5">
                 <div className="flex container justify-between items-center gap-4">
                   <div className="flex flex-col text-left space-y-2">
                     <h2 className="text-muted-foreground">ABOUT</h2>
@@ -88,18 +106,9 @@ export default function Home() {
 
             {/* Right Section */}
             <div className="space-y-5">
-              <section id="work-experience" className="px-5 py-5">
-                <div className="flex min-h-0 flex-col gap-y-3">
+              <section id="work-experience" >
+                <div className="flex min-h-0 border-t md:border-0 border-dashed flex-col gap-y-3 px-5 py-5 ">
                   <h3 className="uppercase text-muted-foreground">Work Experience</h3>
-                  {/* <ResumeCard
-                    logoUrl="/bulba.svg"
-                    altText="Logo"
-                    title="Bulba Cloud"
-                    subtitle="Software Engineer"
-                    period="February 2025 - Present"
-                    description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia laudantium quam reiciendis facere corporis iusto assumenda perspiciatis temporibus asperiores cupiditate tempore, quas animi ducimus ea ipsam iste sit, iure eligendi?"
-                  /> */}
-
                   {WORK.map((work, id) => (
                     <ResumeCard
                       key={work.company}
@@ -108,40 +117,28 @@ export default function Home() {
                       title={work.company}
                       subtitle={work.title}
                       href={work.href}
-
                       period={`${work.start} - ${work.end ?? "Present"}`}
                       description={work.description}
                     />
                   ))}
-
-                  {/* {DATA.work.map((work, id) => (
-                    <BlurFade
-                      key={work.company}
-                      delay={BLUR_FADE_DELAY * 6 + id * 0.05}
-                    >
-                      <ResumeCard
-                        key={work.company}
-                        logoUrl={work.logoUrl}
-                        altText={work.company}
-                        title={work.company}
-                        subtitle={work.title}
-                        href={work.href}
-                        badges={work.badges}
-                        period={`${work.start} - ${work.end ?? "Present"}`}
-                        description={work.description}
-                      />
-                    </BlurFade>
-                   ))} */}
                 </div>
               </section>
-
-              <section className="space-y-6 border-t px-5 py-5">
-                <div className="flex container justify-between items-center gap-4">
-                  <div className="flex flex-col text-left space-y-2">
-                    <h2 className="text-sm text-muted-foreground">BLOG</h2>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquam, nihil doloribus explicabo consectetur culpa molestiae alias! Quam dolores nam eum laborum dolor, modi eveniet. Atque alias tempore esse laudantium?
-                    </p>
+              <section id="work-experience" >
+                <div className="flex min-h-0 border-t border-dashed flex-col gap-y-3 px-5 py-5 ">
+                  <div className="grid grid-cols-1 ">
+                    <div className="w-full">
+                      <GitHubCalendar
+                        username="fadilsflow"
+                        transformData={selectLastHalfYear}
+                        hideColorLegend
+                        blockMargin={5}
+                        blockRadius={0}
+                        blockSize={8}
+                        labels={{
+                          totalCount: '{{count}} contributions in the last half year',
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
               </section>
@@ -150,11 +147,10 @@ export default function Home() {
         </div>
 
         {/* Right Stripe Pattern */}
-        < div className="hidden md:block w-14 relative" style={{
+        <div className="hidden md:block w-14 relative" style={{
           backgroundImage: 'repeating-linear-gradient(45deg, rgba(100, 100, 120, 0.2) 0px, rgba(100, 100, 120, 0.2) 1px, transparent 1px, transparent 10px)'
-        }
-        }></div >
-      </main >
+        }}></div>
+      </main>
 
       <footer className="border-t">
         <div className="flex flex-col justify-center container items-center py-5 text-center gap-4">
@@ -163,6 +159,6 @@ export default function Home() {
           </p>
         </div>
       </footer>
-    </div >
+    </div>
   );
 }
