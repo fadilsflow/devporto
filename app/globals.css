@@ -122,6 +122,6 @@
   }
 
   ::selection {
-    @apply  text-yellow-300;
+    @apply  bg-emerald-400 text-background;
   }
 }

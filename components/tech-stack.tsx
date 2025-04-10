@@ -1,40 +1,43 @@
-
-import Image from "next/image"
+import { useState } from "react";
+import Image from "next/image";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 
 interface TechStackProps {
   title: string;
   description: string;
   icon: string;
-  href: string
+  href: string;
 }
-export default function TechStack({ href, icon, title, description }: TechStackProps) {
+
+export default function TechStack({
+  href,
+  icon,
+  title,
+  description,
+}: TechStackProps) {
   return (
-    <Tooltip >
-      <TooltipTrigger asChild>
-        <a href={href} target="_blank" rel="noopener noreferrer" className="border-none flex items-center p-2 rounded-full hover:rotate-12 transition-all duration-300 hover:scale-110">
-          
-          <Image
-            src={icon}
-            alt={title}
-            width={30}
-            height={30}
-            className="dark:invert invert-0 opacity-50 hover:opacity-100 transition-all duration-300"
-          />
-        </a>
-      </TooltipTrigger>
-      <TooltipContent >
+    <div className="flex flex-col items-center gap-2 p-2 rounded-lg transition-all duration-300  w-24 sm:w-28">
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="rounded-full p-2  shadow-sm hover:shadow-md transition-all duration-300 "
+      >
+        <Image
+          src={icon}
+          alt={title}
+          width={25}
+          height={25}
+          className="dark:invert invert-0 opacity-70 hover:opacity-100 transition-all duration-300"
+        />
+      </a>
 
-        <div className="space-y-1">
-          <h4 className="text-sm font-semibold">@{title}</h4>
-          <p className="text-sm">
-            {description}
-          </p>
-          <div className="flex items-center pt-2">
-          </div>
-        </div>
-      </TooltipContent >
-
-    </Tooltip>
-  )
-} 
+      <div className="text-center">
+        <h4 className="text-xs font-medium ">@{title}</h4>
+        {/* <p className="text-xs bg-red line-clamp-2">
+          {description}
+        </p> */}
+      </div>
+    </div>
+  );
+}

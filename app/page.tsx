@@ -2,14 +2,18 @@
 
 import ModeToggle from "@/components/mode-toggle";
 import { ResumeCard } from "@/components/ResumeCard";
-import { BentoGrid } from "@/components/BentoGrid";
-import { projects, WORK, NAME, type Work, SOCIAL_LINKS, TECHSTACK } from "./data";
+import {
+  WORK,
+  NAME,
+  type Work,
+  TECHSTACK,
+  CONTACT_BIO,
+} from "./data";
 import Image from "next/image";
 import Link from "next/link";
-import { SocialLink } from "@/components/social-link";
-
 
 import TechStack from "@/components/tech-stack";
+import { ContactBio } from "@/components/contact";
 
 export default function Home() {
   return (
@@ -18,7 +22,7 @@ export default function Home() {
       <header className="border-b border-t flex justify-between items-center sticky top-0 z-50 bg-background backdrop-blur-3xl">
         <div className="flex lg:pl-20 md:pl-20 pl-5 items-center gap-2 py-2">
           <Image
-            src={'/profile.png'}
+            src={"/profile.png"}
             alt="wahyu akhmad fadillah"
             width={35}
             height={35}
@@ -26,10 +30,8 @@ export default function Home() {
           />
           <h1 className="font-mono font-medium">{NAME}</h1>
         </div>
-
         <div className="items-center hidden md:flex">
-          <div className="flex  py-5 pl-10 text-xs gap-10 pr-10">
-          </div>
+          <div className="flex  py-5 pl-10 text-xs gap-10 pr-10"></div>
           <p className="text-xs text-muted-foreground border-l px-2 py-2">
             <ModeToggle />
           </p>
@@ -38,9 +40,13 @@ export default function Home() {
 
       <main className="flex flex-row">
         {/* Left Stripe Pattern */}
-        <div className="hidden md:block w-14 relative" style={{
-          backgroundImage: 'repeating-linear-gradient(45deg, rgba(100, 100, 120, 0.2) 0px, rgba(100, 100, 120, 0.2) 1px, transparent 1px, transparent 10px)'
-        }}></div>
+        <div
+          className="hidden md:block w-14 relative"
+          style={{
+            backgroundImage:
+              "repeating-linear-gradient(45deg, rgba(100, 100, 120, 0.2) 0px, rgba(100, 100, 120, 0.2) 1px, transparent 1px, transparent 10px)",
+          }}
+        ></div>
 
         {/* Main Content */}
         <div className="min-h-screen flex-1 border-x text-sm">
@@ -52,19 +58,21 @@ export default function Home() {
                   <div className="flex  flex-col text-left space-y-2 max-w-md">
                     <h2 className="text-muted-foreground">ABOUT</h2>
                     <p className="font-medium text-normal leading-relaxed">
-                      Hi, I'm Fadil — a 19-year-old fullstack developer from Indonesia who builds fast, accessible, and modern web apps. I use TypeScript, React, Next.js, Tailwind, PostgreSQL, and Bun.
+                      Hi, I&apos;m Fadil — a 19-year-old fullstack developer
+                      from Indonesia who builds fast, accessible, and modern web
+                      apps. I use TypeScript, React, Next.js, Tailwind,
+                      PostgreSQL, and Bun.
                       <Link
                         href="/link"
                         className="relative inline-block underline decoration-dotted hover:bg-yellow-200/5  hover:text-yellow-400 underline-offset-1 decoration-1"
                       >
                         Available for work or tech collaborations
-                      </Link>.
+                      </Link>
+                      .
                     </p>
-
-
                     <div className="flex gap-5">
-                      {SOCIAL_LINKS.map((link) => (
-                        <SocialLink
+                      {CONTACT_BIO.map((link) => (
+                        <ContactBio
                           key={link.href}
                           href={link.href}
                           icon={link.icon}
@@ -75,11 +83,13 @@ export default function Home() {
                   </div>
                 </div>
               </section>
-              <section className="space-y-6 border-t border-dashed md:border-t-0 border-0 px-5 py-5">
-                <div className="flex container justify-between items-center gap-4">
-                  <div className="flex  flex-col text-left space-y-2 max-w-md">
-                    <h2 className="text-muted-foreground">CURRENT TECHNOLOGIES</h2>
-                    <div className="flex gap-5 ">
+              <section className="space-y-6 border border-dashed rounded-tr-4xl px-5 py-5">
+                <div className="flex container justify-between items-start gap-4">
+                  <div className="flex flex-col text-left space-y-2 w-full">
+                    <h2 className="text-muted-foreground">
+                      CURRENT TECHNOLOGIES
+                    </h2>
+                    <div className="flex flex-wrap gap-2 justify-start">
                       {TECHSTACK.map((tech) => (
                         <TechStack
                           key={tech.href}
@@ -87,7 +97,6 @@ export default function Home() {
                           icon={tech.icon}
                           title={tech.title}
                           description={tech.description}
-
                         />
                       ))}
                     </div>
@@ -115,7 +124,7 @@ export default function Home() {
             </div>
           </div>
 
-          <section id="projects" className="border-t border-dashed">
+          {/* <section id="projects" className="border-t border-dashed">
             <div className="flex min-h-0 flex-col gap-y-3 px-5 py-5">
               <h3 className="uppercase text-muted-foreground">PROJECTS</h3>
               <p className="text-muted-foreground">
@@ -123,13 +132,17 @@ export default function Home() {
               </p>
               <BentoGrid projects={projects} />
             </div>
-          </section>
+          </section> */}
         </div>
 
         {/* Right Stripe Pattern */}
-        <div className="hidden md:block w-14 relative" style={{
-          backgroundImage: 'repeating-linear-gradient(45deg, rgba(100, 100, 120, 0.2) 0px, rgba(100, 100, 120, 0.2) 1px, transparent 1px, transparent 10px)'
-        }}></div>
+        <div
+          className="hidden md:block w-14 relative"
+          style={{
+            backgroundImage:
+              "repeating-linear-gradient(45deg, rgba(100, 100, 120, 0.2) 0px, rgba(100, 100, 120, 0.2) 1px, transparent 1px, transparent 10px)",
+          }}
+        ></div>
       </main>
 
       <footer className="border-t">
