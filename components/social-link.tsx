@@ -1,6 +1,5 @@
-import { Button } from "@/components/ui/button"
+
 import Image from "next/image"
-import Link from "next/link"
 
 interface SocialLinkProps {
     href: string
@@ -10,16 +9,16 @@ interface SocialLinkProps {
 
 export function SocialLink({ href, icon, label }: SocialLinkProps) {
     return (
-        <Button variant="link" className="border-none p-0" asChild>
-            <Link href={href} target="_blank" rel="noopener noreferrer">
-                <Image
-                    src={`/${icon}.svg`}
-                    alt={label}
-                    width={15}
-                    height={15}
-                    className="dark:invert invert-0 opacity-50 hover:opacity-100 transition-all duration-300"
-                />
-            </Link>
-        </Button>
+
+        <a href={href} target="_blank" rel="noopener noreferrer" className="border-none p-2 rounded-full hover:rotate-12 transition-all duration-300 hover:scale-110">
+            <Image
+                src={`/${icon}.svg`}
+                alt={label}
+                width={20}
+                height={20}
+                className="dark:invert invert-0 opacity-50 hover:opacity-100 transition-all duration-300"
+            />
+        </a>
+
     )
 } 

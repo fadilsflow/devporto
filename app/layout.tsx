@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import DockNavbar from "@/components/DockNavbar";
+import { TooltipProvider } from "@/components/ui/tooltip";
 // import { Dockx } from "@/components/dock";
 
 const geistSans = Geist({
@@ -35,9 +36,11 @@ export default function RootLayout({
           defaultTheme="dark"
           disableTransitionOnChange
         >
+          <TooltipProvider>
 
-          {/* <DockNavbar /> */}
-          {children}
+            {/* <DockNavbar /> */}
+            {children}
+          </TooltipProvider>
         </ThemeProvider>
       </body>
     </html>

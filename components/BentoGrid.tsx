@@ -22,6 +22,7 @@ export const BentoGrid: React.FC<ProjectGridProps> = ({ projects = [] }) => {
         <div className="w-full">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {columns.map((column, colIndex) => (
+
                     <Link href={column[0].href} key={colIndex}>
                         <div className="grid gap-4">
                             {column.map((project) => (

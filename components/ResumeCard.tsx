@@ -1,76 +1,57 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import Link from "next/link";
 import React from "react";
-import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-} from "@/components/ui/accordion";
 
 interface ResumeCardProps {
-    logoUrl: string;
-    altText: string;
     title: string;
-    subtitle?: string;
-    href?: string;
     period: string;
     description?: string;
+    href?: string;
 }
 
 export const ResumeCard = ({
-    logoUrl,
-    altText,
     title,
-    subtitle,
-    href,
     period,
     description,
+    href,
 }: ResumeCardProps) => {
+    const TitleComponent = () => (
+        <h3 className=" text-sm mb-1">
+            {title}
+            {href && <span className="absolute -top-1/40 -right-2 text-[8px] text-yellow-500">↗</span>}
+        </h3>
+    );
+
     return (
-        <Accordion type="single" collapsible className="w-full">
-            <AccordionItem value="item-1" className="border-none">
-                <div className="flex items-start gap-4 space-y-2">
-                    <div className="flex-none">
-                        <Link href={href || "#"} className="block">
-                            <Avatar className="size-10 bg-foreground p-1.5">
-                                <AvatarImage
-                                    src={logoUrl}
-                                    alt={altText}
-                                    className="object-contain"
-                                />
-                                <AvatarFallback>{altText[0]}</AvatarFallback>
-                            </Avatar>
-                        </Link>
-                    </div>
-                    <div className="flex-grow min-w-0">
-                        <AccordionTrigger className="py-0 flex flex-col hover:no-underline">
-                            <div className="flex items-center justify-between w-full cursor-pointer">
-                                <div className="flex items-center gap-x-2">
-                                    <h3 className="font-medium text-sm flex flex-col">
-                                        {title}
-                                        {subtitle && (
-                                            <span className="text-xs">
-                                                {subtitle}
-                                            </span>
-                                        )}
-                                    </h3>
-                                </div>
-                                <div className="text-muted-foreground tabular-nums">
-                                    {period}
-                                </div>
-                            </div>
-                        </AccordionTrigger>
-                        {description && (
-                            <AccordionContent className="mt-2 text-md">
-                                {description}
-                            </AccordionContent>
-                        )}
-                    </div>
+        <div className="w-full font-medium ">
+            <div className="flex gap-8">
+                <div className="flex-1">
+                    {href ? (
+                        <a
+                            href={href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="relative inline-block underline decoration-dotted hover:bg-yellow-200/10 hover:text-yellow-400 underline-offset-1 decoration-1"
+                        >
+                            <TitleComponent />
+                        </a>
+                    ) : (
+                        <div className="relative inline-block">
+                            <TitleComponent />
+                        </div>
+                    )}
+                    <p >
+                        {period}
+                    </p>
                 </div>
-            </AccordionItem>
-        </Accordion>
+                {description && (
+                    <div className="flex-1">
+                        <p className="text-sm leading-relaxed">
+                            {description}
+                        </p>
+                    </div>
+                )}
+            </div>
+        </div>
     );
 };
