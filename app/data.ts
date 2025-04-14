@@ -10,13 +10,11 @@ export type Work = {
   end: string;
   description: string;
 };
-export type TechStack = {
-  title: string;
-  description: string;
-  icon: string;
-  href: string;
-};
 
+type Skill = {
+  label: string
+  link: string
+}
 export const BASE_URL = "https://fadil.xyz";
 export const NAME = "Wahyu Akhmad Fadillah";
 export const JOB = "Full Stack Developer";
@@ -119,66 +117,46 @@ export const NAVBAR = [
   },
 ];
 
-export const TECHSTACK: TechStack[] = [
+export const SKILLS: Skill[] = [
   {
-    title: "Figma",
-    description: "UI/UX Design Tool",
-    href: "https://figma.com",
-    icon: "/figma.svg",
+    label: "Figma",
+    link: "https://figma.com",
   },
   {
-    title: "TypeScript",
-    description: "Typed JavaScript Superset",
-    href: "https://www.typescriptlang.org",
-    icon: "/typescript.svg",
+    label: "TypeScript",
+    link: "https://www.typescriptlang.org",
   },
   {
-    title: "React",
-    description: "JavaScript UI Library",
-    href: "https://reactjs.org",
-    icon: "/react.svg",
+    label: "React",
+    link: "https://reactjs.org",
   },
   {
-    title: "Next.js",
-    description: "React Framework",
-    href: "https://nextjs.org",
-    icon: "/nextdotjs.svg",
+    label: "Next.js",
+    link: "https://nextjs.org",
   },
   {
-    title: "Tailwind CSS",
-    description: "Utility-first CSS Framework",
-    href: "https://tailwindcss.com",
-    icon: "/tailwindcss.svg",
+    label: "Tailwind CSS",
+    link: "https://tailwindcss.com",
   },
   {
-    title: "Linux",
-    description: "Open Source OS",
-    href: "https://kernel.org",
-    icon: "/linux.svg",
+    label: "Linux",
+    link: "https://kernel.org",
   },
   {
-    title: "Bun",
-    description: "JavaScript Runtime",
-    href: "https://bun.sh",
-    icon: "/bun.svg",
+    label: "Bun",
+    link: "https://bun.sh",
   },
   {
-    title: "Git",
-    description: "Version Control System",
-    href: "https://git-scm.com",
-    icon: "/git.svg",
+    label: "Git",
+    link: "https://git-scm.com",
   },
   {
-    title: "Supabase",
-    description: "Open Source Backend",
-    href: "https://supabase.com",
-    icon: "/supabase.svg",
+    label: "Supabase",
+    link: "https://supabase.com",
   },
   {
-    title: "PostgreSQL",
-    description: "Relational Database",
-    href: "https://www.postgresql.org",
-    icon: "/postgresql.svg",
+    label: "PostgreSQL",
+    link: "https://www.postgresql.org",
   },
 ];
 

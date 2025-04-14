@@ -23,7 +23,7 @@ export const ResumeCard = ({
     );
 
     return (
-        <div className="w-full font-medium ">
+        <div className="w-full font-semibold ">
             <div className="flex gap-8">
                 <div className="flex-1">
                     {href ? (

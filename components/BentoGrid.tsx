@@ -19,7 +19,7 @@ export const BentoGrid: React.FC<ProjectGridProps> = ({ projects = [] }) => {
     );
 
     return (
-        <div className="w-full">
+        <div className="w-full border ">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {columns.map((column, colIndex) => (
 
@@ -43,6 +43,7 @@ export const BentoGrid: React.FC<ProjectGridProps> = ({ projects = [] }) => {
                                     </div>
                                 </div>
                             ))}
+                            
                         </div>
                     </Link>
                 ))}

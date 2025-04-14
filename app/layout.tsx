@@ -4,6 +4,8 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import DockNavbar from "@/components/DockNavbar";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { Footer } from "@/components/footer";
+import Navbar from "@/components/navbar";
 // import { Dockx } from "@/components/dock";
 
 const geistSans = Geist({
@@ -37,9 +39,10 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <TooltipProvider>
-
+            <Navbar/>
             {/* <DockNavbar /> */}
             {children}
+            <Footer />
           </TooltipProvider>
         </ThemeProvider>
       </body>
