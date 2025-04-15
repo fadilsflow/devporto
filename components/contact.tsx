@@ -15,7 +15,7 @@ export function ContactBio({ href, label }: ContactBioProps) {
         rel="noopener noreferrer"
         className="border-none rounded-fulltransition-all duration-300 flex "
       >
-        <p className="pl-2 text-xs font-bold text-muted-foreground">{label}</p>
+        <p className=" text-xs font-bold text-muted-foreground">{label}</p>
         <ArrowUpRight className="w-4 h-4" />
 
 

@@ -35,7 +35,7 @@ export const CONTACT_BIO = [
     label: "GitHub",
   },
   {
-    href: "https:///fadils.xyz",
+    href: ":///fadils.xyz",
     icon: "gmail",
     label: "Email",
   },
@@ -69,7 +69,7 @@ export const SOCIAL_LINKS = [
     label: "googlemeet",
   },
   {
-    href: "https:///fadils.xyz",
+    href: ":///fadils.xyz",
     icon: "readdotcv",
     label: "cv",
   },
@@ -116,6 +116,7 @@ export const NAVBAR = [
     label: "Projects",
   },
 ];
+  
 
 export const SKILLS: Skill[] = [
   {
@@ -179,31 +180,78 @@ export interface Project {
   description: string;
   imageUrl: string;
   href: string;
+  tags: string[];
+  featured: boolean;
+  date: string;
+  githubUrl?: string;
+  liveUrl?: string;
+  content?: string;
 }
 
 export const projects: Project[] = [
   {
     id: "1",
     title: "E-Commerce Platform",
-    description: "A fully responsive online shopping experience",
-    imageUrl:
-      "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_1269.jpg",
-    href: "/commerce",
+    description: "A fully responsive online shopping experience with modern UI/UX",
+    imageUrl: "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_1269.jpg",
+    href: "/projects/e-commerce",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase"],
+    featured: true,
+    date: "2024-03-01",
+    githubUrl: "https://github.com/fadilsflow/e-commerce",
+    liveUrl: "https://ecommerce.fadils.xyz",
+    content: "A modern e-commerce platform built with Next.js and Supabase..."
   },
   {
     id: "2",
     title: "Portfolio Website",
-    description: "Personal showcase of creative works",
-    imageUrl:
-      "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_3010.jpg",
-    href: "/portfolio",
+    description: "Personal showcase of creative works with dynamic content",
+    imageUrl: "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_3010.jpg",
+    href: "/projects/portfolio",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS"],
+    featured: true,
+    date: "2024-02-15",
+    githubUrl: "https://github.com/fadilsflow/portfolio",
+    liveUrl: "https://fadils.xyz",
+    content: "A minimalist portfolio website showcasing my projects and skills..."
   },
   {
     id: "3",
     title: "Task Management App",
-    description: "Intuitive interface for organizing tasks",
-    imageUrl:
-      "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_1269.jpg",
-    href: "/task-management",
+    description: "Intuitive interface for organizing tasks with real-time updates",
+    imageUrl: "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_1269.jpg",
+    href: "/projects/task-management",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase"],
+    featured: false,
+    date: "2024-01-20",
+    githubUrl: "https://github.com/fadilsflow/task-management",
+    liveUrl: "https://tasks.fadils.xyz",
+    content: "A task management application with real-time updates and collaborative features..."
   },
+  {
+    id: "4",
+    title: "Weather Dashboard",
+    description: "Real-time weather information with beautiful visualizations",
+    imageUrl: "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_1269.jpg",
+    href: "/projects/weather-dashboard",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "OpenWeather API"],
+    featured: false,
+    date: "2024-01-10",
+    githubUrl: "https://github.com/fadilsflow/weather-dashboard",
+    liveUrl: "https://weather.fadils.xyz",
+    content: "A weather dashboard with real-time data and interactive visualizations..."
+  },
+  {
+    id: "5",
+    title: "Recipe Finder",
+    description: "Discover and save your favorite recipes",
+    imageUrl: "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_1269.jpg",
+    href: "/projects/recipe-finder",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Edamam API"],
+    featured: false,
+    date: "2023-12-15",
+    githubUrl: "https://github.com/fadilsflow/recipe-finder",
+    liveUrl: "https://recipes.fadils.xyz",
+    content: "A recipe finder application with search and filtering capabilities..."
+  }
 ];

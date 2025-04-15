@@ -4,8 +4,8 @@
 
 import { memo } from 'react'
 import Link from 'next/link'
-import { Badge } from '@/components/ui/badge'
 import { Section } from './Section'
+
 
 interface Skill {
   label: string

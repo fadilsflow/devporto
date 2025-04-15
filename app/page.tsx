@@ -1,113 +1,125 @@
 "use client";
 
-
 import { ResumeCard } from "@/components/ResumeCard";
 import {
   WORK,
   type Work,
-
   CONTACT_BIO,
-  SKILLS,
   projects,
 } from "./data";
 
 import Link from "next/link";
 
 
-import { ContactBio } from "@/components/contact";
-import { SkillsSection } from "./components/sections/SkillsSection";
-import { BentoGrid } from "@/components/BentoGrid";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
-
+import { ProjectGrid } from "@/components/ProjectGrid";
+import { Separator } from "@/components/ui/separator";
 
 export default function Home() {
   return (
-    <div className="min-h-screen relative px-5">
-      {/* Header */}
-    
-      <main className="flex flex-row pt-5">
-
-        {/* Main Content */}
-        <div className="min-h-screen flex-1 text-sm space-y-5">
-        <div className="md:grid-cols-[1.2fr_1fr] border-0 grid grid-cols-1">
-            {/* Left Section */}
-            <div className="space-y-5 ">
-              <section className="space-y-6">
-
-                  <div className="flex  flex-col text-left space-y-2 max-w-md">
-                <h3 className="uppercase text-muted-foreground font-mono ">ABOUT</h3>
-                    <p className="font-semibold text-normal leading-relaxed">
-                      Hi, I&apos;m Fadil — a 19-year-old fullstack developer
-                      from Indonesia. specialist with over 2 years of experience. I use TypeScript, React, Next.js, Tailwind,
-                      PostgreSQL, and Bun.
-                      <Link
-                        href="/link"
-                        className="relative inline-block underline decoration-dotted hover:bg-yellow-200/5  hover:text-yellow-400 underline-offset-1 decoration-1"
-                      >
-                        Available for work or tech collaborations
-                      </Link>
-                      .
-                    </p>
-                    <div className="flex gap-5 pt-5">
-                      {CONTACT_BIO.map((link) => (
-                        <ContactBio
-                          key={link.href}
-                          href={link.href}
-                          label={link.label}
-                        />
-                      ))}
-
-                  </div>
-                </div>
-              </section>
-              <section className="space-y-6">
-                  {/* <SkillsSection skills={SKILLS}/> */}
-              </section>
-
-           
+    <div className="min-h-screen relative px-4 md:px-6 lg:px-8 py-12">
+      <main className="space-y-12">
+        {/* Hero Section */}
+        <section className="space-y-6">
+          <div className="space-y-8">
+            <div className="flex items-baseline justify-between">
+              <h1 className="text-3xl font-serif">
+                Fadil&apos;s
+              </h1>
+              <span className="font-mono text-sm text-muted-foreground">[1]</span>
             </div>
 
-            {/* Right Section */}
-            <div className="space-y-5 ">
-              <section className="space-y-6 ">
-                <div className="flex flex-col text-left   gap-4">
-                  <h3 className="uppercase text-muted-foreground font-mono ">WORK</h3>
-                  {WORK.map((work: Work) => (
-                    <ResumeCard
-                      key={work.company}
-                      title={work.company}
-                      period={`${work.start} - ${work.end ?? "Present"}`}
-                      description={work.description}
-                      href={work.href}
-                    />
-                  ))}
-                </div>
-              </section>
-              <section className="space-y-6 ">
-                <div className="flex flex-col text-left   gap-4">
-                  <h3 className="uppercase text-muted-foreground font-mono ">BLOG</h3>
-                <Card>
-                  <CardHeader>
-                    <CardTitle>
-                      <Link href="/blog">Blog</Link>
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-                    </p>
-                  </CardContent>
-                </Card>
-                </div>
-              </section>
+            <div className="space-y-4 text-lg leading-relaxed">
+              <p>
+                Fadil <span className="text-muted-foreground">[法迪]</span> is a fullstack developer who loves building innovative digital experiences and creative solutions. He enjoys crafting elegant interfaces and solving complex problems in creative ways. Previously a software engineer <span className="text-muted-foreground">[工程师]</span>.
+              </p>
+              <p className="text-muted-foreground">
+                Currently building at Instagram. Previously engineered solutions at Apple.
+              </p>
             </div>
           </div>
-          <BentoGrid projects={projects}/>
-        </div>
-       
-      </main>
+        </section>
 
+        <Separator className="my-12" />
+
+        {/* Main Content Grid */}
+        <div className="flex flex-col md:flex-row gap-8 md:gap-16">
+          {/* Left Section */}
+          <div className="flex-1">
+            {/* Contact Section */}
+            <section className="space-y-4">
+              <div className="flex items-center justify-between">
+                <h2 className="font-mono text-sm text-muted-foreground">
+                  ■ [CONTACT]
+                </h2>
+                <span className="font-mono text-sm text-muted-foreground">[2]</span>
+              </div>
+              <div className="space-y-1.5">
+                {CONTACT_BIO.map((link, index) => (
+                  <div key={link.href} className="group flex items-baseline">
+
+                    <span className="font-mono text-xs text-muted-foreground w-4">{index + 1}</span>
+                    <Link 
+                      href={link.href}
+                      className="w-full hover:text-primary transition-colors flex items-baseline gap-1 justify-between"
+                    >
+                      <span>{link.label}</span>
+                      <span >
+                        ↗
+                      </span>
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </div>
+
+          {/* Separator - Hidden on mobile */}
+          <div className="hidden md:block">
+            <Separator orientation="vertical" className="h-full" />
+          </div>
+
+          {/* Horizontal Separator - Shown only on mobile */}
+          <div className="md:hidden">
+            <Separator className="w-full" />
+          </div>
+
+          {/* Right Section */}
+          <div className="flex-1">
+            {/* Teams Section */}
+            <section className="space-y-4">
+              <div className="flex items-center justify-between">
+                <h2 className="font-mono text-sm text-muted-foreground">
+                  □ [TEAMS]
+                </h2>
+                <span className="font-mono text-sm text-muted-foreground">[3]</span>
+              </div>
+              <div className="space-y-2">
+                {WORK.map((work) => (
+                  <div key={work.company} className="flex items-baseline justify-between gap-4">
+                    <span className="text-sm">{work.company}</span>
+                    <span className="text-sm text-muted-foreground font-mono">{work.end ?? "2024-"}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </div>
+        </div>
+
+        {/* Projects Section */}
+        <section className="space-y-8">
+          <div className="flex items-center justify-between">
+            <h2 className="font-mono text-sm text-muted-foreground">
+              ◆ [PROJECTS]
+            </h2>
+            <span className="font-mono text-sm text-muted-foreground">[4]</span>
+          </div>
+          
+          <div className="relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-accent/20 to-secondary/20 blur-3xl -z-10 opacity-50" />
+            <ProjectGrid projects={projects} />
+          </div>
+        </section>
+      </main>
     </div>
   );
 }

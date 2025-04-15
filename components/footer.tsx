@@ -1,11 +1,10 @@
 'use client'
 
-
+import Link from 'next/link'
 import { MonitorIcon, MoonIcon, SunIcon } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 import { AnimatedBackground } from './motion-primitives/animated-background'
-import { TextLoop } from './motion-primitives/text-loop'
 
 const THEMES_OPTIONS = [
   {
@@ -22,6 +21,25 @@ const THEMES_OPTIONS = [
     label: 'System',
     id: 'system',
     icon: <MonitorIcon className="h-4 w-4" />,
+  },
+]
+
+const SOCIAL_LINKS = [
+  {
+    label: 'Linkedin¹',
+    href: 'https://linkedin.com/in/fadilsflow',
+  },
+  {
+    label: 'Instagram²',
+    href: 'https://instagram.com/fadilsflow',
+  },
+  {
+    label: 'Twitter³',
+    href: 'https://twitter.com/fadilsflow',
+  },
+  {
+    label: 'Reading⁴',
+    href: '/reading',
   },
 ]
 
@@ -70,17 +88,58 @@ function ThemeSwitch() {
 
 export function Footer() {
   return (
-    <footer className="mt-24 px-10 border-t py-4 dark:border-zinc-800">
-      <div className="flex items-center justify-between">
-        <a href="https://github.com/ibelick/nim" target="_blank">
-          <TextLoop className="text-xs text-zinc-500">
-            <span>© 2025 Fadils.</span>
-            <span>Stay Curious.</span>
-          </TextLoop>
-        </a>
-        <div className="text-xs text-zinc-400">
-          <ThemeSwitch />
+    <footer className="mt-24 border-t border-border/50 bg-muted/50">
+      <div className="container mx-auto px-4 py-12">
+        <div className="space-y-12">
+          {/* Theme Toggle */}
+        
+
+          {/* Main Footer Content */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Left Column - Version */}
+            <div className="space-y-4">
+              <div className="flex items-center gap-2">
+                <span className="rounded-full border border-border px-2 py-1 font-mono text-xs">
+                  v4.3.0
+                </span>
+                <span className="font-mono text-xs text-muted-foreground">
+                  LAST UPDATED 2025-03-28
+                </span>
+              </div>
+            </div>
+
+            {/* Center Column - Links */}
+            <div className="flex flex-col items-start gap-4">
+              {SOCIAL_LINKS.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="font-mono text-xs text-muted-foreground hover:text-primary transition-colors"
+                  target={link.href.startsWith('http') ? '_blank' : undefined}
+                  rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+
+            {/* Right Column - CTA */}
+            <div className="flex flex-col items-start gap-4">
+              <span className="font-mono text-xs">
+                Let's build something together.
+              </span>
+              <Link
+                href="mailto:wahyufadil1140@gmail.com"
+                className="font-mono text-xs text-muted-foreground hover:text-primary transition-colors"
+              >
+                wahyufadil1140@gmail.com
+              </Link>
+            </div>
+          </div>
         </div>
+          <div className="flex justify-end">
+            <ThemeSwitch />
+          </div>
       </div>
     </footer>
   )
