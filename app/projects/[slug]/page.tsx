@@ -1,7 +1,8 @@
-import { notFound } from 'next/navigation';
-import Image from 'next/image';
-import Link from 'next/link';
-import { projects } from '@/app/data';
+
+import { notFound } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
+import { projects } from "@/app/data";
 
 interface ProjectPageProps {
   params: {
@@ -11,20 +12,15 @@ interface ProjectPageProps {
 
 export default function ProjectPage({ params }: ProjectPageProps) {
   const project = projects.find((p) => p.href === `/projects/${params.slug}`);
-  
+
   if (!project) {
     notFound();
   }
 
   return (
-    <div className="min-h-screen relative px-4 md:px-6 lg:px-8 py-12">
-      <main className="space-y-12">
-     
-
-   
-
-        {/* Project Image */}
-        <div className="relative aspect-[16/9] overflow-hidden ">
+    <div className="min-h-screen bg-black text-white px-20">
+      <main className="container mx-auto py-12  space-y-5">
+      <div className="relative aspect-[16/9] overflow-hidden  ">
           <Image
             src={project.imageUrl}
             alt={project.title}
@@ -32,78 +28,75 @@ export default function ProjectPage({ params }: ProjectPageProps) {
             className="object-cover"
           />
         </div>
-     {/* Project Header */}
-     <section className="space-y-6">
-          <div className="space-y-4">
-            <h1 className="text-3xl font-serif">
-              {project.title}
-            </h1>
-            <p className="text-lg text-muted-foreground">
-              {project.description}
+        {/* Project Header */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+          {/* Left Column - Title */}
+          <div className="col-span-1">
+            <h1 className="text-4xl font-bold mb-4">AIGA HUE</h1>
+            <p className="text-gray-400 uppercase tracking-wider font-mono text-sm">
+              INTERACTIVE DATA<br />VISUALIZATION
             </p>
           </div>
-        </section>
+          
+          {/* Middle Column - Description */}
+          <div className="col-span-1">
+            <p className="text-base mb-4">
+              AIGA Hue is a desktop web experience that visualizes career data from the 2019 AIGA Design Census in a playful and informative manner. The recent over-saturation of interest in certain design fields has resulted in skewed
+            </p>
+          </div>
+          
+          {/* Right Column - Additional Info */}
+          <div className="col-span-1">
+            <p className="text-base">
+              perceptions of neighboring creative industries. This project strives to break those stereotypes by providing a holistic understanding of the creative industry and all the viable career options that exist.
+            </p>
+          </div>
+        </div>
+        
         {/* Project Details */}
-        <section className="space-y-8">
-          {/* Tech Stack */}
-          <div className="space-y-4">
-            <h2 className="font-mono text-sm text-muted-foreground">
-              ◆ [TECH STACK]
-            </h2>
-            <div className="flex flex-wrap gap-2">
-              {project.tags.map((tag) => (
-                <span 
-                  key={tag}
-                  className="text-sm px-3 py-1 bg-muted rounded-full"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
+          {/* Role */}
+          <div>
+            <h3 className="text-gray-400 uppercase tracking-wider font-mono text-sm mb-2">ROLE</h3>
+            <p>Frontend Developer</p>
+            <p>Visual Designer</p>
           </div>
-
-          {/* Project Description */}
-          <div className="space-y-4">
-            <h2 className="font-mono text-sm text-muted-foreground">
-              ◆ [DESCRIPTION]
-            </h2>
-            <div className="prose prose-sm dark:prose-invert">
-              <p>{project.content}</p>
-            </div>
+          
+          {/* Collaborators */}
+          <div>
+            <h3 className="text-gray-400 uppercase tracking-wider font-mono text-sm mb-2">COLLABORATORS</h3>
+            <p>Kyuha Shim (advisor)</p>
+            <p>Langston Wells</p>
+            <p>Stefanie Suk</p>
           </div>
-
-          {/* Links */}
-          <div className="space-y-4">
-            <h2 className="font-mono text-sm text-muted-foreground">
-              ◆ [LINKS]
-            </h2>
-            <div className="flex flex-wrap gap-4">
-              {project.githubUrl && (
-                <Link
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-sm text-muted-foreground hover:text-primary transition-colors"
-                >
-                  <span>GitHub</span>
-                  <span className="ml-1">↗</span>
-                </Link>
-              )}
-              {project.liveUrl && (
-                <Link
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-sm text-muted-foreground hover:text-primary transition-colors"
-                >
-                  <span>Live Preview</span>
-                  <span className="ml-1">↗</span>
-                </Link>
-              )}
-            </div>
+          
+          {/* Duration */}
+          <div>
+            <h3 className="text-gray-400 uppercase tracking-wider font-mono text-sm mb-2">DURATION</h3>
+            <p>8 weeks</p>
           </div>
-        </section>
+          
+          {/* Tools */}
+          <div>
+            <h3 className="text-gray-400 uppercase tracking-wider font-mono text-sm mb-2">TOOLS</h3>
+            <p>HTML/CSS/JS</p>
+            <p>Figma</p>
+            <p>Cinema4D</p>
+          </div>
+        </div>
+        
+        {/* Action Buttons */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Link href="#" className="bg-neutral-900 hover:bg-neutral-800 transition-all border border-neutral-700 rounded-md p-6 flex justify-between items-center">
+            <span className="uppercase font-mono">VIEW LIVE WEBSITE</span>
+            <span className="text-xl">→</span>
+          </Link>
+          <Link href="#" className="bg-neutral-900 hover:bg-neutral-800 transition-all border border-neutral-700 rounded-md p-6 flex justify-between items-center">
+            <span className="uppercase font-mono">VIEW COMPLETE DOCUMENTATION</span>
+            <span className="text-xl">→</span>
+          </Link>
+        </div>
       </main>
     </div>
   );
-} 
+}

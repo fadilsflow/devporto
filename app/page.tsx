@@ -1,9 +1,8 @@
 "use client";
 
-import { ResumeCard } from "@/components/ResumeCard";
+
 import {
   WORK,
-  type Work,
   CONTACT_BIO,
   projects,
 } from "./data";
@@ -13,21 +12,16 @@ import Link from "next/link";
 
 import { ProjectGrid } from "@/components/ProjectGrid";
 import { Separator } from "@/components/ui/separator";
+import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="min-h-screen relative px-4 md:px-6 lg:px-8 py-12">
+    <div className="min-h-screen relative px-4 md:px-6 lg:px-8 py-12 max-w-4xl mx-auto ">
       <main className="space-y-12">
         {/* Hero Section */}
         <section className="space-y-6">
           <div className="space-y-8">
             <div className="flex items-baseline justify-between">
-              <h1 className="text-3xl font-serif">
-                Fadil&apos;s
-              </h1>
-              <span className="font-mono text-sm text-muted-foreground">[1]</span>
-            </div>
-
             <div className="space-y-4 text-lg leading-relaxed">
               <p>
                 Fadil <span className="text-muted-foreground">[法迪]</span> is a fullstack developer who loves building innovative digital experiences and creative solutions. He enjoys crafting elegant interfaces and solving complex problems in creative ways. Previously a software engineer <span className="text-muted-foreground">[工程师]</span>.
@@ -36,7 +30,9 @@ export default function Home() {
                 Currently building at Instagram. Previously engineered solutions at Apple.
               </p>
             </div>
+              <span className="font-mono text-sm text-muted-foreground">[1]</span>
           </div>
+            </div>
         </section>
 
         <Separator className="my-12" />

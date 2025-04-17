@@ -19,7 +19,7 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 bg-background px-4 md:px-6 lg:px-8 p">
+    <nav className="sticky top-0 z-50 bg-background px-4 md:px-6 lg:px-8 max-w-4xl mx-auto">
       <div className="border-b border-border/50">
         <div className="container mx-auto">
           <div className="flex h-16 items-center justify-between">
