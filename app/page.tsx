@@ -16,13 +16,13 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="min-h-screen relative px-4 md:px-6 lg:px-8 py-12 max-w-4xl mx-auto ">
+    <div className="min-h-screen relative px-4 md:px-6 lg:px-20 py-12">
       <main className="space-y-12">
         {/* Hero Section */}
         <section className="space-y-6">
           <div className="space-y-8">
             <div className="flex items-baseline justify-between">
-            <div className="space-y-4 text-lg leading-relaxed">
+            <div className="space-y-4 text-lg leading-relaxed max-w-4xl">
               <p>
                 Fadil <span className="text-muted-foreground">[法迪]</span> is a fullstack developer who loves building innovative digital experiences and creative solutions. He enjoys crafting elegant interfaces and solving complex problems in creative ways. Previously a software engineer <span className="text-muted-foreground">[工程师]</span>.
               </p>

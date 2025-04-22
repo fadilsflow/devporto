@@ -186,6 +186,11 @@ export interface Project {
   githubUrl?: string;
   liveUrl?: string;
   content?: string;
+  role: string[];
+  collaborators: string[];
+  duration: string;
+  tools: string[];
+  category: string;
 }
 
 export const projects: Project[] = [
@@ -200,7 +205,12 @@ export const projects: Project[] = [
     date: "2024-03-01",
     githubUrl: "https://github.com/fadilsflow/e-commerce",
     liveUrl: "https://ecommerce.fadils.xyz",
-    content: "A modern e-commerce platform built with Next.js and Supabase..."
+    content: "A modern e-commerce platform built with Next.js and Supabase...",
+    role: ["Frontend Developer", "UI/UX Designer"],
+    collaborators: ["Kyuha Shim (advisor)", "Langston Wells", "Stefanie Suk"],
+    duration: "8 weeks",
+    tools: ["HTML/CSS/JS", "Figma", "Cinema4D"],
+    category: "INTERACTIVE DATA VISUALIZATION"
   },
   {
     id: "2",
@@ -213,36 +223,15 @@ export const projects: Project[] = [
     date: "2024-02-15",
     githubUrl: "https://github.com/fadilsflow/portfolio",
     liveUrl: "https://fadils.xyz",
-    content: "A minimalist portfolio website showcasing my projects and skills..."
+    content: "A minimalist portfolio website showcasing my projects and skills...",
+    role: ["Full Stack Developer", "UI Designer"],
+    collaborators: ["Solo Project"],
+    duration: "4 weeks",
+    tools: ["Next.js", "TypeScript", "Tailwind CSS"],
+    category: "WEB DEVELOPMENT"
   },
   {
     id: "3",
-    title: "Task Management App",
-    description: "Intuitive interface for organizing tasks with real-time updates",
-    imageUrl: "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_1269.jpg",
-    href: "/projects/task-management",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase"],
-    featured: false,
-    date: "2024-01-20",
-    githubUrl: "https://github.com/fadilsflow/task-management",
-    liveUrl: "https://tasks.fadils.xyz",
-    content: "A task management application with real-time updates and collaborative features..."
-  },
-  {
-    id: "4",
-    title: "Weather Dashboard",
-    description: "Real-time weather information with beautiful visualizations",
-    imageUrl: "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_1269.jpg",
-    href: "/projects/weather-dashboard",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "OpenWeather API"],
-    featured: false,
-    date: "2024-01-10",
-    githubUrl: "https://github.com/fadilsflow/weather-dashboard",
-    liveUrl: "https://weather.fadils.xyz",
-    content: "A weather dashboard with real-time data and interactive visualizations..."
-  },
-  {
-    id: "5",
     title: "Recipe Finder",
     description: "Discover and save your favorite recipes",
     imageUrl: "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_1269.jpg",
@@ -252,6 +241,11 @@ export const projects: Project[] = [
     date: "2023-12-15",
     githubUrl: "https://github.com/fadilsflow/recipe-finder",
     liveUrl: "https://recipes.fadils.xyz",
-    content: "A recipe finder application with search and filtering capabilities..."
+    content: "A recipe finder application with search and filtering capabilities...",
+    role: ["Full Stack Developer"],
+    collaborators: ["Solo Project"],
+    duration: "6 weeks",
+    tools: ["Next.js", "TypeScript", "Tailwind CSS", "Edamam API"],
+    category: "WEB APPLICATION"
   }
 ];
