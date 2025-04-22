@@ -41,10 +41,11 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <TooltipProvider>
-            <Navbar />
-
+            {/* <Navbar /> */}
+            <main className="mx-auto px-4 md:px-6 py-12 max-w-3xl ">
             {children}
             <Footer />
+            </main>
           </TooltipProvider>
         </ThemeProvider>
       </body>

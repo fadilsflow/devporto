@@ -24,26 +24,24 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({ projects = [] }) => {
                     >
                             <div className=" space-y-4">
                                 {/* Image Container */}
-                                <div className="relative aspect-[16/9] overflow-hidden bg-muted ">
+                                <div className="relative aspect-[16/9] overflow-hidden bg-muted">
                                     <Image
                                         src={project.imageUrl}
                                         alt={project.title}
                                         fill
-                                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                        className="object-cover transition-all duration-300 group-hover:brightness-90"
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                 </div>
                                 
                                 {/* Content */}
-                                <div className="space-y-1 uppercase">
-                                    <div className="flex font-mono items-center justify-between">
-                                        <h3 className="text-xs  ">
+                                <div className="space-y-1 ">
+                                    <div className="flex  items-center justify-between">
+                                        <h3 className="text-xs capitalize ">
                                             {project.title}
                                         </h3>
-
                                     </div>
-                                    <p className="text-xs text-muted-foreground line-clamp-2">
-                                        {project.description}
+                                    <p className="text-xs capitalize text-muted-foreground line-clamp-2">
+                                        {project.subtitle}
                                     </p>
                                 </div>
                             </div>

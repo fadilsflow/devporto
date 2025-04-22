@@ -2,8 +2,8 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { projects } from "@/app/data";
-import { ChevronRight } from "lucide-react";
-import { Separator } from "@/components/ui/separator";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface ProjectPageProps {
   params: {
@@ -20,12 +20,18 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   }
 
   return (
-    <div>
-      {/* Floating Header - will be visible on scroll */}
-      
-      <main className="container mx-auto px-4 md:px-6 lg:px-20 ">
+
+    
+    <main>
+        <div className="mb-8">
+          <h1 className="text-3xl md:text-4xl font-bold tracking-tight">{project.title}</h1>
+          <p className="text-sm text-muted-foreground uppercase tracking-wide font-mono">
+            {project.category}
+          </p>
+        </div>
+        
         {/* Hero Image */}
-        <div className="relative aspect-[16/9] overflow-hidden">
+        <div className="relative aspect-video overflow-hidden rounded-lg mb-12 shadow-md">
           <Image
             src={project.imageUrl}
             alt={project.title}
@@ -34,28 +40,20 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             priority
           />
         </div>
-        
-        <div className="max-w-[1400px] mx-auto pt-3">
+        <div className="max-w-[1400px] mx-auto pt-3 ">
           {/* Project Header */}
-          <div className="flex flex-col lg:flex-row lg:justify-between gap-8 ">
+        <div className="flex flex-col gap-8 ">
             {/* Left Column - Title */}
-           <div className="lg:w-1/3 lg:sticky lg:top-20 h-fit col-span-full md:col-end-4 font-mono  ">
-              <h1 className="text-3xl md:text-4xl lg:text-4xl font-bold ">{project.title}</h1>
-              <p className="uppercase tracking-wider text-sm text-muted-foreground">
-                {project.category}
-              </p> 
-            </div>
-
-            {/* Right Column */}
-            <div className="lg:w-2/3 space-y-8 " >
-              <div className="grid md:grid-cols-2 gap-8  ">
+              <div className="flex flex-col gap-4 ">
                 <p className="text-md font-medium">
                   {project.description}
                 </p>
                 <p className="text-md font-medium">
                   {project.content}
-                </p>
+                </p>  
               </div>
+            {/* Right Column */}
+            <div className=" space-y-8 flex flex-col " >
               
 
               {/* Project Details */}
@@ -98,36 +96,43 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               </div>
 
               
-
               {/* Action Buttons */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {project.CTA_BUTTON_1.href && (
-                  <Link 
+              <div className="flex flex-col lg:flex-row gap-4 w-full ">
+                <div className="flex flex-wrap gap-4 w-full ">
+                  {project.CTA_BUTTON_1.href && (
+                    <Button asChild className="w-full" variant="secondary" >
+                      <Link 
                     href={project.CTA_BUTTON_1.href} 
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="transition-all border bg-card hover:bg-card/80 rounded-md p-6 flex justify-between items-center"
+
                   >
                     <span className="uppercase font-mono text-sm">{project.CTA_BUTTON_1.label}</span>
                     <ChevronRight className="w-4 h-4" />
                   </Link>
+                  </Button>
                 )}
+                </div>
+                <div className="flex flex-wrap gap-4 w-full ">
                 {project.CTA_BUTTON_2.href && (
-                  <Link 
+                  <Button asChild className="w-full" variant="secondary">
+                    <Link 
                     href={project.CTA_BUTTON_2.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="transition-all border   bg-card hover:bg-card/80 rounded-md p-6 flex justify-between items-center"
                   >
                     <span className="uppercase font-mono text-sm">{project.CTA_BUTTON_2.label}</span>
                     <ChevronRight className="w-4 h-4" />
                   </Link>
-                )}
+                  </Button>
+                  )}
+                  </div>
               </div>
             </div>
           </div>
         </div>
+      <Link href="/" className="  flex items-center gap-2  mt-20 text-muted-foreground hover:text-primary transition-colors duration-300"><ChevronLeft/>Back</Link>
       </main>
-    </div>
+
   );
 }

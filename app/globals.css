@@ -121,6 +121,6 @@
   }
 
   ::selection {
-    @apply  bg-accent text-foreground;
+    @apply   text-emerald-500 ;
   }
 }

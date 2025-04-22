@@ -17,10 +17,11 @@ type Skill = {
 }
 export const BASE_URL = "https://fadil.xyz";
 export const NAME = "Wahyu Akhmad Fadillah";
+export const BIO = "  19 year old fullstack developer based in Indonesia. Crafting apps with a strong focus on TypeScript and the modern web stack."
 export const JOB = "Full Stack Developer";
 export const EMAIL = "wahyufadil1140@gmail.com";
 export const PHONE = "+62 812-3456-7890";
-export const LOCATION = "Asia/Jakarta (GMT+7)";
+export const LOCATION = "Asia/Jakarta";
 export const GITHUB_USERNAME = "fadilsflow";
 
 export const CONTACT_BIO = [
@@ -35,44 +36,59 @@ export const CONTACT_BIO = [
     label: "GitHub",
   },
   {
-    href: ":///fadils.xyz",
-    icon: "gmail",
-    label: "Email",
+    href: "https://instagram.com/fadils.xyz",
+    icon: "instagram",
+    label: "Instagram",
   },
   {
-    href: "https://cal.com/fadils",
+    href: "https://cal.com/fadils/15min",
     icon: "googlemeet",
-    label: "Meeting",
+    label: "15 Min Meeting",
+  },
+  {
+    href: "https://fadils.xyz/links",
+    icon: "More",
+    label: "More",
+  },
+];
+
+export const NAVIGATION_LINKS = [
+  {
+    href: "/",
+    label: "Home",
+  },
+  {
+    href: "/blog",
+    label: "Blog",
+  },
+  {
+    href: "/projects",
+    label: "Projects",
   },
 ];
 
 export const SOCIAL_LINKS = [
   {
     href: "https://linkedin.com/in/wahyu-akhmad-fadillah",
-    icon: "linkedin",
     label: "LinkedIn",
   },
 
   {
     href: "https://instagram.com/fadils.xyz",
-    icon: "instagram",
+
     label: "Instagram",
   },
   {
     href: "https://github.com/fadilsflow",
-    icon: "github",
+
     label: "GitHub",
   },
   {
     href: "https://cal.com/fadils",
-    icon: "googlemeet",
+
     label: "googlemeet",
   },
-  {
-    href: ":///fadils.xyz",
-    icon: "readdotcv",
-    label: "cv",
-  },
+  
 ];
 export const WORK = [
   {
@@ -177,6 +193,7 @@ export const BLOG = [
 export interface Project {
   id: string;
   title: string;
+  subtitle: string;
   description: string;
   imageUrl: string;
   href: string;
@@ -205,6 +222,7 @@ export const projects: Project[] = [
   {
     id: "1",
     title: "E-Commerce Platform",
+    subtitle:"Productify",
     description:"lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
     imageUrl: "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_1269.jpg",
     href: "/projects/e-commerce",
@@ -231,6 +249,7 @@ export const projects: Project[] = [
   {
     id: "2",
     title: "Portfolio Website",
+    subtitle:"Portfolio",
     description: "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
     imageUrl: "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_3010.jpg",
     href: "/projects/portfolio",
@@ -255,6 +274,7 @@ export const projects: Project[] = [
   {
     id: "3",
     title: "Recipe Finder",
+    subtitle:"Productify",
     description: "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
     imageUrl: "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_1269.jpg",
     href: "/projects/recipe-finder",
