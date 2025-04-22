@@ -191,39 +191,61 @@ export interface Project {
   duration: string;
   tools: string[];
   category: string;
+  CTA_BUTTON_1: {
+    label: string;
+    href: string;
+  };
+  CTA_BUTTON_2: {
+    label: string;
+    href: string;
+  };
 }
 
 export const projects: Project[] = [
   {
     id: "1",
     title: "E-Commerce Platform",
-    description: "A fully responsive online shopping experience with modern UI/UX",
+    description:"lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
     imageUrl: "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_1269.jpg",
     href: "/projects/e-commerce",
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase"],
     featured: true,
     date: "2024-03-01",
-    githubUrl: "https://github.com/fadilsflow/e-commerce",
-    liveUrl: "https://ecommerce.fadils.xyz",
-    content: "A modern e-commerce platform built with Next.js and Supabase...",
+    CTA_BUTTON_1: {
+      label: "domain.com",
+      href: "https://github.com/fadilsflow/e-commerce",
+    },
+    CTA_BUTTON_2: {
+      label: "VIEW SOURCE",
+      href: "https://github.com/fadilsflow/e-commerce",
+    },
+
+    content: "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
     role: ["Frontend Developer", "UI/UX Designer"],
     collaborators: ["Kyuha Shim (advisor)", "Langston Wells", "Stefanie Suk"],
     duration: "8 weeks",
     tools: ["HTML/CSS/JS", "Figma", "Cinema4D"],
     category: "INTERACTIVE DATA VISUALIZATION"
+
   },
   {
     id: "2",
     title: "Portfolio Website",
-    description: "Personal showcase of creative works with dynamic content",
+    description: "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
     imageUrl: "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_3010.jpg",
     href: "/projects/portfolio",
     tags: ["Next.js", "TypeScript", "Tailwind CSS"],
     featured: true,
     date: "2024-02-15",
-    githubUrl: "https://github.com/fadilsflow/portfolio",
-    liveUrl: "https://fadils.xyz",
-    content: "A minimalist portfolio website showcasing my projects and skills...",
+    CTA_BUTTON_1: {
+      label: "VIEW SOURCE",
+      href: "https://github.com/fadilsflow/portfolio",
+    },
+    CTA_BUTTON_2: {
+      label: "VIEW SOURCE",
+      href: "https://github.com/fadilsflow/portfolio",
+    },
+    content: "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
     role: ["Full Stack Developer", "UI Designer"],
     collaborators: ["Solo Project"],
     duration: "4 weeks",
@@ -233,15 +255,21 @@ export const projects: Project[] = [
   {
     id: "3",
     title: "Recipe Finder",
-    description: "Discover and save your favorite recipes",
+    description: "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
     imageUrl: "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_1269.jpg",
     href: "/projects/recipe-finder",
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Edamam API"],
     featured: false,
     date: "2023-12-15",
-    githubUrl: "https://github.com/fadilsflow/recipe-finder",
-    liveUrl: "https://recipes.fadils.xyz",
-    content: "A recipe finder application with search and filtering capabilities...",
+    CTA_BUTTON_1: {
+      label: "VIEW SOURCE",
+      href: "https://github.com/fadilsflow/recipe-finder",
+    },
+    CTA_BUTTON_2: {
+      label: "VIEW SOURCE",
+      href: "https://github.com/fadilsflow/recipe-finder",
+    },
+    content: "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
     role: ["Full Stack Developer"],
     collaborators: ["Solo Project"],
     duration: "6 weeks",
