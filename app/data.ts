@@ -1,23 +1,9 @@
-import { BriefcaseIcon, HomeIcon, UserIcon } from "lucide-react";
 
-export type Work = {
-  company: string;
-  href?: string;
-  title: string;
-  location: string;
-  logoUrl: string;
-  start: string;
-  end: string;
-  description: string;
-};
 
-type Skill = {
-  label: string
-  link: string
-}
 export const BASE_URL = "https://fadil.xyz";
 export const NAME = "Wahyu Akhmad Fadillah";
-export const BIO = "  19 year old fullstack developer based in Indonesia. Crafting apps with a strong focus on TypeScript and the modern web stack."
+export const BIO =
+  "  19 year old fullstack developer based in Indonesia. Crafting apps with a strong focus on TypeScript and the modern web stack.";
 export const JOB = "Full Stack Developer";
 export const EMAIL = "wahyufadil1140@gmail.com";
 export const PHONE = "+62 812-3456-7890";
@@ -54,16 +40,12 @@ export const CONTACT_BIO = [
 
 export const NAVIGATION_LINKS = [
   {
-    href: "/",
-    label: "Home",
-  },
-  {
     href: "/blog",
     label: "Blog",
   },
   {
-    href: "/projects",
-    label: "Projects",
+    href: "/links",
+    label: "Links",
   },
 ];
 
@@ -88,7 +70,6 @@ export const SOCIAL_LINKS = [
 
     label: "googlemeet",
   },
-  
 ];
 export const WORK = [
   {
@@ -115,67 +96,6 @@ export const WORK = [
   },
 ];
 
-export const NAVBAR = [
-  {
-    href: "/",
-    icon: HomeIcon,
-    label: "Home",
-  },
-  {
-    href: "/about",
-    icon: UserIcon,
-    label: "About",
-  },
-  {
-    href: "/projects",
-    icon: BriefcaseIcon,
-    label: "Projects",
-  },
-];
-  
-
-export const SKILLS: Skill[] = [
-  {
-    label: "Figma",
-    link: "https://figma.com",
-  },
-  {
-    label: "TypeScript",
-    link: "https://www.typescriptlang.org",
-  },
-  {
-    label: "React",
-    link: "https://reactjs.org",
-  },
-  {
-    label: "Next.js",
-    link: "https://nextjs.org",
-  },
-  {
-    label: "Tailwind CSS",
-    link: "https://tailwindcss.com",
-  },
-  {
-    label: "Linux",
-    link: "https://kernel.org",
-  },
-  {
-    label: "Bun",
-    link: "https://bun.sh",
-  },
-  {
-    label: "Git",
-    link: "https://git-scm.com",
-  },
-  {
-    label: "Supabase",
-    link: "https://supabase.com",
-  },
-  {
-    label: "PostgreSQL",
-    link: "https://www.postgresql.org",
-  },
-];
 
 export const BLOG = [
   {
@@ -222,9 +142,11 @@ export const projects: Project[] = [
   {
     id: "1",
     title: "E-Commerce Platform",
-    subtitle:"Productify",
-    description:"lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
-    imageUrl: "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_1269.jpg",
+    subtitle: "Productify",
+    description:
+      "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+    imageUrl:
+      "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_1269.jpg",
     href: "/projects/e-commerce",
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase"],
     featured: true,
@@ -238,20 +160,22 @@ export const projects: Project[] = [
       href: "https://github.com/fadilsflow/e-commerce",
     },
 
-    content: "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+    content:
+      "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
     role: ["Frontend Developer", "UI/UX Designer"],
     collaborators: ["Kyuha Shim (advisor)", "Langston Wells", "Stefanie Suk"],
     duration: "8 weeks",
     tools: ["HTML/CSS/JS", "Figma", "Cinema4D"],
-    category: "INTERACTIVE DATA VISUALIZATION"
-
+    category: "INTERACTIVE DATA VISUALIZATION",
   },
   {
     id: "2",
     title: "Portfolio Website",
-    subtitle:"Portfolio",
-    description: "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
-    imageUrl: "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_3010.jpg",
+    subtitle: "Portfolio",
+    description:
+      "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+    imageUrl:
+      "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_3010.jpg",
     href: "/projects/portfolio",
     tags: ["Next.js", "TypeScript", "Tailwind CSS"],
     featured: true,
@@ -264,19 +188,22 @@ export const projects: Project[] = [
       label: "VIEW SOURCE",
       href: "https://github.com/fadilsflow/portfolio",
     },
-    content: "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+    content:
+      "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
     role: ["Full Stack Developer", "UI Designer"],
     collaborators: ["Solo Project"],
     duration: "4 weeks",
     tools: ["Next.js", "TypeScript", "Tailwind CSS"],
-    category: "WEB DEVELOPMENT"
+    category: "WEB DEVELOPMENT",
   },
   {
     id: "3",
     title: "Recipe Finder",
-    subtitle:"Productify",
-    description: "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
-    imageUrl: "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_1269.jpg",
+    subtitle: "Productify",
+    description:
+      "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+    imageUrl:
+      "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_1269.jpg",
     href: "/projects/recipe-finder",
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Edamam API"],
     featured: false,
@@ -289,11 +216,12 @@ export const projects: Project[] = [
       label: "VIEW SOURCE",
       href: "https://github.com/fadilsflow/recipe-finder",
     },
-    content: "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+    content:
+      "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
     role: ["Full Stack Developer"],
     collaborators: ["Solo Project"],
     duration: "6 weeks",
     tools: ["Next.js", "TypeScript", "Tailwind CSS", "Edamam API"],
-    category: "WEB APPLICATION"
-  }
+    category: "WEB APPLICATION",
+  },
 ];
