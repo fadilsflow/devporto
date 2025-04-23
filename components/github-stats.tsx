@@ -1,10 +1,5 @@
 import Reactgithubcalendar from "react-github-calendar";
 
-type Contribution = {
-  date: string;
-  count: number;
-  level: number;
-};
 
 type GitHubStatsProps = {
   totalContributions: number;
@@ -38,7 +33,12 @@ export function GitHubStats({
           />
         </div>
         <div className="mt-4">
-          <Reactgithubcalendar username="fadilsflow" />
+          <Reactgithubcalendar
+            username="fadilsflow"
+            blockRadius={0}
+            blockSize={10}
+            blockMargin={5} 
+          />
         </div>
         <p className="text-xs text-muted-foreground text-center">
           @fadilsflow's contribution activity (updated daily)

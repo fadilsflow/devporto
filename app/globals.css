@@ -121,6 +121,6 @@
   }
 
   ::selection {
-    @apply   text-emerald-500 ;
+    @apply   text-green-500 ;
   }
 }

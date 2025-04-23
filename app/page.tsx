@@ -5,7 +5,7 @@ import { projects } from "./data";
 import Header from "@/components/header";
 import { GitHubStats } from "@/components/github-stats";
 import { getGitHubStats, calculateStats } from "@/lib/github";
-import { DotPattern } from "@/components/magicui/dot-pattern";
+
 
 export const metadata: Metadata = {
   title: `${NAME} | Full Stack Developer`,
@@ -19,19 +19,18 @@ export default async function Home() {
     calculateStats(contributions);
 
   return (
-    <div className="min-h-screen relative">
-      <DotPattern className="fixed inset-0 [mask-image:radial-gradient(800px_circle_at_center,white,transparent)] opacity-80" />
-      <main className="max-w-7xl mx-auto border rounded-lg bg-card relative">
+    <div className="min-h-screen relative ">
+      <main className="max-w-7xl mx-auto  rounded-lg  relative">
         {/* Hero Section */}
-        <section className="border-b">
+        <section>
           <div className="p-8">
             <Header />
           </div>
         </section>
 
         {/* GitHub Activity Section */}
-        <section className="border-b p-8 flex flex-col gap-4">
-          <h2 className="text-sm uppercase font-bold tracking-wider">
+        <section className=" p-8 flex flex-col gap-4 border rounded-t-lg">
+          <h2 className="text-sm font-mono uppercase font-bold tracking-wider">
             GitHub Activity
           </h2>
           <GitHubStats
@@ -42,8 +41,8 @@ export default async function Home() {
         </section>
 
         {/* Projects Section */}
-        <section className=" p-8 flex flex-col gap-4">
-          <h2 className="text-sm uppercase font-bold tracking-wider">
+        <section className=" p-8 flex flex-col gap-4 border rounded-b-lg mt-4">
+          <h2 className="text-sm font-mono pb-3 uppercase font-bold tracking-wider">
             Featured Projects
           </h2>
           <div className="relative">
