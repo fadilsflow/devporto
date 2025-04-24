@@ -1,5 +1,3 @@
-
-
 export const BASE_URL = "https://fadil.xyz";
 export const NAME = "Wahyu Akhmad Fadillah";
 export const BIO =
@@ -25,16 +23,6 @@ export const CONTACT_BIO = [
     href: "https://instagram.com/fadils.xyz",
     icon: "instagram",
     label: "Instagram",
-  },
-  {
-    href: "https://cal.com/fadils/15min",
-    icon: "googlemeet",
-    label: "15 Min Meeting",
-  },
-  {
-    href: "https://fadils.xyz/links",
-    icon: "More",
-    label: "More",
   },
 ];
 
@@ -71,6 +59,40 @@ export const SOCIAL_LINKS = [
     label: "googlemeet",
   },
 ];
+
+export const SKILLS = [
+  {
+    name: "Linux",
+  },
+  {
+    name: "React",
+  },
+  {
+    name: "Next.js",
+  },
+  {
+    name: "Tailwind CSS",
+  },
+  {
+    name: "TypeScript",
+  },
+
+  {
+    name: "Bun",
+  },
+  {
+    name: "PostgreSQL",
+  },
+  {
+    name: "Docker",
+  },
+  {
+    name: "Git",
+  },
+  {
+    name: "Figma",
+  },
+];
 export const WORK = [
   {
     company: "Bulba Cloud",
@@ -95,7 +117,6 @@ export const WORK = [
       "I work with clients to design and develop full-stack websites that are fast, modern, and responsive.",
   },
 ];
-
 
 export const BLOG = [
   {
@@ -195,33 +216,5 @@ export const projects: Project[] = [
     duration: "4 weeks",
     tools: ["Next.js", "TypeScript", "Tailwind CSS"],
     category: "WEB DEVELOPMENT",
-  },
-  {
-    id: "3",
-    title: "Recipe Finder",
-    subtitle: "Productify",
-    description:
-      "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
-    imageUrl:
-      "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_1269.jpg",
-    href: "/projects/recipe-finder",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Edamam API"],
-    featured: false,
-    date: "2023-12-15",
-    CTA_BUTTON_1: {
-      label: "VIEW SOURCE",
-      href: "https://github.com/fadilsflow/recipe-finder",
-    },
-    CTA_BUTTON_2: {
-      label: "VIEW SOURCE",
-      href: "https://github.com/fadilsflow/recipe-finder",
-    },
-    content:
-      "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
-    role: ["Full Stack Developer"],
-    collaborators: ["Solo Project"],
-    duration: "6 weeks",
-    tools: ["Next.js", "TypeScript", "Tailwind CSS", "Edamam API"],
-    category: "WEB APPLICATION",
   },
 ];

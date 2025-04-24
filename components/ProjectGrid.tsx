@@ -34,10 +34,10 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({ projects = [] }) => {
 
             {/* Content */}
             <div className="space-y-2">
-              <h3 className="text-base font-medium text-white/90">
+              <h3 className="text-base font-medium ">
                 {project.title}
               </h3>
-              <p className="text-sm text-white/60 line-clamp-2">
+              <p className="text-sm line-clamp-2">
                 {project.description}
               </p>
             </div>
