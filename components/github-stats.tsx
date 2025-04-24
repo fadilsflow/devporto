@@ -59,7 +59,7 @@ export function GitHubStats({
         />
       </div>
       <p className="text-xs text-muted-foreground text-center">
-        @fadilsflow's contribution activity (updated daily)
+        @fadilsflow&apos;s contribution activity (updated daily)
       </p>
     </div>
   );
@@ -77,7 +77,7 @@ function StatCard({ value, label, description }: StatCardProps) {
       <p
         className={cn(
           "text-base md:text-lg font-bold",
-          "text-green-600 dark:text-green-500"
+          "text-green-600 dark:text-green-500",
         )}
       >
         {value}

@@ -1,4 +1,3 @@
-
 import { GITHUB_USERNAME } from "@/app/data";
 
 type Contribution = {
@@ -18,7 +17,7 @@ export async function getGitHubStats(): Promise<GitHubStats> {
       `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}`,
       {
         next: { revalidate: 3600 }, // Revalidate every hour
-      }
+      },
     );
 
     if (!response.ok) {
@@ -46,11 +45,11 @@ export function calculateStats(contributions: Contribution[]) {
 
   const totalContributions = recentContributions.reduce(
     (sum, contribution) => sum + contribution.count,
-    0
+    0,
   );
 
   const maxInDay = Math.max(
-    ...recentContributions.map((contribution) => contribution.count)
+    ...recentContributions.map((contribution) => contribution.count),
   );
 
   const bestStreak = calculateBestStreak(recentContributions);

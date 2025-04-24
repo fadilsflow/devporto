@@ -1,12 +1,14 @@
 import { Metadata } from "next";
 import { NAME } from "./data";
-import { ProjectGrid } from "@/components/ProjectGrid";
+import { ProjectGrid } from "@/components/project-grid";
 import { projects } from "./data";
 import Header from "@/components/header";
 import { GitHubStats } from "@/components/github-stats";
 import { getGitHubStats, calculateStats } from "@/lib/github";
-import { SkillsSection } from "./components/sections/skills-section";
+
 import Status from "@/components/Status";
+import { Skills } from "@/components/Skills";
+import { BlogPosts } from "@/components/posts";
 
 export const metadata: Metadata = {
   title: `${NAME} | Full Stack Developer`,
@@ -33,7 +35,7 @@ export default async function Home() {
           <h2 className="text-sm font-mono uppercase font-bold tracking-wider">
             Tech Stack
           </h2>
-          <SkillsSection />
+          <Skills />
         </section>
 
         {/* GitHub Activity Section */}
@@ -57,6 +59,14 @@ export default async function Home() {
             <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-accent/20 to-secondary/20 blur-3xl -z-10 opacity-50" />
             <ProjectGrid projects={projects} />
           </div>
+        </section>
+
+        {/* Blog Section */}
+        <section className=" p-8 flex flex-col gap-4 border rounded-b-lg">
+          <h2 className="text-sm font-mono pb-3 uppercase font-bold tracking-wider">
+            Blog
+          </h2>
+          <BlogPosts />
         </section>
 
         <section className=" p-8 flex flex-col gap-4 border rounded-b-lg">

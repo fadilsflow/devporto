@@ -16,7 +16,7 @@ export default function Status({ isAvailable = true, className }: StatusProps) {
         isAvailable
           ? "dark:bg-green-950/30 border-green-800/40 text-green-500"
           : "dark:bg-red-950/30 border-red-800/40 text-red-500",
-        className
+        className,
       )}
     >
       {isAvailable ? (

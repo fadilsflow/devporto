@@ -1,7 +1,7 @@
 export const BASE_URL = "https://fadil.xyz";
 export const NAME = "Wahyu Akhmad Fadillah";
 export const BIO =
-  "  19 year old fullstack developer based in Indonesia. Crafting apps with a strong focus on TypeScript and the modern web stack.";
+  "19 year old fullstack developer based in Indonesia. Crafting apps with a strong focus on TypeScript and the modern web stack.";
 export const JOB = "Full Stack Developer";
 export const EMAIL = "wahyufadil1140@gmail.com";
 export const PHONE = "+62 812-3456-7890";
@@ -40,59 +40,69 @@ export const NAVIGATION_LINKS = [
 export const SOCIAL_LINKS = [
   {
     href: "https://linkedin.com/in/wahyu-akhmad-fadillah",
+    icon: "linkedin",
     label: "LinkedIn",
   },
-
   {
     href: "https://instagram.com/fadils.xyz",
-
+    icon: "instagram",
     label: "Instagram",
   },
   {
     href: "https://github.com/fadilsflow",
-
+    icon: "github",
     label: "GitHub",
   },
   {
-    href: "https://cal.com/fadils",
-
-    label: "googlemeet",
+    href: "mailto:wahyufadil1140@gmail.com",
+    icon: "gmail",
+    label: "Email",
   },
 ];
 
 export const SKILLS = [
   {
     name: "Linux",
+    category: "DevOps",
   },
   {
     name: "React",
+    category: "Frontend",
   },
   {
     name: "Next.js",
+    category: "Frontend",
   },
   {
     name: "Tailwind CSS",
+    category: "Frontend",
   },
   {
     name: "TypeScript",
+    category: "Programming",
   },
-
   {
     name: "Bun",
+    category: "Runtime",
   },
   {
     name: "PostgreSQL",
+    category: "Database",
   },
   {
     name: "Supabase",
+    category: "Backend",
   },
   {
     name: "Git",
+    category: "Version Control",
   },
   {
     name: "Figma",
+    category: "Design",
   },
 ];
+
 export const WORK = [
   {
     company: "Bulba Cloud",
@@ -107,7 +117,6 @@ export const WORK = [
   },
   {
     company: "Freelance",
-    // href: "https://.com",
     location: "Remote",
     title: "Full-stack Web Developer",
     logoUrl: "/freelance.svg",
@@ -127,10 +136,10 @@ export const BLOG = [
     href: `${BASE_URL}/blog/1`,
     date: "Mar 31, 2025",
     readingTime: "5 min read time",
-    tags: ["Next.js", "Typescript", "Tailwind CSS"],
+    tags: ["Next.js", "TypeScript", "Tailwind CSS"],
   },
 ];
-// app/data.ts
+
 export interface Project {
   id: string;
   title: string;
@@ -149,13 +158,15 @@ export interface Project {
   duration: string;
   tools: string[];
   category: string;
-  CTA_BUTTON_1: {
-    label: string;
-    href: string;
-  };
-  CTA_BUTTON_2: {
-    label: string;
-    href: string;
+  ctaButtons: {
+    primary: {
+      label: string;
+      href: string;
+    };
+    secondary: {
+      label: string;
+      href: string;
+    };
   };
 }
 
@@ -165,52 +176,54 @@ export const projects: Project[] = [
     title: "E-Commerce Platform",
     subtitle: "Productify",
     description:
-      "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+      "A modern e-commerce platform built with Next.js and Supabase.A modern e-commerce platform built with Next.js and Supabase.A modern e-commerce platform built with Next.js and Supabase.A modern e-commerce platform built with Next.js and Supabase.A modern e-commerce platform built with Next.js and Supabase.",
     imageUrl:
       "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_1269.jpg",
     href: "/projects/e-commerce",
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase"],
     featured: true,
     date: "2024-03-01",
-    CTA_BUTTON_1: {
-      label: "domain.com",
-      href: "https://github.com/fadilsflow/e-commerce",
+    ctaButtons: {
+      primary: {
+        label: "Live Demo",
+        href: "https://github.com/fadilsflow/e-commerce",
+      },
+      secondary: {
+        label: "View Source",
+        href: "https://github.com/fadilsflow/e-commerce",
+      },
     },
-    CTA_BUTTON_2: {
-      label: "VIEW SOURCE",
-      href: "https://github.com/fadilsflow/e-commerce",
-    },
-
     content:
-      "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+      "A full-featured e-commerce platform with modern UI/UX, real-time updates, and secure payment processing.A full-featured e-commerce platform with modern UI/UX, real-time updates, and secure payment processing.A full-featured e-commerce platform with modern UI/UX, real-time updates, and secure payment processing.A full-featured e-commerce platform with modern UI/UX, real-time updates, and secure payment processing.",
     role: ["Frontend Developer", "UI/UX Designer"],
     collaborators: ["Kyuha Shim (advisor)", "Langston Wells", "Stefanie Suk"],
     duration: "8 weeks",
-    tools: ["HTML/CSS/JS", "Figma", "Cinema4D"],
-    category: "INTERACTIVE DATA VISUALIZATION",
+    tools: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase"],
+    category: "E-COMMERCE",
   },
   {
     id: "2",
     title: "Portfolio Website",
     subtitle: "Portfolio",
-    description:
-      "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+    description: "A modern portfolio website showcasing my work and skills.",
     imageUrl:
       "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_3010.jpg",
     href: "/projects/portfolio",
     tags: ["Next.js", "TypeScript", "Tailwind CSS"],
     featured: true,
     date: "2024-02-15",
-    CTA_BUTTON_1: {
-      label: "VIEW SOURCE",
-      href: "https://github.com/fadilsflow/portfolio",
-    },
-    CTA_BUTTON_2: {
-      label: "VIEW SOURCE",
-      href: "https://github.com/fadilsflow/portfolio",
+    ctaButtons: {
+      primary: {
+        label: "View Live",
+        href: "https://github.com/fadilsflow/portfolio",
+      },
+      secondary: {
+        label: "View Source",
+        href: "https://github.com/fadilsflow/portfolio",
+      },
     },
     content:
-      "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+      "A responsive portfolio website built with modern web technologies.",
     role: ["Full Stack Developer", "UI Designer"],
     collaborators: ["Solo Project"],
     duration: "4 weeks",

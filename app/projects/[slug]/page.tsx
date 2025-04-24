@@ -2,13 +2,14 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { projects } from "@/app/data";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface ProjectPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
+  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
@@ -20,119 +21,139 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   }
 
   return (
+    <main className=" mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      {/* Back Button */}
+      <Link
+        href="/"
+        className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors duration-300 mb-8"
+      >
+        <ChevronLeft className="w-4 h-4" />
+        <span>Back to Projects</span>
+      </Link>
 
-    
-    <main>
-        <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold tracking-tight">{project.title}</h1>
-          <p className="text-sm text-muted-foreground uppercase tracking-wide font-mono">
-            {project.category}
-          </p>
+      {/* Project Header */}
+      <div className="mb-12">
+        <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+          {project.title}
+        </h1>
+        <p className="text-sm text-muted-foreground uppercase tracking-wide font-mono">
+          {project.category}
+        </p>
+      </div>
+
+      {/* Hero Image */}
+      <div className="relative aspect-video overflow-hidden rounded-xl mb-12 shadow-lg">
+        <Image
+          src={project.imageUrl}
+          alt={project.title}
+          fill
+          className="object-cover"
+          priority
+        />
+      </div>
+
+      {/* Main Content */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        {/* Left Column - Project Description */}
+        <div className="lg:col-span-2 space-y-8">
+          <div className="prose prose-lg max-w-none">
+            <p className="text-lg text-muted-foreground">
+              {project.description}
+            </p>
+            <p className="text-lg">{project.content}</p>
+          </div>
         </div>
-        
-        {/* Hero Image */}
-        <div className="relative aspect-video overflow-hidden rounded-lg mb-12 shadow-md">
-          <Image
-            src={project.imageUrl}
-            alt={project.title}
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
-        <div className="max-w-[1400px] mx-auto pt-3 ">
-          {/* Project Header */}
-        <div className="flex flex-col gap-8 ">
-            {/* Left Column - Title */}
-              <div className="flex flex-col gap-4 ">
-                <p className="text-md font-medium">
-                  {project.description}
-                </p>
-                <p className="text-md font-medium">
-                  {project.content}
-                </p>  
+
+        {/* Right Column - Project Details */}
+        <div className="space-y-8">
+          {/* Project Details Grid */}
+          <div className="grid grid-cols-2 gap-8 p-6 bg-muted/5 rounded-lg">
+            {/* Role */}
+            <div>
+              <h3 className="uppercase tracking-wider font-mono text-muted-foreground text-xs mb-3">
+                ROLE
+              </h3>
+              <div className="space-y-2">
+                {project.role.map((role, index) => (
+                  <p key={index} className="text-sm font-medium">
+                    {role}
+                  </p>
+                ))}
               </div>
-            {/* Right Column */}
-            <div className=" space-y-8 flex flex-col " >
-              
+            </div>
 
-              {/* Project Details */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 ">
-                {/* Role */}
-                <div>
-                  <h3 className="uppercase tracking-wider font-mono text-muted-foreground text-xs">ROLE</h3>
-                  <div className="space-y-2 text-xl font-medium">
-                    {project.role.map((role, index) => (
-                      <p key={index} className="text-sm">{role}</p>
-                    ))}
-                  </div>
-                </div>
-                
-                {/* Collaborators */}
-                <div>
-                  <h3 className="uppercase tracking-wider font-mono  text-muted-foreground text-xs">COLLABORATORS</h3>
-                  <div className="space-y-2">
-                    {project.collaborators.map((collaborator, index) => (
-                      <p key={index} className="text-sm font-medium">{collaborator}</p>
-                    ))}
-                  </div>
-                </div>
-                
-                {/* Duration */}
-                <div>
-                  <h3 className="uppercase tracking-wider font-mono  text-muted-foreground text-xs">DURATION</h3>
-                  <p className="text-sm font-medium">{project.duration}</p>
-                </div>
-                
-                {/* Tools */}
-                <div>
-                  <h3 className="uppercase tracking-wider font-mono text-muted-foreground text-xs">TOOLS</h3>
-                  <div className="space-y-2">
-                    {project.tools.map((tool, index) => (
-                      <p key={index} className="text-sm font-medium">{tool}</p>
-                    ))}
-                  </div>
-                </div>
+            {/* Collaborators */}
+            <div>
+              <h3 className="uppercase tracking-wider font-mono text-muted-foreground text-xs mb-3">
+                COLLABORATORS
+              </h3>
+              <div className="space-y-2">
+                {project.collaborators.map((collaborator, index) => (
+                  <p key={index} className="text-sm font-medium">
+                    {collaborator}
+                  </p>
+                ))}
               </div>
+            </div>
 
-              
-              {/* Action Buttons */}
-              <div className="flex flex-col lg:flex-row gap-4 w-full ">
-                <div className="flex flex-wrap gap-4 w-full ">
-                  {project.CTA_BUTTON_1.href && (
-                    <Button asChild className="w-full" variant="secondary" >
-                      <Link 
-                    href={project.CTA_BUTTON_1.href} 
-                    target="_blank"
-                    rel="noopener noreferrer"
+            {/* Duration */}
+            <div>
+              <h3 className="uppercase tracking-wider font-mono text-muted-foreground text-xs mb-3">
+                DURATION
+              </h3>
+              <p className="text-sm font-medium">{project.duration}</p>
+            </div>
 
-                  >
-                    <span className="uppercase font-mono text-sm">{project.CTA_BUTTON_1.label}</span>
-                    <ChevronRight className="w-4 h-4" />
-                  </Link>
-                  </Button>
-                )}
-                </div>
-                <div className="flex flex-wrap gap-4 w-full ">
-                {project.CTA_BUTTON_2.href && (
-                  <Button asChild className="w-full" variant="secondary">
-                    <Link 
-                    href={project.CTA_BUTTON_2.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <span className="uppercase font-mono text-sm">{project.CTA_BUTTON_2.label}</span>
-                    <ChevronRight className="w-4 h-4" />
-                  </Link>
-                  </Button>
-                  )}
-                  </div>
+            {/* Tools */}
+            <div>
+              <h3 className="uppercase tracking-wider font-mono text-muted-foreground text-xs mb-3">
+                TOOLS
+              </h3>
+              <div className="space-y-2">
+                {project.tools.map((tool, index) => (
+                  <p key={index} className="text-sm font-medium">
+                    {tool}
+                  </p>
+                ))}
               </div>
             </div>
           </div>
-        </div>
-      <Link href="/" className="  flex items-center gap-2  mt-20 text-muted-foreground hover:text-primary transition-colors duration-300"><ChevronLeft/>Back</Link>
-      </main>
 
+          {/* Action Buttons */}
+          <div className="space-y-4">
+            {project.ctaButtons.primary.href && (
+              <Button asChild className="w-full" variant="default">
+                <Link
+                  href={project.ctaButtons.primary.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2"
+                >
+                  <span className="uppercase font-mono text-sm">
+                    {project.ctaButtons.primary.label}
+                  </span>
+                  <ChevronRight className="w-4 h-4" />
+                </Link>
+              </Button>
+            )}
+            {project.ctaButtons.secondary.href && (
+              <Button asChild className="w-full" variant="outline">
+                <Link
+                  href={project.ctaButtons.secondary.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2"
+                >
+                  <span className="uppercase font-mono text-sm">
+                    {project.ctaButtons.secondary.label}
+                  </span>
+                  <ChevronRight className="w-4 h-4" />
+                </Link>
+              </Button>
+            )}
+          </div>
+        </div>
+      </div>
+    </main>
   );
 }

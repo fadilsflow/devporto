@@ -37,7 +37,7 @@ const ProfileInfo = () => (
     <div className="text-center sm:text-left">
       <a
         href="mailto:wahyufadil1140@gmail.com"
-        className="text-sm font-bold hover:underline inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+        className="text-sm font-bold inline-flex items-center gap-2 text-muted-foreground hover:text-foreground/80 transition-colors"
       >
         <span>Interested in working together?</span>
         <span className="text-foreground">Email me!</span>
