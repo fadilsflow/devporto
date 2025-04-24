@@ -84,7 +84,7 @@ export const SKILLS = [
     name: "PostgreSQL",
   },
   {
-    name: "Docker",
+    name: "Supabase",
   },
   {
     name: "Git",
