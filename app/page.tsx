@@ -9,10 +9,10 @@ import { ProjectGrid } from "@/components/project-grid";
 import { projects } from "./data";
 import Header from "@/components/header";
 import { GitHubStats } from "@/components/github-stats";
-import Status from "../components/status";
+import Status from "@/components/status";
 import { BlogPosts } from "@/components/posts";
 import { calculateStats, getGitHubStats } from "@/lib/github";
-import { Skills } from "../components/skills";
+import { Skills } from "@/components/skills";
 import ResumeCard from "@/components/resume-card";
 
 export const metadata: Metadata = {
