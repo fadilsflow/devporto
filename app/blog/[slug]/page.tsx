@@ -3,7 +3,7 @@ import { CustomMDX } from "@/components/mdx";
 import { formatDate, getBlogPosts } from "@/app/blog/utils";
 
 import Image from "next/image";
-import { baseUrl } from "@/app/sitemap";
+import { BASE_URL } from "@/app/data";
 import { NAME } from "@/app/data";
 import { XClose } from "@/components/x-close";
 
@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: Props) {
     } = post.metadata;
     const ogImage = image
       ? image
-      : `${baseUrl}/og?title=${encodeURIComponent(title)}`;
+      : `${BASE_URL}/og?title=${encodeURIComponent(title)}`;
 
     return {
       title,
@@ -46,7 +46,7 @@ export async function generateMetadata({ params }: Props) {
         description,
         type: "article",
         publishedTime,
-        url: `${baseUrl}/blog/${post.slug}`,
+        url: `${BASE_URL}/blog/${post.slug}`,
         images: [
           {
             url: ogImage,
@@ -95,11 +95,11 @@ export default async function Blog({ params }: Props) {
               dateModified: post.metadata.publishedAt,
               description: post.metadata.summary,
               image: post.metadata.image
-                ? `${baseUrl}${post.metadata.image}`
-                : `${baseUrl}/og?title=${encodeURIComponent(
+                ? `${BASE_URL}${post.metadata.image}`
+                : `${BASE_URL}/og?title=${encodeURIComponent(
                     post.metadata.title
                   )}`,
-              url: `${baseUrl}/blog/${post.slug}`,
+              url: `${BASE_URL}/blog/${post.slug}`,
               author: {
                 "@type": "Person",
                 name: NAME,
