@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { projects } from "@/app/data";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronRight, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface Props {
@@ -21,53 +21,52 @@ export default async function ProjectPage({ params }: Props) {
   }
 
   return (
-    <main className=" mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      {/* Back Button */}
-      <Link
-        href="/"
-        className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors duration-300 mb-8"
-      >
-        <ChevronLeft className="w-4 h-4" />
-        <span>Back to Projects</span>
-      </Link>
-
-      {/* Project Header */}
-      <div className="mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-          {project.title}
-        </h1>
-        <p className="text-sm text-muted-foreground uppercase tracking-wide font-mono">
-          {project.category}
-        </p>
-      </div>
-
-      {/* Hero Image */}
-      <div className="relative aspect-video overflow-hidden rounded-xl mb-12 shadow-lg">
-        <Image
-          src={project.imageUrl}
-          alt={project.title}
-          fill
-          className="object-cover"
-          priority
-        />
-      </div>
-
-      {/* Main Content */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-        {/* Left Column - Project Description */}
-        <div className="lg:col-span-2 space-y-8">
-          <div className="prose prose-lg max-w-none">
-            <p className="text-lg text-muted-foreground">
-              {project.description}
-            </p>
-            <p className="text-lg">{project.content}</p>
+    <div className="min-h-screen relative max-w-3xl mx-auto">
+      <main className="max-w-7xl mx-auto rounded-lg relative space-y-4">
+        <section className="flex flex-col gap-8">
+          {/* Project Header */}
+          <div className="space-y-4">
+            <div>
+              <Link
+                href="/projects"
+                className=" absolute right-0 top-0 text-sm text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1"
+              >
+                <X />
+              </Link>
+            </div>
+            <div>
+              <h1 className="text-3xl font-bold tracking-tight">
+                {project.title}
+              </h1>
+              <p className="text-sm text-muted-foreground uppercase tracking-wide font-mono mt-2">
+                {project.category}
+              </p>
+            </div>
           </div>
-        </div>
 
-        {/* Right Column - Project Details */}
-        <div className="space-y-8">
-          {/* Project Details Grid */}
-          <div className="grid grid-cols-2 gap-8 p-6 bg-muted/5 rounded-lg">
+          {/* Hero Image */}
+          <div className="relative aspect-video overflow-hidden rounded-xl shadow-lg">
+            <Image
+              src={project.imageUrl}
+              alt={project.title}
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+
+          {/* Project Description */}
+          <div className="space-y-4">
+            <div className="prose prose-lg max-w-none">
+              <p className="text-lg text-muted-foreground">
+                {project.description}
+              </p>
+              <p className="text-lg">{project.content}</p>
+            </div>
+          </div>
+
+          {/* Project Details */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-6 bg-muted/5 rounded-lg">
             {/* Role */}
             <div>
               <h3 className="uppercase tracking-wider font-mono text-muted-foreground text-xs mb-3">
@@ -109,11 +108,14 @@ export default async function ProjectPage({ params }: Props) {
               <h3 className="uppercase tracking-wider font-mono text-muted-foreground text-xs mb-3">
                 TOOLS
               </h3>
-              <div className="space-y-2">
+              <div className="flex flex-wrap gap-2">
                 {project.tools.map((tool, index) => (
-                  <p key={index} className="text-sm font-medium">
+                  <span
+                    key={index}
+                    className="text-xs font-mono px-2 py-1 bg-muted/10 rounded-full"
+                  >
                     {tool}
-                  </p>
+                  </span>
                 ))}
               </div>
             </div>
@@ -123,7 +125,7 @@ export default async function ProjectPage({ params }: Props) {
           <div className="space-y-4">
             {project.ctaButtons.primary.href && (
               <Button asChild className="w-full" variant="default">
-                <Link
+                <a
                   href={project.ctaButtons.primary.href}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -133,12 +135,12 @@ export default async function ProjectPage({ params }: Props) {
                     {project.ctaButtons.primary.label}
                   </span>
                   <ChevronRight className="w-4 h-4" />
-                </Link>
+                </a>
               </Button>
             )}
             {project.ctaButtons.secondary.href && (
               <Button asChild className="w-full" variant="outline">
-                <Link
+                <a
                   href={project.ctaButtons.secondary.href}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -148,12 +150,12 @@ export default async function ProjectPage({ params }: Props) {
                     {project.ctaButtons.secondary.label}
                   </span>
                   <ChevronRight className="w-4 h-4" />
-                </Link>
+                </a>
               </Button>
             )}
           </div>
-        </div>
-      </div>
-    </main>
+        </section>
+      </main>
+    </div>
   );
 }

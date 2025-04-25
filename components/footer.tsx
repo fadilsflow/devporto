@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import ThemeSwitch from "./theme-switch";
-import BreadNav from "./bread-nav";
+import { BreadNav } from "./bread-nav";
 
 export function Footer() {
   return (
@@ -16,7 +16,7 @@ export function Footer() {
             fadils
           </Link>{" "}
           / Build your portfolio with{" "}
-          <span className="font-bold text-green-500">
+          <span className="font-bold">
             <a href="https://www.vercel.com">Devporto</a>
           </span>
         </div>

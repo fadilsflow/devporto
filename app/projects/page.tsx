@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { projects } from "../data";
+import { NICKNAME, projects } from "../data";
 import { ProjectGrid } from "@/components/project-grid";
 
 export const metadata: Metadata = {
@@ -9,17 +9,31 @@ export const metadata: Metadata = {
 
 export default function ProjectsPage() {
   return (
-    <div className="min-h-screen relative max-w-3xl mx-auto">
-      <main className="max-w-7xl mx-auto rounded-lg relative space-y-4">
-        <section className="p-8 flex flex-col gap-4 border rounded-lg">
-          <h1 className="text-2xl font-bold">Projects</h1>
-          <p className="text-muted-foreground">
-            A collection of my projects and work. Each project showcases
-            different aspects of my skills and experience.
-          </p>
+    <div className="relative max-w-3xl mx-auto ">
+      <main className="max-w-3xl mx-auto relative space-y-4">
+        <section className="flex flex-col gap-8 ">
+          <div className="space-y-4">
+            <h1 className="text-3xl font-bold tracking-tight">{NICKNAME}&apos;s Projects</h1>
+            <p
+              className="text-lg t
+xt-muted-fordifferentax-w-2xl"
+            >
+              A collection of my projects and work. Each project showcases
+              different aspects of my skills and experience in web development,
+              design, and problem-solving.
+            </p>
+          </div>
+
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-accent/20 to-secondary/20 blur-3xl -z-10 opacity-50" />
-            <ProjectGrid projects={projects} />
+            <div className="space-y-6">
+              <div className="flex items-center justify-between">
+                <h2 className="text-sm font-mono uppercase font-bold tracking-wider">
+                  All Projects
+                </h2>
+              </div>
+              <ProjectGrid projects={projects} showAll={true} />
+            </div>
           </div>
         </section>
       </main>

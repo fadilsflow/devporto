@@ -29,7 +29,7 @@ export default function BlogPage() {
           <Link
             key={post.slug}
             href={`/blog/${post.slug}`}
-            className="block group"
+            className="block group hover:brightness-80 transition-all"
           >
             <div className="flex flex-col space-y-1">
               <div className="w-full flex flex-col md:flex-row gap-4">

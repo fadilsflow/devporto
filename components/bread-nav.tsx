@@ -8,11 +8,12 @@ import {
   BreadcrumbLink,
   BreadcrumbSeparator,
   BreadcrumbPage,
-} from "./ui/breadcrumb";
+} from "@/components/ui/breadcrumb";
+import React from "react";
 
-export default function BreadNav() {
+export function BreadNav() {
   const pathname = usePathname();
-  const pathnames = pathname.split("/").filter((name) => name);
+  const pathSegments = pathname.split("/").filter(Boolean);
 
   const route = [
     {
@@ -36,7 +37,7 @@ export default function BreadNav() {
     );
   }
   // Handle empty paths
-  if (pathnames.length === 0) {
+  if (pathSegments.length === 0) {
     return null;
   }
 
@@ -44,32 +45,32 @@ export default function BreadNav() {
     <Breadcrumb className="capitalize text-sm md:text-base overflow-x-auto py-2 w-full">
       <BreadcrumbList className="flex-wrap gap-1 md:gap-2">
         <BreadcrumbItem>
-          <Link href="/">
-            <BreadcrumbLink>Home</BreadcrumbLink>
-          </Link>
+          <BreadcrumbLink href="/">Home</BreadcrumbLink>
         </BreadcrumbItem>
 
         {/* Generate breadcrumbs dynamically based on path depth */}
-        {pathnames.map((name, index) => {
-          const href = `/${pathnames.slice(0, index + 1).join("/")}`;
-          const isLast = index === pathnames.length - 1;
+        {pathSegments.map((segment, index) => {
+          const href = `/${pathSegments.slice(0, index + 1).join("/")}`;
+          const isLast = index === pathSegments.length - 1;
 
           return (
-            <BreadcrumbItem key={href}>
+            <React.Fragment key={href}>
               <BreadcrumbSeparator />
-              {isLast ? (
-                <BreadcrumbPage className="truncate max-w-[120px] sm:max-w-none">
-                  {name}
-                </BreadcrumbPage>
-              ) : (
-                <BreadcrumbLink
-                  className="truncate max-w-[100px] sm:max-w-none"
-                  asChild
-                >
-                  <Link href={href}>{name}</Link>
-                </BreadcrumbLink>
-              )}
-            </BreadcrumbItem>
+              <BreadcrumbItem>
+                {isLast ? (
+                  <BreadcrumbPage className="truncate max-w-[120px] sm:max-w-none">
+                    {segment}
+                  </BreadcrumbPage>
+                ) : (
+                  <BreadcrumbLink
+                    className="truncate max-w-[100px] sm:max-w-none"
+                    href={href}
+                  >
+                    {segment}
+                  </BreadcrumbLink>
+                )}
+              </BreadcrumbItem>
+            </React.Fragment>
           );
         })}
       </BreadcrumbList>
