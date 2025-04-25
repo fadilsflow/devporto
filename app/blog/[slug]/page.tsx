@@ -4,35 +4,36 @@ import { formatDate, getBlogPosts } from "@/app/blog/utils";
 
 import Image from "next/image";
 import { baseUrl } from "@/app/sitemap";
+import { NAME } from "@/app/data";
 
-type PageParams = {
-  params: {
+interface Props {
+  params: Promise<{
     slug: string;
-  };
-};
+  }>;
+}
 
 export async function generateStaticParams() {
-  let posts = getBlogPosts();
+  const posts = getBlogPosts();
   return posts.map((post) => ({
     slug: post.slug,
   }));
 }
 
-export async function generateMetadata({ params }: PageParams) {
+export async function generateMetadata({ params }: Props) {
   try {
     const { slug } = await params;
-    let post = getBlogPosts().find((post) => post.slug === slug);
+    const post = getBlogPosts().find((post) => post.slug === slug);
     if (!post) {
       return;
     }
 
-    let {
+    const {
       title,
       publishedAt: publishedTime,
       summary: description,
       image,
     } = post.metadata;
-    let ogImage = image
+    const ogImage = image
       ? image
       : `${baseUrl}/og?title=${encodeURIComponent(title)}`;
 
@@ -67,12 +68,12 @@ export async function generateMetadata({ params }: PageParams) {
   }
 }
 
-export default async function Blog({ params }: PageParams) {
+export default async function Blog({ params }: Props) {
   try {
     const { slug } = await params;
     console.log("Fetching post for slug:", slug);
 
-    let post = getBlogPosts().find((post) => post.slug === slug);
+    const post = getBlogPosts().find((post) => post.slug === slug);
     console.log("Found post:", post ? "yes" : "no");
 
     if (!post) {
@@ -80,7 +81,7 @@ export default async function Blog({ params }: PageParams) {
     }
 
     return (
-      <section className="max-w-3xl mx-auto p-8">
+      <section className="max-w-3xl mx-auto px-4 md:px-0 space-y-8">
         <script
           type="application/ld+json"
           suppressHydrationWarning
@@ -94,23 +95,25 @@ export default async function Blog({ params }: PageParams) {
               description: post.metadata.summary,
               image: post.metadata.image
                 ? `${baseUrl}${post.metadata.image}`
-                : `/og?title=${encodeURIComponent(post.metadata.title)}`,
+                : `${baseUrl}/og?title=${encodeURIComponent(
+                    post.metadata.title
+                  )}`,
               url: `${baseUrl}/blog/${post.slug}`,
               author: {
                 "@type": "Person",
-                name: "My Portfolio",
+                name: NAME,
               },
             }),
           }}
         />
-        <h1 className="title font-semibold text-2xl tracking-tighter">
+
+        <p className="text-sm text-primary text-center mb-4">
+          {formatDate(post.metadata.publishedAt)}
+        </p>
+
+        <h1 className="title font-medium text-3xl md:text-5xl text-center tracking-tighter">
           {post.metadata.title}
         </h1>
-        <div className="flex justify-between items-center mt-2 mb-8 text-sm">
-          <p className="text-sm text-neutral-600 dark:text-neutral-400">
-            {formatDate(post.metadata.publishedAt)}
-          </p>
-        </div>
         {post.metadata.image && (
           <div className="relative aspect-video overflow-hidden rounded-xl mb-12 shadow-lg">
             <Image

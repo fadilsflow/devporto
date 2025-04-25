@@ -5,16 +5,15 @@ import { projects } from "@/app/data";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-
-interface ProjectPageProps {
+interface Props {
   params: Promise<{
     slug: string;
   }>;
-  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
-export default async function ProjectPage({ params }: ProjectPageProps) {
+export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;
+
   const project = projects.find((p) => p.href === `/projects/${slug}`);
 
   if (!project) {

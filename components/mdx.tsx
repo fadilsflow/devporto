@@ -25,7 +25,8 @@ interface ImageProps extends Omit<React.ComponentProps<typeof Image>, "alt"> {
 
 interface CodeProps {
   children: string;
-  [key: string]: any;
+  className?: string;
+  [key: string]: unknown;
 }
 
 interface HeadingProps {
@@ -34,14 +35,14 @@ interface HeadingProps {
 
 interface MDXProps {
   source: string;
-  components?: Record<string, React.ComponentType<any>>;
+  components?: Record<string, React.ComponentType<unknown>>;
 }
 
 function Table({ data }: TableProps) {
-  let headers = data.headers.map((header: string, index: number) => (
+  const headers = data.headers.map((header: string, index: number) => (
     <th key={index}>{header}</th>
   ));
-  let rows = data.rows.map((row: string[], index: number) => (
+  const rows = data.rows.map((row: string[], index: number) => (
     <tr key={index}>
       {row.map((cell: string, cellIndex: number) => (
         <td key={cellIndex}>{cell}</td>
@@ -88,7 +89,7 @@ function RoundedImage({ alt, ...props }: ImageProps) {
 }
 
 function Code({ children, ...props }: CodeProps) {
-  let codeHTML = highlight(children);
+  const codeHTML = highlight(children);
   return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />;
 }
 
@@ -105,7 +106,7 @@ function slugify(str: string) {
 
 function createHeading(level: number) {
   const Heading = ({ children }: HeadingProps) => {
-    let slug = slugify(children?.toString() || "");
+    const slug = slugify(children?.toString() || "");
     return React.createElement(
       `h${level}`,
       { id: slug },
@@ -125,7 +126,7 @@ function createHeading(level: number) {
   return Heading;
 }
 
-let components = {
+const components = {
   h1: createHeading(1),
   h2: createHeading(2),
   h3: createHeading(3),

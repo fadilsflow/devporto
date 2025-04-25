@@ -1,0 +1,295 @@
+---
+title: "Mengenal dan Menginstal Laravel di Arch Linux"
+publishedAt: "2024-04-08"
+summary: "Mengenal dan Menginstal Laravel di Arch Linux"
+---
+
+<Image
+  src="https://res.cloudinary.com/dxurnpbrc/image/upload/v1742360702/Laravel_on_archlinux_oobhvh.png"
+  alt="Image from the movie Alien - from cosmos.com"
+  width={1000}
+  height={1000}
+  caption="cosmos.com"
+/>
+Hai, Kalau kamu berselancar di dunia pengembangan web, pasti sudah nggak asing lagi
+dengan nama Laravel. Framework PHP yang satu ini memang lagi naik daun banget dan
+jadi pilihan banyak developer untuk bikin aplikasi web yang keren dan powerful. Nah,
+buat kamu yang pakai Arch Linux dan pengen mulai ngulik Laravel, artikel ini bakal
+jadi teman perjalananmu.
+
+## Apa Sih Laravel Itu?
+
+Sebelum kita mulai ngoprek instalasi, yuk kenalan dulu sama Laravel. Laravel adalah framework PHP open-source yang dibuat oleh Taylor Otwell. Framework ini dirancang untuk membuat proses pengembangan aplikasi web jadi lebih ekspresif dan menyenangkan, tanpa mengorbankan fungsionalitas aplikasi.
+
+Beberapa fitur keren Laravel yang bikin banyak developer jatuh cinta:
+
+- Sistem templating Blade yang simpel tapi powerful
+- Eloquent ORM yang bikin interaksi dengan database jadi lebih natural
+- Artisan CLI yang membuat proses development jadi lebih cepat
+- Sistem migrasi database yang rapi
+- Testing bawaan yang bikin kamu lebih percaya diri sama kode yang kamu tulis
+
+## Kenapa Pakai Laravel di Arch Linux?
+
+Arch Linux dan Laravel sebenernya kombinasi yang cocok banget! Arch terkenal dengan filosofi KISS (Keep It Simple, Stupid) dan mendukung sistem yang cutting-edge. Laravel juga punya filosofi yang mirip: bikin sesuatu yang kompleks menjadi lebih simpel dan elegan.
+
+Plus, Arch Linux memberikan kontrol penuh ke penggunanya, jadi kamu bisa custom environment development sesuai kebutuhan project Laravel kamu.
+
+## Prasyarat Sebelum Instalasi
+
+Sebelum kita mulai, pastikan sistem kamu sudah memenuhi beberapa prasyarat berikut:
+
+1. PHP (versi 8.1 atau lebih baru)
+2. Composer (package manager untuk PHP)
+3. Node.js dan npm (untuk asset compilation)
+4. Database (MySQL, PostgreSQL, SQLite, atau yang lainnya)
+5. Git
+
+## Langkah-langkah Instalasi Laravel di Arch Linux
+
+### 1. Update Sistem
+
+Seperti biasa, langkah pertama saat mau install apapun di Arch Linux adalah update sistem dulu. Buka terminal dan jalankan:
+
+```bash
+sudo pacman -Syu
+```
+
+### 2. Install PHP dan Ekstensinya
+
+Laravel butuh PHP dan beberapa ekstensi yang dibutuhkan. Install semua dengan perintah:
+
+```bash
+sudo pacman -S php php-fpm php-gd php-intl php-sqlite php-pgsql php-apcu php-redis php-snmp php-xsl
+```
+
+Kalau kamu pake MySQL/MariaDB, tambahkan juga:
+
+```bash
+sudo pacman -S php-mysql
+```
+
+### 3. Install Composer
+
+Composer adalah package manager untuk PHP yang akan kita gunakan untuk menginstall Laravel dan dependency-nya:
+
+```bash
+sudo pacman -S composer
+```
+
+Pastikan Composer sudah terinstall dengan benar:
+
+```bash
+composer --version
+```
+
+### 4. Install Database
+
+Kamu bisa pilih database sesuai kebutuhan. Misalnya, untuk menginstall MySQL:
+
+```bash
+sudo pacman -S mysql
+sudo mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+sudo systemctl enable mysqld
+sudo systemctl start mysqld
+sudo mysql_secure_installation
+```
+
+Atau PostgreSQL:
+
+```bash
+sudo pacman -S postgresql
+sudo -u postgres initdb --locale=en_US.UTF-8 -D /var/lib/postgres/data
+sudo systemctl enable postgresql
+sudo systemctl start postgresql
+sudo -u postgres createuser --interactive
+```
+
+Atau kalau pengen yang simple, SQLite juga bisa:
+
+```bash
+sudo pacman -S sqlite
+```
+
+### 5. Install Node.js dan npm
+
+Laravel Mix menggunakan webpack untuk compile assets, jadi kita perlu Node.js:
+
+```bash
+sudo pacman -S nodejs npm
+```
+
+### 6. Install Git
+
+Git dibutuhkan untuk menginstall Laravel dan juga untuk version control project kamu:
+
+```bash
+sudo pacman -S git
+```
+
+### 7. Install Laravel via Composer
+
+Setelah semua prasyarat terpenuhi, saatnya install Laravel! Ada dua cara untuk menginstall Laravel:
+
+#### Cara 1: Install Laravel Installer
+
+```bash
+composer global require laravel/installer
+```
+
+Pastikan path composer global ada di PATH system kamu. Tambahkan line berikut ke file `~/.bashrc` atau `~/.zshrc` (tergantung shell yang kamu pakai):
+
+```bash
+export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+```
+
+Lalu reload shell config:
+
+```bash
+source ~/.bashrc  # atau source ~/.zshrc
+```
+
+Sekarang kamu bisa membuat project baru dengan perintah:
+
+```bash
+laravel new nama-project
+```
+
+#### Cara 2: Create Project via Composer
+
+Alternatifnya, kamu bisa langsung create project menggunakan Composer:
+
+```bash
+composer create-project --prefer-dist laravel/laravel nama-project
+```
+
+### 8. Konfigurasi Project Laravel
+
+Masuk ke direktori project yang baru dibuat:
+
+```bash
+cd nama-project
+```
+
+Copy file `.env.example` menjadi `.env`:
+
+```bash
+cp .env.example .env
+```
+
+Edit file `.env` sesuai kebutuhan, terutama settingan database:
+
+```bash
+nano .env
+```
+
+Generate application key:
+
+```bash
+php artisan key:generate
+```
+
+### 9. Jalankan Migrasi Database
+
+Untuk setup database awal:
+
+```bash
+php artisan migrate
+```
+
+### 10. Jalankan Server Development
+
+Akhirnya, kamu bisa menjalankan development server Laravel:
+
+```bash
+php artisan serve
+```
+
+Secara default, aplikasi kamu akan berjalan di `http://localhost:8000`.
+
+## Tips dan Troubleshooting
+
+### 1. Permission Issues
+
+Kalau kamu mengalami masalah permission saat menjalankan Laravel, coba pastikan folder `storage` dan `bootstrap/cache` writeable:
+
+```bash
+chmod -R 775 storage bootstrap/cache
+```
+
+### 2. AUR Packages
+
+Ada beberapa package AUR yang bisa membantu, seperti `php-redis` atau `php-imagick` kalau kamu butuh:
+
+```bash
+yay -S php-redis
+```
+
+### 3. Menggunakan PHP-FPM dengan Nginx
+
+Untuk production, biasanya lebih baik menggunakan Nginx dengan PHP-FPM. Install Nginx:
+
+```bash
+sudo pacman -S nginx
+```
+
+Konfigurasi PHP-FPM:
+
+```bash
+sudo systemctl enable php-fpm
+sudo systemctl start php-fpm
+```
+
+Setup virtual host di Nginx:
+
+```
+server {
+    listen 80;
+    server_name example.com;
+    root /path/to/laravel/public;
+
+    add_header X-Frame-Options "SAMEORIGIN";
+    add_header X-Content-Type-Options "nosniff";
+
+    index index.php;
+
+    charset utf-8;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
+
+    error_page 404 /index.php;
+
+    location ~ \.php$ {
+        fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+    location ~ /\.(?!well-known).* {
+        deny all;
+    }
+}
+```
+
+## Penutup
+
+Nah, sekarang kamu sudah berhasil menginstall dan menjalankan Laravel di Arch Linux! Framework yang powerful ini bisa jadi teman setia kamu untuk membuat berbagai aplikasi web keren. Kombinasi Arch Linux yang cutting-edge dan Laravel yang elegan bakal bikin experience development kamu makin asyik.
+
+Jangan lupa untuk selalu update Laravel dan dependency-nya secara berkala:
+
+```bash
+composer update
+```
+
+Dan update juga sistem Arch Linux kamu:
+
+```bash
+sudo pacman -Syu
+```
+
+Selamat ngoding dan berkreasi dengan Laravel di Arch Linux! Punya pertanyaan atau mengalami kendala? Jangan ragu untuk komen di bawah ya. Happy coding! 🚀

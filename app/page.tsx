@@ -12,6 +12,7 @@ import { BlogPosts } from "@/components/posts";
 import { calculateStats, getGitHubStats } from "@/lib/github";
 import { Skills } from "@/components/skills";
 import ResumeCard from "@/components/resume-card";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: `${NAME} | Full Stack Developer`,
@@ -90,12 +91,20 @@ export default async function Home() {
 
         {/* Projects Section */}
         <section className=" p-8 flex flex-col gap-4 border rounded-lg">
-          <h2 className="text-sm font-mono pb-3 uppercase font-bold tracking-wider">
-            Featured Projects
-          </h2>
+          <div className="flex justify-between items-center">
+            <h2 className="text-sm font-mono pb-3 uppercase font-bold tracking-wider">
+              Featured Projects
+            </h2>
+            <Link
+              href="/projects"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              View all projects →
+            </Link>
+          </div>
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-accent/20 to-secondary/20 blur-3xl -z-10 opacity-50" />
-            <ProjectGrid projects={projects} />
+            <ProjectGrid projects={projects.slice(0, 2)} />
           </div>
         </section>
 

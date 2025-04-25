@@ -1,7 +1,6 @@
-import { WorkExperienceItem } from "./types";
-
 export const BASE_URL = "https://fadil.xyz";
 export const NAME = "Wahyu Akhmad Fadillah";
+export const NICKNAME = "Fadil";
 export const BIO =
   "19 year old fullstack developer based in Indonesia. Crafting apps with a strong focus on TypeScript and the modern web stack.";
 export const JOB = "Full Stack Developer";
@@ -105,7 +104,7 @@ export const SKILLS = [
   },
 ];
 
-export const WORK_EXPERIENCE_ITEM: WorkExperienceItem[] = [
+export const WORK_EXPERIENCE_ITEM = [
   {
     title: "Senior Frontend Developer",
     company: "Tech Innovate Inc.",
