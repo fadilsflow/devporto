@@ -1,6 +1,6 @@
 import { SKILLS } from "@/app/data";
 import { Badge } from "@/components/ui/badge";
-export const Skills = () => {
+export const SkillsSection = () => {
   return (
     <div className="flex flex-wrap gap-2 ">
       {SKILLS.map((skill) => (

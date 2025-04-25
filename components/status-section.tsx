@@ -7,7 +7,10 @@ interface StatusProps {
   className?: string;
 }
 
-export default function Status({ isAvailable = true, className }: StatusProps) {
+export const StatusSection = ({
+  isAvailable = true,
+  className,
+}: StatusProps) => {
   return (
     <div
       className={cn(
@@ -38,4 +41,4 @@ export default function Status({ isAvailable = true, className }: StatusProps) {
       </p>
     </div>
   );
-}
+};

@@ -9,10 +9,10 @@ import { ProjectGrid } from "@/components/project-grid";
 import { projects } from "./data";
 import Header from "@/components/header";
 import { GitHubStats } from "@/components/github-stats";
-import Status from "@/components/status";
+import { StatusSection } from "@/components/status-section";
 import { BlogPosts } from "@/components/posts";
 import { calculateStats, getGitHubStats } from "@/lib/github";
-import { Skills } from "@/components/skills";
+import { SkillsSection } from "@/components/skills-section";
 import ResumeCard from "@/components/resume-card";
 
 export const metadata: Metadata = {
@@ -38,7 +38,7 @@ export default async function Home() {
 
         {/* Status Section */}
         <section>
-          <Status isAvailable={AVAILABLE_FOR_WORK} />
+          <StatusSection isAvailable={AVAILABLE_FOR_WORK} />
         </section>
 
         {/* Tech Stack Section */}
@@ -46,7 +46,7 @@ export default async function Home() {
           <h2 className="text-sm font-mono uppercase font-bold tracking-wider">
             Tech Stack
           </h2>
-          <Skills />
+          <SkillsSection />
         </section>
 
         {/* GitHub Activity Section */}
