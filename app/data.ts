@@ -1,3 +1,5 @@
+import { WorkExperienceItem } from "./types";
+
 export const BASE_URL = "https://fadil.xyz";
 export const NAME = "Wahyu Akhmad Fadillah";
 export const BIO =
@@ -103,74 +105,39 @@ export const SKILLS = [
   },
 ];
 
-export const WORK = [
+export const WORK_EXPERIENCE_ITEM: WorkExperienceItem[] = [
   {
-    company: "Bulba Cloud",
-    href: "https://bulba.cloud",
-    location: "Remote",
-    title: "Software Engineer",
-    logoUrl: "/bulba.svg",
-    start: "February 2025",
-    end: "Present",
+    title: "Senior Frontend Developer",
+    company: "Tech Innovate Inc.",
+    period: "2021-06 - Present",
     description:
-      "I build websites, design user interfaces, and manage VPS infrastructure at Bulba Cloud, a startup I founded.",
+      "Leading frontend development for enterprise SaaS products. Working with React, TypeScript, and GraphQL.",
   },
   {
-    company: "Freelance",
-    location: "Remote",
-    title: "Full-stack Web Developer",
-    logoUrl: "/freelance.svg",
-    start: "February 2025",
-    end: "Present",
+    title: "Full Stack Developer",
+    company: "Digital Solutions LLC",
+    period: "2019-03 - 2021-05",
     description:
-      "I work with clients to design and develop full-stack websites that are fast, modern, and responsive.",
+      "Developed and maintained web applications for clients in fintech and healthcare sectors.",
+  },
+  {
+    title: "Junior Web Developer",
+    company: "Web Creators Agency",
+    period: "2017-09 - 2019-02",
+    description:
+      "Created responsive websites and implemented UX improvements for client projects.",
   },
 ];
 
-export const BLOG = [
+export const EDUCATION_ITEM = [
   {
-    id: 1,
-    title: "Hello World",
-    image: `/profile.png`,
-    description: "This is my first blog post",
-    href: `${BASE_URL}/blog/1`,
-    date: "Mar 31, 2025",
-    readingTime: "5 min read time",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS"],
+    education: "Politeknik Harapan Bersama Tegal",
+    degree: "Applied Bachelor (D4) in Informatics Engineering",
+    period: "2023 - 2027",
   },
 ];
 
-export interface Project {
-  id: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  imageUrl: string;
-  href: string;
-  tags: string[];
-  featured: boolean;
-  date: string;
-  githubUrl?: string;
-  liveUrl?: string;
-  content?: string;
-  role: string[];
-  collaborators: string[];
-  duration: string;
-  tools: string[];
-  category: string;
-  ctaButtons: {
-    primary: {
-      label: string;
-      href: string;
-    };
-    secondary: {
-      label: string;
-      href: string;
-    };
-  };
-}
-
-export const projects: Project[] = [
+export const projects = [
   {
     id: "1",
     title: "E-Commerce Platform",

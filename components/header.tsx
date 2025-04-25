@@ -1,4 +1,4 @@
-import { NAME, LOCATION, SOCIAL_LINKS, BIO } from "@/app/data";
+import { NAME, LOCATION, SOCIAL_LINKS, BIO, EMAIL } from "@/app/data";
 import Image from "next/image";
 import { SocialLink } from "@/components/social-link";
 import { TimeDisplay } from "@/components/time-display";
@@ -35,13 +35,12 @@ const ProfileInfo = () => (
       ))}
     </div>
     <div className="text-center sm:text-left">
-      <a
-        href="mailto:wahyufadil1140@gmail.com"
-        className="text-sm font-bold inline-flex items-center gap-2 text-muted-foreground hover:text-foreground/80 transition-colors"
-      >
+      <p className="text-sm font-bold inline-flex items-center gap-2 text-muted-foreground">
         <span>Interested in working together?</span>
-        <span className="text-foreground">Email me!</span>
-      </a>
+        <a className="text-foreground hover:underline" href={`mailto:${EMAIL}`}>
+          Email me!
+        </a>
+      </p>
     </div>
   </div>
 );

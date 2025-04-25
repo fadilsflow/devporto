@@ -37,10 +37,8 @@ export default function ThemeSwitch() {
       {THEMES_OPTIONS.map((option) => (
         <button
           key={option.id}
-          className={`inline-flex h-7 w-7 items-center justify-center rounded-md text-zinc-500 transition-colors duration-100 hover:bg-zinc-200 dark:hover:bg-zinc-700 ${
-            theme === option.id
-              ? "bg-white text-zinc-950 dark:bg-zinc-700 dark:text-zinc-50"
-              : ""
+          className={`inline-flex h-7 w-7 items-center justify-center rounded-md text-zinc-500 transition-colors duration-100 hover:border ${
+            theme === option.id ? "border bg-card " : ""
           }`}
           onClick={() => setTheme(option.id)}
           aria-label={`Switch to ${option.label} theme`}

@@ -3,11 +3,11 @@
 
 import React from "react";
 import Image from "next/image";
-import { Project } from "@/app/data";
+import { projects } from "@/app/data";
 import Link from "next/link";
 
 interface ProjectGridProps {
-  projects?: Project[];
+  projects?: typeof projects;
 }
 
 export const ProjectGrid: React.FC<ProjectGridProps> = ({ projects = [] }) => {

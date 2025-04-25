@@ -1,5 +1,6 @@
-import { UserRoundIcon, CircleSlashIcon } from "lucide-react";
+import { UserRoundIcon, CircleSlashIcon, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { EMAIL } from "@/app/data";
 
 interface StatusProps {
   isAvailable?: boolean;
@@ -16,7 +17,7 @@ export default function Status({ isAvailable = true, className }: StatusProps) {
         isAvailable
           ? "dark:bg-green-950/30 border-green-800/40 text-green-500"
           : "dark:bg-red-950/30 border-red-800/40 text-red-500",
-        className,
+        className
       )}
     >
       {isAvailable ? (
@@ -26,6 +27,14 @@ export default function Status({ isAvailable = true, className }: StatusProps) {
       )}
       <p className="text-sm font-medium">
         {isAvailable ? "Available for work" : "Not available"}
+        {isAvailable ? (
+          <a
+            className=" hover:underline font-medium flex items-center gap-1 text-xs"
+            href={`mailto:${EMAIL}`}
+          >
+            <Mail className="w-3  h-3 text-green-500" /> Contact me
+          </a>
+        ) : null}
       </p>
     </div>
   );
