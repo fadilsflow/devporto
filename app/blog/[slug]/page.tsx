@@ -5,6 +5,7 @@ import { formatDate, getBlogPosts } from "@/app/blog/utils";
 import Image from "next/image";
 import { baseUrl } from "@/app/sitemap";
 import { NAME } from "@/app/data";
+import { XClose } from "@/components/x-close";
 
 interface Props {
   params: Promise<{
@@ -81,7 +82,7 @@ export default async function Blog({ params }: Props) {
     }
 
     return (
-      <section className="max-w-3xl mx-auto px-4 md:px-0 space-y-8">
+      <section className="max-w-3xl mx-auto px-4 md:px-0 space-y-8 relative">
         <script
           type="application/ld+json"
           suppressHydrationWarning
@@ -107,6 +108,9 @@ export default async function Blog({ params }: Props) {
           }}
         />
 
+        <div className="flex justify-end">
+          <XClose href="/blog" />
+        </div>
         <p className="text-sm text-primary text-center mb-4">
           {formatDate(post.metadata.publishedAt)}
         </p>

@@ -1,5 +1,10 @@
 import { Metadata } from "next";
-import { EDUCATION_ITEM, NAME, WORK_EXPERIENCE_ITEM } from "./data";
+import {
+  AVAILABLE_FOR_WORK,
+  EDUCATION_ITEM,
+  NAME,
+  WORK_EXPERIENCE_ITEM,
+} from "./data";
 import { ProjectGrid } from "@/components/project-grid";
 import { projects } from "./data";
 import Header from "@/components/header";
@@ -33,7 +38,7 @@ export default async function Home() {
 
         {/* Status Section */}
         <section>
-          <Status isAvailable={true} />
+          <Status isAvailable={AVAILABLE_FOR_WORK} />
         </section>
 
         {/* Tech Stack Section */}

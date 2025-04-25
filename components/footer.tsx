@@ -16,8 +16,8 @@ export function Footer() {
             fadils
           </Link>{" "}
           / Build your portfolio with{" "}
-          <span className="font-bold">
-            <a href="https://www.vercel.com">Devporto</a>
+          <span className="font-bold text-green-500">
+            <a href="https://www.devporto.xyz">Devporto</a>
           </span>
         </div>
         <div className=" w-fit">

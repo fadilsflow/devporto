@@ -10,27 +10,22 @@ import {
   BreadcrumbPage,
 } from "@/components/ui/breadcrumb";
 import React from "react";
+import { NAVIGATION_LINKS } from "@/app/data";
 
 export function BreadNav() {
   const pathname = usePathname();
   const pathSegments = pathname.split("/").filter(Boolean);
 
-  const route = [
-    {
-      name: "Blog",
-      href: "/blog",
-    },
-    {
-      name: "Projects",
-      href: "/projects",
-    },
-  ];
   if (pathname === "/") {
     return (
-      <div className="flex gap-2">
-        {route.map((item, index) => (
-          <Link key={index} href={item.href} className="text-xs ">
-            {item.name}
+      <div className="flex gap-4 border-b w-full pb-5">
+        {NAVIGATION_LINKS.map((item, index) => (
+          <Link
+            key={index}
+            href={item.href}
+            className="text-xs font-medium hover:underline"
+          >
+            {item.label}
           </Link>
         ))}
       </div>
@@ -42,7 +37,7 @@ export function BreadNav() {
   }
 
   return (
-    <Breadcrumb className="capitalize text-sm md:text-base overflow-x-auto py-2 w-full">
+    <Breadcrumb className="border-b pb-5 capitalize text-sm md:text-base overflow-x-auto py-2 w-full">
       <BreadcrumbList className="flex-wrap gap-1 md:gap-2">
         <BreadcrumbItem>
           <BreadcrumbLink href="/">Home</BreadcrumbLink>

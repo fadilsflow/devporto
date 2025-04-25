@@ -28,7 +28,7 @@ export default function ResumeCard({
           <div className="flex items-start justify-between">
             <div className="flex flex-col">
               <h3 className="text-sm font-semibold">{item.title}</h3>
-              <p className="text-muted-foreground text-sm">{item.subtitle}</p>
+              <p className="text-foreground text-sm">{item.subtitle}</p>
             </div>
             <span className="text-primary font-bold text-sm">
               {item.period}

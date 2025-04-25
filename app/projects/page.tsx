@@ -13,7 +13,9 @@ export default function ProjectsPage() {
       <main className="max-w-3xl mx-auto relative space-y-4">
         <section className="flex flex-col gap-8 ">
           <div className="space-y-4">
-            <h1 className="text-3xl font-bold tracking-tight">{NICKNAME}&apos;s Projects</h1>
+            <h1 className="text-3xl font-bold tracking-tight">
+              {NICKNAME}&apos;s Projects
+            </h1>
             <p
               className="text-lg t
 xt-muted-fordifferentax-w-2xl"

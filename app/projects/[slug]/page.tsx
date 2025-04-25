@@ -1,9 +1,10 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import Link from "next/link";
+
 import { projects } from "@/app/data";
-import { ChevronRight, X } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { XClose } from "@/components/x-close";
 
 interface Props {
   params: Promise<{
@@ -26,13 +27,8 @@ export default async function ProjectPage({ params }: Props) {
         <section className="flex flex-col gap-8">
           {/* Project Header */}
           <div className="space-y-4">
-            <div>
-              <Link
-                href="/projects"
-                className=" absolute right-0 top-0 text-sm text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1"
-              >
-                <X />
-              </Link>
+            <div className="flex justify-end">
+              <XClose href="/projects" />
             </div>
             <div>
               <h1 className="text-3xl font-bold tracking-tight">

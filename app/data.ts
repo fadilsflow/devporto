@@ -1,6 +1,7 @@
 export const BASE_URL = "https://fadil.xyz";
 export const NAME = "Wahyu Akhmad Fadillah";
 export const NICKNAME = "Fadil";
+export const AVAILABLE_FOR_WORK = true;
 export const BIO =
   "19 year old fullstack developer based in Indonesia. Crafting apps with a strong focus on TypeScript and the modern web stack.";
 export const JOB = "Full Stack Developer";
@@ -9,28 +10,15 @@ export const PHONE = "+62 812-3456-7890";
 export const LOCATION = "Asia/Jakarta";
 export const GITHUB_USERNAME = "fadilsflow";
 
-export const CONTACT_BIO = [
-  {
-    href: "https://linkedin.com/in/wahyu-akhmad-fadillah",
-    icon: "linkedin",
-    label: "LinkedIn",
-  },
-  {
-    href: "https://github.com/fadilsflow",
-    icon: "github",
-    label: "GitHub",
-  },
-  {
-    href: "https://instagram.com/fadils.xyz",
-    icon: "instagram",
-    label: "Instagram",
-  },
-];
-
+// Navigation links in the bottom of the page
 export const NAVIGATION_LINKS = [
   {
     href: "/blog",
     label: "Blog",
+  },
+  {
+    href: "/projects",
+    label: "Projects",
   },
   {
     href: "/links",
@@ -38,6 +26,7 @@ export const NAVIGATION_LINKS = [
   },
 ];
 
+// Social links
 export const SOCIAL_LINKS = [
   {
     href: "https://linkedin.com/in/wahyu-akhmad-fadillah",
@@ -106,25 +95,18 @@ export const SKILLS = [
 
 export const WORK_EXPERIENCE_ITEM = [
   {
-    title: "Senior Frontend Developer",
-    company: "Tech Innovate Inc.",
-    period: "2021-06 - Present",
-    description:
-      "Leading frontend development for enterprise SaaS products. Working with React, TypeScript, and GraphQL.",
-  },
-  {
+    company: "Freelancer - Upwork, Fiverr, etc",
     title: "Full Stack Developer",
-    company: "Digital Solutions LLC",
-    period: "2019-03 - 2021-05",
+    period: "2025-03 - Present",
     description:
       "Developed and maintained web applications for clients in fintech and healthcare sectors.",
   },
   {
-    title: "Junior Web Developer",
-    company: "Web Creators Agency",
-    period: "2017-09 - 2019-02",
+    company: "Bulba Cloud",
+    title: "Full Stack Developer",
+    period: "2025-03 - Present",
     description:
-      "Created responsive websites and implemented UX improvements for client projects.",
+      "Developed and maintained web applications for clients in fintech and healthcare sectors.",
   },
 ];
 
@@ -195,5 +177,35 @@ export const projects = [
     duration: "4 weeks",
     tools: ["Next.js", "TypeScript", "Tailwind CSS"],
     category: "WEB DEVELOPMENT",
+  },
+];
+
+// Links card in links page
+export const LINKS_PAGE_LINKS = [
+  {
+    label: "Pomopokus",
+    href: "https://pomopokus.com",
+    description: "Best Pomodoro apps timer in the world",
+  },
+  {
+    label: "Youtube",
+    href: "https://www.youtube.com/@wahyuakhmadfadillah9882",
+    description: "nerdy videos about software dev stuff ",
+  },
+  {
+    label: "Personal Website",
+    href: "https://fadil.xyz",
+    description: "My personal website where I share my thoughts and ideas",
+  },
+  {
+    label: "Blog",
+    href: "/blog",
+    description:
+      "Here are some of my thoughts on software development, design, and more.",
+  },
+  {
+    label: "Projects",
+    href: "/projects",
+    description: "A collection of my projects and work",
   },
 ];

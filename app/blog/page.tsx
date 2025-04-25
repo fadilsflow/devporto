@@ -37,7 +37,7 @@ export default function BlogPage() {
                   {formatDate(post.metadata.publishedAt, false)}
                 </p>
                 <div className="min-w-0">
-                  <h2 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100 group-hover:text-primary transition-colors line-clamp-2">
+                  <h2 className="text-xl   font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2">
                     {post.metadata.title}
                   </h2>
                   {post.metadata.summary && (

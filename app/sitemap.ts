@@ -1,6 +1,6 @@
 import { getBlogPosts } from "@/app/blog/utils";
 
-export const baseUrl = "https://portfolio-blog-starter.vercel.app";
+export const baseUrl = "http://localhost:3000";
 
 export default async function sitemap() {
   const blogs = getBlogPosts().map((post) => ({
@@ -8,7 +8,7 @@ export default async function sitemap() {
     lastModified: post.metadata.publishedAt,
   }));
 
-  const routes = ["", "/blog"].map((route) => ({
+  const routes = ["", "/blog", "/projects"].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date().toISOString().split("T")[0],
   }));

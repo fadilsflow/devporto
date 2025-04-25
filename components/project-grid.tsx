@@ -5,6 +5,7 @@ import React from "react";
 import Image from "next/image";
 import { projects } from "@/app/data";
 import Link from "next/link";
+import { Badge } from "./ui/badge";
 
 interface ProjectGridProps {
   projects?: typeof projects;
@@ -44,6 +45,15 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
               <div className="space-y-2">
                 <h3 className="text-base font-medium">{project.title}</h3>
                 <p className="text-sm line-clamp-2">{project.description}</p>
+                {project.tags && (
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <Badge key={tag} variant="outline" className="text-xs">
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           </Link>

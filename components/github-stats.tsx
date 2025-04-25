@@ -3,6 +3,7 @@ import Reactgithubcalendar from "react-github-calendar";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { GITHUB_USERNAME } from "@/app/data";
 
 type GitHubStatsProps = {
   totalContributions: number;
@@ -49,7 +50,7 @@ export function GitHubStats({
       </div>
       <div className="mt-4 p-4">
         <Reactgithubcalendar
-          username="fadilsflow"
+          username={GITHUB_USERNAME}
           colorScheme={colorScheme}
           blockRadius={2}
           blockSize={10}
@@ -59,7 +60,14 @@ export function GitHubStats({
         />
       </div>
       <p className="text-xs text-muted-foreground text-center">
-        @fadilsflow&apos;s contribution activity (updated daily)
+        <a
+          href={`https://github.com/${GITHUB_USERNAME}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:underline"
+        >
+          {GITHUB_USERNAME}&apos;s contribution activity (updated daily)
+        </a>
       </p>
     </div>
   );
@@ -77,7 +85,7 @@ function StatCard({ value, label, description }: StatCardProps) {
       <p
         className={cn(
           "text-base md:text-lg font-bold",
-          "text-green-600 dark:text-green-500",
+          "text-green-600 dark:text-green-500"
         )}
       >
         {value}
