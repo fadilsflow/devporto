@@ -1,8 +1,10 @@
 import { notFound } from "next/navigation";
 import { CustomMDX } from "@/components/mdx";
 import { formatDate, getBlogPosts } from "@/app/blog/utils";
-import { baseUrl } from "@/app/sitemap";
+
 import Image from "next/image";
+import { baseUrl } from "@/app/sitemap";
+
 type PageParams = {
   params: {
     slug: string;
@@ -18,7 +20,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageParams) {
   try {
-    const { slug } = params;
+    const { slug } = await params;
     let post = getBlogPosts().find((post) => post.slug === slug);
     if (!post) {
       return;
@@ -67,7 +69,7 @@ export async function generateMetadata({ params }: PageParams) {
 
 export default async function Blog({ params }: PageParams) {
   try {
-    const { slug } = params;
+    const { slug } = await params;
     console.log("Fetching post for slug:", slug);
 
     let post = getBlogPosts().find((post) => post.slug === slug);
@@ -78,7 +80,7 @@ export default async function Blog({ params }: PageParams) {
     }
 
     return (
-      <section>
+      <section className="max-w-3xl mx-auto p-8">
         <script
           type="application/ld+json"
           suppressHydrationWarning
@@ -113,9 +115,9 @@ export default async function Blog({ params }: PageParams) {
           <div className="relative aspect-video overflow-hidden rounded-xl mb-12 shadow-lg">
             <Image
               src={post.metadata.image}
-            alt={post.metadata.title}
-            fill
-            className="object-cover"
+              alt={post.metadata.title}
+              fill
+              className="object-cover"
             />
           </div>
         )}

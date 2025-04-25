@@ -1,8 +1,8 @@
 import { NAME, LOCATION, SOCIAL_LINKS, BIO } from "@/app/data";
 import Image from "next/image";
-import { SocialLink } from "./social-link";
-import { TimeDisplay } from "./time-display";
-import { Badge } from "./ui/badge";
+import { SocialLink } from "@/components/social-link";
+import { TimeDisplay } from "@/components/time-display";
+import { Badge } from "@/components/ui/badge";
 
 const ProfileImage = () => (
   <div className="relative flex-shrink-0">
@@ -31,7 +31,7 @@ const ProfileInfo = () => (
     <p className="text-sm text-md font-light text-center sm:text-left">{BIO}</p>
     <div className="flex justify-center sm:justify-start gap-2">
       {SOCIAL_LINKS.map((link) => (
-        <SocialLink key={link.href} icon={link.label} {...link} />
+        <SocialLink key={link.href} {...link} />
       ))}
     </div>
     <div className="text-center sm:text-left">

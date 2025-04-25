@@ -33,7 +33,7 @@ export default function ThemeSwitch() {
   }
 
   return (
-    <div className="inline-flex items-center rounded-lg bg-zinc-100 p-1 dark:bg-zinc-800">
+    <div className="inline-flex items-center gap-2 rounded-lg">
       {THEMES_OPTIONS.map((option) => (
         <button
           key={option.id}

@@ -17,19 +17,36 @@ export async function getGitHubStats(): Promise<GitHubStats> {
       `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}`,
       {
         next: { revalidate: 3600 }, // Revalidate every hour
-      },
+      }
     );
 
     if (!response.ok) {
-      throw new Error("Failed to fetch GitHub data");
+      console.warn("Failed to fetch GitHub data, using fallback data");
+      return {
+        total: { "2024": 0 },
+        contributions: [
+          {
+            date: new Date().toISOString().split("T")[0],
+            count: 0,
+            level: 0,
+          },
+        ],
+      };
     }
 
-    return await response.json();
+    const data = await response.json();
+    return data;
   } catch (error) {
-    console.error("Error fetching GitHub data:", error);
+    console.warn("Error fetching GitHub data, using fallback data:", error);
     return {
-      total: {},
-      contributions: [],
+      total: { "2024": 0 },
+      contributions: [
+        {
+          date: new Date().toISOString().split("T")[0],
+          count: 0,
+          level: 0,
+        },
+      ],
     };
   }
 }
@@ -45,11 +62,11 @@ export function calculateStats(contributions: Contribution[]) {
 
   const totalContributions = recentContributions.reduce(
     (sum, contribution) => sum + contribution.count,
-    0,
+    0
   );
 
   const maxInDay = Math.max(
-    ...recentContributions.map((contribution) => contribution.count),
+    ...recentContributions.map((contribution) => contribution.count)
   );
 
   const bestStreak = calculateBestStreak(recentContributions);

@@ -5,6 +5,7 @@ import { projects } from "@/app/data";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+
 interface ProjectPageProps {
   params: Promise<{
     slug: string;

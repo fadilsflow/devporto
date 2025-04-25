@@ -16,7 +16,7 @@ export default function BlogPage() {
   });
 
   return (
-    <section className="max-w-7xl mx-auto p-8">
+    <section className="max-w-3xl mx-auto p-8">
       <h1 className="text-3xl font-bold tracking-tight mb-8">Blog Posts</h1>
       <div className="space-y-8">
         {posts.map((post) => (
