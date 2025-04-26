@@ -10,8 +10,6 @@ import { linksMetadata } from "../config/seo";
 import Image from "next/image";
 import { SocialLink } from "@/components/social-link";
 import Link from "next/link";
-import { BreadNav } from "@/components/bread-nav";
-import { ShareButton } from "@/components/share-button";
 
 export const metadata: Metadata = linksMetadata;
 const ProfileImage = () => (
@@ -69,10 +67,6 @@ export default function LinksPage() {
   return (
     <div className="min-h-screen relative max-w-3xl mx-auto">
       <main className="max-w-7xl mx-auto rounded-lg relative space-y-4">
-        <div className="flex items-center justify-between max-w-3xl mx-auto">
-          <BreadNav />
-          <ShareButton />
-        </div>
         <div className="relative flex flex-col gap-6 items-center justify-center text-center">
           <ProfileImage />
           <ProfileInfo />

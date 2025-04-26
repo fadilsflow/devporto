@@ -19,6 +19,11 @@ export const defaultMetadata: Metadata = {
     default: SEO_CONFIG.defaultTitle,
     template: SEO_CONFIG.titleTemplate,
   },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+  },
+
   description: BIO,
   keywords: [
     "portfolio",
@@ -52,7 +57,7 @@ export const defaultMetadata: Metadata = {
     description: BIO,
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: `${NAME}'s Portfolio`,
@@ -64,7 +69,7 @@ export const defaultMetadata: Metadata = {
     title: SEO_CONFIG.defaultTitle,
     description: BIO,
     creator: SEO_CONFIG.twitterHandle,
-    images: ["/og-image.jpg"],
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
@@ -113,7 +118,7 @@ export const homeMetadata: Metadata = {
     description: BIO,
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: `${NAME} Portfolio`,
