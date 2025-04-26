@@ -47,6 +47,7 @@ export function BreadNav() {
         {pathSegments.map((segment, index) => {
           const href = `/${pathSegments.slice(0, index + 1).join("/")}`;
           const isLast = index === pathSegments.length - 1;
+          const formattedSegment = segment.replace(/-/g, " ");
 
           return (
             <React.Fragment key={href}>
@@ -54,14 +55,14 @@ export function BreadNav() {
               <BreadcrumbItem>
                 {isLast ? (
                   <BreadcrumbPage className="truncate max-w-[120px] sm:max-w-none">
-                    {segment}
+                    {formattedSegment}
                   </BreadcrumbPage>
                 ) : (
                   <BreadcrumbLink
                     className="truncate max-w-[100px] sm:max-w-none"
                     href={href}
                   >
-                    {segment}
+                    {formattedSegment}
                   </BreadcrumbLink>
                 )}
               </BreadcrumbItem>
