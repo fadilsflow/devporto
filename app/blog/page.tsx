@@ -1,13 +1,7 @@
 import { getBlogPosts } from "./utils";
 import { formatDate } from "./utils";
 import Link from "next/link";
-import type { Metadata } from "next";
 import { NICKNAME } from "../data";
-
-export const metadata: Metadata = {
-  title: "Blog",
-  description: "Read my thoughts on software development, design, and more.",
-};
 
 export default function BlogPage() {
   const posts = getBlogPosts().sort((a, b) => {

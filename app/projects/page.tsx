@@ -1,11 +1,5 @@
-import { Metadata } from "next";
 import { NICKNAME, PROJECTS } from "../data";
 import { ProjectGrid } from "@/components/project-grid";
-
-export const metadata: Metadata = {
-  title: "Projects | Fadil's Portfolio",
-  description: "A collection of my projects and work.",
-};
 
 export default function ProjectsPage() {
   return (

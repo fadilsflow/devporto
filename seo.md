@@ -23,21 +23,21 @@ With both these options, Next.js will automatically generate the relevant `<head
 To define static metadata, export a [`Metadata` object](/docs/app/api-reference/functions/generate-metadata#metadata-object) from a `layout.js` or static `page.js` file.
 
 ```tsx filename="layout.tsx | page.tsx" switcher
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: '...',
-  description: '...',
-}
+  title: "...",
+  description: "...",
+};
 
 export default function Page() {}
 ```
 
 ```jsx filename="layout.js | page.js" switcher
 export const metadata = {
-  title: '...',
-  description: '...',
-}
+  title: "...",
+  description: "...",
+};
 
 export default function Page() {}
 ```
@@ -49,32 +49,32 @@ For all the available options, see the [API Reference](/docs/app/api-reference/f
 You can use `generateMetadata` function to `fetch` metadata that requires dynamic values.
 
 ```tsx filename="app/products/[id]/page.tsx" switcher
-import type { Metadata, ResolvingMetadata } from 'next'
+import type { Metadata, ResolvingMetadata } from "next";
 
 type Props = {
-  params: Promise<{ id: string }>
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
-}
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
 
 export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   // read route params
-  const { id } = await params
+  const { id } = await params;
 
   // fetch data
-  const product = await fetch(`https://.../${id}`).then((res) => res.json())
+  const product = await fetch(`https://.../${id}`).then((res) => res.json());
 
   // optionally access and extend (rather than replace) parent metadata
-  const previousImages = (await parent).openGraph?.images || []
+  const previousImages = (await parent).openGraph?.images || [];
 
   return {
     title: product.title,
     openGraph: {
-      images: ['/some-specific-page-image.jpg', ...previousImages],
+      images: ["/some-specific-page-image.jpg", ...previousImages],
     },
-  }
+  };
 }
 
 export default function Page({ params, searchParams }: Props) {}
@@ -83,20 +83,20 @@ export default function Page({ params, searchParams }: Props) {}
 ```jsx filename="app/products/[id]/page.js" switcher
 export async function generateMetadata({ params, searchParams }, parent) {
   // read route params
-  const { id } = await params
+  const { id } = await params;
 
   // fetch data
-  const product = await fetch(`https://.../${id}`).then((res) => res.json())
+  const product = await fetch(`https://.../${id}`).then((res) => res.json());
 
   // optionally access and extend (rather than replace) parent metadata
-  const previousImages = (await parent).openGraph?.images || []
+  const previousImages = (await parent).openGraph?.images || [];
 
   return {
     title: product.title,
     openGraph: {
-      images: ['/some-specific-page-image.jpg', ...previousImages],
+      images: ["/some-specific-page-image.jpg", ...previousImages],
     },
-  }
+  };
 }
 
 export default function Page({ params, searchParams }) {}
@@ -159,21 +159,21 @@ This means metadata with nested fields such as [`openGraph`](/docs/app/api-refer
 
 ```jsx filename="app/layout.js"
 export const metadata = {
-  title: 'Acme',
+  title: "Acme",
   openGraph: {
-    title: 'Acme',
-    description: 'Acme is a...',
+    title: "Acme",
+    description: "Acme is a...",
   },
-}
+};
 ```
 
 ```jsx filename="app/blog/page.js"
 export const metadata = {
-  title: 'Blog',
+  title: "Blog",
   openGraph: {
-    title: 'Blog',
+    title: "Blog",
   },
-}
+};
 
 // Output:
 // <title>Blog</title>
@@ -188,29 +188,29 @@ In the example above:
 If you'd like to share some nested fields between segments while overwriting others, you can pull them out into a separate variable:
 
 ```jsx filename="app/shared-metadata.js"
-export const openGraphImage = { images: ['http://...'] }
+export const openGraphImage = { images: ["http://..."] };
 ```
 
 ```jsx filename="app/page.js"
-import { openGraphImage } from './shared-metadata'
+import { openGraphImage } from "./shared-metadata";
 
 export const metadata = {
   openGraph: {
     ...openGraphImage,
-    title: 'Home',
+    title: "Home",
   },
-}
+};
 ```
 
 ```jsx filename="app/about/page.js"
-import { openGraphImage } from '../shared-metadata'
+import { openGraphImage } from "../shared-metadata";
 
 export const metadata = {
   openGraph: {
     ...openGraphImage,
-    title: 'About',
+    title: "About",
   },
-}
+};
 ```
 
 In the example above, the OG image is shared between `app/layout.js` and `app/about/page.js` while the titles are different.
@@ -219,18 +219,18 @@ In the example above, the OG image is shared between `app/layout.js` and `app/ab
 
 ```jsx filename="app/layout.js"
 export const metadata = {
-  title: 'Acme',
+  title: "Acme",
   openGraph: {
-    title: 'Acme',
-    description: 'Acme is a...',
+    title: "Acme",
+    description: "Acme is a...",
   },
-}
+};
 ```
 
 ```jsx filename="app/about/page.js"
 export const metadata = {
-  title: 'About',
-}
+  title: "About",
+};
 
 // Output:
 // <title>About</title>
@@ -250,7 +250,7 @@ The `ImageResponse` constructor allows you to generate dynamic images using JSX 
 To use it, you can import `ImageResponse` from `next/og`:
 
 ```jsx filename="app/about/opengraph-image.js"
-import { ImageResponse } from 'next/og'
+import { ImageResponse } from "next/og";
 
 export default function OG() {
   return new ImageResponse(
@@ -258,13 +258,13 @@ export default function OG() {
       <div
         style={{
           fontSize: 128,
-          background: 'white',
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          textAlign: 'center',
-          alignItems: 'center',
-          justifyContent: 'center',
+          background: "white",
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          textAlign: "center",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
         Hello world!
@@ -274,7 +274,7 @@ export default function OG() {
       width: 1200,
       height: 600,
     }
-  )
+  );
 }
 ```
 
@@ -298,16 +298,16 @@ Our current recommendation for JSON-LD is to render structured data as a `<scrip
 
 ```tsx filename="app/products/[id]/page.tsx" switcher
 export default async function Page({ params }) {
-  const { id } = await params
-  const product = await getProduct(id)
+  const { id } = await params;
+  const product = await getProduct(id);
 
   const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Product',
+    "@context": "https://schema.org",
+    "@type": "Product",
     name: product.name,
     image: product.image,
     description: product.description,
-  }
+  };
 
   return (
     <section>
@@ -318,22 +318,22 @@ export default async function Page({ params }) {
       />
       {/* ... */}
     </section>
-  )
+  );
 }
 ```
 
 ```jsx filename="app/products/[id]/page.js" switcher
 export default async function Page({ params }) {
-  const { id } = await params
-  const product = await getProduct(id)
+  const { id } = await params;
+  const product = await getProduct(id);
 
   const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Product',
+    "@context": "https://schema.org",
+    "@type": "Product",
     name: product.name,
     image: product.image,
     description: product.description,
-  }
+  };
 
   return (
     <section>
@@ -344,7 +344,7 @@ export default async function Page({ params }) {
       />
       {/* ... */}
     </section>
-  )
+  );
 }
 ```
 
@@ -353,17 +353,16 @@ You can validate and test your structured data with the [Rich Results Test](http
 You can type your JSON-LD with TypeScript using community packages like [`schema-dts`](https://www.npmjs.com/package/schema-dts):
 
 ```tsx
-import { Product, WithContext } from 'schema-dts'
+import { Product, WithContext } from "schema-dts";
 
 const jsonLd: WithContext<Product> = {
-  '@context': 'https://schema.org',
-  '@type': 'Product',
-  name: 'Next.js Sticker',
-  image: 'https://nextjs.org/imgs/sticker.png',
-  description: 'Dynamic at the speed of static.',
-}
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: "Next.js Sticker",
+  image: "https://nextjs.org/imgs/sticker.png",
+  description: "Dynamic at the speed of static.",
+};
 ```
-
 
 Meta Data is a cornerstone of web optimization, improving both **Search Engine Optimization (SEO)** and user experience. In **Next.js 15**, the process of managing Meta Data has evolved significantly, thanks to enhanced features in the **App Router**. This guide explores everything you need to know about Meta Data in Next.js 15, from its implementation to its impact on SEO and performance.
 
@@ -373,14 +372,14 @@ Meta Data is a cornerstone of web optimization, improving both **Search Engine O
 
 Meta Data refers to the information embedded in your webpage's `<head>` tag, which helps search engines and social platforms understand your content. Key Meta Data elements include:
 
--   **Title**: The main title of the page.
--   **Description**: A brief summary of the page content.
--   **Keywords**: Relevant search terms.
--   **Social Tags**: Open Graph, Twitter Card, and similar tags for enhanced sharing.
+- **Title**: The main title of the page.
+- **Description**: A brief summary of the page content.
+- **Keywords**: Relevant search terms.
+- **Social Tags**: Open Graph, Twitter Card, and similar tags for enhanced sharing.
 
 Meta Data not only improves how your website is indexed but also how it's displayed in search engine results and social media previews.
 
-___
+---
 
 ## [](https://dev.to/joodi/maximizing-seo-with-meta-data-in-nextjs-15-a-comprehensive-guide-4pa7#meta-data-in-nextjs-15-an-overview)**Meta Data in Next.js 15: An Overview**
 
@@ -388,18 +387,18 @@ In Next.js 15, managing Meta Data is more streamlined than ever. The **App Route
 
 Here are the highlights:
 
--   **Static and Dynamic Meta Data**: Define Meta Data as constants or generate it dynamically.
--   **Template Strings for Dynamic Titles**: Use the `template` and `absolute` keys to create flexible titles.
--   **Automatic Integration**: Simplifies adding Open Graph, Twitter Card, and other social tags.
--   **SEO Optimization**: Ensures better indexing and improved page rankings.
+- **Static and Dynamic Meta Data**: Define Meta Data as constants or generate it dynamically.
+- **Template Strings for Dynamic Titles**: Use the `template` and `absolute` keys to create flexible titles.
+- **Automatic Integration**: Simplifies adding Open Graph, Twitter Card, and other social tags.
+- **SEO Optimization**: Ensures better indexing and improved page rankings.
 
-___
+---
 
 ## [](https://dev.to/joodi/maximizing-seo-with-meta-data-in-nextjs-15-a-comprehensive-guide-4pa7#defining-meta-data-in-nextjs-15)**Defining Meta Data in Next.js 15**
 
 ### [](https://dev.to/joodi/maximizing-seo-with-meta-data-in-nextjs-15-a-comprehensive-guide-4pa7#1-static-meta-data)**1\. Static Meta Data**
 
-For static Meta Data, you can define a `metadata` object in your `page.tsx` or `layout.tsx` file. Here’s an example:  
+For static Meta Data, you can define a `metadata` object in your `page.tsx` or `layout.tsx` file. Here’s an example:
 
 ```
 export const metadata = {
@@ -422,7 +421,7 @@ This approach is suitable for pages with fixed content and structure.
 
 ### [](https://dev.to/joodi/maximizing-seo-with-meta-data-in-nextjs-15-a-comprehensive-guide-4pa7#2-dynamic-meta-data)**2\. Dynamic Meta Data**
 
-For pages with dynamic content (e.g., blog posts), you can use an asynchronous `generateMetadata` function:  
+For pages with dynamic content (e.g., blog posts), you can use an asynchronous `generateMetadata` function:
 
 ```
 export async function generateMetadata({ params }: { params: { slug: string } }) {
@@ -451,10 +450,10 @@ This ensures that each page gets a unique title and description based on its con
 
 Next.js 15 allows you to create consistent and dynamic titles using `template` and `absolute` keys within the `metadata` object.
 
--   **Template**: Use a dynamic template for the title, such as appending the site name to all page titles.
--   **Absolute**: Override the template with a specific title when necessary.
+- **Template**: Use a dynamic template for the title, such as appending the site name to all page titles.
+- **Absolute**: Override the template with a specific title when necessary.
 
-Here’s an example:  
+Here’s an example:
 
 ```
 export const metadata = {
@@ -478,14 +477,14 @@ Enter fullscreen mode Exit fullscreen mode
 
 In this example:
 
--   The `template` key ensures that all titles follow a specific pattern (`Page Title | My Awesome Site`).
--   The `absolute` key overrides the template for the current page, displaying only `Custom Page Title`.
+- The `template` key ensures that all titles follow a specific pattern (`Page Title | My Awesome Site`).
+- The `absolute` key overrides the template for the current page, displaying only `Custom Page Title`.
 
-___
+---
 
 ## [](https://dev.to/joodi/maximizing-seo-with-meta-data-in-nextjs-15-a-comprehensive-guide-4pa7#social-meta-tags)**Social Meta Tags**
 
-Next.js 15 simplifies the process of adding social Meta Tags. For example, you can include Open Graph and Twitter Card tags in the `metadata` object:  
+Next.js 15 simplifies the process of adding social Meta Tags. For example, you can include Open Graph and Twitter Card tags in the `metadata` object:
 
 ```
 export const metadata = {
@@ -520,18 +519,18 @@ Enter fullscreen mode Exit fullscreen mode
 
 These tags improve how your content appears when shared on social media platforms, driving more engagement and traffic.
 
-___
+---
 
 ## [](https://dev.to/joodi/maximizing-seo-with-meta-data-in-nextjs-15-a-comprehensive-guide-4pa7#impact-on-seo)**Impact on SEO**
 
 Meta Data directly influences how search engines crawl and rank your pages. Here’s how:
 
--   **Title and Description**: Well-crafted titles and descriptions improve click-through rates (CTR) by making your search results more appealing.
--   **Social Tags**: Enhance visibility and engagement on platforms like Facebook, Twitter, and LinkedIn.
--   **Template Titles**: Ensure consistency across pages while allowing for exceptions using the `absolute` key.
--   **Dynamic Rendering**: Ensures Meta Data stays accurate, even for frequently updated pages.
+- **Title and Description**: Well-crafted titles and descriptions improve click-through rates (CTR) by making your search results more appealing.
+- **Social Tags**: Enhance visibility and engagement on platforms like Facebook, Twitter, and LinkedIn.
+- **Template Titles**: Ensure consistency across pages while allowing for exceptions using the `absolute` key.
+- **Dynamic Rendering**: Ensures Meta Data stays accurate, even for frequently updated pages.
 
-___
+---
 
 ## [](https://dev.to/joodi/maximizing-seo-with-meta-data-in-nextjs-15-a-comprehensive-guide-4pa7#best-practices)**Best Practices**
 
@@ -544,14 +543,10 @@ To maximize the benefits of Meta Data in Next.js 15, follow these best practices
 5.  **Template Titles**: Use consistent title templates for better branding and SEO, but override them when necessary with `absolute` titles.
 6.  **Monitor SEO Performance**: Use tools like Google Search Console and Lighthouse to analyze and improve your Meta Data effectiveness.
 
-___
+---
 
 ## [](https://dev.to/joodi/maximizing-seo-with-meta-data-in-nextjs-15-a-comprehensive-guide-4pa7#conclusion)**Conclusion**
 
 ## [](https://dev.to/joodi/maximizing-seo-with-meta-data-in-nextjs-15-a-comprehensive-guide-4pa7#nextjs-15-offers-a-powerful-and-streamlined-approach-to-managing-meta-data-enabling-developers-to-optimize-seo-and-enhance-user-experience-effortlessly-whether-youre-building-static-pages-or-dynamic-content-the-updated-meta-data-api-in-nextjs-15-ensures-your-website-is-both-searchengine-and-userfriendly)Next.js 15 offers a powerful and streamlined approach to managing Meta Data, enabling developers to optimize SEO and enhance user experience effortlessly. Whether you’re building static pages or dynamic content, the updated Meta Data API in Next.js 15 ensures your website is both search-engine and user-friendly.
 
 I hope you found this helpful! Let’s connect on [LinkedIn](https://www.linkedin.com/in/joodi) or [GitHub](https://github.com/MiladJoodi) 🚀
-
-
-
-
