@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { NICKNAME, projects } from "../data";
+import { NICKNAME, PROJECTS } from "../data";
 import { ProjectGrid } from "@/components/project-grid";
 
 export const metadata: Metadata = {
@@ -34,7 +34,7 @@ xt-muted-fordifferentax-w-2xl"
                   All Projects
                 </h2>
               </div>
-              <ProjectGrid projects={projects} showAll={true} />
+              <ProjectGrid projects={PROJECTS} showAll={true} />
             </div>
           </div>
         </section>

@@ -5,7 +5,6 @@ import { formatDate, getBlogPosts } from "@/app/blog/utils";
 import Image from "next/image";
 import { BASE_URL } from "@/app/data";
 import { NAME } from "@/app/data";
-import { XClose } from "@/components/x-close";
 
 interface Props {
   params: Promise<{
@@ -72,10 +71,8 @@ export async function generateMetadata({ params }: Props) {
 export default async function Blog({ params }: Props) {
   try {
     const { slug } = await params;
-    console.log("Fetching post for slug:", slug);
 
     const post = getBlogPosts().find((post) => post.slug === slug);
-    console.log("Found post:", post ? "yes" : "no");
 
     if (!post) {
       notFound();
@@ -108,9 +105,6 @@ export default async function Blog({ params }: Props) {
           }}
         />
 
-        <div className="flex justify-end">
-          <XClose href="/blog" />
-        </div>
         <p className="text-sm text-primary text-center mb-4">
           {formatDate(post.metadata.publishedAt)}
         </p>

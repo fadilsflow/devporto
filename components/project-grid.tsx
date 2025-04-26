@@ -3,12 +3,12 @@
 
 import React from "react";
 import Image from "next/image";
-import { projects } from "@/app/data";
+import { PROJECTS } from "@/app/data";
 import Link from "next/link";
 import { Badge } from "./ui/badge";
 
 interface ProjectGridProps {
-  projects?: typeof projects;
+  projects?: typeof PROJECTS;
   showAll?: boolean;
 }
 

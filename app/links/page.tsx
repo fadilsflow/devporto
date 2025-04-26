@@ -11,6 +11,7 @@ import Image from "next/image";
 import { SocialLink } from "@/components/social-link";
 import Link from "next/link";
 import { ShareButton } from "@/components/share-button";
+import { BreadNav } from "@/components/bread-nav";
 const ProfileImage = () => (
   <div className="relative flex-shrink-0">
     <div className="w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] relative">
@@ -65,12 +66,13 @@ const LinkCard = ({ link }: { link: (typeof LINKS_PAGE_LINKS)[0] }) => (
 
 export default function LinksPage() {
   return (
-    <div className="min-h-screen relative max-w-3xl mx-auto">
+    <div className="min-h-screen relative max-w-md mx-auto">
       <main className="space-y-8">
+        <div className="flex justify-between ">
+          <BreadNav />
+          <ShareButton />
+        </div>
         <div className="relative flex flex-col gap-6 items-center justify-center text-center">
-          <div className="absolute top-0 right-0">
-            <ShareButton />
-          </div>
           <ProfileImage />
           <ProfileInfo />
           <div className="w-full space-y-4">

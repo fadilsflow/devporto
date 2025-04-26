@@ -1,14 +1,10 @@
 "use client";
 import Link from "next/link";
 import ThemeSwitch from "./theme-switch";
-import { BreadNav } from "./bread-nav";
 
 export function Footer() {
   return (
     <footer className="mt-10">
-      <div className="max-w-3xl mx-auto mb-4">
-        <BreadNav />
-      </div>
       <div className="max-w-3xl mx-auto flex justify-between items-center gap-6   ">
         <div className="relative text-xs  tracking-wider w-fit ">
           &copy; 2025 /{" "}

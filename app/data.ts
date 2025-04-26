@@ -6,11 +6,10 @@ export const BIO =
   "19 year old fullstack developer based in Indonesia. Crafting apps with a strong focus on TypeScript and the modern web stack.";
 export const JOB = "Full Stack Developer";
 export const EMAIL = "wahyufadil1140@gmail.com";
-export const PHONE = "+62 812-3456-7890";
 export const LOCATION = "Asia/Jakarta";
 export const GITHUB_USERNAME = "fadilsflow";
 
-// Navigation links in the bottom of the page
+// Navigation links in the bottom of the page.
 export const NAVIGATION_LINKS = [
   {
     href: "/blog",
@@ -53,57 +52,47 @@ export const SOCIAL_LINKS = [
 export const SKILLS = [
   {
     name: "Linux",
-    category: "DevOps",
   },
   {
     name: "React",
-    category: "Frontend",
   },
   {
     name: "Next.js",
-    category: "Frontend",
   },
   {
     name: "Tailwind CSS",
-    category: "Frontend",
   },
   {
     name: "TypeScript",
-    category: "Programming",
   },
   {
     name: "Bun",
-    category: "Runtime",
   },
   {
     name: "PostgreSQL",
-    category: "Database",
   },
   {
     name: "Supabase",
-    category: "Backend",
   },
   {
     name: "Git",
-    category: "Version Control",
   },
   {
     name: "Figma",
-    category: "Design",
   },
 ];
 
 export const WORK_EXPERIENCE_ITEM = [
   {
     company: "Freelancer - Upwork, Fiverr, etc",
-    title: "Full Stack Developer",
+    role: "Full Stack Developer",
     period: "2025-03 - Present",
     description:
       "Developed and maintained web applications for clients in fintech and healthcare sectors.",
   },
   {
     company: "Bulba Cloud",
-    title: "Full Stack Developer",
+    role: "Full Stack Developer",
     period: "2025-03 - Present",
     description:
       "Developed and maintained web applications for clients in fintech and healthcare sectors.",
@@ -118,13 +107,13 @@ export const EDUCATION_ITEM = [
   },
 ];
 
-export const projects = [
+export const PROJECTS = [
   {
     id: "1",
-    title: "E-Commerce Platform",
-    subtitle: "Productify",
+    title: "Developer Portfolio",
+    subtitle: "Personal Website",
     description:
-      "A modern e-commerce platform built with Next.js and Supabase.A modern e-commerce platform built with Next.js and Supabase.A modern e-commerce platform built with Next.js and Supabase.A modern e-commerce platform built with Next.js and Supabase.A modern e-commerce platform built with Next.js and Supabase.",
+      "A modern developer portfolio built with Next.js and Tailwind CSS.A modern developer portfolio built with Next.js and Tailwind CSS.A modern developer portfolio built with Next.js and Tailwind CSS.A modern developer portfolio built with Next.js and Tailwind CSS.A modern developer portfolio built with Next.js and Tailwind CSS.",
     imageUrl:
       "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_1269.jpg",
     href: "/projects/e-commerce",
@@ -144,7 +133,7 @@ export const projects = [
     content:
       "A full-featured e-commerce platform with modern UI/UX, real-time updates, and secure payment processing.A full-featured e-commerce platform with modern UI/UX, real-time updates, and secure payment processing.A full-featured e-commerce platform with modern UI/UX, real-time updates, and secure payment processing.A full-featured e-commerce platform with modern UI/UX, real-time updates, and secure payment processing.",
     role: ["Frontend Developer", "UI/UX Designer"],
-    collaborators: ["Kyuha Shim (advisor)", "Langston Wells", "Stefanie Suk"],
+    useCase: ["Kyuha Shim (advisor)", "Langston Wells", "Stefanie Suk"],
     duration: "8 weeks",
     tools: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase"],
     category: "E-COMMERCE",
@@ -153,7 +142,8 @@ export const projects = [
     id: "2",
     title: "Portfolio Website",
     subtitle: "Portfolio",
-    description: "A modern portfolio website showcasing my work and skills.",
+    description:
+      "A modern portfolio website showcasing my work and skills.A modern portfolio website showcasing my work and skills.A modern portfolio website showcasing my work and skills.A modern portfolio website showcasing my work and skills.A modern portfolio website showcasing my work and skills.",
     imageUrl:
       "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_3010.jpg",
     href: "/projects/portfolio",
@@ -162,18 +152,18 @@ export const projects = [
     date: "2024-02-15",
     ctaButtons: {
       primary: {
-        label: "View Live",
+        label: "Demo",
         href: "https://github.com/fadilsflow/portfolio",
       },
       secondary: {
-        label: "View Source",
+        label: "Deploy on Vercel",
         href: "https://github.com/fadilsflow/portfolio",
       },
     },
     content:
       "A responsive portfolio website built with modern web technologies.",
     role: ["Full Stack Developer", "UI Designer"],
-    collaborators: ["Solo Project"],
+    useCase: ["Solo Project"],
     duration: "4 weeks",
     tools: ["Next.js", "TypeScript", "Tailwind CSS"],
     category: "WEB DEVELOPMENT",

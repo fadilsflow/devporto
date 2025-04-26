@@ -18,7 +18,7 @@ export function BreadNav() {
 
   if (pathname === "/") {
     return (
-      <div className="flex gap-4 border-b w-full pb-5">
+      <div className="flex items-center  gap-4  w-full">
         {NAVIGATION_LINKS.map((item, index) => (
           <Link
             key={index}
@@ -37,7 +37,7 @@ export function BreadNav() {
   }
 
   return (
-    <Breadcrumb className="border-b pb-5 capitalize text-sm md:text-base overflow-x-auto py-2 w-full">
+    <Breadcrumb className=" pb-5 capitalize text-sm md:text-base overflow-x-auto py-2 w-full">
       <BreadcrumbList className="flex-wrap gap-1 md:gap-2">
         <BreadcrumbItem>
           <BreadcrumbLink href="/">Home</BreadcrumbLink>

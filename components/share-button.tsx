@@ -10,7 +10,8 @@ import {
   MessageSquare,
   Instagram,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -25,7 +26,14 @@ import { NAME } from "@/app/data";
 
 export function ShareButton() {
   const [isCopied, setIsCopied] = useState(false);
-  const currentUrl = typeof window !== "undefined" ? window.location.href : "";
+  const pathname = usePathname();
+  const [currentUrl, setCurrentUrl] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setCurrentUrl(window.location.origin + pathname);
+    }
+  }, [pathname]);
 
   const handleCopy = async () => {
     try {

@@ -6,7 +6,7 @@ import {
   WORK_EXPERIENCE_ITEM,
 } from "./data";
 import { ProjectGrid } from "@/components/project-grid";
-import { projects } from "./data";
+import { PROJECTS } from "./data";
 import Header from "@/components/header";
 import { GitHubStats } from "@/components/github-stats";
 import { StatusSection } from "@/components/status-section";
@@ -14,6 +14,8 @@ import { BlogPosts } from "@/components/posts";
 import { calculateStats, getGitHubStats } from "@/lib/github";
 import { SkillsSection } from "@/components/skills-section";
 import ResumeCard from "@/components/resume-card";
+import { BreadNav } from "@/components/bread-nav";
+import { ShareButton } from "@/components/share-button";
 
 export const metadata: Metadata = {
   title: `${NAME} | Full Stack Developer`,
@@ -39,6 +41,10 @@ export default async function Home() {
         {/* Status Section */}
         <section>
           <StatusSection isAvailable={AVAILABLE_FOR_WORK} />
+        </section>
+        <section className="px-4 flex justify-between items-center  text-center">
+          <BreadNav />
+          <ShareButton />
         </section>
 
         {/* Tech Stack Section */}
@@ -68,7 +74,7 @@ export default async function Home() {
           </h2>
           <ResumeCard
             items={WORK_EXPERIENCE_ITEM.map((item) => ({
-              title: item.title,
+              title: item.role,
               subtitle: item.company,
               period: item.period,
               description: item.description,
@@ -97,7 +103,7 @@ export default async function Home() {
           </h2>
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-accent/20 to-secondary/20 blur-3xl -z-10 opacity-50" />
-            <ProjectGrid projects={projects} showAll={false} />
+            <ProjectGrid projects={PROJECTS} showAll={false} />
           </div>
         </section>
 

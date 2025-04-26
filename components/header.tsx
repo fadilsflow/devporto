@@ -2,7 +2,6 @@ import { NAME, LOCATION, SOCIAL_LINKS, BIO, EMAIL } from "@/app/data";
 import Image from "next/image";
 import { SocialLink } from "@/components/social-link";
 import { TimeDisplay } from "@/components/time-display";
-import { Badge } from "@/components/ui/badge";
 
 const ProfileImage = () => (
   <div className="relative flex-shrink-0">
@@ -20,13 +19,11 @@ const ProfileImage = () => (
 
 const ProfileInfo = () => (
   <div className="space-y-3 text-center sm:text-left w-full">
-    <div className="space-y-2 flex flex-col items-center sm:items-start">
-      <h1 className="text-xl font-mono md:text-xl font-bold tracking-tight">
-        {NAME}
-      </h1>
-      <Badge className="text-[10px] font-bold" variant={"outline"}>
+    <div className=" flex flex-col items-center sm:items-start">
+      <h1 className="text-xl md:text-xl font-bold tracking-tight">{NAME}</h1>
+      <p className="text-sm font-ligh text-muted-foreground">
         Full Stack Developer
-      </Badge>
+      </p>
     </div>
     <p className="text-sm text-md font-light text-center sm:text-left">{BIO}</p>
     <div className="flex justify-center sm:justify-start gap-2">
@@ -34,6 +31,7 @@ const ProfileInfo = () => (
         <SocialLink key={link.href} {...link} />
       ))}
     </div>
+
     <div className="text-center sm:text-left">
       <p className="text-sm font-bold inline-flex items-center gap-2 text-muted-foreground">
         <span>Interested in working together?</span>

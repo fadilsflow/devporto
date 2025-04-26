@@ -31,7 +31,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ThemeProvider attribute="class" disableTransitionOnChange>
-          <main className="px-4 md:px-6 py-12 ">
+          <main className="px-4 md:px-6 py-12 max-w-3xl mx-auto">
             {children}
             <Toaster position="top-center" />
             <Footer />
