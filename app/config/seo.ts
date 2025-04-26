@@ -97,7 +97,7 @@ export const defaultMetadata: Metadata = {
  * Home page metadata
  */
 export const homeMetadata: Metadata = {
-  title: "Home",
+  title: `${NAME} | ${JOB}`,
   description:
     "Full Stack Developer Portfolio showcasing projects, skills, and experience",
   keywords: [
@@ -110,8 +110,7 @@ export const homeMetadata: Metadata = {
   ],
   openGraph: {
     title: `${NAME} | ${JOB}`,
-    description:
-      "Personal portfolio website showcasing my projects and experience as a full stack developer.",
+    description: BIO,
     images: [
       {
         url: "/og-image.jpg",
@@ -130,7 +129,7 @@ export const homeMetadata: Metadata = {
  * Projects page metadata
  */
 export const projectsMetadata: Metadata = {
-  title: "Projects",
+  title: `Projects | ${NAME}`,
   description:
     "Explore my portfolio of web development projects and case studies",
   keywords: [
@@ -163,7 +162,7 @@ export const projectsMetadata: Metadata = {
  * Blog page metadata
  */
 export const blogMetadata: Metadata = {
-  title: "Blog",
+  title: `Blog | ${NAME}`,
   description:
     "Read my thoughts on web development, programming, and technology",
   keywords: [
@@ -196,7 +195,7 @@ export const blogMetadata: Metadata = {
  * Links page metadata
  */
 export const linksMetadata: Metadata = {
-  title: "Links",
+  title: `Links | ${NAME}`,
   description: "Collection of useful links and resources for web developers",
   keywords: [
     "useful links",
