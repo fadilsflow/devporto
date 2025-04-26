@@ -12,6 +12,11 @@ interface Props {
   }>;
 }
 
+// Set export const dynamic = "error" to force static generation
+export const dynamic = "error";
+// Disable dynamic rendering
+export const dynamicParams = false;
+
 export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
@@ -29,7 +34,7 @@ export async function generateMetadata(
   const previousImages = (await parent).openGraph?.images || [];
 
   return {
-    title: `${project.title} | Portfolio Project`,
+    title: `${project.title} | ${NAME}`,
     description: project.description,
     openGraph: {
       title: project.title,
@@ -46,12 +51,19 @@ export async function generateMetadata(
       images: [project.imageUrl],
     },
     alternates: {
-      canonical: `https://porto.fadils.xyz/projects/${slug}`,
+      canonical: `${BASE_URL}/projects/${slug}`,
     },
   };
 }
 
 export const viewport = defaultViewport;
+
+// Generate static paths at build time
+export async function generateStaticParams() {
+  return PROJECTS.map((project) => ({
+    slug: project.href.split("/").pop() || "",
+  }));
+}
 
 export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;

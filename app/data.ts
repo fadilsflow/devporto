@@ -1,4 +1,4 @@
-export const BASE_URL = "https://fadil.xyz";
+export const BASE_URL = "https://fadils.xyz";
 export const NAME = "Wahyu Akhmad Fadillah";
 export const NICKNAME = "Fadil";
 export const AVAILABLE_FOR_WORK = true;
