@@ -1,5 +1,5 @@
 import { getBlogPosts } from "@/app/blog/utils";
-import { BASE_URL, PROJECTS } from "./data";
+import { BASE_URL, PROJECTS } from "@/app/data";
 import { MetadataRoute } from "next";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -13,7 +13,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Project pages with less frequent updates
   const projects = PROJECTS.map((project) => {
-    const slug = project.href.split("/").pop();
+    const slug = project.href.split("/").pop() || "";
     return {
       url: `${BASE_URL}/projects/${slug}`,
       lastModified: new Date().toISOString(),
