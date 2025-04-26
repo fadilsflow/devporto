@@ -1,16 +1,54 @@
 import { getBlogPosts } from "@/app/blog/utils";
-import { BASE_URL } from "./data";
+import { BASE_URL, PROJECTS } from "./data";
+import { MetadataRoute } from "next";
 
-export default async function sitemap() {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  // Blog posts with most recent publishing dates
   const blogs = getBlogPosts().map((post) => ({
     url: `${BASE_URL}/blog/${post.slug}`,
-    lastModified: post.metadata.publishedAt,
+    lastModified: new Date(post.metadata.publishedAt).toISOString(),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
   }));
 
-  const routes = ["", "/blog", "/projects"].map((route) => ({
-    url: `${BASE_URL}${route}`,
-    lastModified: new Date().toISOString().split("T")[0],
-  }));
+  // Project pages with less frequent updates
+  const projects = PROJECTS.map((project) => {
+    const slug = project.href.split("/").pop();
+    return {
+      url: `${BASE_URL}/projects/${slug}`,
+      lastModified: new Date().toISOString(),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    };
+  });
 
-  return [...routes, ...blogs];
+  // Main routes with more frequent updates
+  const routes = [
+    {
+      url: BASE_URL,
+      lastModified: new Date().toISOString(),
+      changeFrequency: "weekly" as const,
+      priority: 1.0,
+    },
+    {
+      url: `${BASE_URL}/blog`,
+      lastModified: new Date().toISOString(),
+      changeFrequency: "weekly" as const,
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/projects`,
+      lastModified: new Date().toISOString(),
+      changeFrequency: "weekly" as const,
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/links`,
+      lastModified: new Date().toISOString(),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    },
+  ];
+
+  return [...routes, ...projects, ...blogs];
 }

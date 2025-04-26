@@ -3,6 +3,7 @@ interface ResumeItem {
   subtitle: string;
   period: string;
   description?: string;
+  achievements?: string[];
 }
 
 interface ResumeCardProps {
@@ -34,7 +35,16 @@ export default function ResumeCard({
               {item.period}
             </span>
           </div>
-          <p className="text-muted-foreground text-sm">{item.description}</p>
+          {item.description && (
+            <p className="text-muted-foreground text-sm">{item.description}</p>
+          )}
+          {item.achievements && item.achievements.length > 0 && (
+            <ul className="text-muted-foreground text-sm list-disc pl-5 mt-1 space-y-1">
+              {item.achievements.map((achievement, i) => (
+                <li key={i}>{achievement}</li>
+              ))}
+            </ul>
+          )}
         </div>
       ))}
     </div>

@@ -1,8 +1,11 @@
-import { BASE_URL } from "@/app/data";
+import { BASE_URL, NAME, BIO, JOB } from "@/app/data";
 import { getBlogPosts } from "@/app/blog/utils";
 
 export async function GET() {
   const allBlogs = await getBlogPosts();
+
+  // Format the current date according to RFC 822
+  const pubDate = new Date().toUTCString();
 
   const itemsXml = allBlogs
     .sort((a, b) => {
@@ -14,29 +17,46 @@ export async function GET() {
     .map(
       (post) =>
         `<item>
-          <title>${post.metadata.title}</title>
+          <title><![CDATA[${post.metadata.title}]]></title>
           <link>${BASE_URL}/blog/${post.slug}</link>
-          <description>${post.metadata.summary || ""}</description>
+          <guid>${BASE_URL}/blog/${post.slug}</guid>
+          <description><![CDATA[${post.metadata.summary || ""}]]></description>
           <pubDate>${new Date(
             post.metadata.publishedAt
           ).toUTCString()}</pubDate>
+          <author>${NAME}</author>
+          ${
+            post.metadata.image
+              ? `<enclosure url="${BASE_URL}${post.metadata.image}" type="image/jpeg" />`
+              : ""
+          }
         </item>`
     )
     .join("\n");
 
   const rssFeed = `<?xml version="1.0" encoding="UTF-8" ?>
-  <rss version="2.0">
+  <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>My Portfolio</title>
+        <title>${NAME}'s Blog</title>
         <link>${BASE_URL}</link>
-        <description>This is my portfolio RSS feed</description>
+        <description><![CDATA[${BIO}]]></description>
+        <language>en-us</language>
+        <lastBuildDate>${pubDate}</lastBuildDate>
+        <atom:link href="${BASE_URL}/rss.xml" rel="self" type="application/rss+xml" />
+        <webMaster>${NAME} (${JOB})</webMaster>
+        <image>
+          <url>${BASE_URL}/favicon.ico</url>
+          <title>${NAME}'s Blog</title>
+          <link>${BASE_URL}</link>
+        </image>
         ${itemsXml}
     </channel>
   </rss>`;
 
   return new Response(rssFeed, {
     headers: {
-      "Content-Type": "text/xml",
+      "Content-Type": "application/xml",
+      "Cache-Control": "max-age=0, s-maxage=3600",
     },
   });
 }

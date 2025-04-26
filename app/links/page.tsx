@@ -1,23 +1,25 @@
-"use client";
-
+import { Metadata } from "next";
 import {
   NAME,
   SOCIAL_LINKS,
   EMAIL,
-  NICKNAME,
   LINKS_PAGE_LINKS,
+  DESCRIPTION_LINKS_PAGE,
 } from "@/app/data";
+import { linksMetadata } from "../config/seo";
 import Image from "next/image";
 import { SocialLink } from "@/components/social-link";
 import Link from "next/link";
-import { ShareButton } from "@/components/share-button";
 import { BreadNav } from "@/components/bread-nav";
+import { ShareButton } from "@/components/share-button";
+
+export const metadata: Metadata = linksMetadata;
 const ProfileImage = () => (
   <div className="relative flex-shrink-0">
     <div className="w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] relative">
       <Image
         src="/profile.png"
-        alt={`${NAME}&apos;s profile picture`}
+        alt={`${NAME}'s profile picture`}
         fill
         className="rounded-full bg-muted border-4 border-border border-double object-cover"
         priority
@@ -30,8 +32,7 @@ const ProfileInfo = () => (
   <div className="space-y-3 text-center w-full">
     <div className="space-y-2 flex flex-col items-center">
       <h1 className="text-xl font-mono md:text-xl font-bold tracking-tight">
-        Hi, I&apos;m {NICKNAME}. Mostly code, sometimes design. you&apos;re
-        probably here for one of these things...
+        {DESCRIPTION_LINKS_PAGE}
       </h1>
     </div>
     <div className="flex justify-center gap-2">
@@ -51,10 +52,10 @@ const ProfileInfo = () => (
 );
 
 const LinkCard = ({ link }: { link: (typeof LINKS_PAGE_LINKS)[0] }) => (
-  <div className="w-full h-auto  flex items-center justify-center border border-border rounded-lg bg-card/50 hover:bg-card/30 transition-all">
+  <div className="w-full h-auto flex items-center justify-center border border-border rounded-lg bg-card/50 hover:bg-card/30 transition-all">
     <Link
       href={link.href}
-      className="w-full flex flex-col items-center gap-1 px-4 py-4 "
+      className="w-full flex flex-col items-center gap-1 px-4 py-4"
     >
       <span className="text-lg font-semibold">{link.label}</span>
       <p className="text-sm text-muted-foreground text-center line-clamp-2">
@@ -66,9 +67,9 @@ const LinkCard = ({ link }: { link: (typeof LINKS_PAGE_LINKS)[0] }) => (
 
 export default function LinksPage() {
   return (
-    <div className="min-h-screen relative max-w-md mx-auto">
-      <main className="space-y-8">
-        <div className="flex justify-between ">
+    <div className="min-h-screen relative max-w-3xl mx-auto">
+      <main className="max-w-7xl mx-auto rounded-lg relative space-y-4">
+        <div className="flex items-center justify-between max-w-3xl mx-auto">
           <BreadNav />
           <ShareButton />
         </div>

@@ -28,11 +28,11 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
           <Link
             href={project.href}
             key={project.id}
-            className="group relative block overflow-hidden  hover:brightness-80 transition-all"
+            className="group relative block overflow-hidden hover:brightness-90 transition-all"
           >
-            <div className=" space-y-4">
+            <div className="space-y-3 border rounded-lg overflow-hidden">
               {/* Image Container */}
-              <div className="relative aspect-[16/9] overflow-hidden ">
+              <div className="relative aspect-[16/9] overflow-hidden">
                 <Image
                   src={project.imageUrl}
                   alt={project.title}
@@ -42,18 +42,19 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
               </div>
 
               {/* Content */}
-              <div className="space-y-2">
+              <div className="p-4">
                 <h3 className="text-base font-medium">{project.title}</h3>
-                <p className="text-sm line-clamp-2">{project.description}</p>
-                {project.tags && (
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
+                <p className="text-sm text-muted-foreground line-clamp-2 mt-1">
+                  {project.description}
+                </p>
+                <div className="flex flex-wrap gap-2 mt-3">
+                  {project.tags &&
+                    project.tags.slice(0, 3).map((tag) => (
                       <Badge key={tag} variant="outline" className="text-xs">
                         {tag}
                       </Badge>
                     ))}
-                  </div>
-                )}
+                </div>
               </div>
             </div>
           </Link>

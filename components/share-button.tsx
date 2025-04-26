@@ -23,15 +23,71 @@ import {
 } from "@/components/ui/dialog";
 import { toast } from "sonner";
 import { NAME } from "@/app/data";
+import { LucideIcon } from "lucide-react";
+
+interface SocialLink {
+  name: string;
+  icon: LucideIcon;
+  url: string;
+}
+
+// Define the social links creator function - can be imported from a utils file
+const createSocialLinks = (url: string, name: string): SocialLink[] => [
+  {
+    name: "X (Twitter)",
+    icon: X,
+    url: `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+      url
+    )}&text=${name} - ${url}`,
+  },
+  {
+    name: "Facebook",
+    icon: Facebook,
+    url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+      url
+    )}`,
+  },
+  {
+    name: "LinkedIn",
+    icon: Linkedin,
+    url: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
+      url
+    )}`,
+  },
+  {
+    name: "Instagram",
+    icon: Instagram,
+    url: `https://www.instagram.com/create/story?url=${encodeURIComponent(
+      url
+    )}`,
+  },
+  {
+    name: "WhatsApp",
+    icon: MessageSquare,
+    url: `https://wa.me/?text=${encodeURIComponent(
+      `${name} - ${url}: ${url}`
+    )}`,
+  },
+  {
+    name: "Email",
+    icon: Mail,
+    url: `mailto:?subject=${name} - ${url}&body=${encodeURIComponent(
+      `${name} - ${url}: ${url}`
+    )}`,
+  },
+];
 
 export function ShareButton() {
   const [isCopied, setIsCopied] = useState(false);
   const pathname = usePathname();
   const [currentUrl, setCurrentUrl] = useState("");
+  const [socialLinks, setSocialLinks] = useState<SocialLink[]>([]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setCurrentUrl(window.location.origin + pathname);
+      const url = window.location.origin + pathname;
+      setCurrentUrl(url);
+      setSocialLinks(createSocialLinks(url, NAME));
     }
   }, [pathname]);
 
@@ -46,51 +102,6 @@ export function ShareButton() {
       toast.error("Failed to copy link");
     }
   };
-
-  const socialLinks = [
-    {
-      name: "X (Twitter)",
-      icon: X,
-      url: `https://twitter.com/intent/tweet?url=${encodeURIComponent(
-        currentUrl
-      )}&text=${NAME} - ${currentUrl}`,
-    },
-    {
-      name: "Facebook",
-      icon: Facebook,
-      url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-        currentUrl
-      )}`,
-    },
-    {
-      name: "LinkedIn",
-      icon: Linkedin,
-      url: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
-        currentUrl
-      )}`,
-    },
-    {
-      name: "Instagram",
-      icon: Instagram,
-      url: `https://www.instagram.com/create/story?url=${encodeURIComponent(
-        currentUrl
-      )}`,
-    },
-    {
-      name: "WhatsApp",
-      icon: MessageSquare,
-      url: `https://wa.me/?text=${encodeURIComponent(
-        `${NAME} - ${currentUrl}: ${currentUrl}`
-      )}`,
-    },
-    {
-      name: "Email",
-      icon: Mail,
-      url: `mailto:?subject=${NAME} - ${currentUrl}&body=${encodeURIComponent(
-        `${NAME} - ${currentUrl}: ${currentUrl}`
-      )}`,
-    },
-  ];
 
   return (
     <Dialog>
@@ -130,7 +141,7 @@ export function ShareButton() {
               <Button
                 key={social.name}
                 variant="outline"
-                className="w-full justify-start gap-2  transition-colors"
+                className="w-full justify-start gap-2 transition-colors"
                 asChild
               >
                 <a
