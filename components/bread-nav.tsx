@@ -54,13 +54,14 @@ export function BreadNav() {
 
   if (pathname === "/") {
     return (
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 border rounded-md p-1">
         {NAVIGATION_LINKS.map((item, index) => (
           <Button
             key={index}
-            variant="outline"
+            variant="ghost"
             size="sm"
             className="text-xs font-medium"
+            asChild
           >
             <Link href={item.href}>{item.label}</Link>
           </Button>
