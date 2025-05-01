@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import ThemeSwitch from "./theme-switch";
+import { NAME } from "@/app/data";
 
 export function Footer() {
   return (
@@ -9,10 +10,10 @@ export function Footer() {
         <div className="relative text-xs  tracking-wider w-fit ">
           &copy; 2025 /{" "}
           <Link href="/" className=" font-bold">
-            fadils
+            {NAME}
           </Link>{" "}
           / Build your portfolio with{" "}
-          <span className="font-bold text-green-500">
+          <span className="font-black ">
             <a href="https://www.devporto.xyz">Devporto</a>
           </span>
         </div>

@@ -47,7 +47,7 @@ export default async function Home() {
           <section>
             <StatusSection isAvailable={AVAILABLE_FOR_WORK} />
           </section>
-          <section className="px-4 flex justify-between items-center text-center">
+          <section className=" flex justify-between items-center text-center">
             <BreadNav />
             <div className="flex items-center gap-2">
               <RssButton />

@@ -13,6 +13,7 @@ import React, { useMemo } from "react";
 import { NAVIGATION_LINKS } from "@/app/data";
 import Script from "next/script";
 import { BASE_URL } from "@/app/data";
+import { Button } from "./ui/button";
 
 export function BreadNav() {
   const pathname = usePathname();
@@ -53,15 +54,16 @@ export function BreadNav() {
 
   if (pathname === "/") {
     return (
-      <div className="flex items-center gap-4 w-full">
+      <div className="flex items-center gap-2">
         {NAVIGATION_LINKS.map((item, index) => (
-          <Link
+          <Button
             key={index}
-            href={item.href}
-            className="text-xs font-medium hover:underline"
+            variant="outline"
+            size="sm"
+            className="text-xs font-medium"
           >
-            {item.label}
-          </Link>
+            <Link href={item.href}>{item.label}</Link>
+          </Button>
         ))}
       </div>
     );
