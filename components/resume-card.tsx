@@ -3,7 +3,6 @@ interface ResumeItem {
   subtitle: string;
   period: string;
   description?: string;
-  achievements?: string[];
 }
 
 interface ResumeCardProps {
@@ -29,21 +28,14 @@ export default function ResumeCard({
           <div className="flex items-start justify-between">
             <div className="flex flex-col">
               <h3 className="text-sm font-semibold">{item.title}</h3>
-              <p className="text-foreground text-sm">{item.subtitle}</p>
+              <p className="text-foreground text-xs">{item.subtitle}</p>
             </div>
-            <span className="text-primary font-bold text-sm">
+            <span className="text-primary font-normal text-sm">
               {item.period}
             </span>
           </div>
           {item.description && (
             <p className="text-muted-foreground text-sm">{item.description}</p>
-          )}
-          {item.achievements && item.achievements.length > 0 && (
-            <ul className="text-muted-foreground text-sm list-disc pl-5 mt-1 space-y-1">
-              {item.achievements.map((achievement, i) => (
-                <li key={i}>{achievement}</li>
-              ))}
-            </ul>
           )}
         </div>
       ))}

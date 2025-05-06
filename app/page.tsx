@@ -82,11 +82,10 @@ export default async function Home() {
             </h2>
             <ResumeCard
               items={WORK_EXPERIENCE_ITEM.map((item) => ({
-                title: item.role,
-                subtitle: item.company,
+                title: item.company,
+                subtitle: item.role,
                 period: item.period,
                 description: item.description,
-                achievements: item.achievements,
               }))}
             />
           </section>
@@ -101,12 +100,6 @@ export default async function Home() {
                 title: item.education,
                 subtitle: item.degree,
                 period: item.period,
-                description: item.location
-                  ? `📍 ${item.location}${
-                      item.description ? ` - ${item.description}` : ""
-                    }`
-                  : item.description,
-                achievements: item.achievements,
               }))}
             />
           </section>

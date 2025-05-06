@@ -96,6 +96,11 @@ export const WORK_EXPERIENCE_ITEM = [
     period: "2025-03 - Present",
     description:
       "Developed and maintained web applications for clients in fintech and healthcare sectors.",
+    location: "Remote",
+    // achievements: [
+    //   "Delivered 15+ projects with 100% client satisfaction",
+    //   "Improved application performance by 30% through code optimization",
+    // ],
   },
   {
     company: "Bulba Cloud",
@@ -103,6 +108,11 @@ export const WORK_EXPERIENCE_ITEM = [
     period: "2025-03 - Present",
     description:
       "Developed and maintained web applications for clients in fintech and healthcare sectors.",
+    location: "Remote",
+    achievements: [
+      "Led a team of 3 developers to complete a mission-critical project",
+      "Reduced server costs by 25% through architecture improvements",
+    ],
   },
 ];
 
