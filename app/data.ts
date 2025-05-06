@@ -11,47 +11,6 @@ export const EMAIL = "wahyufadil1140@gmail.com";
 export const LOCATION = "Asia/Jakarta";
 export const GITHUB_USERNAME = "fadilsflow";
 
-// SEO Configuration
-export const SEO_CONFIG = {
-  titleTemplate: "%s | Fadil's Portfolio",
-  defaultTitle: `${NAME} - ${JOB}`,
-  siteName: "Fadil's Portfolio",
-  language: "en-US",
-  themeColor: "#000000",
-  twitterHandle: "@fadils",
-  googleSiteVerification: "",
-  googleAnalyticsId: "",
-  facebookAppId: "",
-};
-
-// Structured Data Config - For advanced SEO
-export const STRUCTURED_DATA = {
-  person: {
-    "@type": "Person",
-    name: NAME,
-    jobTitle: JOB,
-    url: BASE_URL,
-    sameAs: [
-      "https://linkedin.com/in/wahyu-akhmad-fadillah",
-      "https://github.com/fadilsflow",
-      "https://instagram.com/fadils.xyz",
-    ],
-  },
-  technologies: [
-    "TypeScript",
-    "React",
-    "Next.js",
-    "Node.js",
-    "Tailwind CSS",
-    "PostgreSQL",
-    "Supabase",
-  ],
-  availability: AVAILABLE_FOR_WORK
-    ? "Available for hire"
-    : "Not available for hire",
-  countryCode: "ID", // Indonesia
-  locationString: "Indonesia",
-};
 
 // Navigation links in the bottom of the page.
 export const NAVIGATION_LINKS = [
@@ -138,17 +97,10 @@ export const WORK_EXPERIENCE_ITEM = [
     description:
       "Developed and maintained web applications for clients in fintech and healthcare sectors.",
     location: "Remote",
-    technologies: [
-      "React",
-      "Next.js",
-      "TypeScript",
-      "Tailwind CSS",
-      "PostgreSQL",
-    ],
-    achievements: [
-      "Delivered 15+ projects with 100% client satisfaction",
-      "Improved application performance by 30% through code optimization",
-    ],
+    // achievements: [
+    //   "Delivered 15+ projects with 100% client satisfaction",
+    //   "Improved application performance by 30% through code optimization",
+    // ],
   },
   {
     company: "Bulba Cloud",
@@ -157,7 +109,6 @@ export const WORK_EXPERIENCE_ITEM = [
     description:
       "Developed and maintained web applications for clients in fintech and healthcare sectors.",
     location: "Remote",
-    technologies: ["React", "Node.js", "TypeScript", "MongoDB"],
     achievements: [
       "Led a team of 3 developers to complete a mission-critical project",
       "Reduced server costs by 25% through architecture improvements",
@@ -172,10 +123,6 @@ export const EDUCATION_ITEM = [
     period: "2023 - 2027",
     location: "Tegal, Indonesia",
     description: "Focused on software engineering and web development",
-    achievements: [
-      "Top 10% of class",
-      "Dean's List for 2 consecutive semesters",
-    ],
   },
 ];
 
@@ -313,18 +260,45 @@ export const FAVICONS = {
   },
 };
 
-// Site Footer Info
-export const FOOTER_INFO = {
-  copyright: `© ${new Date().getFullYear()} ${NAME}`,
-  credits: "Built with Next.js and Tailwind CSS",
-  links: [
-    {
-      label: "Terms",
-      href: "/terms",
-    },
-    {
-      label: "Privacy",
-      href: "/privacy",
-    },
+
+// SEO Configuration
+export const SEO_CONFIG = {
+  titleTemplate: "%s | Fadil's Portfolio",
+  defaultTitle: `${NAME} - ${JOB}`,
+  siteName: "Fadil's Portfolio",
+  language: "en-US",
+  themeColor: "#000000",
+  twitterHandle: "@fadils",
+  googleSiteVerification: "",
+  googleAnalyticsId: "",
+  facebookAppId: "",
+};
+
+// Structured Data Config - For advanced SEO
+export const STRUCTURED_DATA = {
+  person: {
+    "@type": "Person",
+    name: NAME,
+    jobTitle: JOB,
+    url: BASE_URL,
+    sameAs: [
+      "https://linkedin.com/in/wahyu-akhmad-fadillah",
+      "https://github.com/fadilsflow",
+      "https://instagram.com/fadils.xyz",
+    ],
+  },
+  technologies: [
+    "TypeScript",
+    "React",
+    "Next.js",
+    "Node.js",
+    "Tailwind CSS",
+    "PostgreSQL",
+    "Supabase",
   ],
+  availability: AVAILABLE_FOR_WORK
+    ? "Available for hire"
+    : "Not available for hire",
+  countryCode: "ID", // Indonesia
+  locationString: "Indonesia",
 };
