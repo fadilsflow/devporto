@@ -91,14 +91,14 @@ export const SKILLS = [
 
 export const WORK_EXPERIENCE_ITEM = [
   {
-    company: "Freelancer - Upwork, Fiverr, etc",
-    role: "Full Stack Developer",
+    company: "Bulba Cloud",
+    role: "Software Engineer",
     period: "2025-03 - Present",
     description:
       "Developed and maintained web applications for clients in fintech and healthcare sectors.",
   },
   {
-    company: "Bulba Cloud",
+    company: "Freelancer - Upwork, Fiverr, etc",
     role: "Full Stack Developer",
     period: "2025-03 - Present",
     description:
