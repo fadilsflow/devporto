@@ -137,10 +137,10 @@ export default async function ProjectPage({ params }: Props) {
             </header>
 
             {/* Project Details */}
-            <section className="flex flex-col bg-muted/5 rounded-lg">
+            <section className="flex flex-col">
               {/* Role */}
               <div className="mb-3 flex justify-between border-b">
-                <h2 className="capitalize tracking-wider text-muted-foreground text-xs">
+                <h2 className="capitalize tracking-wider text-muted-foreground text-sm">
                   Role
                 </h2>
                 <div className="space-x-2 flex">
@@ -154,7 +154,7 @@ export default async function ProjectPage({ params }: Props) {
 
               {/* Use Case */}
               <div className="mb-3 flex justify-between border-b">
-                <h2 className="capitalize tracking-wider text-muted-foreground text-xs mb-3">
+                <h2 className="capitalize tracking-wider text-muted-foreground text-sm mb-3">
                   Use case
                 </h2>
                 <div className="space-x-2 flex">
@@ -203,7 +203,7 @@ export default async function ProjectPage({ params }: Props) {
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2"
                   >
-                    <span className="capitalize text-sm">
+                    <span className=" text-sm">
                       {project.ctaButtons.primary.label}
                     </span>
                   </a>
@@ -217,7 +217,7 @@ export default async function ProjectPage({ params }: Props) {
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2"
                   >
-                    <span className="capitalize text-sm">
+                    <span className="text-sm">
                       {project.ctaButtons.secondary.label}
                     </span>
                   </a>
