@@ -112,6 +112,7 @@ export const EDUCATION_ITEM = [
     degree: "Applied Bachelor (D4) in Informatics Engineering",
     period: "2023 - 2027",
   },
+
 ];
 
 export const PROJECTS = [
@@ -149,36 +150,34 @@ export const PROJECTS = [
   },
   {
     id: "2",
-    title: "Portfolio Website",
-    subtitle: "Portfolio",
+    title: "Bulba Cloud",
+    subtitle: "Cloud Hosting Website",
     description:
-      "A modern portfolio website showcasing my work and skills. Built with Next.js, TypeScript, and Tailwind CSS. Features include responsive design, dark mode, and optimized performance. The site is statically generated and deployed on Vercel.",
+      "A modern landing page and product catalog for a cloud hosting startup. Built with Next.js and Tailwind CSS, the site showcases services like domain, hosting, and VPS with a WhatsApp-based ordering system.",
     imageUrl:
       "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_3010.jpg",
-    href: "/projects/portfolio",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS"],
+    href: "/projects/bulba-cloud",
+    tags: ["Next.js", "Tailwind CSS", "ShadCN", "Figma", "Canva"],
     featured: true,
     date: "2024-02-15",
     ctaButtons: {
       primary: {
-        label: "Demo",
-        href: "https://github.com/fadilsflow/portfolio",
+        label: "bulba.cloud",
+        href: "https://bulba.cloud", // ganti dengan URL kamu
       },
       secondary: {
-        label: "Deploy on Vercel",
-        href: "https://github.com/fadilsflow/portfolio",
+        label: "GitHub Repo",
+        href: "https://github.com/fadilsflow/bulbacloud", // ganti dengan repo kamu
       },
     },
     content:
-      "A responsive portfolio website built with modern web technologies. Features include dynamic content loading, optimized images, and a clean, minimalist design that focuses on showcasing projects and skills.",
-    role: ["Full Stack Developer", "UI Designer"],
-    useCase: ["Solo Project"],
+      "I designed and developed a website for Bulba Cloud, a startup offering domain, VPS, and hosting services. The site functions as an online catalog with clean UI and directs users to WhatsApp for purchases, creating a seamless and personal buying experience. \n\nI handled brand design (logo, posters, visual content), marketing strategy, and full website development using modern tools like Next.js, Tailwind CSS, ShadCN, and Figma.",
+    role: ["Web Designer", "Frontend Developer", "Marketing"],
+    useCase: ["Startup Website", "Product Catalog"],
     duration: "4 weeks",
-    tools: ["Next.js", "TypeScript", "Tailwind CSS"],
+    tools: ["Next.js", "Tailwind CSS", "ShadCN", "Figma", "Canva"],
     category: "WEB DEVELOPMENT",
-    github: "https://github.com/fadilsflow/portfolio",
-    liveDemo: "https://portfolio.fadil.xyz",
-  },
+  }
 ];
 
 // Links card in links page
