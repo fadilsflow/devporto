@@ -112,6 +112,7 @@ export const EDUCATION_ITEM = [
     degree: "Applied Bachelor (D4) in Informatics Engineering",
     period: "2023 - 2027",
   },
+  
 
 ];
 

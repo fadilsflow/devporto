@@ -18,6 +18,7 @@ import { BreadNav } from "@/components/bread-nav";
 import { ShareButton } from "@/components/share-button";
 import { RssButton } from "@/components/rss-button";
 import Script from "next/script";
+import AnimatedContainer from "@/components/animate-container";
 
 export const metadata = homeMetadata;
 export const viewport = defaultViewport;
@@ -34,9 +35,10 @@ export default async function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
       />
-      <div className="min-h-screen relative max-w-3xl mx-auto">
-        <main className="max-w-7xl mx-auto rounded-lg relative space-y-4">
-          {/* Hero Section */}
+      <AnimatedContainer>
+        <div className="min-h-screen relative max-w-3xl mx-auto">
+          <main className="max-w-7xl mx-auto rounded-lg relative space-y-4">
+            {/* Hero Section */}
           <section>
             <div className="p-8">
               <Header />
@@ -122,8 +124,9 @@ export default async function Home() {
             </h2>
             <BlogPosts />
           </section>
-        </main>
-      </div>
+          </main>
+        </div>
+      </AnimatedContainer>
     </>
   );
 }
