@@ -10,6 +10,7 @@ import { linksMetadata } from "../config/seo";
 import Image from "next/image";
 import { SocialLink } from "@/components/social-link";
 import Link from "next/link";
+import AnimatedSection from "@/components/animated-section";
 
 export const metadata: Metadata = linksMetadata;
 const ProfileImage = () => (
@@ -65,6 +66,7 @@ const LinkCard = ({ link }: { link: (typeof LINKS_PAGE_LINKS)[0] }) => (
 
 export default function LinksPage() {
   return (
+    <AnimatedSection delay={0.3}>
     <div className="min-h-screen relative max-w-3xl mx-auto">
       <main className="max-w-7xl mx-auto rounded-lg relative space-y-4">
         <div className="relative flex flex-col gap-6 items-center justify-center text-center">
@@ -78,5 +80,6 @@ export default function LinksPage() {
         </div>
       </main>
     </div>
+    </AnimatedSection>
   );
 }

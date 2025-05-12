@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import type { Metadata, ResolvingMetadata } from "next";
 import Script from "next/script";
 import { defaultViewport } from "@/app/config/viewport";
+import AnimatedSection from "@/components/animated-section";
 
 interface Props {
   params: Promise<{
@@ -109,6 +110,7 @@ export default async function ProjectPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <AnimatedSection delay={0.3}>
       <article className="min-h-screen relative max-w-3xl mx-auto">
         <main className="max-w-7xl mx-auto rounded-lg relative space-y-4">
           <section className="flex flex-col gap-8">
@@ -239,6 +241,7 @@ export default async function ProjectPage({ params }: Props) {
           </section>
         </main>
       </article>
+      </AnimatedSection>
     </>
   );
 }

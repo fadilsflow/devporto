@@ -2,7 +2,7 @@ import { getBlogPosts } from "./utils";
 import { formatDate } from "./utils";
 import Link from "next/link";
 import { NICKNAME } from "../data";
-
+import AnimatedSection from "@/components/animated-section";
 export default function BlogPage() {
   const posts = getBlogPosts().sort((a, b) => {
     const dateA = new Date(a.metadata.publishedAt).getTime();
@@ -11,6 +11,7 @@ export default function BlogPage() {
   });
 
   return (
+    <AnimatedSection delay={0.3}>
     <section className="max-w-3xl mx-auto px-4 md:px-0 p-8">
       <h1 className="text-3xl font-bold tracking-tight mb-2 ">
         {NICKNAME}&apos;s Blog
@@ -46,5 +47,6 @@ export default function BlogPage() {
         ))}
       </div>
     </section>
+    </AnimatedSection>
   );
 }

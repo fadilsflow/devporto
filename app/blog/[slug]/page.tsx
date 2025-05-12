@@ -5,6 +5,7 @@ import Image from "next/image";
 import { BASE_URL, NAME } from "@/app/data";
 import Script from "next/script";
 import { defaultViewport } from "@/app/config/viewport";
+import AnimatedSection from "@/components/animated-section";
 
 interface Props {
   params: Promise<{
@@ -119,6 +120,7 @@ export default async function Blog({ params }: Props) {
     };
 
     return (
+      <AnimatedSection delay={0.3}>
       <article className="max-w-3xl mx-auto px-4 md:px-0 space-y-8 relative">
         <Script
           id="blog-post-jsonld"
@@ -163,14 +165,17 @@ export default async function Blog({ params }: Props) {
           <p>Published on {formatDate(post.metadata.publishedAt)}</p>
         </footer>
       </article>
+      </AnimatedSection>
     );
   } catch (error) {
     console.error("Error in Blog component:", error);
     return (
+      <AnimatedSection delay={0.3}>
       <section className="max-w-3xl mx-auto px-4 space-y-8">
         <h1 className="text-3xl font-bold">Error loading blog post</h1>
         <p>Sorry, there was an error loading this blog post.</p>
       </section>
+      </AnimatedSection>
     );
   }
 }
