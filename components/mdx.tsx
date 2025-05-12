@@ -137,6 +137,7 @@ const components = {
   a: CustomLink,
   code: Code,
   Table,
+  Link: Link,
 };
 
 export function CustomMDX({
