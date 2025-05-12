@@ -19,6 +19,7 @@ import { ShareButton } from "@/components/share-button";
 import { RssButton } from "@/components/rss-button";
 import Script from "next/script";
 import AnimatedContainer from "@/components/animate-container";
+import AnimatedSection from "@/components/animated-section";
 
 export const metadata = homeMetadata;
 export const viewport = defaultViewport;
@@ -39,91 +40,92 @@ export default async function Home() {
         <div className="min-h-screen relative max-w-3xl mx-auto">
           <main className="max-w-7xl mx-auto rounded-lg relative space-y-4">
             {/* Hero Section */}
-          <section>
-            <div className="p-8">
-              <Header />
-            </div>
-          </section>
+            <AnimatedSection delay={0.2}>
+              <div className="p-8">
+                <Header />
+              </div>
+            </AnimatedSection>
 
-          {/* Status Section */}
-          <section>
-            <StatusSection isAvailable={AVAILABLE_FOR_WORK} />
-          </section>
-          <section className=" flex justify-between items-center text-center">
-            <BreadNav />
-            <div className="flex items-center gap-2">
-              <RssButton />
-              <ShareButton />
-            </div>
-          </section>
+            {/* Status Section */}
+            <AnimatedSection delay={0.3}>
+              <StatusSection isAvailable={AVAILABLE_FOR_WORK} />
+            </AnimatedSection>
 
-          {/* Tech Stack Section */}
-          <section className="p-8 flex flex-col gap-4 border rounded-lg">
-            <h2 className="text-sm font-mono uppercase font-bold tracking-wider">
-              Tech Stack
-            </h2>
-            <SkillsSection />
-          </section>
+            <AnimatedSection delay={0.4} className="flex justify-between items-center text-center">
+              <BreadNav />
+              <div className="flex items-center gap-2">
+                <RssButton />
+                <ShareButton />
+              </div>
+            </AnimatedSection>
 
-          {/* GitHub Activity Section */}
-          <section className="p-8 flex flex-col gap-4 border rounded-lg">
-            <h2 className="text-sm font-mono uppercase font-bold tracking-wider">
-              GitHub Contributions
-            </h2>
-            <GitHubStats
-              totalContributions={totalContributions}
-              maxInDay={maxInDay}
-              bestStreak={bestStreak}
-            />
-          </section>
+            {/* Tech Stack Section */}
+            <AnimatedSection delay={0.5} className="p-8 flex flex-col gap-4 border rounded-lg">
+              <h2 className="text-sm font-mono uppercase font-bold tracking-wider">
+                Tech Stack
+              </h2>
+              <SkillsSection />
+            </AnimatedSection>
 
-          {/* Work Experience Section */}
-          <section className="p-8 flex flex-col gap-4 border rounded-lg">
-            <h2 className="text-sm font-mono uppercase font-bold tracking-wider">
-              Work Experience
-            </h2>
-            <ResumeCard
-              items={WORK_EXPERIENCE_ITEM.map((item) => ({
-                title: item.company,
-                subtitle: item.role,
-                period: item.period,
-                description: item.description,
-              }))}
-            />
-          </section>
+            {/* GitHub Activity Section */}
+            <AnimatedSection delay={0.6} className="p-8 flex flex-col gap-4 border rounded-lg">
+              <h2 className="text-sm font-mono uppercase font-bold tracking-wider">
+                GitHub Contributions
+              </h2>
+              <GitHubStats
+                totalContributions={totalContributions}
+                maxInDay={maxInDay}
+                bestStreak={bestStreak}
+              />
+            </AnimatedSection>
 
-          {/* Education Section */}
-          <section className="p-8 flex flex-col gap-4 border rounded-lg">
-            <h2 className="text-sm font-mono uppercase font-bold tracking-wider">
-              Education
-            </h2>
-            <ResumeCard
-              items={EDUCATION_ITEM.map((item) => ({
-                title: item.education,
-                subtitle: item.degree,
-                period: item.period,
-              }))}
-            />
-          </section>
+            {/* Work Experience Section */}
+            <AnimatedSection delay={0.7} className="p-8 flex flex-col gap-4 border rounded-lg">
+              <h2 className="text-sm font-mono uppercase font-bold tracking-wider">
+                Work Experience
+              </h2>
+              <ResumeCard
+                items={WORK_EXPERIENCE_ITEM.map((item) => ({
+                  title: item.company,
+                  subtitle: item.role,
+                  period: item.period,
+                  description: item.description,
+                }))}
+              />
+            </AnimatedSection>
 
-          {/* Projects Section */}
-          <section className="p-8 flex flex-col gap-4 border rounded-lg">
-            <h2 className="text-sm font-mono pb-3 uppercase font-bold tracking-wider">
-              Featured Projects
-            </h2>
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-accent/20 to-secondary/20 blur-3xl -z-10 opacity-50" />
-              <ProjectGrid projects={PROJECTS} showAll={false} />
-            </div>
-          </section>
+            {/* Education Section */}
+            <AnimatedSection delay={0.8} className="p-8 flex flex-col gap-4 border rounded-lg">
+              <h2 className="text-sm font-mono uppercase font-bold tracking-wider">
+                Education
+              </h2>
+              <ResumeCard
+                items={EDUCATION_ITEM.map((item) => ({
+                  title: item.education,
+                  subtitle: item.degree,
+                  period: item.period,
+                }))}
+              />
+            </AnimatedSection>
 
-          {/* Blog Section */}
-          <section className="p-8 flex flex-col gap-4 border rounded-lg">
-            <h2 className="text-sm font-mono pb-3 uppercase font-bold tracking-wider">
-              Blog
-            </h2>
-            <BlogPosts />
-          </section>
+            {/* Projects Section */}
+            <AnimatedSection delay={0.9} className="p-8 flex flex-col gap-4 border rounded-lg">
+              <h2 className="text-sm font-mono pb-3 uppercase font-bold tracking-wider">
+                Featured Projects
+              </h2>
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-accent/20 to-secondary/20 blur-3xl -z-10 opacity-50" />
+                <ProjectGrid projects={PROJECTS} showAll={false} />
+              </div>
+            </AnimatedSection>
+
+            {/* Blog Section */}
+            <AnimatedSection delay={1.0} className="p-8 flex flex-col gap-4 border rounded-lg">
+              <h2 className="text-sm font-mono pb-3 uppercase font-bold tracking-wider">
+                Blog
+              </h2>
+              <BlogPosts />
+            </AnimatedSection>
           </main>
         </div>
       </AnimatedContainer>
