@@ -103,6 +103,7 @@ export default async function Home() {
                   title: item.education,
                   subtitle: item.degree,
                   period: item.period,
+                  description: item.description,
                 }))}
               />
             </AnimatedSection>

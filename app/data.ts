@@ -95,24 +95,33 @@ export const WORK_EXPERIENCE_ITEM = [
     role: "Software Engineer",
     period: "2025-03 - Present",
     description:
-      "Developed and maintained web applications for clients in fintech and healthcare sectors.",
+      "Software engineer at Bulba Cloud, a startup offering domain, VPS, and hosting services. The site functions as an online catalog with clean UI and directs users to WhatsApp for purchases, creating a seamless and personal buying experience.",
   },
   {
     company: "Freelancer - Upwork, Fiverr, etc",
     role: "Full Stack Developer",
     period: "2025-03 - Present",
     description:
-      "Developed and maintained web applications for clients in fintech and healthcare sectors.",
+      "Developed and maintained web applications for clients in various industries.",
   },
 ];
 
 export const EDUCATION_ITEM = [
   {
+    education: "SMK Muhammadiyah 1 Tegal",
+    degree: "Multimedia",
+    period: "2020 - 2023",
+    description:
+      "I learned about multimedia, such as video editing, photo editing and etc.",
+  },
+  {
     education: "Politeknik Harapan Bersama Tegal",
     degree: "Applied Bachelor (D4) in Informatics Engineering",
     period: "2023 - 2027",
+    description:
+      "I learned about software development, database, and system analysis.",
   },
-  
+
 
 ];
 
