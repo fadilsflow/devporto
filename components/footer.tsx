@@ -14,7 +14,7 @@ export function Footer() {
           </Link>{" "}
           / Build your portfolio with{" "}
           <span className="font-black ">
-            <a href="https://www.devporto.xyz">Devporto</a>
+            <a href="https://github.com/fadilsflow/devporto" className="text-blue-400">Devporto</a>
           </span>
         </div>
         <div className=" w-fit">
