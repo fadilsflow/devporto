@@ -96,7 +96,7 @@ export default async function ProjectPage({ params }: Props) {
       "@type": "WebPage",
       "@id": `${BASE_URL}/projects/${slug}`,
     },
-    keywords: [project.category, ...project.tools].join(", "),
+    keywords: [project.category, ...project.stack].join(", "),
     articleSection: "Project",
     about: {
       "@type": "Thing",
@@ -188,9 +188,9 @@ export default async function ProjectPage({ params }: Props) {
                   Tools
                 </h2>
                 <div className="flex flex-wrap gap-2 text-muted-foreground">
-                  {project.tools.map((tool, index) => (
+                  {project.stack.map((stack, index) => (
                     <p key={index} className="text-sm">
-                      {index === project.tools.length - 1 ? tool : tool + ","}
+                      {index === project.stack.length - 1 ? stack : stack + ","}
                     </p>
                   ))}
                 </div>

@@ -8,8 +8,11 @@ export const DESCRIPTION_LINKS_PAGE =
   "Hi, I'm Fadil. Mostly code, sometimes design. you're probably here for one of these things...";
 export const JOB = "Full Stack Developer";
 export const EMAIL = "wahyufadil1140@gmail.com";
-export const LOCATION = "Asia/Jakarta";
+export const LOCATION = "Indonesia";
 export const GITHUB_USERNAME = "fadilsflow";
+export const LINKEDIN_USERNAME = "wahyu-akhmad-fadillah";
+export const INSTAGRAM_USERNAME = "fadils.xyz";
+export const TWITTER_USERNAME = "fadils";
 
 
 // Navigation links in the bottom of the page.
@@ -57,36 +60,16 @@ export const SOCIAL_LINKS = [
 ];
 
 export const SKILLS = [
-  {
-    name: "Linux",
-  },
-  {
-    name: "React",
-  },
-  {
-    name: "Next.js",
-  },
-  {
-    name: "Tailwind CSS",
-  },
-  {
-    name: "TypeScript",
-  },
-  {
-    name: "Bun",
-  },
-  {
-    name: "PostgreSQL",
-  },
-  {
-    name: "Supabase",
-  },
-  {
-    name: "Git",
-  },
-  {
-    name: "Figma",
-  },
+  "Linux",
+  "React",
+  "Next.js", 
+  "Tailwind CSS",
+  "TypeScript",
+  "Bun",
+  "PostgreSQL",
+  "Supabase",
+  "Git",
+  "Figma"
 ];
 
 export const WORK_EXPERIENCE_ITEM = [
@@ -135,8 +118,8 @@ export const PROJECTS = [
     imageUrl:
       "https://res.cloudinary.com/dxurnpbrc/image/upload/v1747126424/1_ftwuie.png",
     href: "/projects/devporto",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "ShadCN"],
-    featured: true,
+    stack: ["Next.js", "Framer Motion", "shadcn/ui"],
+    featured: false,
     date: "2025-05-13",
     ctaButtons: {
       primary: {
@@ -152,7 +135,6 @@ export const PROJECTS = [
     role: ["Frontend Developer", "UI/UX Designer"],
     useCase: ["Developer Portfolio Website"],
     duration: "1 week",
-    tools: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "ShadCN"],
     category: "WEB DEVELOPMENT",
     github: "https://github.com/fadilsflow/devporto",
     liveDemo: "https://fadils.xyz",
@@ -166,7 +148,7 @@ export const PROJECTS = [
     imageUrl:
       "https://res.cloudinary.com/dxurnpbrc/image/upload/v1747125582/2_gsmj22.png",
     href: "/projects/bulba-cloud",
-    tags: ["Next.js", "Tailwind CSS", "ShadCN", "Figma", "Canva"],
+    stack: ["Next.js", "shadcn/ui", "Figma"],
     featured: true,
     date: "2024-02-15",
     ctaButtons: {
@@ -183,7 +165,6 @@ export const PROJECTS = [
     role: ["Web Designer", "Frontend Developer", "Marketing"],
     useCase: ["Startup Website", "Product Catalog"],
     duration: "4 weeks",
-    tools: ["Next.js", "Tailwind CSS", "ShadCN", "Figma", "Canva"],
     category: "WEB DEVELOPMENT",
   }
 ];
@@ -217,73 +198,3 @@ export const LINKS_PAGE_LINKS = [
     description: "A collection of my projects and work",
   },
 ];
-
-// Required favicons configuration
-export const FAVICONS = {
-  appName: "Fadil's Portfolio",
-  appShortName: "Fadil",
-  appDescription: "Full Stack Developer Portfolio",
-  developerName: NAME,
-  developerURL: BASE_URL,
-  dir: "auto",
-  lang: "en-US",
-  background: "#ffffff",
-  theme_color: "#000000",
-  display: "standalone",
-  orientation: "any",
-  startUrl: "/",
-  version: "1.0",
-  logging: false,
-  icons: {
-    // Create all these favicon sizes using a tool like https://realfavicongenerator.net/
-    // and place them in the public directory
-    android: true,
-    appleIcon: true,
-    appleStartup: true,
-    favicons: true,
-    windows: true,
-  },
-};
-
-
-// SEO Configuration
-export const SEO_CONFIG = {
-  titleTemplate: "%s | Fadil's Portfolio",
-  defaultTitle: `${NAME} - ${JOB}`,
-  siteName: "Fadil's Portfolio",
-  language: "en-US",
-  themeColor: "#000000",
-  twitterHandle: "@fadils",
-  googleSiteVerification: "",
-  googleAnalyticsId: "",
-  facebookAppId: "",
-};
-
-// Structured Data Config - For advanced SEO
-export const STRUCTURED_DATA = {
-  person: {
-    "@type": "Person",
-    name: NAME,
-    jobTitle: JOB,
-    url: BASE_URL,
-    sameAs: [
-      "https://linkedin.com/in/wahyu-akhmad-fadillah",
-      "https://github.com/fadilsflow",
-      "https://instagram.com/fadils.xyz",
-    ],
-  },
-  technologies: [
-    "TypeScript",
-    "React",
-    "Next.js",
-    "Node.js",
-    "Tailwind CSS",
-    "PostgreSQL",
-    "Supabase",
-  ],
-  availability: AVAILABLE_FOR_WORK
-    ? "Available for hire"
-    : "Not available for hire",
-  countryCode: "ID", // Indonesia
-  locationString: "Indonesia",
-};

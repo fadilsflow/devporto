@@ -3,12 +3,81 @@ import {
   NAME,
   BIO,
   BASE_URL,
-  SEO_CONFIG,
-  STRUCTURED_DATA,
-  FAVICONS,
   JOB,
   NICKNAME,
+  LINKEDIN_USERNAME,
+  GITHUB_USERNAME,
+  INSTAGRAM_USERNAME,
+  TWITTER_USERNAME,
+  LOCATION,
+  AVAILABLE_FOR_WORK,
+  SKILLS,
 } from "../data";
+
+
+// Required favicons configuration
+export const FAVICONS = {
+  appName: `${NAME} - ${JOB}`,
+  appShortName: `${NAME} Portfolio`,
+  appDescription: BIO,
+  developerName: NAME,
+  developerURL: BASE_URL,
+  dir: "auto",
+  lang: "en-US",
+  background: "#ffffff",
+  theme_color: "#000000",
+  display: "standalone",
+  orientation: "any",
+  startUrl: "/",
+  version: "1.0",
+  logging: false,
+  icons: {
+    // Create all these favicon sizes using a tool like https://realfavicongenerator.net/
+    // and place them in the public directory
+    android: true,
+    appleIcon: true,
+    appleStartup: true,
+    favicons: true,
+    windows: true,
+  },
+};
+
+
+// SEO Configuration
+export const SEO_CONFIG = {
+  titleTemplate: `%s - ${JOB}`,
+  defaultTitle: `${NAME} - ${JOB}`,
+  siteName: `${NAME} - ${JOB}`,
+  language: "en-US",
+  themeColor: "#000000",
+  twitterHandle: `@${TWITTER_USERNAME}`,
+  googleSiteVerification: "",
+  googleAnalyticsId: "",
+  facebookAppId: "",
+};
+
+// Structured Data Config - For advanced SEO
+export const STRUCTURED_DATA = {
+  person: {
+    "@type": "Person",
+    name: NAME,
+    jobTitle: JOB,
+    url: BASE_URL,
+    sameAs: [
+      `https://linkedin.com/in/${LINKEDIN_USERNAME}`,
+      `https://github.com/${GITHUB_USERNAME}`,
+      `https://instagram.com/${INSTAGRAM_USERNAME}`,
+      `https://twitter.com/${TWITTER_USERNAME}`,
+      `${BASE_URL}`,
+    ],
+  },
+  technologies: SKILLS,
+  availability: AVAILABLE_FOR_WORK
+    ? "Available for hire"
+    : "Not available for hire",
+  countryCode: "ID", // Indonesia
+  locationString: LOCATION,
+};
 
 /**
  * Default metadata for the site
@@ -25,19 +94,7 @@ export const defaultMetadata: Metadata = {
   },
 
   description: BIO,
-  keywords: [
-    "portfolio",
-    "developer",
-    "fullstack",
-    "web development",
-    "software engineer",
-    "react",
-    "nextjs",
-    "typescript",
-    "javascript",
-    "frontend developer",
-    "backend developer",
-  ],
+  keywords: SKILLS,
   authors: [{ name: NAME, url: BASE_URL }],
   creator: NAME,
   publisher: NAME,
@@ -102,19 +159,11 @@ export const defaultMetadata: Metadata = {
  * Home page metadata
  */
 export const homeMetadata: Metadata = {
-  title: `${NAME} | ${JOB}`,
-  description:
-    "Full Stack Developer Portfolio showcasing projects, skills, and experience",
-  keywords: [
-    "portfolio",
-    "developer portfolio",
-    "full stack developer",
-    NAME,
-    "web development",
-    ...STRUCTURED_DATA.technologies,
-  ],
+  title: `${NAME} - ${JOB}`,
+  description: BIO,
+  keywords: SKILLS,
   openGraph: {
-    title: `${NAME} | ${JOB}`,
+    title: `${NAME} - ${JOB}`,
     description: BIO,
     images: [
       {
@@ -135,20 +184,11 @@ export const homeMetadata: Metadata = {
  */
 export const projectsMetadata: Metadata = {
   title: `Projects | ${NAME}`,
-  description:
-    "Explore my portfolio of web development projects and case studies",
-  keywords: [
-    "web projects",
-    "portfolio projects",
-    "case studies",
-    "web development projects",
-    "coding projects",
-    ...STRUCTURED_DATA.technologies,
-  ],
+  description: BIO,
+  keywords: SKILLS,
   openGraph: {
     title: `Projects | ${NAME}`,
-    description:
-      "Explore my portfolio of web development projects and case studies",
+    description: BIO,
     images: [
       {
         url: "/projects-og.jpg",
@@ -168,20 +208,11 @@ export const projectsMetadata: Metadata = {
  */
 export const blogMetadata: Metadata = {
   title: `Blog | ${NAME}`,
-  description:
-    "Read my thoughts on web development, programming, and technology",
-  keywords: [
-    "web development blog",
-    "programming articles",
-    "tech blog",
-    "coding tutorials",
-    "software development insights",
-    ...STRUCTURED_DATA.technologies,
-  ],
+  description: BIO,
+  keywords: SKILLS,
   openGraph: {
     title: `Blog | ${NAME}`,
-    description:
-      "Read my thoughts on web development, programming, and technology",
+    description: BIO,
     images: [
       {
         url: "/blog-og.jpg",
@@ -201,17 +232,11 @@ export const blogMetadata: Metadata = {
  */
 export const linksMetadata: Metadata = {
   title: `Links | ${NAME}`,
-  description: "Collection of useful links and resources for web developers",
-  keywords: [
-    "useful links",
-    "web development resources",
-    "developer tools",
-    "programming resources",
-    "tech links",
-  ],
+  description: BIO,
+  keywords: SKILLS,
   openGraph: {
     title: `Links | ${NAME}`,
-    description: "Collection of useful links and resources for web developers",
+    description: BIO,
     images: [
       {
         url: "/links-og.jpg",

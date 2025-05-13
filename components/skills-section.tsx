@@ -5,8 +5,8 @@ export const SkillsSection = () => {
   return (
     <div className="flex flex-wrap gap-2">
       {SKILLS.map((skill) => (
-        <Badge key={skill.name} variant="outline" className="bg-card">
-          {skill.name}
+        <Badge key={skill} variant="outline" className="bg-card">
+          {skill}
         </Badge>
       ))}
     </div>

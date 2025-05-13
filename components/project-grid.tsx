@@ -48,10 +48,10 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
                   {project.description}
                 </p>
                 <div className="flex flex-wrap gap-2 mt-3">
-                  {project.tags &&
-                    project.tags.slice(0, 3).map((tag) => (
-                      <Badge key={tag} variant="outline" className="text-xs">
-                        {tag}
+                  {project.stack &&
+                    project.stack.slice(0, 3).map((stack) => (
+                      <Badge key={stack} variant="outline" className="text-xs">
+                        {stack}
                       </Badge>
                     ))}
                 </div>

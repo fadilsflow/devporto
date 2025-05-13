@@ -1,5 +1,5 @@
 import type { Viewport } from "next";
-import { FAVICONS } from "../data";
+import { FAVICONS } from "./seo";
 
 /**
  * Default viewport configuration
