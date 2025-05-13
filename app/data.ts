@@ -133,7 +133,7 @@ export const PROJECTS = [
     description:
       "A developer portfolio website built with Next.js and Tailwind CSS. Showcases my projects, skills, and experience in a clean and responsive design. Features include dark mode, responsive layout, and optimized performance.",
     imageUrl:
-      "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_1269.jpg",
+      "https://res.cloudinary.com/dxurnpbrc/image/upload/v1747125598/1_ftwuie.png",
     href: "/projects/devporto",
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "ShadCN"],
     featured: true,
@@ -164,14 +164,14 @@ export const PROJECTS = [
     description:
       "A modern landing page and product catalog for a cloud hosting startup. Built with Next.js and Tailwind CSS, the site showcases services like domain, hosting, and VPS with a WhatsApp-based ordering system.",
     imageUrl:
-      "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_3010.jpg",
+      "https://res.cloudinary.com/dxurnpbrc/image/upload/v1747125582/2_gsmj22.png",
     href: "/projects/bulba-cloud",
     tags: ["Next.js", "Tailwind CSS", "ShadCN", "Figma", "Canva"],
     featured: true,
     date: "2024-02-15",
     ctaButtons: {
       primary: {
-        label: "bulba.cloud",
+        label: "Live Demo",
         href: "https://bulba.cloud", // ganti dengan URL kamu
       },
       secondary: {
