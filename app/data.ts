@@ -123,7 +123,7 @@ export const PROJECTS = [
         href: "https://fadils.xyz",
       },
       secondary: {
-        label: "View Source",
+        label: "Deploy",
         href: "https://github.com/fadilsflow/devporto",
       },
     },

@@ -8,6 +8,9 @@ import { defaultViewport } from "@/app/config/viewport";
 import AnimatedSection from "@/components/animated-section";
 import Link from "next/link";
 import { ArrowLeftIcon } from "lucide-react";
+import { getProjectDetail } from "../utils";
+import { CustomMDX } from "@/components/mdx";
+
 interface Props {
   params: Promise<{
     slug: string;
@@ -75,6 +78,10 @@ export default async function ProjectPage({ params }: Props) {
     notFound();
   }
 
+  // Get project detail MDX content if available
+  const projectSlug = project.href.split("/").pop() || "";
+  const projectDetail = await getProjectDetail(projectSlug);
+
   // JSON-LD structured data for project
   const jsonLd = {
     "@context": "https://schema.org",
@@ -112,124 +119,128 @@ export default async function ProjectPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <AnimatedSection delay={0.3}>
-      <article className="min-h-screen relative max-w-3xl mx-auto border-t border-border border-dashed pt-8 mt-8">
-        <main className="max-w-7xl mx-auto rounded-lg relative space-y-4">
-          <section className="flex flex-col gap-8">
-            {/* Hero Image */}
-            <figure className="relative aspect-video overflow-hidden rounded-xl shadow-lg">
-              <Image
-                src={project.imageUrl}
-                alt={project.title}
-                fill
-                className="object-cover"
-                priority
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              />
-            </figure>
+        <article className="min-h-screen relative max-w-3xl mx-auto border-t border-border border-dashed pt-8 mt-8">
+          <main className="max-w-7xl mx-auto rounded-lg relative space-y-4">
+            <section className="flex flex-col gap-8">
+              {/*  Image */}
+              <figure className="relative aspect-video overflow-hidden rounded-xl shadow-lg">
+                <Image
+                  src={project.imageUrl}
+                  alt={project.title}
+                  fill
+                  className="object-cover"
+                  priority
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+              </figure>
 
-            {/* Project Header */}
-            <header className="space-y-4">
-              <div>
-                <h1 className="text-3xl font-bold tracking-tight">
-                  {project.title}
-                </h1>
-                <p className="text-sm text-muted-foreground capitalize  mt-2">
-                  {project.description}
-                </p>
-              </div>
-            </header>
-
-            {/* Project Details */}
-            <section className="flex flex-col">
-              
-              {/* Role */}
-              <div className="mb-3 flex justify-between border-b border-dashed  ">
-                <h2 className="capitalize tracking-wider text-muted-foreground text-sm mb-3">
-                  Role
-                </h2>
-                <div className="space-x-2 flex">
-                  {project.role.map((role, index) => (
-                    <p key={index} className="text-sm text-muted-foreground">
-                      {index === project.role.length - 1 ? role : role + ","}
-                    </p>
-                  ))}
+              {/* Project Header */}
+              <header className="space-y-4">
+                <div>
+                  <h1 className="text-4xl font-semibold tracking-tight">
+                    {project.title}
+                  </h1>
+                  <p className="text-sm text-muted-foreground capitalize mt-2">
+                    {project.description}
+                  </p>
                 </div>
+              </header>
+                {/* Action Buttons */}
+                <div className="grid grid-cols-2 gap-4">
+                {project.ctaButtons.primary.href && (
+                  <Button asChild variant="default" className="w-full">
+                    <a
+                      href={project.ctaButtons.primary.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2"
+                    >
+                      <span className="text-sm">
+                        {project.ctaButtons.primary.label}
+                      </span>
+                    </a>
+                  </Button>
+                )}
+                {project.ctaButtons.secondary.href && (
+                  <Button asChild variant="outline" className="w-full">
+                    <a
+                      href={project.ctaButtons.secondary.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2"
+                    >
+                      <span className="text-sm">
+                        {project.ctaButtons.secondary.label}
+                      </span>
+                    </a>
+                  </Button>
+                )}
               </div>
 
-              {/* Use Case */}
-              <div className="mb-3 flex justify-between border-b border-dashed">
-                <h2 className="capitalize tracking-wider text-muted-foreground text-sm mb-3">
-                  Use case
-                </h2>
-                <div className="space-x-2 flex">
-                  {project.useCase.map((useCase, index) => (
-                    <p key={index} className="text-sm text-muted-foreground">
-                      {index === project.useCase.length - 1
-                        ? useCase
-                        : useCase + ","}
-                    </p>
-                  ))}
+              {/* Project Details */}
+              <section className="flex flex-col">
+                {/* Role */}
+                <div className="mb-3 flex justify-between border-b border-dashed">
+                  <h2 className="capitalize tracking-wider text-muted-foreground text-sm font-medium mb-3">
+                    Role
+                  </h2>
+                  <div className="space-x-2 flex">
+                    {project.role.map((role, index) => (
+                      <p key={index} className="text-sm text-muted-foreground">
+                        {index === project.role.length - 1 ? role : role + ","}
+                      </p>
+                    ))}
+                  </div>
                 </div>
-              </div>
 
-
-              {/* Tools */}
-              <div className="mb-3 flex justify-between border-b border-dashed">
-                <h2 className="capitalize tracking-wider text-muted-foreground text-sm mb-3">
-                  Tools
-                </h2>
-                <div className="flex flex-wrap gap-2 text-muted-foreground">
-                  {project.stack.map((stack, index) => (
-                    <p key={index} className="text-sm">
-                      {index === project.stack.length - 1 ? stack : stack + ","}
-                    </p>
-                  ))}
+                {/* Use Case */}
+                <div className="mb-3 flex justify-between border-b border-dashed">
+                  <h2 className="capitalize tracking-wider text-muted-foreground text-sm mb-3 font-medium">
+                    Use case
+                  </h2>
+                  <div className="space-x-2 flex">
+                    {project.useCase.map((useCase, index) => (
+                      <p key={index} className="text-sm text-muted-foreground">
+                        {index === project.useCase.length - 1
+                          ? useCase
+                          : useCase + ","}
+                      </p>
+                    ))}
+                  </div>
                 </div>
-              </div>
+
+                {/* Tools */}
+                <div className="mb-3 flex justify-between border-b border-dashed">
+                  <h2 className="capitalize tracking-wider text-muted-foreground text-sm mb-3 font-medium ">
+                    Tools
+                  </h2>
+                  <div className="flex flex-wrap gap-2 text-muted-foreground">
+                    {project.stack.map((stack, index) => (
+                      <p key={index} className="text-sm">
+                        {index === project.stack.length - 1 ? stack : stack + ","}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              </section>
+
+            
             </section>
 
-            {/* Action Buttons */}
-            <div className="space-x-4 flex justify-end">
-              {project.ctaButtons.primary.href && (
-                <Button asChild variant="default">
-                  <a
-                    href={project.ctaButtons.primary.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2"
-                  >
-                    <span className=" text-sm">
-                      {project.ctaButtons.primary.label}
-                    </span>
-                  </a>
-                </Button>
-              )}
-              {project.ctaButtons.secondary.href && (
-                <Button asChild variant="outline">
-                  <a
-                    href={project.ctaButtons.secondary.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2"
-                  >
-                    <span className="text-sm">
-                      {project.ctaButtons.secondary.label}
-                    </span>
-                  </a>
-                </Button>
-              )}
-            </div>
+            {/* Project MDX Content */}
+            {projectDetail && (
+              <section className="mt-12 prose dark:prose-invert max-w-none ">
+                <CustomMDX source={projectDetail.content} />
+              </section>
+            )}
 
-         
-          </section>
-          <footer className="text-sm border-t border-border border-dashed pt-8  mt-8">
-        <Link href="/projects" className="text-primary flex items-center gap-2">
-        <ArrowLeftIcon className="w-4 h-4 " /> Back
-
-        </Link>
-        </footer>
-        </main>
-      </article>
+            <footer className="text-sm border-t border-border border-dashed pt-8 mt-8">
+              <Link href="/projects" className="text-primary flex items-center gap-2">
+                <ArrowLeftIcon className="w-4 h-4" /> Back
+              </Link>
+            </footer>
+          </main>
+        </article>
       </AnimatedSection>
     </>
   );

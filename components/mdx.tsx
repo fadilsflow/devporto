@@ -3,6 +3,7 @@ import Image from "next/image";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { highlight } from "sugar-high";
 import React from "react";
+import { CopyButton } from "./copy-button";
 
 interface TableData {
   headers: string[];
@@ -36,6 +37,11 @@ interface HeadingProps {
 interface MDXProps {
   source: string;
   components?: Record<string, React.ComponentType<unknown>>;
+}
+
+interface PreProps {
+  children: React.ReactNode;
+  [key: string]: unknown;
 }
 
 function Table({ data }: TableProps) {
@@ -126,6 +132,23 @@ function createHeading(level: number) {
   return Heading;
 }
 
+function Pre({ children, ...props }: PreProps) {
+  return (
+    <div className="relative group">
+      <pre {...props}>
+        {children}
+      </pre>
+      <CopyButton text={
+        typeof children === 'string' 
+          ? children 
+          : children && typeof children === 'object' && 'props' in (children as { props?: unknown })
+            ? ((children as { props?: { children?: string } }).props?.children as string) || ''
+            : ''
+      } />
+    </div>
+  );
+}
+
 const components = {
   h1: createHeading(1),
   h2: createHeading(2),
@@ -136,6 +159,7 @@ const components = {
   Image: RoundedImage,
   a: CustomLink,
   code: Code,
+  pre: Pre,
   Table,
   Link: Link,
 };
