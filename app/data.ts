@@ -9,6 +9,7 @@ export const DESCRIPTION_LINKS_PAGE =
 export const JOB = "Full Stack Developer";
 export const EMAIL = "wahyufadil1140@gmail.com";
 export const LOCATION = "Indonesia";
+export const TIMEZONE = "Asia/Jakarta";
 export const GITHUB_USERNAME = "fadilsflow";
 export const LINKEDIN_USERNAME = "wahyu-akhmad-fadillah";
 export const INSTAGRAM_USERNAME = "fadils.xyz";

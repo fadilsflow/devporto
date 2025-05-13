@@ -1,4 +1,4 @@
-import { NAME, LOCATION, SOCIAL_LINKS, BIO, EMAIL } from "@/app/data";
+import { NAME, TIMEZONE, SOCIAL_LINKS, BIO, EMAIL } from "@/app/data";
 import Image from "next/image";
 import { SocialLink } from "@/components/social-link";
 import { TimeDisplay } from "@/components/time-display";
@@ -50,7 +50,7 @@ export default function Header() {
         <ProfileImage />
         <ProfileInfo />
         <div className="absolute right-2 top-2 sm:flex hidden">
-          <TimeDisplay location={LOCATION} />
+          <TimeDisplay location={TIMEZONE} />
         </div>
       </div>
     </header>
