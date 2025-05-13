@@ -133,7 +133,7 @@ export const PROJECTS = [
     description:
       "A developer portfolio website built with Next.js and Tailwind CSS. Showcases my projects, skills, and experience in a clean and responsive design. Features include dark mode, responsive layout, and optimized performance.",
     imageUrl:
-      "https://res.cloudinary.com/dxurnpbrc/image/upload/v1747125598/1_ftwuie.png",
+      "https://res.cloudinary.com/dxurnpbrc/image/upload/v1747126424/1_ftwuie.png",
     href: "/projects/devporto",
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "ShadCN"],
     featured: true,
