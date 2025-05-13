@@ -172,15 +172,6 @@ export default async function ProjectPage({ params }: Props) {
                 </div>
               </div>
 
-              {/* Duration */}
-              <div className="mb-3 flex justify-between border-b border-dashed">
-                <h2 className="capitalize tracking-wider text-muted-foreground text-sm mb-3">
-                  Duration
-                </h2>
-                <p className="text-sm text-muted-foreground">
-                  {project.duration}
-                </p>
-              </div>
 
               {/* Tools */}
               <div className="mb-3 flex justify-between border-b border-dashed">

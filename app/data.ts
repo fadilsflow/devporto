@@ -110,7 +110,6 @@ export const PROJECTS = [
   {
     id: "1",
     title: "Devporto",
-    subtitle: "Developer Portfolio Website Template",
     description:
       "A modern, feature-rich portfolio website template designed specifically for developers. Built with Next.js and Tailwind CSS, it offers a perfect showcase for your coding journey. Features include GitHub stats integration showing your contribution graph and top repositories, dark mode support, fully responsive layouts, and blazing-fast performance with server-side rendering. The template implements comprehensive SEO optimization with semantic HTML, meta tags, and structured data. Developers can easily customize sections for projects, skills, work experience, and blog posts. Includes  image optimization, and accessibility best practices. Perfect for developers wanting a professional online presence with minimal setup.",
     imageUrl:
@@ -118,7 +117,6 @@ export const PROJECTS = [
     href: "/projects/devporto", 
     stack: ["Next.js", "Framer Motion", "shadcn/ui"],
     featured: false,
-    date: "2025-05-13",
     ctaButtons: {
       primary: {
         label: "Live Demo",
@@ -132,7 +130,6 @@ export const PROJECTS = [
     
     role: ["Frontend Developer", "UI/UX Designer"],
     useCase: ["Developer Portfolio Website", "Portfolio Template"],
-    duration: "1 week",
     category: "WEB DEVELOPMENT",
     github: "https://github.com/fadilsflow/devporto",
     liveDemo: "https://fadils.xyz",
@@ -140,7 +137,6 @@ export const PROJECTS = [
   {
     id: "2", 
     title: "Bulba Cloud",
-    subtitle: "Cloud Hosting Website",
     description:
       "A modern, SEO-optimized landing page and product catalog for a cloud hosting startup. Built with Next.js and Tailwind CSS, the site delivers a seamless user experience for browsing hosting services. Features include optimized page load times, responsive design across all devices, and strategic SEO implementation including meta tags, canonical URLs, and structured data markup. The WhatsApp-based ordering system streamlines customer communication while maintaining a personal touch. Comprehensive service pages for domains, VPS, and hosting are enhanced with rich snippets for better search visibility. Analytics integration helps track conversion rates and user engagement to continuously improve the platform.",
     imageUrl:
@@ -148,7 +144,6 @@ export const PROJECTS = [
     href: "/projects/bulba-cloud",
     stack: ["Next.js", "shadcn/ui", "Figma"],
     featured: true,
-    date: "2024-02-15",
     ctaButtons: {
       primary: {
         label: "Live Demo",
@@ -162,7 +157,6 @@ export const PROJECTS = [
    
     role: ["Web Designer", "Frontend Developer", "Marketing"],
     useCase: ["Startup Website", "Product Catalog"],
-    duration: "4 weeks",
     category: "WEB DEVELOPMENT",
   }
 ];
