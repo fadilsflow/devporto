@@ -129,7 +129,7 @@ export const PROJECTS = [
     },
     
     role: ["Frontend Developer", "UI/UX Designer"],
-    useCase: ["Developer Portfolio Website", "Portfolio Template"],
+    useCase: ["Portfolio Website"],
     category: "WEB DEVELOPMENT",
     github: "https://github.com/fadilsflow/devporto",
     liveDemo: "https://fadils.xyz",
