@@ -19,7 +19,7 @@ export default function BlogPage() {
       <p className="text-neutral-600 dark:text-neutral-400 mb-8 ">
         Here are some of my thoughts on software development, design, and more.
       </p>
-      <div className="space-y-8">
+      <div className="space-y-8 border-t border-border border-dashed pt-8">
         {posts.map((post) => (
           <Link
             key={post.slug}

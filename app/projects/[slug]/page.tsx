@@ -6,7 +6,8 @@ import type { Metadata, ResolvingMetadata } from "next";
 import Script from "next/script";
 import { defaultViewport } from "@/app/config/viewport";
 import AnimatedSection from "@/components/animated-section";
-
+import Link from "next/link";
+import { ArrowLeftIcon } from "lucide-react";
 interface Props {
   params: Promise<{
     slug: string;
@@ -111,7 +112,7 @@ export default async function ProjectPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <AnimatedSection delay={0.3}>
-      <article className="min-h-screen relative max-w-3xl mx-auto">
+      <article className="min-h-screen relative max-w-3xl mx-auto border-t border-border border-dashed pt-8">
         <main className="max-w-7xl mx-auto rounded-lg relative space-y-4">
           <section className="flex flex-col gap-8">
             {/* Hero Image */}
@@ -132,17 +133,18 @@ export default async function ProjectPage({ params }: Props) {
                 <h1 className="text-3xl font-bold tracking-tight">
                   {project.title}
                 </h1>
-                <p className="text-sm text-muted-foreground capitalize tracking-wide mt-2">
-                  {project.category}
+                <p className="text-sm text-muted-foreground capitalize  mt-2">
+                  {project.description}
                 </p>
               </div>
             </header>
 
             {/* Project Details */}
             <section className="flex flex-col">
+              
               {/* Role */}
-              <div className="mb-3 flex justify-between border-b">
-                <h2 className="capitalize tracking-wider text-muted-foreground text-sm">
+              <div className="mb-3 flex justify-between border-b border-dashed  ">
+                <h2 className="capitalize tracking-wider text-muted-foreground text-sm mb-3">
                   Role
                 </h2>
                 <div className="space-x-2 flex">
@@ -155,7 +157,7 @@ export default async function ProjectPage({ params }: Props) {
               </div>
 
               {/* Use Case */}
-              <div className="mb-3 flex justify-between border-b">
+              <div className="mb-3 flex justify-between border-b border-dashed">
                 <h2 className="capitalize tracking-wider text-muted-foreground text-sm mb-3">
                   Use case
                 </h2>
@@ -171,8 +173,8 @@ export default async function ProjectPage({ params }: Props) {
               </div>
 
               {/* Duration */}
-              <div className="mb-3 flex justify-between border-b">
-                <h2 className="capitalize tracking-wider text-muted-foreground text-xs mb-3">
+              <div className="mb-3 flex justify-between border-b border-dashed">
+                <h2 className="capitalize tracking-wider text-muted-foreground text-sm mb-3">
                   Duration
                 </h2>
                 <p className="text-sm text-muted-foreground">
@@ -181,13 +183,13 @@ export default async function ProjectPage({ params }: Props) {
               </div>
 
               {/* Tools */}
-              <div className="mb-3 flex justify-between border-b">
-                <h2 className="capitalize tracking-wider text-muted-foreground text-xs mb-3">
+              <div className="mb-3 flex justify-between border-b border-dashed">
+                <h2 className="capitalize tracking-wider text-muted-foreground text-sm mb-3">
                   Tools
                 </h2>
                 <div className="flex flex-wrap gap-2 text-muted-foreground">
                   {project.tools.map((tool, index) => (
-                    <p key={index} className="text-xs">
+                    <p key={index} className="text-sm">
                       {index === project.tools.length - 1 ? tool : tool + ","}
                     </p>
                   ))}
@@ -210,7 +212,7 @@ export default async function ProjectPage({ params }: Props) {
                     </span>
                   </a>
                 </Button>
-              )}
+              )}age
               {project.ctaButtons.secondary.href && (
                 <Button asChild variant="outline">
                   <a
@@ -227,18 +229,14 @@ export default async function ProjectPage({ params }: Props) {
               )}
             </div>
 
-            {/* Project Description */}
-            <div className="space-y-4">
-              <div className="prose prose-lg max-w-none">
-                <p className="text-sm text-muted-foreground">
-                  {project.description}
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  {project.content}
-                </p>
-              </div>
-            </div>
+         
           </section>
+          <footer className="text-sm border-t border-border border-dashed pt-8  mt-8">
+        <Link href="/projects" className="text-primary flex items-center gap-2">
+        <ArrowLeftIcon className="w-4 h-4 " /> Back
+
+        </Link>
+        </footer>
         </main>
       </article>
       </AnimatedSection>

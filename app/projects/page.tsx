@@ -14,8 +14,7 @@ export default function ProjectsPage() {
               {NICKNAME}&apos;s Projects
             </h1>
             <p
-              className="text-lg t
-xt-muted-fordifferentax-w-2xl"
+              className="text-lg text-muted-foreground "
             >
               A collection of my projects and work. Each project showcases
               different aspects of my skills and experience in web development,
@@ -23,16 +22,9 @@ xt-muted-fordifferentax-w-2xl"
             </p>
           </div>
 
-          <div className="relative">
+          <div className="relative border-t border-border border-dashed pt-8">
             <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-accent/20 to-secondary/20 blur-3xl -z-10 opacity-50" />
-            <div className="space-y-6">
-              <div className="flex items-center justify-between">
-                <h2 className="text-sm font-mono uppercase font-bold tracking-wider">
-                  All Projects
-                </h2>
-              </div>
               <ProjectGrid projects={PROJECTS} showAll={true} />
-            </div>
           </div>
         </section>
       </main>

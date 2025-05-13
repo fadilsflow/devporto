@@ -16,7 +16,6 @@ import { SkillsSection } from "@/components/skills-section";
 import ResumeCard from "@/components/resume-card";
 import { BreadNav } from "@/components/bread-nav";
 import { ShareButton } from "@/components/share-button";
-import { RssButton } from "@/components/rss-button";
 import Script from "next/script";
 
 import AnimatedSection from "@/components/animated-section";
@@ -53,7 +52,7 @@ export default async function Home() {
             <AnimatedSection delay={0.4} className="flex justify-between items-center text-center">
               <BreadNav />
               <div className="flex items-center gap-2">
-                <RssButton />
+                
                 <ShareButton />
               </div>
             </AnimatedSection>

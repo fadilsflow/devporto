@@ -128,35 +128,34 @@ export const EDUCATION_ITEM = [
 export const PROJECTS = [
   {
     id: "1",
-    title: "Developer Portfolio",
-    subtitle: "Personal Website",
+    title: "Devporto",
+    subtitle: "Developer Portfolio Website",
     description:
-      "A modern developer portfolio built with Next.js and Tailwind CSS. Showcases my projects, skills, and experience in a clean and responsive design. Features include dark mode, responsive layout, and optimized performance.",
+      "A developer portfolio website built with Next.js and Tailwind CSS. Showcases my projects, skills, and experience in a clean and responsive design. Features include dark mode, responsive layout, and optimized performance.",
     imageUrl:
       "https://res.cloudinary.com/zeit-inc/image/upload/nextconf-photos/Sexton_Vercel_1269.jpg",
-    href: "/projects/e-commerce",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase"],
+    href: "/projects/devporto",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "ShadCN"],
     featured: true,
-    date: "2024-03-01",
+    date: "2025-05-13",
     ctaButtons: {
       primary: {
         label: "Live Demo",
-        href: "https://github.com/fadilsflow/e-commerce",
+        href: "https://fadils.xyz",
       },
       secondary: {
         label: "View Source",
-        href: "https://github.com/fadilsflow/e-commerce",
+        href: "https://github.com/fadilsflow/devporto",
       },
     },
-    content:
-      "A full-featured e-commerce platform with modern UI/UX, real-time updates, and secure payment processing. Built with Next.js, TypeScript, and Tailwind CSS, with Supabase as the backend. Features include user authentication, product search, cart functionality, and order processing.",
+    
     role: ["Frontend Developer", "UI/UX Designer"],
-    useCase: ["Kyuha Shim (advisor)", "Langston Wells", "Stefanie Suk"],
-    duration: "8 weeks",
-    tools: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase"],
-    category: "E-COMMERCE",
-    github: "https://github.com/fadilsflow/e-commerce",
-    liveDemo: "https://e-commerce.fadil.xyz",
+    useCase: ["Developer Portfolio Website"],
+    duration: "1 week",
+    tools: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "ShadCN"],
+    category: "WEB DEVELOPMENT",
+    github: "https://github.com/fadilsflow/devporto",
+    liveDemo: "https://fadils.xyz",
   },
   {
     id: "2",
@@ -180,8 +179,7 @@ export const PROJECTS = [
         href: "https://github.com/fadilsflow/bulbacloud", // ganti dengan repo kamu
       },
     },
-    content:
-      "I designed and developed a website for Bulba Cloud, a startup offering domain, VPS, and hosting services. The site functions as an online catalog with clean UI and directs users to WhatsApp for purchases, creating a seamless and personal buying experience. \n\nI handled brand design (logo, posters, visual content), marketing strategy, and full website development using modern tools like Next.js, Tailwind CSS, ShadCN, and Figma.",
+   
     role: ["Web Designer", "Frontend Developer", "Marketing"],
     useCase: ["Startup Website", "Product Catalog"],
     duration: "4 weeks",

@@ -1,7 +1,7 @@
 import { BreadNav } from "@/components/bread-nav";
 import { ShareButton } from "@/components/share-button";
 import { defaultViewport } from "../config/viewport";
-import { RssButton } from "@/components/rss-button";
+
 
 export const viewport = defaultViewport;
 
@@ -15,7 +15,7 @@ export default function LinksLayout({
       <div className="flex justify-between items-center">
         <BreadNav />
         <div className="flex items-center gap-2">
-          <RssButton />
+          
           <ShareButton />
         </div>
       </div>

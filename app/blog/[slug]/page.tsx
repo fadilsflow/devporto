@@ -6,6 +6,8 @@ import { BASE_URL, NAME } from "@/app/data";
 import Script from "next/script";
 import { defaultViewport } from "@/app/config/viewport";
 import AnimatedSection from "@/components/animated-section";
+import Link from "next/link";
+import { ArrowLeftIcon } from "lucide-react";
 
 interface Props {
   params: Promise<{
@@ -121,7 +123,7 @@ export default async function Blog({ params }: Props) {
 
     return (
       <AnimatedSection delay={0.3}>
-      <article className="max-w-3xl mx-auto px-4 md:px-0 space-y-8 relative">
+      <article className="max-w-3xl mx-auto px-4 md:px-0 space-y-8 relative border-t border-border border-dashed pt-8 mt-5">
         <Script
           id="blog-post-jsonld"
           type="application/ld+json"
@@ -156,13 +158,15 @@ export default async function Blog({ params }: Props) {
           </figure>
         )}
 
-        <div className="prose dark:prose-invert max-w-none">
+        <div className="prose dark:prose-invert max-w-none ">
           <CustomMDX source={post.content} />
         </div>
 
-        <footer className="text-sm text-muted-foreground text-center pt-8 border-t">
-          <p>Written by {NAME}</p>
-          <p>Published on {formatDate(post.metadata.publishedAt)}</p>
+        <footer className="text-sm pt-8 border-t border-border border-dashed">
+        <Link href="/blog" className="text-primary flex items-center gap-2">
+        <ArrowLeftIcon className="w-4 h-4 " /> Back
+
+        </Link>
         </footer>
       </article>
       </AnimatedSection>
