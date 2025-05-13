@@ -110,7 +110,7 @@ export default async function Home() {
             {/* Projects Section */}
             <AnimatedSection delay={0.3} className="p-8 flex flex-col gap-4 border rounded-lg">
               <h2 className="text-sm font-mono pb-3 uppercase font-bold tracking-wider">
-                Featured Projects
+              Projects
               </h2>
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-accent/20 to-secondary/20 blur-3xl -z-10 opacity-50" />
