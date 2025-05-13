@@ -6,6 +6,7 @@ import Image from "next/image";
 import { PROJECTS } from "@/app/data";
 import Link from "next/link";
 import { Badge } from "./ui/badge";
+import { ArrowRightIcon } from "lucide-react";
 
 interface ProjectGridProps {
   projects?: typeof PROJECTS;
@@ -64,9 +65,9 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
       {!showAll && (
         <Link
           href="/projects"
-          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+          className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
         >
-          View all projects →
+          View all projects <ArrowRightIcon className="w-4 h-4" />
         </Link>
       )}
     </div>

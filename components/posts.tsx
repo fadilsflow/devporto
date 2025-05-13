@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getBlogPosts, formatDate } from "@/app/blog/utils";
+import { ArrowRightIcon } from "lucide-react";
 
 export function BlogPosts() {
   const allBlogs = getBlogPosts()
@@ -31,9 +32,9 @@ export function BlogPosts() {
       ))}
       <Link
         href="/blog"
-        className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
+        className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors flex items-center gap-2"
       >
-        View all posts →
+        View all posts <ArrowRightIcon className="w-4 h-4" />
       </Link>
     </div>
   );
