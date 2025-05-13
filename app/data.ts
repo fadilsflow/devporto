@@ -124,7 +124,7 @@ export const PROJECTS = [
       },
       secondary: {
         label: "Deploy",
-        href: "https://github.com/fadilsflow/devporto",
+        href: "https://vercel.com/new/clone?repository-url=https://github.com/fadilsflow/devporto",
       },
     },
     
