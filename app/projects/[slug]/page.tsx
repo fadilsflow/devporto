@@ -112,7 +112,7 @@ export default async function ProjectPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <AnimatedSection delay={0.3}>
-      <article className="min-h-screen relative max-w-3xl mx-auto border-t border-border border-dashed pt-8">
+      <article className="min-h-screen relative max-w-3xl mx-auto border-t border-border border-dashed pt-8 mt-8">
         <main className="max-w-7xl mx-auto rounded-lg relative space-y-4">
           <section className="flex flex-col gap-8">
             {/* Hero Image */}
