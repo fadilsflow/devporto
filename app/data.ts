@@ -165,7 +165,7 @@ export const PROJECTS = [
 export const LINKS_PAGE_LINKS = [
   {
     label: "Devporto",
-    href: "https://devporto.fadils.xyz",
+    href: "https://fadils.xyz/projects/devporto",
     description: "Best Developer Portfolio Website Template",
   },
   {
@@ -175,7 +175,7 @@ export const LINKS_PAGE_LINKS = [
   },
   {
     label: "Personal Website",
-    href: "https://fadil.xyz",
+    href: "https://fadils.xyz",
     description: "My personal website where I share my thoughts and ideas",
   },
   {
