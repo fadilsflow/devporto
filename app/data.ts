@@ -95,7 +95,7 @@ export const EDUCATION_ITEM = [
     degree: "Multimedia",
     period: "2020 - 2023", 
     description:
-      "Completed vocational high school with focus on multimedia and digital content creation. Gained hands-on experience with industry-standard creative software including Adobe Creative Suite for video editing, motion graphics, and photo manipulation. Developed strong foundation in visual design principles and digital storytelling.",
+      "Completed vocational high school with focus on multimedia and digital content creation. Gained hands-on experience with industry-standard creative software, Creative Suite for video editing, motion graphics, and photo manipulation. Developed strong foundation in visual design principles and digital storytelling.",
   },
   {
     education: "Politeknik Harapan Bersama Tegal",
