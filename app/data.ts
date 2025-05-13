@@ -81,11 +81,11 @@ export const WORK_EXPERIENCE_ITEM = [
       "Software engineer at Bulba Cloud, a startup offering domain, VPS, and hosting services. The site functions as an online catalog with clean UI and directs users to WhatsApp for purchases, creating a seamless and personal buying experience.",
   },
   {
-    company: "Freelancer - Upwork, Fiverr, etc",
+    company: "Freelancer - Self-employed",
     role: "Full Stack Developer",
-    period: "2025-03 - Present",
+    period: "2025-03 - Present", 
     description:
-      "Developed and maintained web applications for clients in various industries.",
+      "Building personal projects and learning new technologies through hands-on development. Focusing on modern web development stack including React, Next.js, and TypeScript. Actively participating in open source contributions and expanding skillset through online courses and tutorials.",
   },
 ];
 
