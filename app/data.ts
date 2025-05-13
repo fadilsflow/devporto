@@ -93,21 +93,18 @@ export const EDUCATION_ITEM = [
   {
     education: "SMK Muhammadiyah 1 Tegal",
     degree: "Multimedia",
-    period: "2020 - 2023",
+    period: "2020 - 2023", 
     description:
-      "I learned about multimedia, such as video editing, photo editing and etc.",
+      "Completed vocational high school with focus on multimedia and digital content creation. Gained hands-on experience with industry-standard creative software including Adobe Creative Suite for video editing, motion graphics, and photo manipulation. Developed strong foundation in visual design principles and digital storytelling.",
   },
   {
     education: "Politeknik Harapan Bersama Tegal",
     degree: "Applied Bachelor (D4) in Informatics Engineering",
     period: "2023 - 2027",
     description:
-      "I learned about software development, database, and system analysis.",
+      "Currently pursuing applied bachelor's degree with focus on practical software engineering. Studying modern web development, database design, system architecture, and software project management. Gaining hands-on experience through industry-focused coursework and real-world projects.",
   },
-
-
 ];
-
 export const PROJECTS = [
   {
     id: "1",
