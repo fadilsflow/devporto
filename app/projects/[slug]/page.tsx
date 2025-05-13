@@ -212,7 +212,7 @@ export default async function ProjectPage({ params }: Props) {
                     </span>
                   </a>
                 </Button>
-              )}age
+              )}
               {project.ctaButtons.secondary.href && (
                 <Button asChild variant="outline">
                   <a
