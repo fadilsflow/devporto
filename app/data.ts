@@ -191,40 +191,30 @@ export const PROJECTS = [
 // Links card in links page
 export const LINKS_PAGE_LINKS = [
   {
-    label: "Pomopokus",
-    href: "https://pomopokus.com",
-    description: "Best Pomodoro apps timer in the world",
-    category: "Productivity",
-    icon: "clock",
+    label: "Devporto",
+    href: "https://devporto.fadils.xyz",
+    description: "Best Developer Portfolio Website Template",
   },
   {
     label: "Youtube",
     href: "https://www.youtube.com/@wahyuakhmadfadillah9882",
     description: "Nerdy videos about software dev stuff",
-    category: "Social Media",
-    icon: "youtube",
   },
   {
     label: "Personal Website",
     href: "https://fadil.xyz",
     description: "My personal website where I share my thoughts and ideas",
-    category: "Personal",
-    icon: "globe",
   },
   {
     label: "Blog",
     href: "/blog",
     description:
       "Here are some of my thoughts on software development, design, and more.",
-    category: "Writing",
-    icon: "pencil",
   },
   {
     label: "Projects",
     href: "/projects",
     description: "A collection of my projects and work",
-    category: "Portfolio",
-    icon: "code",
   },
 ];
 
