@@ -53,4 +53,4 @@ Built with Next.js 15, [shadcn/ui](https://ui.shadcn.com/), and deployed on Verc
 
 # License
 
-Licensed under the [MIT license](https://github.com/fadilsflow/devporto/LICENSE.md).
+Licensed under the [MIT license](https://github.com/fadilsflow/devporto/LICENSE).
