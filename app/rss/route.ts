@@ -45,7 +45,7 @@ export async function GET() {
         <atom:link href="${BASE_URL}/rss.xml" rel="self" type="application/rss+xml" />
         <webMaster>${NAME} (${JOB})</webMaster>
         <image>
-          <url>${BASE_URL}/favicon.ico</url>
+          <url>${BASE_URL}/icon0.svg</url>
           <title>${NAME}'s Blog</title>
           <link>${BASE_URL}</link>
         </image>

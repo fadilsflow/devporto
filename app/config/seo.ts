@@ -24,7 +24,7 @@ export const FAVICONS = {
   developerURL: BASE_URL,
   dir: "auto",
   lang: "en-US",
-  background: "#ffffff",
+  background: "#000000",
   theme_color: "#000000",
   display: "standalone",
   orientation: "any",
@@ -89,9 +89,10 @@ export const defaultMetadata: Metadata = {
     template: SEO_CONFIG.titleTemplate,
   },
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
+    icon: "/icon0.svg",
+    shortcut: "/icon0.svg",
   },
+  
 
   description: BIO,
   keywords: SKILLS,
@@ -114,7 +115,7 @@ export const defaultMetadata: Metadata = {
     description: BIO,
     images: [
       {
-        url: "/og-image.png",
+        url: "/icon0.svg",
         width: 1200,
         height: 630,
         alt: `${NAME}'s Portfolio`,
@@ -126,7 +127,7 @@ export const defaultMetadata: Metadata = {
     title: SEO_CONFIG.defaultTitle,
     description: BIO,
     creator: SEO_CONFIG.twitterHandle,
-    images: ["/og-image.png"],
+    images: ["/icon0.svg"],
   },
   robots: {
     index: true,
@@ -167,7 +168,7 @@ export const homeMetadata: Metadata = {
     description: BIO,
     images: [
       {
-        url: "/og-image.png",
+        url: "/icon0.svg",
         width: 1200,
         height: 630,
         alt: `${NAME} Portfolio`,
@@ -191,7 +192,7 @@ export const projectsMetadata: Metadata = {
     description: BIO,
     images: [
       {
-        url: "/projects-og.jpg",
+        url: "/icon0.svg",
         width: 1200,
         height: 630,
         alt: `${NAME}'s Projects`,
@@ -215,7 +216,7 @@ export const blogMetadata: Metadata = {
     description: BIO,
     images: [
       {
-        url: "/blog-og.jpg",
+        url: "/icon0.svg",
         width: 1200,
         height: 630,
         alt: `${NAME}'s Blog`,
@@ -239,7 +240,7 @@ export const linksMetadata: Metadata = {
     description: BIO,
     images: [
       {
-        url: "/links-og.jpg",
+        url: "/icon0.svg",
         width: 1200,
         height: 630,
         alt: `${NAME}'s Links`,

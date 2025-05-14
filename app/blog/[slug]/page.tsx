@@ -112,7 +112,7 @@ export default async function Blog({ params }: Props) {
         name: NAME,
         logo: {
           "@type": "ImageObject",
-          url: `${BASE_URL}/favicon.ico`,
+          url: `${BASE_URL}/icon0.svg`,
         },
       },
       mainEntityOfPage: {

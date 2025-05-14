@@ -47,6 +47,22 @@ Built with Next.js 15, [shadcn/ui](https://ui.shadcn.com/), and deployed on Verc
 
 5. Open the [Config file](https://github.com/fadilsflow/devporto/data.ts) and customize your portfolio settings
 
+
+## Setting Up Your Website Icon (Favicon)
+
+A favicon is the small icon that appears in browser tabs and bookmarks. Here's how to set it up:
+
+1. Create or prepare a square image for your favicon (minimum 260x260 pixels)
+2. Go to [RealFaviconGenerator](https://realfavicongenerator.net/favicon-generator/nextjs) - this tool will create all the favicon files you need
+3. Upload your image and follow the simple customization options
+4. Click "Generate" and download the favicon package
+5. Extract the favicon files to:
+   - `app` folder - Files that follow Next.js conventions will have HTML markup automatically generated
+   - `public` folder - Static favicon files that need to be publicly accessible
+6. The favicons are already configured in `app/config/seo.ts` - no changes needed unless you used different file names
+
+That's it! Your website will now show your custom icon across all browsers and devices.
+
 ## License
 
 Licensed under the [MIT license](https://github.com/fadilsflow/devporto/LICENSE.md).

@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { defaultMetadata } from "./config/seo";
 import { defaultViewport } from "./config/viewport";
 import AnimatedContainer from "@/components/animate-container";
+import { NAME } from "./data";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,6 +32,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+      <meta name="apple-mobile-web-app-title" content={NAME} />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
