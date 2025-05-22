@@ -68,6 +68,7 @@ export const SKILLS = [
   "TypeScript",
   "Bun",
   "PostgreSQL",
+  "Docker",
   "Supabase",
   "Git",
   "Figma"
