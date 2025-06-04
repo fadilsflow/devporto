@@ -18,7 +18,7 @@ saya namain aplikasi nya rightsponse, kenapa? se simple right + response = right
 
 langsung aja kita buat aplikasi nya.
 
-## Teknologi yang kita gunakan // orang orang nyebutnya tech stack
+### Tech Stack
 
 - **Next.js 15.3.3**: React Framework
 - **Gemini API**: Model AI dari Google
@@ -26,7 +26,7 @@ langsung aja kita buat aplikasi nya.
 - **Tailwind CSS**: CSS Framework
 - **Shadcn/ui**: UI Library
 
-## Requirements
+### Requirements
 
 Pastikan di Laptop/Komputer km udah ada beberapa software ini. Ini alat-alat yang bakal kita pake.
 
@@ -34,7 +34,7 @@ Pastikan di Laptop/Komputer km udah ada beberapa software ini. Ini alat-alat yan
 2.  **Text Editor** : Visual Studio Code / Cursor / VSCodium / Notepad++ / etc
 3.  **Gemini API Key** : Key buat akses AI nya Google
 
-## Dapetin API Key
+### Dapetin API Key
 
 API Key itu kayak KTP buat aplikasi kita biar bisa akses layanan Gemini. Gini nih cara simpel dapetinnya:
 
@@ -45,40 +45,36 @@ API Key itu kayak KTP buat aplikasi kita biar bisa akses layanan Gemini. Gini ni
 
 Nah, kalo semua udah beres, lanjut ke step berikutnya -> [Bikin Kerangka: Setup Project Next.js](#bikin-kerangka-setup-project-nextjs)
 
-# Setup Project
+## Setup Project
 
-## 1. Bikin Proyek Next.js
+### Bikin Proyek Next.js
 
 Kita bakal pake `create-next-app`. command buat bikin project next.js. Buka terminal atau command prompt-mu, terus ketik ini:
 
 ```bash
-# Bikin proyek baru
 npx create-next-app@latest rightsponse --typescript --tailwind --app
 
-# Masuk ke folder proyeknya
+# masuk ke folder project nya
 cd rightsponse
 ```
 
 Perintah pertama itu bakal bikin folder baru namanya `rightsponse` isinya semua file awal proyek Next.js, udah lengkap sama settingan buat TypeScript dan Tailwind CSS (`--typescript --tailwind --app`). Kelar itu, perintah `cd rightsponse` bakal ngebawa kamu masuk ke dalem folder proyek yang baru aja jadi, biar kita bisa mulai ngoprek di situ.
 
-## 2. Install Gemini API library
+### Install Gemini API library
 
 ```bash
 npm install @google/genai
-
-# bisa juga pake node package manager lainnya seperti bun, pnpm, atau yarn
 ```
 
-## 3. Setup Shadcn/ui
+### Setup Shadcn/ui
 
 ```bash
-# Initialize shadcn/ui
 npx shadcn-ui@latest init
 ```
 
-Nanti dia bakal nanya beberapa hal soal settingan awal `shadcn/ui` di proyekmu, kayak file `tailwind.config.js`-nya di mana, warna dasarnya apa, dan lain-lain. Buat tutorial ini, ikutin aja pilihan standarnya, biasanya udah oke kok buat mulai.
+Nanti dia bakal nanya beberapa hal soal settingan awal `shadcn/ui` di proyek ini, warna dasarnya apa, dan lain-lain. Buat tutorial ini, ikutin aja pilihan defaultnya.
 
-## 4. Add UI Components
+### Add UI Components
 
 Kelar ngesetup `shadcn/ui`, kita bisa mulai nambahin komponen-komponen UI spesifik yang kita butuhin buat ngebangun tampilan Rightsponse. Gak perlu install semua komponennya, yang kita perluin aja.
 
@@ -99,7 +95,7 @@ Perintah ini otomatis bakal bikin file-file komponen itu (kayak `button.tsx`, `t
 
 nah kalo udah, kita lanjut liat struktur project yang akan kita buat.
 
-# Struktur Project
+### Struktur Project
 
 ```text
 rightsponse/
@@ -121,7 +117,7 @@ rightsponse/
 └── tsconfig.json                   // settingan buat TypeScript
 ```
 
-## Tata Letak Universal: `app/layout.tsx`
+### Global Layout: `app/layout.tsx`
 
 Di arsitektur Next.js yang pake App Router, file `app/layout.tsx` ini perannya vital banget. Anggap aja ini kayak cetakan dasar yang bakal dipake sama semua halaman di aplikasi kamu. Makanya, `layout.tsx` ini tempat paling pas buat naruh elemen UI atau fungsi yang sifatnya global dan sama di semua halaman, contohnya:
 
@@ -129,8 +125,6 @@ Di arsitektur Next.js yang pake App Router, file `app/layout.tsx` ini perannya v
 - Settingan metadata standar buat SEO (biar gampang dicari Google) lewat objek `metadata`.
 - Impor dan pake font buat seluruh aplikasi.
 - Naruh komponen UI yang nongol di semua halaman (kayak header, footer, atau sistem notif kayak `Toaster`).
-
-Yuk, kita bedah isi `app/layout.tsx` di proyek Rightsponse kita:
 
 ```typescript
 import type { Metadata } from "next";
@@ -171,22 +165,13 @@ export default function RootLayout({
 }
 ```
 
-Nih, beberapa bagian penting dari kode `layout.tsx` di atas:
-
-- **Impor Font**: `Geist` dan `Geist_Mono` dari `next/font/google` kita impor buat jadi font utama aplikasi. Pake `next/font` ini bantu banget biar website-mu nggak lemot gara-gara loading font dan nggak ada lagi tuh tampilan yang geser-geser sendiri (layout shifts).
-- **Komponen `Toaster`**: Diimpor dari `@/components/ui/sonner`, si `Toaster` ini tugasnya nampilin notifikasi (pesan kecil) yang muncul di layar. Kita bakal pake ini buat ngasih tau user, misalnya kalo teks berhasil dicopy atau kalo ada error pas lagi proses sesuatu.
-- **Objek `metadata`**: Objek `metadata` ini bikin kita bisa nentuin metadata standar buat aplikasi, kayak `title` (judul) dan `description` (deskripsi). Ini penting buat SEO, biar mesin pencari ngerti isi halamanmu.
-- **Fungsi Komponen `RootLayout`**: Ini komponen layout utamanya. Dia nerima `children` sebagai properti (prop). `children` ini nantinya bakal jadi isi dari halaman spesifik yang lagi diliat user atau layout turunan lainnya.
-- **Struktur HTML Dasar**: Komponen `RootLayout` ngebalikin struktur dasar HTML (`<html>` dan `<body>`). Liat deh gimana variabel font (`geistSans.variable` dan `geistMono.variable`) sama kelas `antialiased` (biar teksnya keliatan lebih halus) diterapin di tag `<body>`.
-- **Penempatan `Toaster`**: Komponen `<Toaster />` kita taro di dalem `<body>` biar sistem notifikasinya siap dipake di seluruh penjuru aplikasi.
-
 Dengan adanya `layout.tsx` ini, kita mastiin semua halaman di Rightsponse punya tampilan dasar, font, dan fungsi notifikasi yang seragam, jadi nggak perlu nulis kode yang sama berulang-ulang di tiap halaman.
 
-# Merakit Blok Bangunan: Implementasi Komponen UI
+## Implementasi Komponen UI
 
 Komponen itu ibarat LEGO-nya aplikasi React. Mereka itu potongan UI yang bisa berdiri sendiri dan dipake ulang. Buat Rightsponse, kita bakal bikin beberapa komponen khusus buat ngatur pilihan bahasa dan nada, plus make komponen-komponen dari `shadcn/ui`.
 
-## 1. Komponen Pemilih Bahasa: `components/language-select.tsx`
+### Komponen Pemilih Bahasa: `components/language-select.tsx`
 
 Komponen ini, yang bakal kita simpen di `components/language-select.tsx`, punya peran penting buat ngasih kebebasan ke user. Tugasnya nampilin daftar bahasa yang disupport sama aplikasi kita, jadi user bisa gampang milih bahasa target buat teks yang bakal dikeluarin sama AI. Dasarnya, komponen ini manfaatin komponen `Select` dari `shadcn/ui` yang udah kita pasang tadi. Desainnya yang bersih dan fungsinya yang udah kebukti bakal ngebantu banget.
 
@@ -245,7 +230,7 @@ export const LanguageSelect = ({
 };
 ```
 
-## 2. Pengatur Nada Bicara: `components/tone-select.tsx`
+### Pengatur Nada Bicara: `components/tone-select.tsx`
 
 Mirip sama pemilih bahasa, komponen `ToneSelect` (disimpen di `components/tone-select.tsx`) ngasih lapisan kustomisasi lain buat user. Komponen ini bikin user bisa milih 'nada' atau 'gaya bahasa' yang dimau buat teks yang dikeluarin AI. Mau respons yang super profesional buat email bisnis, nada yang lebih santai buat temen, atau mungkin gaya persuasif buat materi promosi? `ToneSelect` solusinya.
 
@@ -312,11 +297,11 @@ export const ToneSelect = ({ value, onValueChange }: ToneSelectProps) => {
 };
 ```
 
-# Jantung Aplikasi: Konfigurasi dan Logika API
+### Implementasi API
 
 Kelar nyiapin komponen tampilan, sekarang waktunya kita sambungin aplikasi kita sama "otak"-nya, yaitu Gemini API. Ini termasuk nyimpen API key kita dengan aman pake variabel lingkungan dan bikin API route di Next.js buat ngurusin permintaan ke Gemini.
 
-## 1. Nyimpen Kunci Rahasia: Variabel Lingkungan (`.env`)
+#### 1. API Key
 
 API key-mu itu info sensitif. **Jangan pernah** nulis langsung di kode (hardcoding)! Cara yang bener dan aman itu pake variabel lingkungan. Next.js otomatis ngeload variabel dari file `.env`.
 
@@ -328,7 +313,7 @@ GEMINI_API_KEY=your_api_key_here
 
 Pastikan kamu ganti `your_api_key_here` sama API key yang udah kamu dapet dari Google AI Studio. File `.env` ini secara default udah masuk di `.gitignore` sama `create-next-app`, jadi nggak bakal ke-upload ke repository Git-mu. Ini penting banget buat keamanan.
 
-## 2. Jembatan ke AI: API Route (`app/api/rewrite/route.ts`)
+#### API Route (`app/api/rewrite/route.ts`)
 
 Di Next.js App Router, file yang namanya `route.ts` (atau `route.js`) di dalem folder `app` bakal jadi endpoint API. Kita bakal bikin endpoint di `app/api/rewrite/route.ts` yang bakal nerima teks dari user, plus pilihan bahasa, nada, dan tipe konten, terus ngirimnya ke Gemini API buat diolah.
 
@@ -440,7 +425,7 @@ ${text}`,
 }
 ```
 
-## 3. Tampilan Utama: Halaman Depan (`app/page.tsx`)
+### Tampilan Utama: Halaman Depan (`app/page.tsx`)
 
 Ini halaman yang pertama kali nongol pas user buka aplikasi. Di sinilah semua komponen UI yang udah kita siapin (`LanguageSelect`, `ToneSelect`, `Textarea`, `Button`, dll.) dirangkai jadi satu kesatuan yang berfungsi. File `app/page.tsx` ini adalah React Client Component karena kita pake hook kayak `useState` dan ngurusin interaksi user langsung di browser.
 
@@ -711,7 +696,7 @@ export default function Home() {
 }
 ```
 
-# Run the project
+### Run the project
 
 Buat mulai, pastiin kamu udah buka terminal atau command prompt dan lagi ada di dalem folder utama proyek Rightsponse kita (folder `rightsponse` yang pertama kita bikin).
 
@@ -734,7 +719,7 @@ Kita punya dua mode utama buat jalanin aplikasi Next.js:
 
 buka `http://localhost:3000` di browser.
 
-# Note
+### Note
 
 AI bukanlah masa depan — AI adalah masa kini.
 Teknologi ini sudah menjadi bagian dari kehidupan sehari-hari kita, dan sebagai programmer di era sekarang, kita punya peluang besar untuk memanfaatkannya sebaik mungkin. Baik itu dalam pengembangan website, aplikasi, software, atau sistem lainnya, AI bisa jadi alat bantu yang luar biasa.
@@ -744,7 +729,7 @@ Untuk menghasilkan karya yang maksimal, kita tetap harus menguasai dasar-dasar p
 
 Jadi, jangan hanya terpaku pada hasil instan dari AI. Teruslah belajar, kembangkan kemampuan teknis dan kreativitasmu, karena yang bertahan di masa depan bukan hanya yang bisa menggunakan AI, tapi yang mampu berpikir kritis, beradaptasi, dan terus berkembang di tengah perubahan teknologi yang cepat.
 
-## Rencana Pengembangan Lanjutan
+##$ Rencana Pengembangan Lanjutan
 
 1. Auth
 2. Pricing & Custom Model
