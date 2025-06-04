@@ -28,7 +28,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
         {displayedProjects.map((project) => (
           <Link
             href={project.href}
-            key={project.id}
+            key={project.title}
             className="group relative block overflow-hidden hover:brightness-90 transition-all"
           >
             <div className="space-y-3 border rounded-lg overflow-hidden">

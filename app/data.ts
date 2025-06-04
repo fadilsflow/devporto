@@ -15,7 +15,6 @@ export const LINKEDIN_USERNAME = "wahyu-akhmad-fadillah";
 export const INSTAGRAM_USERNAME = "fadils.xyz";
 export const TWITTER_USERNAME = "fadils";
 
-
 // Navigation links in the bottom of the page.
 export const NAVIGATION_LINKS = [
   {
@@ -63,7 +62,7 @@ export const SOCIAL_LINKS = [
 export const SKILLS = [
   "Linux",
   "React",
-  "Next.js", 
+  "Next.js",
   "Tailwind CSS",
   "TypeScript",
   "Bun",
@@ -71,7 +70,7 @@ export const SKILLS = [
   "Docker",
   "Supabase",
   "Git",
-  "Figma"
+  "Figma",
 ];
 
 export const WORK_EXPERIENCE_ITEM = [
@@ -85,7 +84,7 @@ export const WORK_EXPERIENCE_ITEM = [
   {
     company: "Freelancer - Self-employed",
     role: "Full Stack Developer",
-    period: "2025-03 - Present", 
+    period: "2025-03 - Present",
     description:
       "Building personal projects and learning new technologies through hands-on development. Focusing on modern web development stack including React, Next.js, and TypeScript. Actively participating in open source contributions and expanding skillset through online courses and tutorials.",
   },
@@ -95,7 +94,7 @@ export const EDUCATION_ITEM = [
   {
     education: "SMK Muhammadiyah 1 Tegal",
     degree: "Multimedia",
-    period: "2020 - 2023", 
+    period: "2020 - 2023",
     description:
       "Completed vocational high school with focus on multimedia and digital content creation. Gained hands-on experience with industry-standard creative software, Creative Suite for video editing, motion graphics, and photo manipulation. Developed strong foundation in visual design principles and digital storytelling.",
   },
@@ -109,13 +108,36 @@ export const EDUCATION_ITEM = [
 ];
 export const PROJECTS = [
   {
-    id: "1",
+    title: "Rightsponse",
+    description:
+      "AI-powered writing assistant that helps you craft perfect responses for chat messages, emails, and comments. Built with Next.js and Gemini API, it offers customizable language and tone options for better communication. Features include real-time text generation, multiple response formats, and a clean, modern UI powered by shadcn/ui.",
+    imageUrl:
+      "https://res.cloudinary.com/dxurnpbrc/image/upload/v1749034640/RIGHTSPONSE_Text_dtvzcu.png",
+    href: "/projects/rightsponse",
+    stack: ["Next.js", "Gemini API", "TypeScript", "Tailwind CSS", "shadcn/ui"],
+    featured: true,
+    ctaButtons: {
+      primary: {
+        label: "Live Demo",
+        href: "https://rs.fadils.xyz",
+      },
+      secondary: {
+        label: "GitHub Repo",
+        href: "https://github.com/fadilsflow/rightsponse",
+      },
+    },
+    role: ["Frontend Developer", "AI Integration"],
+    useCase: ["Communication Tool", "AI Writing Assistant"],
+    category: "AI DEVELOPMENT",
+    github: "https://github.com/fadilsflow/rightsponse",
+  },
+  {
     title: "Devporto",
     description:
       "A modern, feature-rich portfolio website template designed specifically for developers. Built with Next.js and Tailwind CSS, it offers a perfect showcase for your coding journey. Features include GitHub stats integration showing your contribution graph and top repositories, dark mode support, fully responsive layouts, and blazing-fast performance with server-side rendering. The template implements comprehensive SEO optimization with semantic HTML, meta tags, and structured data. Developers can easily customize sections for projects, skills, work experience, and blog posts. Includes  image optimization, and accessibility best practices. Perfect for developers wanting a professional online presence with minimal setup.",
     imageUrl:
       "https://res.cloudinary.com/dxurnpbrc/image/upload/v1747126424/1_ftwuie.png",
-    href: "/projects/devporto", 
+    href: "/projects/devporto",
     stack: ["Next.js", "Framer Motion", "shadcn/ui"],
     featured: false,
     ctaButtons: {
@@ -128,15 +150,13 @@ export const PROJECTS = [
         href: "https://vercel.com/new/clone?repository-url=https://github.com/fadilsflow/devporto",
       },
     },
-    
+
     role: ["Frontend Developer", "UI/UX Designer"],
     useCase: ["Portfolio Website"],
     category: "WEB DEVELOPMENT",
     github: "https://github.com/fadilsflow/devporto",
-    liveDemo: "https://fadils.xyz",
   },
   {
-    id: "2", 
     title: "Bulba Cloud",
     description:
       "A modern, SEO-optimized landing page and product catalog for a cloud hosting startup. Built with Next.js and Tailwind CSS, the site delivers a seamless user experience for browsing hosting services. Features include optimized page load times, responsive design across all devices, and strategic SEO implementation including meta tags, canonical URLs, and structured data markup. The WhatsApp-based ordering system streamlines customer communication while maintaining a personal touch. Comprehensive service pages for domains, VPS, and hosting are enhanced with rich snippets for better search visibility. Analytics integration helps track conversion rates and user engagement to continuously improve the platform.",
@@ -155,11 +175,11 @@ export const PROJECTS = [
         href: "https://github.com/fadilsflow/bulbacloud", // ganti dengan repo kamu
       },
     },
-   
+
     role: ["Web Designer", "Frontend Developer", "Marketing"],
     useCase: ["Startup Website", "Product Catalog"],
     category: "WEB DEVELOPMENT",
-  }
+  },
 ];
 
 // Links card in links page

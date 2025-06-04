@@ -8,7 +8,7 @@ import { defaultViewport } from "@/app/config/viewport";
 import AnimatedSection from "@/components/animated-section";
 import Link from "next/link";
 import { ArrowLeftIcon } from "lucide-react";
-import { getProjectDetail } from "../utils";
+import { getProjectDetail } from "@/app/projects/utils";
 import { CustomMDX } from "@/components/mdx";
 
 interface Props {
@@ -145,8 +145,8 @@ export default async function ProjectPage({ params }: Props) {
                   </p>
                 </div>
               </header>
-                {/* Action Buttons */}
-                <div className="grid grid-cols-2 gap-4">
+              {/* Action Buttons */}
+              <div className="grid grid-cols-2 gap-4">
                 {project.ctaButtons.primary.href && (
                   <Button asChild variant="default" className="w-full">
                     <a
@@ -217,14 +217,14 @@ export default async function ProjectPage({ params }: Props) {
                   <div className="flex flex-wrap gap-2 text-muted-foreground">
                     {project.stack.map((stack, index) => (
                       <p key={index} className="text-sm">
-                        {index === project.stack.length - 1 ? stack : stack + ","}
+                        {index === project.stack.length - 1
+                          ? stack
+                          : stack + ","}
                       </p>
                     ))}
                   </div>
                 </div>
               </section>
-
-            
             </section>
 
             {/* Project MDX Content */}
@@ -235,7 +235,10 @@ export default async function ProjectPage({ params }: Props) {
             )}
 
             <footer className="text-sm border-t border-border border-dashed pt-8 mt-8">
-              <Link href="/projects" className="text-primary flex items-center gap-2">
+              <Link
+                href="/projects"
+                className="text-primary flex items-center gap-2"
+              >
                 <ArrowLeftIcon className="w-4 h-4" /> Back
               </Link>
             </footer>
