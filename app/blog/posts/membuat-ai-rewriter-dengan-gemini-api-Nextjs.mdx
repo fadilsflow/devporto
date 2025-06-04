@@ -1,0 +1,875 @@
+---
+title: "Membuat AI Rewriter dengan Gemini API + Next.js"
+date: "2025-06-04"
+description: "Tutorial lengkap membuat AI Rewriter untuk Chat, Email, Komentar, dengan Gemini API + Next.js"
+---
+
+Sering kali kita bingung nyari kata-kata yang pas buat nge-chat orang, bales komentar di medsos, atau nulis email dengan format yang bener.
+Nah, di sini saya coba bantu biar semua itu jadi lebih gampang. Kamu bisa atur sendiri mau ngomong pakai gaya bahasa kayak gimana — formal, santai, atau yang sesuai sama kepribadian kamu.
+sebenernya mudah, udah banyak chat bot diluar sana yang bisa ngasih solusi untuk semua itu, tapi perlu prompt yang pas, dan itu gak efektif karena kita perlu nulis dan mikirin dulu prompt yang pas biar hasil nya sesuai sama yang kita pengenin.
+saya namain aplikasi nya rightsponse, kenapa? se simple right + response = rightsponse jadi artinya respon yang benar.
+
+langsung aja kita buat aplikasi nya.
+
+## Teknologi yang kita gunakan // orang orang nyebutnya tech stack
+
+- **Next.js 15.3.3**: React Framework
+- **Gemini API**: Model AI dari Google
+- **TypeScript**: JavaScript Super Set
+- **Tailwind CSS**: CSS Framework
+- **Shadcn/ui**: UI Library
+
+## Requirements
+
+Pastikan di Laptop/Komputer km udah ada beberapa software ini. Ini alat-alat yang bakal kita pake.
+
+1.  **Node.js** : JavaScript Runtime
+2.  **Text Editor** : Visual Studio Code / Cursor / VSCodium / Notepad++ / etc
+3.  **Gemini API Key** : Key buat akses AI nya Google
+
+## Dapetin API Key
+
+API Key itu kayak KTP buat aplikasi kita biar bisa akses layanan Gemini. Gini nih cara simpel dapetinnya:
+
+1.  Akses [Google AI Studio](https://aistudio.google.com/apikey).
+2.  Login pake akun Google-mu.
+3.  Ikutin aja petunjuk buat bikin API key baru. Biasanya sih disuruh bikin proyek baru dulu kalo belum punya.
+4.  **Simpen API key-nya baik-baik, jangan sampe ilang atau kesebar!** Bentar lagi kita pake nih. Anggep aja kayak password, jangan kasih tau siapa-siapa.
+
+Nah, kalo semua udah beres, lanjut ke step berikutnya -> [Bikin Kerangka: Setup Project Next.js](#bikin-kerangka-setup-project-nextjs)
+
+# Setup Project
+
+## 1. Bikin Proyek Next.js
+
+Kita bakal pake `create-next-app`. command buat bikin project next.js. Buka terminal atau command prompt-mu, terus ketik ini:
+
+```bash
+# Bikin proyek baru
+npx create-next-app@latest rightsponse --typescript --tailwind --app
+
+# Masuk ke folder proyeknya
+cd rightsponse
+```
+
+Perintah pertama itu bakal bikin folder baru namanya `rightsponse` isinya semua file awal proyek Next.js, udah lengkap sama settingan buat TypeScript dan Tailwind CSS (`--typescript --tailwind --app`). Kelar itu, perintah `cd rightsponse` bakal ngebawa kamu masuk ke dalem folder proyek yang baru aja jadi, biar kita bisa mulai ngoprek di situ.
+
+## 2. Install Gemini API library
+
+```bash
+npm install @google/genai
+
+# bisa juga pake node package manager lainnya seperti bun, pnpm, atau yarn
+```
+
+## 3. Setup Shadcn/ui
+
+```bash
+# Initialize shadcn/ui
+npx shadcn-ui@latest init
+```
+
+Nanti dia bakal nanya beberapa hal soal settingan awal `shadcn/ui` di proyekmu, kayak file `tailwind.config.js`-nya di mana, warna dasarnya apa, dan lain-lain. Buat tutorial ini, ikutin aja pilihan standarnya, biasanya udah oke kok buat mulai.
+
+## 4. Add UI Components
+
+Kelar ngesetup `shadcn/ui`, kita bisa mulai nambahin komponen-komponen UI spesifik yang kita butuhin buat ngebangun tampilan Rightsponse. Gak perlu install semua komponennya, yang kita perluin aja.
+
+```bash
+# Install semua komponen yang kita butuhin
+npx shadcn-ui@latest add button tabs input textarea select card sonner badge
+```
+
+Perintah ini otomatis bakal bikin file-file komponen itu (kayak `button.tsx`, `tabs.tsx`, dll.) di dalem folder `components/ui` di proyekmu. Kita pilih:
+
+- `button`: Buat macem-macem tombol interaktif.
+- `tabs`: Buat pindah-pindah mode "Message", "Email", sama "Comment".
+- `input` dan `textarea`: Buat tempat user ngetik.
+- `select`: Buat dropdown pilihan bahasa sama nada.
+- `card`: Buat ngelompokin dan nata elemen UI.
+- `sonner`: Buat nampilin notifikasi (pesan kecil) yang informatif.
+- `badge`: Buat nampilin label kecil kayak bahasa dan nada yang dipilih.
+
+nah kalo udah, kita lanjut liat struktur project yang akan kita buat.
+
+# Struktur Project
+
+```text
+rightsponse/
+├── app/                            // Folder utama buat halaman/page dan API
+│   ├── api/
+│   │   └── rewrite/
+│   │       └── route.ts          // Logika backend buat ngobrol sama Gemini API kita
+│   ├── globals.css               // global css style
+│   ├── layout.tsx                // template utama aplikasi
+│   └── page.tsx                  // halaman root atau home page
+├── components/                     // tempat nyimpen komponen UI
+│   ├── ui/                         // Komponen dari Shadcn/ui (misal: button.tsx, card.tsx)
+│   ├── language-select.tsx       // Komponen custom kita buat milih bahasa
+│   └── tone-select.tsx           // Komponen custom kita buat milih nada
+├── public/                         // tempat nyimpen file statis (gambar, ikon, dll.)
+├── .env                            // File PENTING buat API Key Gemini (RAHASIA!)
+├── next.config.mjs                 // settingan buat Next.js
+├── package.json                    // daftar "bahan-bahan" proyek & skrip (npm/bun)
+└── tsconfig.json                   // settingan buat TypeScript
+```
+
+## Tata Letak Universal: `app/layout.tsx`
+
+Di arsitektur Next.js yang pake App Router, file `app/layout.tsx` ini perannya vital banget. Anggap aja ini kayak cetakan dasar yang bakal dipake sama semua halaman di aplikasi kamu. Makanya, `layout.tsx` ini tempat paling pas buat naruh elemen UI atau fungsi yang sifatnya global dan sama di semua halaman, contohnya:
+
+- Deklarasi tag `<html>` dan `<body>`.
+- Settingan metadata standar buat SEO (biar gampang dicari Google) lewat objek `metadata`.
+- Impor dan pake font buat seluruh aplikasi.
+- Naruh komponen UI yang nongol di semua halaman (kayak header, footer, atau sistem notif kayak `Toaster`).
+
+Yuk, kita bedah isi `app/layout.tsx` di proyek Rightsponse kita:
+
+```typescript
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "Right Sponse ",
+  description: "Your ai for a better response",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        {children}
+        <Toaster />
+      </body>
+    </html>
+  );
+}
+```
+
+Nih, beberapa bagian penting dari kode `layout.tsx` di atas:
+
+- **Impor Font**: `Geist` dan `Geist_Mono` dari `next/font/google` kita impor buat jadi font utama aplikasi. Pake `next/font` ini bantu banget biar website-mu nggak lemot gara-gara loading font dan nggak ada lagi tuh tampilan yang geser-geser sendiri (layout shifts).
+- **Komponen `Toaster`**: Diimpor dari `@/components/ui/sonner`, si `Toaster` ini tugasnya nampilin notifikasi (pesan kecil) yang muncul di layar. Kita bakal pake ini buat ngasih tau user, misalnya kalo teks berhasil dicopy atau kalo ada error pas lagi proses sesuatu.
+- **Objek `metadata`**: Objek `metadata` ini bikin kita bisa nentuin metadata standar buat aplikasi, kayak `title` (judul) dan `description` (deskripsi). Ini penting buat SEO, biar mesin pencari ngerti isi halamanmu.
+- **Fungsi Komponen `RootLayout`**: Ini komponen layout utamanya. Dia nerima `children` sebagai properti (prop). `children` ini nantinya bakal jadi isi dari halaman spesifik yang lagi diliat user atau layout turunan lainnya.
+- **Struktur HTML Dasar**: Komponen `RootLayout` ngebalikin struktur dasar HTML (`<html>` dan `<body>`). Liat deh gimana variabel font (`geistSans.variable` dan `geistMono.variable`) sama kelas `antialiased` (biar teksnya keliatan lebih halus) diterapin di tag `<body>`.
+- **Penempatan `Toaster`**: Komponen `<Toaster />` kita taro di dalem `<body>` biar sistem notifikasinya siap dipake di seluruh penjuru aplikasi.
+
+Dengan adanya `layout.tsx` ini, kita mastiin semua halaman di Rightsponse punya tampilan dasar, font, dan fungsi notifikasi yang seragam, jadi nggak perlu nulis kode yang sama berulang-ulang di tiap halaman.
+
+# Merakit Blok Bangunan: Implementasi Komponen UI
+
+Komponen itu ibarat LEGO-nya aplikasi React. Mereka itu potongan UI yang bisa berdiri sendiri dan dipake ulang. Buat Rightsponse, kita bakal bikin beberapa komponen khusus buat ngatur pilihan bahasa dan nada, plus make komponen-komponen dari `shadcn/ui`.
+
+## 1. Komponen Pemilih Bahasa: `components/language-select.tsx`
+
+Komponen ini, yang bakal kita simpen di `components/language-select.tsx`, punya peran penting buat ngasih kebebasan ke user. Tugasnya nampilin daftar bahasa yang disupport sama aplikasi kita, jadi user bisa gampang milih bahasa target buat teks yang bakal dikeluarin sama AI. Dasarnya, komponen ini manfaatin komponen `Select` dari `shadcn/ui` yang udah kita pasang tadi. Desainnya yang bersih dan fungsinya yang udah kebukti bakal ngebantu banget.
+
+```typescript
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectGroup,
+  SelectLabel,
+  SelectItem,
+} from "./ui/select";
+
+interface LanguageSelectProps {
+  value: string;
+  onValueChange: (value: string) => void;
+}
+
+const languages = [
+  { value: "en", label: "English", group: "Language" },
+  { value: "id", label: "Indonesian", group: "Language" },
+];
+
+const groupedLanguages = languages.reduce((acc, lang) => {
+  if (!acc[lang.group]) {
+    acc[lang.group] = [];
+  }
+  acc[lang.group].push(lang);
+  return acc;
+}, {} as Record<string, typeof languages>);
+
+export const LanguageSelect = ({
+  value,
+  onValueChange,
+}: LanguageSelectProps) => {
+  return (
+    <Select value={value} onValueChange={onValueChange}>
+      <SelectTrigger className="w-[130px]">
+        <SelectValue placeholder="Language" />
+      </SelectTrigger>
+      <SelectContent>
+        {Object.entries(groupedLanguages).map(([group, langs]) => (
+          <SelectGroup key={group}>
+            <SelectLabel>{group}</SelectLabel>
+            {langs.map((lang) => (
+              <SelectItem key={lang.value} value={lang.value}>
+                {lang.label}
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        ))}
+      </SelectContent>
+    </Select>
+  );
+};
+```
+
+Nih, penjelasan singkat kode di atas:
+
+- **Interface `LanguageSelectProps`**: Bagian ini kayak perjanjian buat komponen kita. Isinya nentuin properti (atau 'props' kalo di React) apa aja yang bisa diterima sama komponen `LanguageSelect`. Di sini ada dua: `value`, yang nyimpen bahasa yang lagi dipilih, sama `onValueChange`, fungsi yang bakal dipanggil tiap kali user ganti pilihan bahasa. Ini biar komponen induknya tau kalo ada perubahan.
+- **Array `languages`**: Ini daftar bahasa yang kita tawarin. Tiap bahasa itu objek dengan tiga properti: `value` (kode singkat bahasa, misal "en" buat Inggris), `label` (nama bahasa yang diliat user, misal "English"), dan `group` (buat ngelompokin bahasa di dropdown, misalnya semua bahasa Eropa). Struktur ini bikin gampang kalo nanti mau nambah bahasa baru.
+- **`groupedLanguages`**: Biar dropdown-nya rapi dan gampang diliat, kita kelompokin bahasa-bahasanya. Objek `groupedLanguages` ini dibikin dengan ngolah array `languages`. Hasilnya, bahasa-bahasa bakal dikelompokin di bawah label grupnya masing-masing (misal, "Bahasa Populer", "Bahasa Asia"), ini ngebantu banget kalo daftar bahasanya banyak.
+- **Komponen `Select` dari `shadcn/ui`**: Inti dari dropdown ini dibangun pake beberapa komponen dari `shadcn/ui`:
+  - `<Select>`: Pembungkus utamanya.
+  - `<SelectTrigger>`: Bagian yang diliat user sebelum dropdown kebuka (biasanya nampilin pilihan sekarang atau placeholder).
+  - `<SelectContent>`: Kotak yang muncul pas dropdown kebuka, isinya semua pilihan.
+  - `<SelectGroup>`: Dipake bareng `groupedLanguages` buat bikin bagian-bagian terpisah di dalem dropdown, masing-masing ada `<SelectLabel>`-nya.
+  - `<SelectItem>`: Ini satu pilihan di dalem dropdown.
+
+Dengan komponen `LanguageSelect` ini, user jadi bisa langsung ngatur bahasa output sesuai kebutuhan mereka, bikin aplikasi kita jadi lebih fleksibel dan berguna buat orang banyak.
+
+## 2. Pengatur Nada Bicara: `components/tone-select.tsx`
+
+Mirip sama pemilih bahasa, komponen `ToneSelect` (disimpen di `components/tone-select.tsx`) ngasih lapisan kustomisasi lain buat user. Komponen ini bikin user bisa milih 'nada' atau 'gaya bahasa' yang dimau buat teks yang dikeluarin AI. Mau respons yang super profesional buat email bisnis, nada yang lebih santai buat temen, atau mungkin gaya persuasif buat materi promosi? `ToneSelect` solusinya.
+
+```typescript
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectGroup,
+  SelectLabel,
+  SelectItem,
+} from "./ui/select";
+
+interface ToneSelectProps {
+  value: string;
+  onValueChange: (value: string) => void;
+}
+
+const tones = [
+  { value: "professional", label: "Professional", group: "Business" },
+  { value: "formal", label: "Formal", group: "Business" },
+  { value: "polite", label: "Polite", group: "Business" },
+  { value: "confident", label: "Confident", group: "Business" },
+  { value: "friendly", label: "Friendly", group: "Casual" },
+  { value: "casual", label: "Casual", group: "Casual" },
+  { value: "enthusiastic", label: "Enthusiastic", group: "Casual" },
+  { value: "empathetic", label: "Empathetic", group: "Emotional" },
+  { value: "apologetic", label: "Apologetic", group: "Emotional" },
+  { value: "grateful", label: "Grateful", group: "Emotional" },
+  { value: "diplomatic", label: "Diplomatic", group: "Special" },
+  { value: "persuasive", label: "Persuasive", group: "Special" },
+  { value: "urgent", label: "Urgent", group: "Special" },
+];
+
+const groupedTones = tones.reduce((acc, tone) => {
+  if (!acc[tone.group]) {
+    acc[tone.group] = [];
+  }
+  acc[tone.group].push(tone);
+  return acc;
+}, {} as Record<string, typeof tones>);
+
+export const ToneSelect = ({ value, onValueChange }: ToneSelectProps) => {
+  return (
+    <Select value={value} onValueChange={onValueChange}>
+      <SelectTrigger className="w-[130px]">
+        <SelectValue placeholder="Tone" />
+      </SelectTrigger>
+      <SelectContent>
+        {Object.entries(groupedTones).map(([group, tones]) => (
+          <SelectGroup key={group}>
+            <SelectLabel>{group}</SelectLabel>
+            {tones.map((tone) => (
+              <SelectItem key={tone.value} value={tone.value}>
+                {tone.label}
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        ))}
+      </SelectContent>
+    </Select>
+  );
+};
+```
+
+Struktur dan cara kerja komponen `ToneSelect` ini mirip banget sama `LanguageSelect`:
+
+- **Interface `ToneSelectProps`**: Sama kayak tadi, ini nentuin props yang diterima, yaitu `value` buat nada yang lagi aktif dan `onValueChange` sebagai fungsi yang dipanggil pas ada perubahan pilihan nada.
+- **Array `tones`**: Ini daftar macem-macem nada yang bisa dipilih user. Tiap nada juga bentuknya objek dengan `value` (misal, "professional"), `label` (misal, "Professional"), dan `group` (misal, "Business", "Casual", "Emotional", "Special"). Pengelompokan ini bantu user nemuin nada yang paling pas dengan cepet.
+- **`groupedTones`**: Sama kayak di `LanguageSelect`, variabel ini dipake buat ngelompokin macem-macem pilihan nada di dalem dropdown, biar tampilannya tetep rapi dan gampang dipake, meskipun pilihan nadanya banyak.
+- **Komponen `Select`**: Lagi-lagi, kita manfaatin kemudahan komponen `Select` dari `shadcn/ui` buat bikin dropdown yang interaktif dan tampilannya konsisten sama `LanguageSelect`.
+
+Dengan gabungin `LanguageSelect` dan `ToneSelect`, kita kasih user kekuatan buat bener-bener ngarahin output dari Gemini API, jadi teks yang dihasilin nggak cuma bener bahasanya tapi juga pas gaya dan konteksnya.
+
+# Jantung Aplikasi: Konfigurasi dan Logika API
+
+Kelar nyiapin komponen tampilan, sekarang waktunya kita sambungin aplikasi kita sama "otak"-nya, yaitu Gemini API. Ini termasuk nyimpen API key kita dengan aman pake variabel lingkungan dan bikin API route di Next.js buat ngurusin permintaan ke Gemini.
+
+## 1. Nyimpen Kunci Rahasia: Variabel Lingkungan (`.env.local`)
+
+API key-mu itu info sensitif. **Jangan pernah** nulis langsung di kode (hardcoding)! Cara yang bener dan aman itu pake variabel lingkungan. Next.js otomatis ngeload variabel dari file `.env.local`.
+
+Bikin file namanya `.env.local` di folder root proyekmu (sejajar sama `package.json`), terus isi API key Gemini-mu kayak gini:
+
+```env
+GEMINI_API_KEY=your_api_key_here
+```
+
+Pastikan kamu ganti `your_api_key_here` sama API key yang udah kamu dapet dari Google AI Studio. File `.env.local` ini secara default udah masuk di `.gitignore` sama `create-next-app`, jadi nggak bakal ke-upload ke repository Git-mu. Ini penting banget buat keamanan.
+
+## 2. Jembatan ke AI: API Route (`app/api/rewrite/route.ts`)
+
+Di Next.js App Router, file yang namanya `route.ts` (atau `route.js`) di dalem folder `app` bakal jadi endpoint API. Kita bakal bikin endpoint di `app/api/rewrite/route.ts` yang bakal nerima teks dari user, plus pilihan bahasa, nada, dan tipe konten, terus ngirimnya ke Gemini API buat diolah.
+
+```typescript
+import { GoogleGenAI } from "@google/genai";
+import { NextResponse } from "next/server";
+
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "" });
+
+const languageMap = {
+  en: "English",
+  id: "Indonesian",
+};
+
+// System instructions for different types of content
+const systemInstructions = {
+  message:
+    "You are a writing assistant. Provide ONE direct rewrite of the text. Do not provide multiple options or explanations. Just rewrite the text once in the requested style.",
+  email:
+    "You are an email expert. Provide ONE direct email format. Do not provide multiple options or explanations. Format the email once with subject, greeting, and closing.",
+  comment:
+    "You are a response expert. Provide ONE direct response. Do not provide multiple options or explanations. Just write one clear response.",
+};
+
+// Maximum output length constraints
+const MAX_OUTPUT_TOKENS = 250;
+const TEMPERATURE = 0.3; // Reduced temperature for more focused outputs
+
+export async function POST(req: Request) {
+  try {
+    const { text, tone, language, type, comment } = await req.json();
+
+    if (!text?.trim()) {
+      return NextResponse.json({ error: "Text is required" }, { status: 400 });
+    }
+
+    const targetLanguage =
+      languageMap[language as keyof typeof languageMap] || "English";
+
+    // Build prompt based on content type
+    const prompt = buildPrompt(type, targetLanguage, tone, text, comment);
+
+    const response = await ai.models.generateContent({
+      model: "gemini-2.0-flash",
+      contents: prompt,
+      config: {
+        temperature: TEMPERATURE,
+        maxOutputTokens: MAX_OUTPUT_TOKENS,
+        systemInstruction:
+          systemInstructions[type as keyof typeof systemInstructions],
+      },
+    });
+
+    const rewrittenText = response.text;
+
+    return NextResponse.json({ result: rewrittenText });
+  } catch (error) {
+    console.error("Error:", error);
+    return NextResponse.json(
+      { error: "Failed to process the request" },
+      { status: 500 }
+    );
+  }
+}
+
+function buildPrompt(
+  type: string,
+  language: string,
+  tone: string,
+  text: string,
+  comment?: string
+): string {
+  const prompts = {
+    email: `
+Rewrite this content as ONE professional email in ${language} with a ${tone} tone.
+IMPORTANT: 
+- Provide only ONE version
+- Do not explain or give options
+- Include subject, greeting, and closing
+- Keep it concise and culturally appropriate for ${language}
+
+Content to rewrite:
+${text}`,
+
+    comment: `
+Write ONE ${tone} response in ${language}.
+IMPORTANT:
+- Provide only ONE direct response
+- Do not explain or give options
+- Maximum 2-3 sentences
+- Keep it contextual and appropriate
+
+Original Comment: ${comment}
+Your message: ${text}`,
+
+    message: `
+Rewrite this message ONCE in ${language} with a ${tone} tone.
+IMPORTANT:
+- Provide only ONE rewritten version
+- Do not explain or give options
+- Keep the core message intact
+- Be concise and clear
+
+Message to rewrite:
+${text}`,
+  };
+
+  return prompts[type as keyof typeof prompts] || prompts.message;
+}
+```
+
+Mari kita kupas kode penting di API route ini:
+
+- **Bikin Klien Gemini**: `const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "" });` ini bikin "alat" buat ngobrol sama Gemini, pake API key yang kita simpen di variabel lingkungan tadi.
+- **`languageMap`**: Objek simpel buat nerjemahin kode bahasa (misal, "en") jadi nama bahasa yang lebih gampang dibaca ("English"). Ini dipake di prompt buat AI.
+- **`systemInstructions`**: Objek ini penting banget. Isinya instruksi sistem atau peran yang harus diambil sama AI Gemini tergantung tipe kontennya (`message`, `email`, `comment`). Instruksi ini bantu ngarahin AI biar ngasilin output yang lebih pas. Contohnya, buat email, AI disuruh jadi "pakar email" dan harus ada subjek, sapaan, sama penutup.
+- **Konstanta `MAX_OUTPUT_TOKENS` dan `TEMPERATURE`**: Ini settingan buat model Gemini.
+  - `MAX_OUTPUT_TOKENS` (misal, 250) ngebatasin panjang maksimal teks yang dikeluarin AI. Ini penting buat ngontrol biaya dan biar jawabannya nggak kepanjangan.
+  - `TEMPERATURE` (misal, 0.3) ngontrol seberapa "kreatif" atau "acak" output AI. Nilai rendah (kayak 0.3) bikin output lebih fokus, nggak macem-macem, dan ngikutin instruksi. Nilai tinggi bakal bikin output lebih variatif dan kreatif, tapi mungkin kurang presisi.
+- **Fungsi `POST`**: Ini fungsi utama yang jalan tiap kali ada permintaan HTTP POST ke endpoint `/api/rewrite`. Di Next.js App Router, fungsi yang diekspor dengan nama metode HTTP (kayak `POST`, `GET`, dll.) di file `route.ts` otomatis jadi pengurus buat metode itu. Yuk, kita liat langkah-langkahnya:
+
+  - **Baca Isi Request**: `const { text, tone, language, type, comment } = await req.json();` Baris ini ngambil data yang dikirim sama aplikasi depan kita (frontend) dalam format JSON. Isinya ada `text` yang mau diolah, `tone` dan `language` pilihan user, `type` konten (message, email, atau comment), plus `comment` asli kalo tipenya "comment".
+  - **Validasi Input**: `if (!text?.trim()) { ... }` Ini langkah penting buat mastiin teks utamanya nggak kosong. Kalo kosong, server bakal ngasih error `400 Bad Request` (permintaan nggak bener). Validasi input di server itu wajib buat keamanan.
+  - **Nentuin Bahasa Target**: `const targetLanguage = languageMap[language as keyof typeof languageMap] || "English";` Di sini, kita pake `languageMap` buat ngubah kode bahasa (misal, "id") jadi nama bahasa yang lebih deskriptif ("Indonesian"). Kalo kode bahasanya nggak dikenal, kita pake "English" aja sebagai default.
+  - **Bikin Prompt (`buildPrompt`)**: `const prompt = buildPrompt(type, targetLanguage, tone, text, comment);` Ini manggil fungsi `buildPrompt` (yang bakal kita bahas abis ini). Fungsi ini tugasnya ngeracik instruksi atau "prompt" yang spesifik dan kaya konteks buat dikirim ke Gemini API.
+  - **Ngirim Permintaan ke Gemini API**: `const response = await ai.models.generateContent({ ... });` Nah, ini dia momen kita beneran ngobrol sama si AI. Kita pake metode `generateContent` dari klien Gemini (`ai`).
+    - `model: "gemini-2.0-flash"`: Nentuin model Gemini yang mau kita pake. "gemini-2.0-flash" (dulu mungkin kamu kenal sebagai "gemini-pro" atau varian lain, pastiin pake ID model yang paling baru dan pas ya!) itu model yang cepet dan efisien buat tugas kayak gini.
+    - `contents: prompt`: Ini prompt yang udah kita siapin.
+    - `config`: Objek konfigurasi ini isinya parameter yang udah kita bahas tadi:
+      - `temperature: TEMPERATURE`: Ngontrol kreativitas.
+      - `maxOutputTokens: MAX_OUTPUT_TOKENS`: Ngebatasin panjang output.
+      - `systemInstruction: systemInstructions[type as keyof typeof systemInstructions]`: Ngasih instruksi sistem berdasarkan tipe konten.
+  - **Ambil Hasil Teksnya**: `const rewrittenText = response.text;` Setelah Gemini API kelar ngolah, kita ambil teks hasilnya dari properti `text` di objek respons.
+  - **Kirim Respons ke Klien**: `return NextResponse.json({ result: rewrittenText });` Hasil teks yang udah diolah dikirim balik ke aplikasi depan dalam format JSON.
+  - **Penanganan Error (`try...catch`)**: Semua logika ini dibungkus `try...catch`. Kalo ada error di mana aja selama proses (misal, jaringan putus, error dari API Gemini, dll.), blok `catch` bakal nangkep, nyatet errornya di konsol server, dan ngirim respons error `500 Internal Server Error` ke klien dengan pesan yang lebih umum.
+
+- **Fungsi `buildPrompt`**: Fungsi ini bisa dibilang kayak "koki resep" buat AI kita. Tugasnya ngeracik instruksi (prompt) yang paling jitu biar AI ngasilin output sesuai mau kita. Kualitas prompt itu salah satu kunci paling penting pas kerja bareng model bahasa gede. Yuk, liat cara kerjanya:
+  - **Parameter**: Fungsi ini nerima `type` (tipe konten), `language` (bahasa target yang udah deskriptif), `tone` (nada pilihan), `text` (input dari user), dan `comment` (opsional, buat tipe "comment").
+  - **Objek `prompts`**: Di dalem fungsi ini, ada objek `prompts` yang isinya template string JavaScript buat tiap tipe konten (`email`, `comment`, `message`).
+  - **Template String Dinamis**: Tiap template dirancang hati-hati buat ngasih instruksi yang jelas ke AI. Perhatiin penggunaan variabel kayak `${language}`, `${tone}`, dan `${text}` (plus `${comment}`) yang disisipin langsung ke string prompt. Ini bikin prompt kita jadi dinamis banget dan bisa nyesuain sama input user.
+  - **Instruksi Spesifik per Tipe**:
+    - Buat **`email`**: Prompt-nya nyuruh AI bikin "SATU email profesional", nyebutin bahasa dan nada, dan secara gamblang minta buat nyantumin subjek, sapaan, sama penutup. Ada juga penekanan biar singkat dan sopan sesuai budaya.
+    - Buat **`comment`**: Prompt-nya minta "SATU respons dengan nada ${tone} dalam bahasa ${language}", nekenin buat ngasih satu respons langsung aja, batasan panjang (2-3 kalimat), dan harus nyambung sama konteksnya. Komentar asli juga dimasukin ke prompt biar AI dapet konteks.
+    - Buat **`message`**: Prompt-nya minta buat nulis ulang pesan "SEKALI AJA", inti pesannya jangan ilang, plus nekenin biar singkat dan jelas.
+  - **Penekanan di Output Tunggal & Gak Pake Penjelasan**: Hampir semua prompt ada klausa "INGET YA" yang minta AI buat ngasih "SATU versi/respons langsung aja" dan "Gak usah dijelasin atau kasih pilihan". Ini penting banget buat mastiin output AI itu teks yang langsung bisa dipake user, bukan malah jadi pilihan-pilihan atau penjelasan soal apa yang udah AI lakuin.
+  - **Fallback**: `return prompts[type as keyof typeof prompts] || prompts.message;` Baris ini ngembaliin template prompt yang sesuai sama `type` yang dikasih. Kalo `type`-nya nggak dikenal (meskipun harusnya nggak kejadian kalo validasi di frontend bener), dia bakal default ke prompt buat `message`.
+
+Dengan ngerancang prompt secara teliti kayak gini, kita bisa "ngebimbing" Gemini API biar ngasilin output yang lebih pas, rapi, dan sesuai sama harapan user. Ini seni sekaligus ilmu dalam bikin aplikasi pake AI.
+
+API route ini adalah jantung dari fungsionalitas Rightsponse, ngejembatanin input user dengan kekuatan ngolah bahasa dari Gemini API.
+
+## 3. Ngerakit Tampilan Utama: Halaman Depan (`app/page.tsx`)
+
+Ini halaman yang pertama kali nongol pas user buka aplikasi. Di sinilah semua komponen UI yang udah kita siapin (`LanguageSelect`, `ToneSelect`, `Textarea`, `Button`, dll.) dirangkai jadi satu kesatuan yang berfungsi. File `app/page.tsx` ini adalah React Client Component karena kita pake hook kayak `useState` dan ngurusin interaksi user langsung di browser.
+
+```typescript
+"use client";
+
+import { LanguageSelect } from "@/components/language-select";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { ToneSelect } from "@/components/tone-select";
+import {
+  CopyIcon,
+  Loader2,
+  Mail,
+  MessageSquare,
+  MessagesSquare,
+  Sparkles,
+} from "lucide-react";
+import { useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { toast } from "sonner";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { cn } from "@/lib/utils";
+
+type TabType = "message" | "email" | "comment";
+
+const tabDescriptions = {
+  message: "Improve your message with AI assistance",
+  email: "Create professional emails with proper formatting",
+  comment: "Generate appropriate responses to comments",
+};
+
+const placeholders = {
+  message: "Write your message here...",
+  email:
+    "Write your email content here. The AI will format it with a subject line, greeting, and closing.",
+  comment: "Write your reply here...",
+};
+
+export default function Home() {
+  const [inputText, setInputText] = useState("");
+  const [comment, setComment] = useState("");
+  const [outputText, setOutputText] = useState("");
+  const [language, setLanguage] = useState("en");
+  const [tone, setTone] = useState("professional");
+  const [isLoading, setIsLoading] = useState(false);
+  const [activeTab, setActiveTab] = useState<TabType>("message");
+
+  const validateInput = (type: TabType): boolean => {
+    if (!inputText.trim()) {
+      toast.error("Please enter your message");
+      return false;
+    }
+
+    if (type === "comment" && !comment.trim()) {
+      toast.error("Please enter the comment you're replying to");
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleSubmit = async (type: TabType) => {
+    if (!validateInput(type)) return;
+
+    setIsLoading(true);
+    try {
+      const response = await fetch("/api/rewrite", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          text: inputText,
+          comment: type === "comment" ? comment : undefined,
+          tone,
+          language,
+          type,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to process request");
+      }
+
+      if (data.result) {
+        setOutputText(data.result);
+        toast.success("Your text has been improved");
+      }
+    } catch (error) {
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : "Failed to process your request"
+      );
+      console.error("Error:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(outputText);
+      toast.success("Text copied to clipboard");
+    } catch (error) {
+      toast.error("Failed to copy text");
+    }
+  };
+
+  return (
+    <main className="min-h-screen bg-gradient-to-b from-background to-muted/50">
+      <div className="container mx-auto px-4 py-8 max-w-6xl">
+        <div className="flex flex-col gap-8">
+          <div className="text-center space-y-3">
+            <h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+              Rightsponse
+            </h1>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Transform your communication with AI-powered writing assistance.
+              Perfect for emails, messages, and responses.
+            </p>
+          </div>
+
+          <Tabs
+            value={activeTab}
+            onValueChange={(v) => setActiveTab(v as TabType)}
+            className="w-full"
+          >
+            <TabsList className="grid w-full grid-cols-3 mb-8">
+              <TabsTrigger value="message" className="flex items-center gap-2">
+                <MessageSquare className="h-4 w-4" />
+                Message
+              </TabsTrigger>
+              <TabsTrigger value="email" className="flex items-center gap-2">
+                <Mail className="h-4 w-4" />
+                Email
+              </TabsTrigger>
+              <TabsTrigger value="comment" className="flex items-center gap-2">
+                <MessagesSquare className="h-4 w-4" />
+                Comment
+              </TabsTrigger>
+            </TabsList>
+
+            <div className="grid gap-6 lg:grid-cols-2">
+              <Card className="lg:sticky lg:top-8 h-fit">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <span>Input</span>
+                    <div className="flex-1" />
+                    <div className="flex items-center gap-2">
+                      <LanguageSelect
+                        value={language}
+                        onValueChange={setLanguage}
+                      />
+                      <ToneSelect value={tone} onValueChange={setTone} />
+                    </div>
+                  </CardTitle>
+                  <CardDescription>
+                    {tabDescriptions[activeTab]}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {activeTab === "comment" && (
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium">
+                          Original Comment
+                        </label>
+                        <Textarea
+                          placeholder="Paste the comment you're replying to..."
+                          value={comment}
+                          onChange={(e) => setComment(e.target.value)}
+                          className="h-24 resize-none"
+                        />
+                      </div>
+                    )}
+
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">
+                        {activeTab === "message" && "Your Message"}
+                        {activeTab === "email" && "Email Content"}
+                        {activeTab === "comment" && "Your Reply"}
+                      </label>
+                      <div className="relative">
+                        <Textarea
+                          placeholder={placeholders[activeTab]}
+                          className="min-h-[200px] pr-12 resize-none"
+                          value={inputText}
+                          onChange={(e) => setInputText(e.target.value)}
+                        />
+                        <Button
+                          size="sm"
+                          className={cn(
+                            "absolute bottom-2 right-2 transition-opacity",
+                            !inputText && "opacity-0"
+                          )}
+                          onClick={() => handleSubmit(activeTab)}
+                          disabled={isLoading}
+                        >
+                          {isLoading ? (
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                          ) : (
+                            <Sparkles className="h-4 w-4" />
+                          )}
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Improved Version</CardTitle>
+                  <CardDescription>
+                    AI-enhanced text with your selected style
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="relative">
+                      <div className="absolute top-2 right-2">
+                        {outputText && (
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={copyToClipboard}
+                          >
+                            <CopyIcon className="h-4 w-4" />
+                          </Button>
+                        )}
+                      </div>
+                      <div className="min-h-[300px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm whitespace-pre-wrap">
+                        {outputText || (
+                          <span className="text-muted-foreground">
+                            Your improved text will appear here...
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    {outputText && (
+                      <div className="flex gap-2">
+                        <Badge variant="secondary">
+                          {language.toUpperCase()}
+                        </Badge>
+                        <Badge variant="secondary">{tone}</Badge>
+                      </div>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </Tabs>
+        </div>
+      </div>
+    </main>
+  );
+}
+```
+
+Sekarang, mari kita bedah lebih dalem gimana halaman `Home` ini jalan, dari atas sampe bawah:
+
+- **Perintah Sakti `"use client"`**: Baris paling atas ini kode penting di Next.js App Router. Ini ngasih tau kalo komponen ini adalah _Client Component_. Artinya, komponen ini bakal jalan di browser user, bukan di server. Ini perlu karena kita bakal pake fitur-fitur React yang ngobrol langsung sama user dan browser, kayak state (`useState`) dan ngurusin kejadian (misalnya pas tombol diklik).
+
+- **Ngatur State Pake `useState`**: Biar halamannya interaktif, kita pake beberapa _state variable_ yang dibikin pake hook `useState` dari React:
+
+  - `inputText`: Nyimpen teks mentah yang diketik user di kotak input utama.
+  - `comment`: Khusus buat mode "Comment", state ini nyimpen teks dari komen asli yang mau dibales.
+  - `outputText`: Nyimpen teks hasil olahan dari Gemini API yang bakal diliatin ke user.
+  - `language`: Nyimpen kode bahasa yang lagi dipilih (misal, "en").
+  - `tone`: Nyimpen kode nada yang lagi dipilih (misal, "professional").
+  - `isLoading`: State boolean yang berguna banget buat nandain kalo aplikasi lagi ngirim permintaan ke API dan nunggu jawaban. Ini kita pake buat nampilin animasi loading dan matiin tombol submit biar nggak diklik berkali-kali.
+  - `activeTab`: Nyimpen tipe konten yang lagi aktif, antara "message", "email", atau "comment". Ini nentuin tampilan dan logika mana yang lagi jalan.
+
+- **Objek Deskripsi dan Placeholder (`tabDescriptions`, `placeholders`)**: Dua objek ini dipake biar tampilan lebih dinamis dan ngasih info. `tabDescriptions` nyediain teks deskripsi singkat yang nongol di bawah judul kartu input, isinya ganti-ganti sesuai tab yang aktif. `placeholders` nyediain teks placeholder yang beda buat kotak input utama, juga tergantung tab yang dipilih, jadi user tau mesti ngetik apa.
+
+- **Fungsi Validasi Input (`validateInput`)**: Sebelum data dikirim ke server, bagusnya divalidasi dulu di sisi klien. Fungsi `validateInput` ini ngecek hal simpel:
+
+  - Mastiin `inputText` (pesan utama) nggak kosong abis di-trim (spasi di awal akhir dibuang).
+  - Kalo tab aktifnya "comment", dia juga mastiin `comment` (komen asli) nggak kosong.
+  - Kalo validasinya gagal, dia bakal nampilin notif error pake `toast.error()` (dari library `sonner` yang kita pasang lewat `shadcn/ui`) dan ngebalikin `false`.
+
+- **Fungsi Buat Ngirim (`handleSubmit`)**: Ini fungsi yang jalan pas user ngeklik tombol buat ngolah teks (tombol yang ada ikon ✨).
+
+  - Pertama, dia manggil `validateInput`. Kalo nggak valid, fungsinya berhenti duluan.
+  - Ngatur `isLoading` jadi `true` buat munculin animasi loading.
+  - Pake `fetch API` bawaan browser buat ngirim permintaan `POST` ke endpoint API kita (`/api/rewrite`).
+    - `headers`: Ngatur `Content-Type` jadi `application/json` karena kita ngirim data JSON.
+    - `body`: Data yang dikirim di-`stringify` jadi JSON, isinya `text` (dari `inputText`), `comment` (kalo `activeTab`-nya "comment"), `tone`, `language`, dan `type` (dari `activeTab`).
+  - **Ngurusin Respons**: Selesai `fetch`, dia bakal ngolah respons JSON dari server.
+    - Kalo `response.ok` nggak `true` (artinya ada error HTTP kayak 4xx atau 5xx), dia bakal nge-lempar (throw) error baru, ngambil pesan error dari `data.error` kalo ada.
+    - Kalo sukses dan `data.result` ada, `outputText` bakal di-update sama hasil dari AI, dan notif sukses (`toast.success()`) ditampilin.
+  - **Blok `catch`**: Kalo ada error pas proses `fetch` atau dari server (yang kita lempar manual), blok `catch` bakal nangkep, nampilin notif error, dan nyatet errornya di konsol browser.
+  - **Blok `finally`**: Bagian ini bakal selalu jalan, mau sukses atau gagal. Di sini, `isLoading` diatur lagi jadi `false` buat ngilangin animasi loading dan ngaktifin lagi tombol submit.
+
+- **Fungsi Salin ke Clipboard (`copyToClipboard`)**: Fungsi simpel ini pake `navigator.clipboard.writeText()` (API browser modern) buat nyalin isi `outputText` ke clipboard user. Notif sukses atau error juga ditampilin.
+
+- **Struktur JSX (Tampilan Pengguna)**: Bagian `return` dari komponen `Home` nentuin gimana tampilan pengguna dirakit pake komponen-komponen dari `shadcn/ui` dan komponen custom kita:
+  - **Layout Utama**: Pake kelas-kelas Tailwind CSS buat ngatur tata letak umum halaman, kayak padding, margin, dan warna latar belakang gradien.
+  - **Judul dan Deskripsi Aplikasi**: Nampilin nama aplikasi "Rightsponse" dan deskripsi singkat.
+  - **Komponen `Tabs`**: Dipake biar user bisa ganti-ganti mode "message", "email", dan "comment". Tiap `TabsTrigger` ada ikonnya (dari `lucide-react`) dan teks.
+  - **Grid Layout**: Konten di bawah tabs dibagi jadi dua kolom di layar gede (`lg:grid-cols-2`) buat kartu input dan output.
+  - **Kartu Input (`Card`)**: Isinya:
+    - `CardHeader` dengan `CardTitle` (yang juga nampilin komponen `LanguageSelect` dan `ToneSelect` kita) dan `CardDescription` (dari `tabDescriptions`).
+    - `CardContent` yang isinya:
+      - `Textarea` buat "Komentar Asli" yang cuma nongol kalo `activeTab`-nya "comment" (contoh tampilan kondisional).
+      - `Textarea` utama buat input user, dengan placeholder dinamis dari `placeholders`.
+      - Tombol `Button` buat submit. Tombol ini nampilin ikon `Loader2` yang muter kalo `isLoading` itu `true`, atau ikon `Sparkles` kalo nggak. Tombol juga dimatiin pas `isLoading`.
+  - **Kartu Output (`Card`)**: Nampilin hasil dari AI.
+    - `CardHeader` dengan judul "Versi Kerennya".
+    - `CardContent` yang isinya:
+      - Tombol `Button` dengan `CopyIcon` yang cuma nongol kalo `outputText` ada isinya.
+      - Sebuah `div` yang nampilin `outputText`. Kalo `outputText` kosong, dia nampilin pesan placeholder.
+      - Komponen `Badge` yang nampilin bahasa dan nada yang dipake buat ngasilin output, juga cuma nongol kalo `outputText` ada.
+
+Dengan gabungan ngatur state, ngurusin kejadian, manggil API dengan hati-hati, dan nampilin UI yang dinamis, komponen `Home` ini jadi pusat interaksi user di aplikasi Rightsponse. Ini nunjukin gimana potongan-potongan kode dan komponen bisa kerja bareng buat bikin pengalaman user yang enak dan responsif.
+
+# Run the project
+
+Buat mulai, pastiin kamu udah buka terminal atau command prompt dan lagi ada di dalem folder utama proyek Rightsponse kita (folder `rightsponse` yang pertama kita bikin).
+
+Kita punya dua mode utama buat jalanin aplikasi Next.js:
+
+1.  **Mode Pengembangan (Development Mode)**
+    Mode ini pas banget kalo kamu lagi faase development aplikasi nya.
+
+    ```bash
+    npm run dev
+    ```
+
+2.  **Mode Produksi (Production Mode)**
+    Mode ini dipake kalo aplikasi kamu udah siap buat Hosting .
+
+    ```bash
+    npm run build # build aplikasi
+    npm start # jalankan aplikasi
+    ```
+
+buka `http://localhost:3000` di browser.
+
+# Note
+
+AI bukanlah masa depan — AI adalah masa kini.
+Teknologi ini sudah menjadi bagian dari kehidupan sehari-hari kita, dan sebagai programmer di era sekarang, kita punya peluang besar untuk memanfaatkannya sebaik mungkin. Baik itu dalam pengembangan website, aplikasi, software, atau sistem lainnya, AI bisa jadi alat bantu yang luar biasa.
+
+Namun penting untuk diingat: AI hanyalah alat, bukan pengganti pemahaman kita.
+Untuk menghasilkan karya yang maksimal, kita tetap harus menguasai dasar-dasar pemrograman, logika sistem, dan struktur program yang kita bangun. AI bisa mempercepat proses, memberikan solusi, bahkan menginspirasi ide baru — tapi arah dan kontrol tetap ada di tangan kita.
+
+Jadi, jangan hanya terpaku pada hasil instan dari AI. Teruslah belajar, kembangkan kemampuan teknis dan kreativitasmu, karena yang bertahan di masa depan bukan hanya yang bisa menggunakan AI, tapi yang mampu berpikir kritis, beradaptasi, dan terus berkembang di tengah perubahan teknologi yang cepat.
+
+## Rencana Pengembangan Lanjutan
+
+1. Auth
+2. Pricing & Custom Model
+3. History
+4. Database Implementation
+5. Browser Extension
+6. Mobile Version
+
+---
+
+Terima kasih sudah meluangkan waktu buat baca tutorial ini. Ini adalah proyek pertama saya yang mencoba menggabungkan API dengan AI, jadi kalau masih ada kekurangan atau hal-hal yang bisa dikembangkan, saya sangat terbuka untuk masukan.
+
+kalo ada ide pengembangan aplikasi atau mau kerja sama, silahkan hubungi saya lewat [wahyufadil1140@gmail.com](mailto:wahyufadil1140@gmail.com)
+
+sampai bertemu di tulisan saya selanjutnya, semoga.
