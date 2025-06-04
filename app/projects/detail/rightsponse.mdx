@@ -1,3 +1,10 @@
+<Image
+  src="https://res.cloudinary.com/dxurnpbrc/image/upload/v1749031764/RIGHTSPONSE_jzqpkh.png"
+  alt="Rightsponse AI Rewriter"
+  width={1000}
+  height={1000}
+/>
+
 # Rightsponse - AI Writing Assistant
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/fadilsflow/rightsponse)
@@ -24,53 +31,27 @@ Transform your communication with AI-powered writing assistance. Perfect for ema
 
 ## Getting Started
 
-1. Clone the repository:
+For detailed setup instructions, check out the [Full tutorial](https://fadils.xyz/blog/posts/membuat-ai-rewriter-dengan-gemini-api-dan-Nextjs).
 
-   ```bash
-   git clone https://github.com/fadilsflow/rightsponse
-   ```
+```bash
+git clone https://github.com/fadilsflow/rightsponse
+cd rightsponse
+npm install
+```
 
-2. Install dependencies:
+get the api key from [Google AI Studio](https://aistudio.google.com/apikey) and set it in the ".env" file:
 
-   ```bash
-   bun install
-   ```
+```env
+GEMINI_API_KEY=your_api_key_here
+```
 
-3. Set up your environment variables:
-   Create a `.env` file in the root directory:
+Start the development server:
 
-   ```env
-   GEMINI_API_KEY=your_api_key_here
-   ```
+```bash
+npm run dev
+```
 
-4. Start the development server:
-
-   ```bash
-   bun dev
-   ```
-
-5. Open [http://localhost:3000](http://localhost:3000) in your browser
-
-## Key Components
-
-### Language Selection
-
-- Support for multiple languages
-- Easy switching between languages
-- Culturally appropriate translations
-
-### Tone Customization
-
-- Business tones: Professional, Formal, Polite
-- Casual tones: Friendly, Casual, Enthusiastic
-- Emotional tones: Empathetic, Apologetic, Grateful
-- Special tones: Diplomatic, Persuasive, Urgent
-
-### Content Types
-
-- **Messages**: Quick text improvements
-- **Emails**: Professional formatting with subject lines and closings
-- **Comments**: Contextual responses to social media comments
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
 
 ## Future Development Plans
 
@@ -86,7 +67,7 @@ Transform your communication with AI-powered writing assistance. Perfect for ema
 - [Next.js Documentation](https://nextjs.org/)
 - [Shadcn/ui Components](https://ui.shadcn.com/)
 - [Gemini API Reference](https://ai.google.dev/docs)
-- [Live Demo](https://rs.fadils.xyz)
+- [Rightsponse](https://rs.fadils.xyz)
 - [GitHub Repository](https://github.com/fadilsflow/rightsponse)
 
 ## Contact

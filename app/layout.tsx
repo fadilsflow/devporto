@@ -33,18 +33,22 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-      <meta name="apple-mobile-web-app-title" content={NAME} />
+        <meta name="apple-mobile-web-app-title" content={NAME} />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider attribute="class"             defaultTheme="dark" disableTransitionOnChange>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          disableTransitionOnChange
+        >
           <AnimatedContainer>
-          <main className="px-4 md:px-6 py-12 max-w-3xl mx-auto">
-            {children}
-            <Toaster position="top-center" />
-            <Footer />
-          </main>
+            <main className="px-4 md:px-6 py-12 max-w-3xl mx-auto ">
+              {children}
+              <Toaster position="top-center" />
+              <Footer />
+            </main>
           </AnimatedContainer>
         </ThemeProvider>
       </body>

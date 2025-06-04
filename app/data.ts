@@ -114,11 +114,11 @@ export const PROJECTS = [
     imageUrl:
       "https://res.cloudinary.com/dxurnpbrc/image/upload/v1749034640/RIGHTSPONSE_Text_dtvzcu.png",
     href: "/projects/rightsponse",
-    stack: ["Next.js", "Gemini API", "TypeScript", "Tailwind CSS", "shadcn/ui"],
+    stack: ["Next.js", "Gemini API", "shadcn/ui"],
     featured: true,
     ctaButtons: {
       primary: {
-        label: "Live Demo",
+        label: "Try Rightsponse",
         href: "https://rs.fadils.xyz",
       },
       secondary: {

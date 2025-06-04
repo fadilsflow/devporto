@@ -2,19 +2,21 @@
 title: "Belajar Laravel dari Migration hingga CRUD Menggunakan Pola MVC"
 publishedAt: "2025-05-12"
 summary: "Tutorial lengkap membangun aplikasi Laravel modern: dari Migration database sampai implementasi MVC dan CRUD. Cocok untuk pemula yang ingin menguasai framework Laravel!"
+tags: Laravel, MVC, CRUD
 ---
 
-Halo sobat developer! 👋 
+Halo sobat developer! 👋
 
 Masih semangat belajar Laravel? Di artikel sebelumnya kita sudah berhasil menginstal Laravel di Arch Linux. Sekarang, kita akan membahas tiga konsep penting dalam pengembangan aplikasi Laravel: Migration, MVC (Model-View-Controller), dan CRUD (Create, Read, Update, Delete). Yuk langsung kita mulai! 🚀
 
-## Part 1: Database Migration 
+## Part 1: Database Migration
 
 ### Apa sih Migration itu?
 
 Bayangkan Migration seperti "version control untuk database" kamu. Mirip seperti Git yang mencatat setiap perubahan kode, Migration mencatat setiap perubahan struktur database kamu. Keren kan?
 
 Dengan Migration, kamu bisa:
+
 - 📝 Membuat dan mengubah struktur database menggunakan kode PHP
 - 🤝 Berbagi struktur database dengan tim tanpa perlu share file SQL
 - ↩️ Rollback perubahan jika ada kesalahan
@@ -50,6 +52,7 @@ public function up()
 ### Apa itu MVC?
 
 MVC (Model-View-Controller) adalah pola arsitektur yang membantu kita mengorganisir kode dengan lebih rapi. Bayangkan MVC seperti restoran:
+
 - 👨‍🍳 Model: Koki yang mengolah bahan makanan (data)
 - 🍽️ View: Pelayan yang menyajikan makanan ke pelanggan (tampilan)
 - 🧑‍💼 Controller: Manajer yang mengkoordinasi semuanya
@@ -74,7 +77,7 @@ class Category extends Model
     protected $fillable = [
         'name', 'slug', 'description', 'image'
     ];
-    
+
     // Otomatis mengisi slug dari name
     protected static function boot()
     {
@@ -97,9 +100,9 @@ View adalah tampilan yang dilihat user. Laravel menggunakan Blade templating eng
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <h2 class="text-2xl font-bold mb-4">Daftar Kategori</h2>
-                    
+
                     <div class="mb-4">
-                        <a href="{{ route('categories.create') }}" 
+                        <a href="{{ route('categories.create') }}"
                            class="bg-blue-500 text-white px-4 py-2 rounded">
                             Tambah Kategori
                         </a>
@@ -121,7 +124,7 @@ View adalah tampilan yang dilihat user. Laravel menggunakan Blade templating eng
                                     <td>
                                         <a href="{{ route('categories.edit', $category) }}"
                                            class="text-blue-500">Edit</a>
-                                        
+
                                         <form action="{{ route('categories.destroy', $category) }}"
                                               method="POST" class="inline">
                                             @csrf
@@ -195,6 +198,7 @@ class CategoryController extends Controller
 ## Part 3: Implementasi CRUD
 
 CRUD adalah operasi dasar untuk mengelola data:
+
 - Create: Membuat data baru
 - Read: Membaca/menampilkan data
 - Update: Mengubah data
@@ -225,15 +229,15 @@ Contoh form create/edit kategori:
 
     <div class="mb-4">
         <label class="block">Nama Kategori</label>
-        <input type="text" 
-               name="name" 
+        <input type="text"
+               name="name"
                value="{{ $category->name ?? old('name') }}"
                class="w-full border rounded px-3 py-2">
     </div>
 
     <div class="mb-4">
         <label class="block">Deskripsi</label>
-        <textarea name="description" 
+        <textarea name="description"
                   class="w-full border rounded px-3 py-2"
                   rows="3">{{ $category->description ?? old('description') }}</textarea>
     </div>
@@ -243,7 +247,7 @@ Contoh form create/edit kategori:
         <input type="file" name="image">
     </div>
 
-    <button type="submit" 
+    <button type="submit"
             class="bg-blue-500 text-white px-4 py-2 rounded">
         {{ isset($category) ? 'Update' : 'Simpan' }}
     </button>
@@ -253,16 +257,19 @@ Contoh form create/edit kategori:
 ## 💡 Tips dan Best Practices
 
 1. **Validasi Data**
+
    - Selalu validasi input user
    - Gunakan Request classes untuk validasi kompleks
    - Manfaatkan fitur Laravel untuk sanitasi data
 
 2. **Security**
+
    - Gunakan CSRF protection
    - Implementasikan authorization dengan Gates/Policies
    - Hindari mass assignment vulnerability
 
 3. **Code Organization**
+
    - Ikuti PSR standards
    - Gunakan service classes untuk logic kompleks
    - Manfaatkan Laravel helpers
@@ -275,6 +282,7 @@ Contoh form create/edit kategori:
 ## Yuk, Praktek Langsung! 🚀
 
 Selamat! Kamu sudah belajar konsep dasar pengembangan aplikasi Laravel:
+
 - ✅ Migration untuk mengelola struktur database
 - ✅ MVC untuk mengorganisir kode
 - ✅ CRUD untuk operasi data
@@ -282,6 +290,7 @@ Selamat! Kamu sudah belajar konsep dasar pengembangan aplikasi Laravel:
 Sekarang saatnya praktek! Coba buat fitur kategori ini di project kamu. Eksperimen dengan berbagai fitur Laravel, tambahkan validasi, buat tampilan yang lebih menarik, dan jangan takut untuk mencoba hal baru!
 
 Di artikel selanjutnya, kita akan belajar tentang:
+
 - 🔐 Authentication & Authorization
 - 🎨 Frontend dengan Tailwind CSS
 - 📱 API Development
@@ -290,4 +299,3 @@ Di artikel selanjutnya, kita akan belajar tentang:
 Remember: Practice makes perfect! ��
 
 Happy coding! 🎉
-

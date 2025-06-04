@@ -14,7 +14,7 @@ export default function BlogLayout({
 }) {
   return (
     <div>
-      <div className="flex items-center justify-between max-w-3xl mx-auto">
+      <div className="flex items-center justify-between max-w-3xl mx-auto ">
         <BreadNav />
         <div className="flex items-center gap-2">
           <RssButton />

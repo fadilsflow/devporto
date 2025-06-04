@@ -20,7 +20,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
   if (!allProjects || allProjects.length === 0) return null;
 
   // If showAll is false, only show 2 projects
-  const displayedProjects = showAll ? allProjects : allProjects.slice(0, 2);
+  const displayedProjects = showAll ? allProjects : allProjects.slice(0, 4);
 
   return (
     <div className="space-y-4">
@@ -51,7 +51,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
                 <div className="flex flex-wrap gap-2 mt-3">
                   {project.stack &&
                     project.stack.slice(0, 3).map((stack) => (
-                      <Badge key={stack} variant="outline" className="text-xs">
+                      <Badge key={stack} variant="outline" className="text-xs bg-card">
                         {stack}
                       </Badge>
                     ))}
