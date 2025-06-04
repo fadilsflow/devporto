@@ -135,16 +135,19 @@ function createHeading(level: number) {
 function Pre({ children, ...props }: PreProps) {
   return (
     <div className="relative group">
-      <pre {...props}>
-        {children}
-      </pre>
-      <CopyButton text={
-        typeof children === 'string' 
-          ? children 
-          : children && typeof children === 'object' && 'props' in (children as { props?: unknown })
-            ? ((children as { props?: { children?: string } }).props?.children as string) || ''
-            : ''
-      } />
+      <pre {...props}>{children}</pre>
+      <CopyButton
+        text={
+          typeof children === "string"
+            ? children
+            : children &&
+              typeof children === "object" &&
+              "props" in (children as { props?: unknown })
+            ? ((children as { props?: { children?: string } }).props
+                ?.children as string) || ""
+            : ""
+        }
+      />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 ---
-title: "Membuat AI Rewriter dengan Gemini API + Next.js"
+title: "Membuat AI Rewriter dengan Gemini API dan Next.js"
 publishedAt: "2025-06-04"
 description: "Tutorial lengkap membuat AI Rewriter untuk Chat, Email, Komentar, dengan Gemini API + Next.js"
 ---
@@ -238,20 +238,6 @@ export const LanguageSelect = ({
 };
 ```
 
-Nih, penjelasan singkat kode di atas:
-
-- **Interface `LanguageSelectProps`**: Bagian ini kayak perjanjian buat komponen kita. Isinya nentuin properti (atau 'props' kalo di React) apa aja yang bisa diterima sama komponen `LanguageSelect`. Di sini ada dua: `value`, yang nyimpen bahasa yang lagi dipilih, sama `onValueChange`, fungsi yang bakal dipanggil tiap kali user ganti pilihan bahasa. Ini biar komponen induknya tau kalo ada perubahan.
-- **Array `languages`**: Ini daftar bahasa yang kita tawarin. Tiap bahasa itu objek dengan tiga properti: `value` (kode singkat bahasa, misal "en" buat Inggris), `label` (nama bahasa yang diliat user, misal "English"), dan `group` (buat ngelompokin bahasa di dropdown, misalnya semua bahasa Eropa). Struktur ini bikin gampang kalo nanti mau nambah bahasa baru.
-- **`groupedLanguages`**: Biar dropdown-nya rapi dan gampang diliat, kita kelompokin bahasa-bahasanya. Objek `groupedLanguages` ini dibikin dengan ngolah array `languages`. Hasilnya, bahasa-bahasa bakal dikelompokin di bawah label grupnya masing-masing (misal, "Bahasa Populer", "Bahasa Asia"), ini ngebantu banget kalo daftar bahasanya banyak.
-- **Komponen `Select` dari `shadcn/ui`**: Inti dari dropdown ini dibangun pake beberapa komponen dari `shadcn/ui`:
-  - `<Select>`: Pembungkus utamanya.
-  - `<SelectTrigger>`: Bagian yang diliat user sebelum dropdown kebuka (biasanya nampilin pilihan sekarang atau placeholder).
-  - `<SelectContent>`: Kotak yang muncul pas dropdown kebuka, isinya semua pilihan.
-  - `<SelectGroup>`: Dipake bareng `groupedLanguages` buat bikin bagian-bagian terpisah di dalem dropdown, masing-masing ada `<SelectLabel>`-nya.
-  - `<SelectItem>`: Ini satu pilihan di dalem dropdown.
-
-Dengan komponen `LanguageSelect` ini, user jadi bisa langsung ngatur bahasa output sesuai kebutuhan mereka, bikin aplikasi kita jadi lebih fleksibel dan berguna buat orang banyak.
-
 ## 2. Pengatur Nada Bicara: `components/tone-select.tsx`
 
 Mirip sama pemilih bahasa, komponen `ToneSelect` (disimpen di `components/tone-select.tsx`) ngasih lapisan kustomisasi lain buat user. Komponen ini bikin user bisa milih 'nada' atau 'gaya bahasa' yang dimau buat teks yang dikeluarin AI. Mau respons yang super profesional buat email bisnis, nada yang lebih santai buat temen, atau mungkin gaya persuasif buat materi promosi? `ToneSelect` solusinya.
@@ -319,30 +305,21 @@ export const ToneSelect = ({ value, onValueChange }: ToneSelectProps) => {
 };
 ```
 
-Struktur dan cara kerja komponen `ToneSelect` ini mirip banget sama `LanguageSelect`:
-
-- **Interface `ToneSelectProps`**: Sama kayak tadi, ini nentuin props yang diterima, yaitu `value` buat nada yang lagi aktif dan `onValueChange` sebagai fungsi yang dipanggil pas ada perubahan pilihan nada.
-- **Array `tones`**: Ini daftar macem-macem nada yang bisa dipilih user. Tiap nada juga bentuknya objek dengan `value` (misal, "professional"), `label` (misal, "Professional"), dan `group` (misal, "Business", "Casual", "Emotional", "Special"). Pengelompokan ini bantu user nemuin nada yang paling pas dengan cepet.
-- **`groupedTones`**: Sama kayak di `LanguageSelect`, variabel ini dipake buat ngelompokin macem-macem pilihan nada di dalem dropdown, biar tampilannya tetep rapi dan gampang dipake, meskipun pilihan nadanya banyak.
-- **Komponen `Select`**: Lagi-lagi, kita manfaatin kemudahan komponen `Select` dari `shadcn/ui` buat bikin dropdown yang interaktif dan tampilannya konsisten sama `LanguageSelect`.
-
-Dengan gabungin `LanguageSelect` dan `ToneSelect`, kita kasih user kekuatan buat bener-bener ngarahin output dari Gemini API, jadi teks yang dihasilin nggak cuma bener bahasanya tapi juga pas gaya dan konteksnya.
-
 # Jantung Aplikasi: Konfigurasi dan Logika API
 
 Kelar nyiapin komponen tampilan, sekarang waktunya kita sambungin aplikasi kita sama "otak"-nya, yaitu Gemini API. Ini termasuk nyimpen API key kita dengan aman pake variabel lingkungan dan bikin API route di Next.js buat ngurusin permintaan ke Gemini.
 
-## 1. Nyimpen Kunci Rahasia: Variabel Lingkungan (`.env.local`)
+## 1. Nyimpen Kunci Rahasia: Variabel Lingkungan (`.env`)
 
-API key-mu itu info sensitif. **Jangan pernah** nulis langsung di kode (hardcoding)! Cara yang bener dan aman itu pake variabel lingkungan. Next.js otomatis ngeload variabel dari file `.env.local`.
+API key-mu itu info sensitif. **Jangan pernah** nulis langsung di kode (hardcoding)! Cara yang bener dan aman itu pake variabel lingkungan. Next.js otomatis ngeload variabel dari file `.env`.
 
-Bikin file namanya `.env.local` di folder root proyekmu (sejajar sama `package.json`), terus isi API key Gemini-mu kayak gini:
+Bikin file namanya `.env` di folder root proyekmu (sejajar sama `package.json`), terus isi API key Gemini-mu kayak gini:
 
 ```env
 GEMINI_API_KEY=your_api_key_here
 ```
 
-Pastikan kamu ganti `your_api_key_here` sama API key yang udah kamu dapet dari Google AI Studio. File `.env.local` ini secara default udah masuk di `.gitignore` sama `create-next-app`, jadi nggak bakal ke-upload ke repository Git-mu. Ini penting banget buat keamanan.
+Pastikan kamu ganti `your_api_key_here` sama API key yang udah kamu dapet dari Google AI Studio. File `.env` ini secara default udah masuk di `.gitignore` sama `create-next-app`, jadi nggak bakal ke-upload ke repository Git-mu. Ini penting banget buat keamanan.
 
 ## 2. Jembatan ke AI: API Route (`app/api/rewrite/route.ts`)
 
@@ -456,47 +433,7 @@ ${text}`,
 }
 ```
 
-Mari kita kupas kode penting di API route ini:
-
-- **Bikin Klien Gemini**: `const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "" });` ini bikin "alat" buat ngobrol sama Gemini, pake API key yang kita simpen di variabel lingkungan tadi.
-- **`languageMap`**: Objek simpel buat nerjemahin kode bahasa (misal, "en") jadi nama bahasa yang lebih gampang dibaca ("English"). Ini dipake di prompt buat AI.
-- **`systemInstructions`**: Objek ini penting banget. Isinya instruksi sistem atau peran yang harus diambil sama AI Gemini tergantung tipe kontennya (`message`, `email`, `comment`). Instruksi ini bantu ngarahin AI biar ngasilin output yang lebih pas. Contohnya, buat email, AI disuruh jadi "pakar email" dan harus ada subjek, sapaan, sama penutup.
-- **Konstanta `MAX_OUTPUT_TOKENS` dan `TEMPERATURE`**: Ini settingan buat model Gemini.
-  - `MAX_OUTPUT_TOKENS` (misal, 250) ngebatasin panjang maksimal teks yang dikeluarin AI. Ini penting buat ngontrol biaya dan biar jawabannya nggak kepanjangan.
-  - `TEMPERATURE` (misal, 0.3) ngontrol seberapa "kreatif" atau "acak" output AI. Nilai rendah (kayak 0.3) bikin output lebih fokus, nggak macem-macem, dan ngikutin instruksi. Nilai tinggi bakal bikin output lebih variatif dan kreatif, tapi mungkin kurang presisi.
-- **Fungsi `POST`**: Ini fungsi utama yang jalan tiap kali ada permintaan HTTP POST ke endpoint `/api/rewrite`. Di Next.js App Router, fungsi yang diekspor dengan nama metode HTTP (kayak `POST`, `GET`, dll.) di file `route.ts` otomatis jadi pengurus buat metode itu. Yuk, kita liat langkah-langkahnya:
-
-  - **Baca Isi Request**: `const { text, tone, language, type, comment } = await req.json();` Baris ini ngambil data yang dikirim sama aplikasi depan kita (frontend) dalam format JSON. Isinya ada `text` yang mau diolah, `tone` dan `language` pilihan user, `type` konten (message, email, atau comment), plus `comment` asli kalo tipenya "comment".
-  - **Validasi Input**: `if (!text?.trim()) { ... }` Ini langkah penting buat mastiin teks utamanya nggak kosong. Kalo kosong, server bakal ngasih error `400 Bad Request` (permintaan nggak bener). Validasi input di server itu wajib buat keamanan.
-  - **Nentuin Bahasa Target**: `const targetLanguage = languageMap[language as keyof typeof languageMap] || "English";` Di sini, kita pake `languageMap` buat ngubah kode bahasa (misal, "id") jadi nama bahasa yang lebih deskriptif ("Indonesian"). Kalo kode bahasanya nggak dikenal, kita pake "English" aja sebagai default.
-  - **Bikin Prompt (`buildPrompt`)**: `const prompt = buildPrompt(type, targetLanguage, tone, text, comment);` Ini manggil fungsi `buildPrompt` (yang bakal kita bahas abis ini). Fungsi ini tugasnya ngeracik instruksi atau "prompt" yang spesifik dan kaya konteks buat dikirim ke Gemini API.
-  - **Ngirim Permintaan ke Gemini API**: `const response = await ai.models.generateContent({ ... });` Nah, ini dia momen kita beneran ngobrol sama si AI. Kita pake metode `generateContent` dari klien Gemini (`ai`).
-    - `model: "gemini-2.0-flash"`: Nentuin model Gemini yang mau kita pake. "gemini-2.0-flash" (dulu mungkin kamu kenal sebagai "gemini-pro" atau varian lain, pastiin pake ID model yang paling baru dan pas ya!) itu model yang cepet dan efisien buat tugas kayak gini.
-    - `contents: prompt`: Ini prompt yang udah kita siapin.
-    - `config`: Objek konfigurasi ini isinya parameter yang udah kita bahas tadi:
-      - `temperature: TEMPERATURE`: Ngontrol kreativitas.
-      - `maxOutputTokens: MAX_OUTPUT_TOKENS`: Ngebatasin panjang output.
-      - `systemInstruction: systemInstructions[type as keyof typeof systemInstructions]`: Ngasih instruksi sistem berdasarkan tipe konten.
-  - **Ambil Hasil Teksnya**: `const rewrittenText = response.text;` Setelah Gemini API kelar ngolah, kita ambil teks hasilnya dari properti `text` di objek respons.
-  - **Kirim Respons ke Klien**: `return NextResponse.json({ result: rewrittenText });` Hasil teks yang udah diolah dikirim balik ke aplikasi depan dalam format JSON.
-  - **Penanganan Error (`try...catch`)**: Semua logika ini dibungkus `try...catch`. Kalo ada error di mana aja selama proses (misal, jaringan putus, error dari API Gemini, dll.), blok `catch` bakal nangkep, nyatet errornya di konsol server, dan ngirim respons error `500 Internal Server Error` ke klien dengan pesan yang lebih umum.
-
-- **Fungsi `buildPrompt`**: Fungsi ini bisa dibilang kayak "koki resep" buat AI kita. Tugasnya ngeracik instruksi (prompt) yang paling jitu biar AI ngasilin output sesuai mau kita. Kualitas prompt itu salah satu kunci paling penting pas kerja bareng model bahasa gede. Yuk, liat cara kerjanya:
-  - **Parameter**: Fungsi ini nerima `type` (tipe konten), `language` (bahasa target yang udah deskriptif), `tone` (nada pilihan), `text` (input dari user), dan `comment` (opsional, buat tipe "comment").
-  - **Objek `prompts`**: Di dalem fungsi ini, ada objek `prompts` yang isinya template string JavaScript buat tiap tipe konten (`email`, `comment`, `message`).
-  - **Template String Dinamis**: Tiap template dirancang hati-hati buat ngasih instruksi yang jelas ke AI. Perhatiin penggunaan variabel kayak `${language}`, `${tone}`, dan `${text}` (plus `${comment}`) yang disisipin langsung ke string prompt. Ini bikin prompt kita jadi dinamis banget dan bisa nyesuain sama input user.
-  - **Instruksi Spesifik per Tipe**:
-    - Buat **`email`**: Prompt-nya nyuruh AI bikin "SATU email profesional", nyebutin bahasa dan nada, dan secara gamblang minta buat nyantumin subjek, sapaan, sama penutup. Ada juga penekanan biar singkat dan sopan sesuai budaya.
-    - Buat **`comment`**: Prompt-nya minta "SATU respons dengan nada ${tone} dalam bahasa ${language}", nekenin buat ngasih satu respons langsung aja, batasan panjang (2-3 kalimat), dan harus nyambung sama konteksnya. Komentar asli juga dimasukin ke prompt biar AI dapet konteks.
-    - Buat **`message`**: Prompt-nya minta buat nulis ulang pesan "SEKALI AJA", inti pesannya jangan ilang, plus nekenin biar singkat dan jelas.
-  - **Penekanan di Output Tunggal & Gak Pake Penjelasan**: Hampir semua prompt ada klausa "INGET YA" yang minta AI buat ngasih "SATU versi/respons langsung aja" dan "Gak usah dijelasin atau kasih pilihan". Ini penting banget buat mastiin output AI itu teks yang langsung bisa dipake user, bukan malah jadi pilihan-pilihan atau penjelasan soal apa yang udah AI lakuin.
-  - **Fallback**: `return prompts[type as keyof typeof prompts] || prompts.message;` Baris ini ngembaliin template prompt yang sesuai sama `type` yang dikasih. Kalo `type`-nya nggak dikenal (meskipun harusnya nggak kejadian kalo validasi di frontend bener), dia bakal default ke prompt buat `message`.
-
-Dengan ngerancang prompt secara teliti kayak gini, kita bisa "ngebimbing" Gemini API biar ngasilin output yang lebih pas, rapi, dan sesuai sama harapan user. Ini seni sekaligus ilmu dalam bikin aplikasi pake AI.
-
-API route ini adalah jantung dari fungsionalitas Rightsponse, ngejembatanin input user dengan kekuatan ngolah bahasa dari Gemini API.
-
-## 3. Ngerakit Tampilan Utama: Halaman Depan (`app/page.tsx`)
+## 3. Tampilan Utama: Halaman Depan (`app/page.tsx`)
 
 Ini halaman yang pertama kali nongol pas user buka aplikasi. Di sinilah semua komponen UI yang udah kita siapin (`LanguageSelect`, `ToneSelect`, `Textarea`, `Button`, dll.) dirangkai jadi satu kesatuan yang berfungsi. File `app/page.tsx` ini adalah React Client Component karena kita pake hook kayak `useState` dan ngurusin interaksi user langsung di browser.
 
@@ -767,63 +704,6 @@ export default function Home() {
 }
 ```
 
-Sekarang, mari kita bedah lebih dalem gimana halaman `Home` ini jalan, dari atas sampe bawah:
-
-- **Perintah Sakti `"use client"`**: Baris paling atas ini kode penting di Next.js App Router. Ini ngasih tau kalo komponen ini adalah _Client Component_. Artinya, komponen ini bakal jalan di browser user, bukan di server. Ini perlu karena kita bakal pake fitur-fitur React yang ngobrol langsung sama user dan browser, kayak state (`useState`) dan ngurusin kejadian (misalnya pas tombol diklik).
-
-- **Ngatur State Pake `useState`**: Biar halamannya interaktif, kita pake beberapa _state variable_ yang dibikin pake hook `useState` dari React:
-
-  - `inputText`: Nyimpen teks mentah yang diketik user di kotak input utama.
-  - `comment`: Khusus buat mode "Comment", state ini nyimpen teks dari komen asli yang mau dibales.
-  - `outputText`: Nyimpen teks hasil olahan dari Gemini API yang bakal diliatin ke user.
-  - `language`: Nyimpen kode bahasa yang lagi dipilih (misal, "en").
-  - `tone`: Nyimpen kode nada yang lagi dipilih (misal, "professional").
-  - `isLoading`: State boolean yang berguna banget buat nandain kalo aplikasi lagi ngirim permintaan ke API dan nunggu jawaban. Ini kita pake buat nampilin animasi loading dan matiin tombol submit biar nggak diklik berkali-kali.
-  - `activeTab`: Nyimpen tipe konten yang lagi aktif, antara "message", "email", atau "comment". Ini nentuin tampilan dan logika mana yang lagi jalan.
-
-- **Objek Deskripsi dan Placeholder (`tabDescriptions`, `placeholders`)**: Dua objek ini dipake biar tampilan lebih dinamis dan ngasih info. `tabDescriptions` nyediain teks deskripsi singkat yang nongol di bawah judul kartu input, isinya ganti-ganti sesuai tab yang aktif. `placeholders` nyediain teks placeholder yang beda buat kotak input utama, juga tergantung tab yang dipilih, jadi user tau mesti ngetik apa.
-
-- **Fungsi Validasi Input (`validateInput`)**: Sebelum data dikirim ke server, bagusnya divalidasi dulu di sisi klien. Fungsi `validateInput` ini ngecek hal simpel:
-
-  - Mastiin `inputText` (pesan utama) nggak kosong abis di-trim (spasi di awal akhir dibuang).
-  - Kalo tab aktifnya "comment", dia juga mastiin `comment` (komen asli) nggak kosong.
-  - Kalo validasinya gagal, dia bakal nampilin notif error pake `toast.error()` (dari library `sonner` yang kita pasang lewat `shadcn/ui`) dan ngebalikin `false`.
-
-- **Fungsi Buat Ngirim (`handleSubmit`)**: Ini fungsi yang jalan pas user ngeklik tombol buat ngolah teks (tombol yang ada ikon ✨).
-
-  - Pertama, dia manggil `validateInput`. Kalo nggak valid, fungsinya berhenti duluan.
-  - Ngatur `isLoading` jadi `true` buat munculin animasi loading.
-  - Pake `fetch API` bawaan browser buat ngirim permintaan `POST` ke endpoint API kita (`/api/rewrite`).
-    - `headers`: Ngatur `Content-Type` jadi `application/json` karena kita ngirim data JSON.
-    - `body`: Data yang dikirim di-`stringify` jadi JSON, isinya `text` (dari `inputText`), `comment` (kalo `activeTab`-nya "comment"), `tone`, `language`, dan `type` (dari `activeTab`).
-  - **Ngurusin Respons**: Selesai `fetch`, dia bakal ngolah respons JSON dari server.
-    - Kalo `response.ok` nggak `true` (artinya ada error HTTP kayak 4xx atau 5xx), dia bakal nge-lempar (throw) error baru, ngambil pesan error dari `data.error` kalo ada.
-    - Kalo sukses dan `data.result` ada, `outputText` bakal di-update sama hasil dari AI, dan notif sukses (`toast.success()`) ditampilin.
-  - **Blok `catch`**: Kalo ada error pas proses `fetch` atau dari server (yang kita lempar manual), blok `catch` bakal nangkep, nampilin notif error, dan nyatet errornya di konsol browser.
-  - **Blok `finally`**: Bagian ini bakal selalu jalan, mau sukses atau gagal. Di sini, `isLoading` diatur lagi jadi `false` buat ngilangin animasi loading dan ngaktifin lagi tombol submit.
-
-- **Fungsi Salin ke Clipboard (`copyToClipboard`)**: Fungsi simpel ini pake `navigator.clipboard.writeText()` (API browser modern) buat nyalin isi `outputText` ke clipboard user. Notif sukses atau error juga ditampilin.
-
-- **Struktur JSX (Tampilan Pengguna)**: Bagian `return` dari komponen `Home` nentuin gimana tampilan pengguna dirakit pake komponen-komponen dari `shadcn/ui` dan komponen custom kita:
-  - **Layout Utama**: Pake kelas-kelas Tailwind CSS buat ngatur tata letak umum halaman, kayak padding, margin, dan warna latar belakang gradien.
-  - **Judul dan Deskripsi Aplikasi**: Nampilin nama aplikasi "Rightsponse" dan deskripsi singkat.
-  - **Komponen `Tabs`**: Dipake biar user bisa ganti-ganti mode "message", "email", dan "comment". Tiap `TabsTrigger` ada ikonnya (dari `lucide-react`) dan teks.
-  - **Grid Layout**: Konten di bawah tabs dibagi jadi dua kolom di layar gede (`lg:grid-cols-2`) buat kartu input dan output.
-  - **Kartu Input (`Card`)**: Isinya:
-    - `CardHeader` dengan `CardTitle` (yang juga nampilin komponen `LanguageSelect` dan `ToneSelect` kita) dan `CardDescription` (dari `tabDescriptions`).
-    - `CardContent` yang isinya:
-      - `Textarea` buat "Komentar Asli" yang cuma nongol kalo `activeTab`-nya "comment" (contoh tampilan kondisional).
-      - `Textarea` utama buat input user, dengan placeholder dinamis dari `placeholders`.
-      - Tombol `Button` buat submit. Tombol ini nampilin ikon `Loader2` yang muter kalo `isLoading` itu `true`, atau ikon `Sparkles` kalo nggak. Tombol juga dimatiin pas `isLoading`.
-  - **Kartu Output (`Card`)**: Nampilin hasil dari AI.
-    - `CardHeader` dengan judul "Versi Kerennya".
-    - `CardContent` yang isinya:
-      - Tombol `Button` dengan `CopyIcon` yang cuma nongol kalo `outputText` ada isinya.
-      - Sebuah `div` yang nampilin `outputText`. Kalo `outputText` kosong, dia nampilin pesan placeholder.
-      - Komponen `Badge` yang nampilin bahasa dan nada yang dipake buat ngasilin output, juga cuma nongol kalo `outputText` ada.
-
-Dengan gabungan ngatur state, ngurusin kejadian, manggil API dengan hati-hati, dan nampilin UI yang dinamis, komponen `Home` ini jadi pusat interaksi user di aplikasi Rightsponse. Ini nunjukin gimana potongan-potongan kode dan komponen bisa kerja bareng buat bikin pengalaman user yang enak dan responsif.
-
 # Run the project
 
 Buat mulai, pastiin kamu udah buka terminal atau command prompt dan lagi ada di dalem folder utama proyek Rightsponse kita (folder `rightsponse` yang pertama kita bikin).
@@ -867,6 +747,17 @@ Jadi, jangan hanya terpaku pada hasil instan dari AI. Teruslah belajar, kembangk
 6. Mobile Version
 
 ---
+
+Resources:
+
+- [Next.js](https://nextjs.org/)
+- [Shadcn/ui](https://ui.shadcn.com/)
+- [Lucide](https://lucide.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+
+Github:
+
+- [Rightsponse](https://github.com/fadilsflow/rightsponse)
 
 Terima kasih sudah meluangkan waktu buat baca tutorial ini. Ini adalah proyek pertama saya yang mencoba menggabungkan API dengan AI, jadi kalau masih ada kekurangan atau hal-hal yang bisa dikembangkan, saya sangat terbuka untuk masukan.
 
