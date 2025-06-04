@@ -43,8 +43,6 @@ API Key itu kayak KTP buat aplikasi kita biar bisa akses layanan Gemini. Gini ni
 3.  Ikutin aja petunjuk buat bikin API key baru. Biasanya sih disuruh bikin proyek baru dulu kalo belum punya.
 4.  **Simpen API key-nya baik-baik, jangan sampe ilang atau kesebar!** Bentar lagi kita pake nih. Anggep aja kayak password, jangan kasih tau siapa-siapa.
 
-Nah, kalo semua udah beres, lanjut ke step berikutnya -> [Bikin Kerangka: Setup Project Next.js](#bikin-kerangka-setup-project-nextjs)
-
 ## Setup Project
 
 ### Bikin Proyek Next.js
@@ -58,7 +56,12 @@ npx create-next-app@latest rightsponse --typescript --tailwind --app
 cd rightsponse
 ```
 
-Perintah pertama itu bakal bikin folder baru namanya `rightsponse` isinya semua file awal proyek Next.js, udah lengkap sama settingan buat TypeScript dan Tailwind CSS (`--typescript --tailwind --app`). Kelar itu, perintah `cd rightsponse` bakal ngebawa kamu masuk ke dalem folder proyek yang baru aja jadi, biar kita bisa mulai ngoprek di situ.
+Would you like to use ESLint? … Yes
+✔ Would you like your code inside a `src/` directory? … No
+✔ Would you like to use Turbopack for `next dev`? … Yes
+✔ Would you like to customize the import alias (`@/*` by default)? … Yes
+
+Perintah pertama itu bakal bikin folder baru namanya `rightsponse` isinya semua file awal proyek Next.js. Kelar itu, perintah `cd rightsponse` bakal ngebawa kamu masuk ke dalem folder proyek yang baru aja jadi, biar kita bisa mulai ngoprek di situ.
 
 ### Install Gemini API library
 
@@ -69,10 +72,10 @@ npm install @google/genai
 ### Setup Shadcn/ui
 
 ```bash
-npx shadcn-ui@latest init
+npx shadcn@latest init
 ```
 
-Nanti dia bakal nanya beberapa hal soal settingan awal `shadcn/ui` di proyek ini, warna dasarnya apa, dan lain-lain. Buat tutorial ini, ikutin aja pilihan defaultnya.
+Nanti dia bakal nanya beberapa hal soal settingan awal [shadcn/ui](https://ui.shadcn.com/) di proyek ini, warna dasarnya apa, dan lain-lain. Buat tutorial ini, ikutin aja pilihan defaultnya.
 
 ### Add UI Components
 
@@ -80,7 +83,7 @@ Kelar ngesetup `shadcn/ui`, kita bisa mulai nambahin komponen-komponen UI spesif
 
 ```bash
 # Install semua komponen yang kita butuhin
-npx shadcn-ui@latest add button tabs input textarea select card sonner badge
+  npx shadcn@latest add button tabs input textarea select card sonner badge
 ```
 
 Perintah ini otomatis bakal bikin file-file komponen itu (kayak `button.tsx`, `tabs.tsx`, dll.) di dalem folder `components/ui` di proyekmu. Kita pilih:
