@@ -24,7 +24,7 @@ export function CopyButton({ text }: CopyButtonProps) {
   return (
     <button
       onClick={onCopy}
-      className="absolute right-2 top-2 rounded-md px-2 py-1 text-xs font-medium text-neutral-400 hover:text-neutral-100 bg-neutral-800 hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-600 transition-all"
+      className="absolute right-2 top-2 rounded-md px-2 py-1 text-xs font-medium text-neutral-400 hover:text-neutral-10000  transition-all"
     >
       {copied ? (
         <Check className="w-4 h-4" />

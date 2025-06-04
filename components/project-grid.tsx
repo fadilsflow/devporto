@@ -29,7 +29,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
           <Link
             href={project.href}
             key={project.title}
-            className="group relative block overflow-hidden hover:brightness-90 transition-all"
+            className="group relative block overflow-hidden hover:opacity-80 transition-all"
           >
             <div className="space-y-3 border rounded-lg overflow-hidden">
               {/* Image Container */}
@@ -65,7 +65,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
       {!showAll && (
         <Link
           href="/projects"
-          className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
+          className="text-sm text-muted-foreground hover:opacity-80 transition-colors flex items-center gap-2"
         >
           View all projects <ArrowRightIcon className="w-4 h-4" />
         </Link>

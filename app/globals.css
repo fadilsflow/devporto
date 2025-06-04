@@ -44,7 +44,7 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
+  --background: oklch(0.967 0.001 286.375);
   --foreground: oklch(0.141 0.005 285.823);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.141 0.005 285.823);
@@ -141,10 +141,10 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --sh-class: #4c97f8;
-    --sh-identifier: white;
-    --sh-keyword: #f47067;
-    --sh-string: #0fa295;
+    --sh-class: #9ccfd8;
+    --sh-identifier: #e0def4;
+    --sh-keyword: #c4a7e7;
+    --sh-string: #31748f;
   }
   html {
     color-scheme: dark;
@@ -180,11 +180,11 @@
 }
 
 .prose pre {
-  @apply bg-neutral-900 dark:bg-neutral-900 rounded-lg overflow-x-auto border border-neutral-900 dark:border-neutral-900 py-2 px-3 text-sm;
+  @apply bg-[#191724] dark:bg-[#2a283e] rounded-lg overflow-x-auto border border-neutral-900 dark:border-neutral-900 py-2 px-3 text-sm;
 }
 
 .prose code {
-  @apply px-1 py-0.5 rounded-lg;
+  @apply px-2 text-xs py-0.5 rounded-lg bg-[#191724] dark:bg-[#2a283e];
 }
 
 .prose pre code {
