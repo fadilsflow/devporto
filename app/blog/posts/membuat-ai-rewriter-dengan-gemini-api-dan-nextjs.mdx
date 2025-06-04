@@ -12,12 +12,10 @@ tags: AI, Next.js, Gemini API
   height={1000}
 />
 
-Sering kali kita bingung nyari kata-kata yang pas buat nge-chat orang, bales komentar di medsos, atau nulis email dengan format yang bener.
-Nah, di sini saya coba bantu biar semua itu jadi lebih gampang. Kamu bisa atur sendiri mau ngomong pakai gaya bahasa kayak gimana — formal, santai, atau yang sesuai sama kepribadian kamu.
-sebenernya mudah, udah banyak chat bot diluar sana yang bisa ngasih solusi untuk semua itu, tapi perlu prompt yang pas, dan itu gak efektif karena kita perlu nulis dan mikirin dulu prompt yang pas biar hasil nya sesuai sama yang kita pengenin.
-saya namain aplikasi nya rightsponse, kenapa? se simple right + response = rightsponse jadi artinya respon yang benar.
+Pernah nggak sih kamu bingung nyari kata-kata yang pas buat nge-chat orang, bales komentar di media sosial, atau mungkin pas nulis email yang sopan dan tepat?.
+Melalui blog ini kita bakalan buat aplikasi yang dapat mengatasi masalah tersebut dengan cepat dan tepat loh! Kamu bisa memilih gaya bahasa sesuai kebutuhan, baik formal maupun santai.
 
-langsung aja kita buat aplikasi nya.
+Meskipun sebenarnya sudah banyak chatbot yang bisa kamu pakai, tapi kamu masih harus nge-prompt dulu, ribet banget gak sih. Tapi dengan aplikasi ini kamu gak akan kerepotan, aplikasi Rightsponse akan membantu kamu dengan memberikan respon yang cepat dan tepat!
 
 ### Tech Stack
 
@@ -37,12 +35,12 @@ Pastikan di Laptop/Komputer km udah ada beberapa software ini. Ini alat-alat yan
 
 ### Dapetin API Key
 
-API Key itu kayak KTP buat aplikasi kita biar bisa akses layanan Gemini. Gini nih cara simpel dapetinnya:
+API Key itu seperti KTP buat aplikasi kita biar bisa akses layanan AI dari Google. Cara dapetinnya gampang kok:
 
 1.  Akses [Google AI Studio](https://aistudio.google.com/apikey).
 2.  Login pake akun Google-mu.
 3.  Ikutin aja petunjuk buat bikin API key baru. Biasanya sih disuruh bikin proyek baru dulu kalo belum punya.
-4.  **Simpen API key-nya baik-baik, jangan sampe ilang atau kesebar!** Bentar lagi kita pake nih. Anggep aja kayak password, jangan kasih tau siapa-siapa.
+4.  **Simpen API key-nya baik-baik, jangan sampe ilang atau kesebar!** Bentar lagi kita pake nih. Anggep aja seperti password, jangan kasih tau siapa-siapa.
 
 ## Setup Project
 
@@ -89,7 +87,7 @@ Kelar ngesetup `shadcn/ui`, kita bisa mulai nambahin komponen-komponen UI spesif
   npx shadcn@latest add button tabs input textarea select card sonner badge
 ```
 
-Perintah ini otomatis bakal bikin file-file komponen itu (kayak `button.tsx`, `tabs.tsx`, dll.) di dalem folder `components/ui` di proyekmu. Kita pilih:
+Perintah ini otomatis bakal bikin file-file komponen itu (seperti `button.tsx`, `tabs.tsx`, dll.) di dalem folder `components/ui` di proyekmu. Kita pilih:
 
 - `button`: Buat macem-macem tombol interaktif.
 - `tabs`: Buat pindah-pindah mode "Message", "Email", sama "Comment".
@@ -97,7 +95,7 @@ Perintah ini otomatis bakal bikin file-file komponen itu (kayak `button.tsx`, `t
 - `select`: Buat dropdown pilihan bahasa sama nada.
 - `card`: Buat ngelompokin dan nata elemen UI.
 - `sonner`: Buat nampilin notifikasi (pesan kecil) yang informatif.
-- `badge`: Buat nampilin label kecil kayak bahasa dan nada yang dipilih.
+- `badge`: Buat nampilin label kecil seperti bahasa dan nada yang dipilih.
 
 nah kalo udah, kita lanjut liat struktur project yang akan kita buat.
 
@@ -125,12 +123,12 @@ rightsponse/
 
 ### Global Layout: `app/layout.tsx`
 
-Di arsitektur Next.js yang pake App Router, file `app/layout.tsx` ini perannya vital banget. Anggap aja ini kayak cetakan dasar yang bakal dipake sama semua halaman di aplikasi kamu. Makanya, `layout.tsx` ini tempat paling pas buat naruh elemen UI atau fungsi yang sifatnya global dan sama di semua halaman, contohnya:
+Di arsitektur Next.js yang pake App Router, file `app/layout.tsx` ini perannya vital banget. Anggap aja ini seperti cetakan dasar yang bakal dipake sama semua halaman di aplikasi kamu. Makanya, `layout.tsx` ini tempat paling pas buat naruh elemen UI atau fungsi yang sifatnya global dan sama di semua halaman, contohnya:
 
 - Deklarasi tag `<html>` dan `<body>`.
 - Settingan metadata standar buat SEO (biar gampang dicari Google) lewat objek `metadata`.
 - Impor dan pake font buat seluruh aplikasi.
-- Naruh komponen UI yang nongol di semua halaman (kayak header, footer, atau sistem notif kayak `Toaster`).
+- Naruh komponen UI yang nongol di semua halaman (seperti header, footer, atau sistem notif seperti `Toaster`).
 
 ```typescript
 import type { Metadata } from "next";
@@ -311,7 +309,7 @@ Kelar nyiapin komponen tampilan, sekarang waktunya kita sambungin aplikasi kita 
 
 API key-mu itu info sensitif. **Jangan pernah** nulis langsung di kode (hardcoding)! Cara yang bener dan aman itu pake variabel lingkungan. Next.js otomatis ngeload variabel dari file `.env`.
 
-Bikin file namanya `.env` di folder root proyekmu (sejajar sama `package.json`), terus isi API key Gemini-mu kayak gini:
+Bikin file namanya `.env` di folder root proyekmu (sejajar sama `package.json`), terus isi API key Gemini-mu seperti gini:
 
 ```env
 GEMINI_API_KEY=your_api_key_here
@@ -433,7 +431,7 @@ ${text}`,
 
 ### Tampilan Utama: Halaman Depan (`app/page.tsx`)
 
-Ini halaman yang pertama kali nongol pas user buka aplikasi. Di sinilah semua komponen UI yang udah kita siapin (`LanguageSelect`, `ToneSelect`, `Textarea`, `Button`, dll.) dirangkai jadi satu kesatuan yang berfungsi. File `app/page.tsx` ini adalah React Client Component karena kita pake hook kayak `useState` dan ngurusin interaksi user langsung di browser.
+Ini halaman yang pertama kali nongol pas user buka aplikasi. Di sinilah semua komponen UI yang udah kita siapin (`LanguageSelect`, `ToneSelect`, `Textarea`, `Button`, dll.) dirangkai jadi satu kesatuan yang berfungsi. File `app/page.tsx` ini adalah React Client Component karena kita pake hook seperti `useState` dan ngurusin interaksi user langsung di browser.
 
 ```typescript
 "use client";
