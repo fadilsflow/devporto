@@ -23,7 +23,6 @@ export default function ProjectsPage() {
           </div>
 
           <div className="relative border-t border-border border-dashed pt-8">
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-accent/20 to-secondary/20 blur-3xl -z-10 opacity-50" />
               <ProjectGrid projects={PROJECTS} showAll={true} />
           </div>
         </section>

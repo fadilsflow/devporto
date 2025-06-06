@@ -45,13 +45,17 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
               {/* Content */}
               <div className="p-4">
                 <h3 className="text-base font-medium">{project.title}</h3>
-                <p className="text-sm text-muted-foreground line-clamp-2 mt-1">
+                <p className="text-sm text-muted-foreground line-clamp-4 mt-1">
                   {project.description}
                 </p>
                 <div className="flex flex-wrap gap-2 mt-3">
                   {project.stack &&
                     project.stack.slice(0, 3).map((stack) => (
-                      <Badge key={stack} variant="outline" className="text-xs bg-card">
+                      <Badge
+                        key={stack}
+                        variant="outline"
+                        className="text-xs bg-card"
+                      >
                         {stack}
                       </Badge>
                     ))}

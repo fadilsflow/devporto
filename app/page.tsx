@@ -129,10 +129,7 @@ export default async function Home() {
             <h2 className="text-sm font-mono pb-3 uppercase font-bold tracking-wider">
               Projects
             </h2>
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-accent/20 to-secondary/20 blur-3xl -z-10 opacity-50" />
-              <ProjectGrid projects={PROJECTS} showAll={false} />
-            </div>
+            <ProjectGrid projects={PROJECTS} showAll={false} />
           </AnimatedSection>
 
           {/* Blog Section */}
