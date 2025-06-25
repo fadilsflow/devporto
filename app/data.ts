@@ -113,7 +113,7 @@ export const PROJECTS = [
     description:
       "A decision support system (DSS) based on AI to help educational institutions in objectively ranking student achievements. Built with Next.js, SyncRank implements the SAW (Simple Additive Weighting) method and is enhanced with AI for intelligent recommendations. Key features include efficient data management with Excel import/export, interactive dashboard, and instant PDF report generation.",
     imageUrl:
-      "https://res.cloudinary.com/dxurnpbrc/image/upload/v1750844369/syncrank-dashboard_sxgeqt.png",
+      "https://res.cloudinary.com/dxurnpbrc/image/upload/v1750862288/5_xs3ur8.png",
     href: "/projects/syncrank",
     stack: ["Next.js", "Clerk", "PostgreSQL", "Gemini API"],
     featured: true,
