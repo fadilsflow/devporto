@@ -106,7 +106,32 @@ export const EDUCATION_ITEM = [
       "Currently pursuing applied bachelor's degree with focus on practical software engineering. Studying modern web development, database design, system architecture, and software project management. Gaining hands-on experience through industry-focused coursework and real-world projects.",
   },
 ];
+
 export const PROJECTS = [
+  {
+    title: "SyncRank",
+    description:
+      "A decision support system (DSS) based on AI to help educational institutions in objectively ranking student achievements. Built with Next.js, SyncRank implements the SAW (Simple Additive Weighting) method and is enhanced with AI for intelligent recommendations. Key features include efficient data management with Excel import/export, interactive dashboard, and instant PDF report generation.",
+    imageUrl:
+      "https://res.cloudinary.com/dxurnpbrc/image/upload/v1750844369/syncrank-dashboard_sxgeqt.png",
+    href: "/projects/syncrank",
+    stack: ["Next.js", "Clerk", "PostgreSQL", "Gemini API"],
+    featured: true,
+    ctaButtons: {
+      primary: {
+        label: "Try SyncRank",
+        href: "https://syncrank.bulba.cloud",
+      },
+      secondary: {
+        label: "GitHub Repo",
+        href: "https://github.com/fadilsflow/sistem-peringkat-mahasiswa",
+      },
+    },
+    role: ["Full-stack Developer", "AI Integration"],
+    useCase: ["Decision Support System", "Education Technology (EdTech)"],
+    category: "WEB DEVELOPMENT",
+    github: "https://github.com/fadilsflow/sistem-peringkat-mahasiswa",
+  },
   {
     title: "Rightsponse",
     description:
