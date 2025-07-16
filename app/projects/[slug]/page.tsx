@@ -180,52 +180,93 @@ export default async function ProjectPage({ params }: Props) {
               {/* Project Details */}
               <section className="flex flex-col">
                 {/* Role */}
-                <div className="mb-3 flex justify-between border-b border-dashed">
-                  <h2 className="capitalize tracking-wider text-muted-foreground text-sm font-medium mb-3">
-                    Role
-                  </h2>
-                  <div className="space-x-2 flex">
-                    {project.role.map((role, index) => (
-                      <p key={index} className="text-sm text-muted-foreground">
-                        {index === project.role.length - 1 ? role : role + ","}
-                      </p>
-                    ))}
+                {project.role && (
+                  <div className="mb-3 flex flex-col sm:flex-row justify-between border-b border-dashed">
+                    <h2 className="text-primary capitalize tracking-wider text-sm mb-3 font-medium">
+                      Role
+                    </h2>
+                    <div className="space-x-2 flex">
+                      {project.role?.map((role, index) => (
+                        <p
+                          key={index}
+                          className="text-sm text-muted-foreground"
+                        >
+                          {index === project.role.length - 1
+                            ? role
+                            : role + ","}
+                        </p>
+                      ))}
+                    </div>
                   </div>
-                </div>
+                )}
 
                 {/* Use Case */}
-                <div className="mb-3 flex justify-between border-b border-dashed">
-                  <h2 className="capitalize tracking-wider text-muted-foreground text-sm mb-3 font-medium">
-                    Use case
-                  </h2>
-                  <div className="space-x-2 flex">
-                    {project.useCase.map((useCase, index) => (
-                      <p key={index} className="text-sm text-muted-foreground">
-                        {index === project.useCase.length - 1
-                          ? useCase
-                          : useCase + ","}
-                      </p>
-                    ))}
+                {project.useCase && (
+                  <div className="mb-3 flex flex-col sm:flex-row justify-between border-b border-dashed">
+                    <h2 className="text-primary capitalize tracking-wider text-sm mb-3 font-medium">
+                      Use case
+                    </h2>
+                    <div className="space-x-2 flex">
+                      {project.useCase?.map((useCase, index) => (
+                        <p
+                          key={index}
+                          className="text-sm text-muted-foreground"
+                        >
+                          {index === project.useCase.length - 1
+                            ? useCase
+                            : useCase + ","}
+                        </p>
+                      ))}
+                    </div>
                   </div>
-                </div>
+                )}
 
                 {/* Tools */}
-                <div className="mb-3 flex justify-between border-b border-dashed">
-                  <h2 className="capitalize tracking-wider text-muted-foreground text-sm mb-3 font-medium ">
-                    Tools
-                  </h2>
-                  <div className="flex flex-wrap gap-2 text-muted-foreground">
-                    {project.stack.map((stack, index) => (
-                      <p key={index} className="text-sm">
-                        {index === project.stack.length - 1
-                          ? stack
-                          : stack + ","}
-                      </p>
-                    ))}
+                {project.stack && (
+                  <div className="mb-3 flex flex-col sm:flex-row justify-between border-b border-dashed">
+                    <h2 className="text-primary capitalize tracking-wider text-sm mb-3 font-medium">
+                      Tools
+                    </h2>
+                    <div className="text-muted-foreground flex flex-wrap gap-2 ">
+                      {project.stack?.map((stack, index) => (
+                        <p key={index} className="text-sm">
+                          {index === project.stack.length - 1
+                            ? stack
+                            : stack + ","}
+                        </p>
+                      ))}
+                    </div>
                   </div>
-                </div>
+                )}
               </section>
             </section>
+
+            {/* Team */}
+            {project.team && (
+              <section className="flex flex-col">
+                <h2 className="capitalize tracking-wider text-primary text-sm mb-3 font-medium">
+                  Team
+                </h2>
+                <div className="flex flex-wrap gap-2 text-muted-foreground">
+                  {project.team?.map((member, index) => (
+                    <Link
+                      href={member.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      key={index}
+                    >
+                      <Image
+                        src={`${member.github}.png`}
+                        alt={member.name}
+                        width={32}
+                        height={32}
+                        className="rounded-full"
+                      />
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            )}
 
             {/* Project MDX Content */}
             {projectDetail && (

@@ -109,6 +109,58 @@ export const EDUCATION_ITEM = [
 
 export const PROJECTS = [
   {
+    title: "Dya Collection",
+    description:
+      "A website-based e-commerce platform developed to digitize the 'Toko Koleksi Tas DYA' MSME, a women's bag store that previously relied on conventional sales methods. As a Community Service Project (PPM), this solution was designed to expand market reach, professionalize sales processes, and streamline data management. Built with Next.js, the platform features a complete product catalog, an online ordering system, and a comprehensive admin dashboard for managing products and transactions, empowering the business to compete in the digital era.",
+    imageUrl:
+      "https://res.cloudinary.com/dxurnpbrc/image/upload/v1752689356/1_rzhmbk.png",
+    href: "/projects/dya-collection",
+    stack: [
+      "Next.js",
+      "Clerk",
+      "Prisma",
+      "PostgreSQL",
+      "Cloudinary",
+      "shadcn/ui",
+    ],
+    featured: true,
+    category: "WEB DEVELOPMENT",
+    role: ["Full-stack Developer", "UI/UX Designer"],
+    useCase: ["E-commerce Platform", "MSME Digitalization"],
+    ctaButtons: {
+      primary: {
+        label: "Visit Store",
+        href: "https://dya-collection.vercel.app",
+      },
+      secondary: {
+        label: "GitHub Repo",
+        href: "https://github.com/ahmdsaif87/dya-collection",
+      },
+    },
+    team: [
+      {
+        name: "Wahyu Akhmad Fadillah",
+        role: "Full Stack Developer",
+        github: "https://github.com/fadilsflow",
+      },
+      {
+        name: "Ahmad Saifi K.U.",
+        role: "Backend Developer",
+        github: "https://github.com/ahmdsaif87",
+      },
+      {
+        name: "Dede Fernanda",
+        role: "Frontend Developer",
+        github: "https://github.com/ddfrnnd",
+      },
+      {
+        name: "Alifia Shafa Shabrina",
+        role: "UI/UX Designer",
+        github: "https://github.com/Alifia-30",
+      },
+    ],
+  },
+  {
     title: "SyncRank",
     description:
       "A decision support system (DSS) based on AI to help educational institutions in objectively ranking student achievements. Built with Next.js, SyncRank implements the SAW (Simple Additive Weighting) method and is enhanced with AI for intelligent recommendations. Key features include efficient data management with Excel import/export, interactive dashboard, and instant PDF report generation.",
