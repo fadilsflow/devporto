@@ -10,6 +10,11 @@ import Link from "next/link";
 import { ArrowLeftIcon } from "lucide-react";
 import { getProjectDetail } from "@/app/projects/utils";
 import { CustomMDX } from "@/components/mdx";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface Props {
   params: Promise<{
@@ -24,7 +29,7 @@ export const dynamicParams = false;
 
 export async function generateMetadata(
   { params }: Props,
-  parent: ResolvingMetadata
+  parent: ResolvingMetadata,
 ): Promise<Metadata> {
   const { slug } = await params;
   const project = PROJECTS.find((p) => p.href === `/projects/${slug}`);
@@ -249,20 +254,26 @@ export default async function ProjectPage({ params }: Props) {
                 </h2>
                 <div className="flex flex-wrap gap-2 text-muted-foreground">
                   {project.team?.map((member, index) => (
-                    <Link
-                      href={member.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      key={index}
-                    >
-                      <Image
-                        src={`${member.github}.png`}
-                        alt={member.name}
-                        width={32}
-                        height={32}
-                        className="rounded-full"
-                      />
-                    </Link>
+                    <Tooltip key={index}>
+                      <TooltipTrigger asChild>
+                        <Link
+                          href={member.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Image
+                            src={`${member.github}.png`}
+                            alt={member.name}
+                            width={32}
+                            height={32}
+                            className="rounded-full"
+                          />
+                        </Link>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>{member.role}</p>
+                      </TooltipContent>
+                    </Tooltip>
                   ))}
                 </div>
               </section>

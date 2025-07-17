@@ -155,7 +155,7 @@ export const PROJECTS = [
       },
       {
         name: "Alifia Shafa Shabrina",
-        role: "UI/UX Designer",
+        role: "Frontend Developer",
         github: "https://github.com/Alifia-30",
       },
     ],
@@ -207,6 +207,18 @@ export const PROJECTS = [
     useCase: ["Communication Tool", "AI Writing Assistant"],
     category: "AI DEVELOPMENT",
     github: "https://github.com/fadilsflow/rightsponse",
+    team: [
+      {
+        name: "Wahyu Akhmad Fadillah",
+        role: "Backend Developer",
+        github: "https://github.com/fadilsflow",
+      },
+      {
+        name: "Alifia Shafa Shabrina",
+        role: "Frontend Developer",
+        github: "https://github.com/Alifia-30",
+      },
+    ],
   },
   {
     title: "Devporto",
