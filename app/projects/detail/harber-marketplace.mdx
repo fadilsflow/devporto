@@ -1,0 +1,47 @@
+<Image
+  src="https://res.cloudinary.com/dxurnpbrc/image/upload/v1754040559/Marketplace_UMKM_HARBER_HOMEPAGE_qnbce2.png"
+  alt="Harber Marketplace Screenshot"
+  width={1000}
+  height={1000}
+/>
+
+# Harber Marketplace Frontend
+
+web aplikasi yang berfungsi sebagai tampilan utama (frontend) untuk pusat belanja online terpadu. Dirancang khusus untuk menyatukan dan menyinkronkan produk serta kategori dari berbagai toko online UMKM yang sudah ada ke dalam satu platform pusat ini. Dengan demikian, beragam UMKM dapat menampilkan dan menjual produk mereka di satu tempat, memudahkan pembeli untuk menemukan, membandingkan, dan membeli barang dari berbagai toko sekaligus. Seluruh data dan logika bisnis diproses di backend terpisah yang dibangun menggunakan Laravel REST API.
+
+## Fitur Utama
+
+- **Otentikasi & Manajemen Akun** – Pengguna dapat mendaftar, masuk, keluar, dan memeriksa sesi secara otomatis. Seluruh proses dilindungi token JWT yang disimpan secara aman di cookie.
+- **Pusat Belanja Terpadu** – Produk dari berbagai toko UMKM disatukan ke dalam satu katalog sehingga pembeli dapat berbelanja tanpa berpindah-pindah situs.
+- **Pencarian & Filter Cerdas** – Fitur pencarian kata kunci, filter kategori, harga, serta penyortiran (tren, terbaru, harga) yang efisien berkat React Query.
+- **Detail Produk Komprehensif** – Halaman detail menampilkan foto resolusi tinggi, deskripsi, harga, stok, dan informasi penjual secara lengkap.
+- **Keranjang Belanja Terintegrasi** – Keranjang tersimpan secara lokal (Zustand + localStorage) dan tersinkron dengan server. Mendukung penambahan produk, validasi penjual, serta dialog konfirmasi saat mencampur toko berbeda.
+- **Checkout & Pembayaran Midtrans** – Formulir checkout lengkap (alamat pengiriman, metode pembayaran, catatan) dengan integrasi Midtrans Snap untuk pembayaran aman dan notifikasi status.
+- **Pelacakan & Manajemen Pesanan** – Pengguna dapat melihat riwayat pesanan, detail item, dan status (pending, processing, shipped, completed, cancelled). Penjual dapat memperbarui status, nomor resi, dan kurir via dashboard.
+- **Dashboard Penjual** – Panel ringkas untuk memantau statistik penjualan dan pesanan masuk secara _real-time_ serta memperbarui proses pengiriman.
+- **Responsive & Dark Mode** – Antarmuka modern berbasis Tailwind CSS + shadcn/ui yang adaptif di semua perangkat dan mendukung tema gelap.
+
+---
+
+## Teknologi yang Digunakan
+
+- **Next.js 15 & TypeScript** – Fast, production-ready React framework.
+- **React Query** – Data fetching & caching yang efisien.
+- **Zustand** – Lightweight global state (cart & UI).
+- **Tailwind CSS + shadcn/ui** – Component-driven, modern styling.
+- **Axios** – HTTP client dengan token interceptor.
+
+## Sumber Daya
+
+- [Frontend Repository](https://github.com/Marketplace-UMKM-Harapan-Bersama/harber-marketplace-frontend)
+- [Laravel Backend (privat)](https://github.com/Marketplace-UMKM-Harapan-Bersama/harber-marketplace-backend)
+- [Next.js](https://nextjs.org/)
+- [shadcn/ui](https://ui.shadcn.com/)
+
+## Kontribusi
+
+Pull requests, issue reports, and feature suggestions are welcome! Silakan buat _issue_ atau _PR_ di GitHub repo.
+
+## Lisensi
+
+MIT.

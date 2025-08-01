@@ -145,7 +145,7 @@ export default async function ProjectPage({ params }: Props) {
                   <h1 className="text-4xl font-semibold tracking-tight">
                     {project.title}
                   </h1>
-                  <p className="text-sm text-muted-foreground capitalize mt-2">
+                  <p className="text-sm text-muted-foreground capitalize mt-2 text-justify">
                     {project.description}
                   </p>
                 </div>

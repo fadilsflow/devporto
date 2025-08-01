@@ -75,13 +75,6 @@ export const SKILLS = [
 
 export const WORK_EXPERIENCE_ITEM = [
   {
-    company: "Bulba Cloud",
-    role: "Software Engineer",
-    period: "2025-03 - Present",
-    description:
-      "Software engineer at Bulba Cloud, a startup offering domain, VPS, and hosting services. The site functions as an online catalog with clean UI and directs users to WhatsApp for purchases, creating a seamless and personal buying experience.",
-  },
-  {
     company: "Freelancer - Self-employed",
     role: "Full Stack Developer",
     period: "2025-03 - Present",
@@ -108,6 +101,60 @@ export const EDUCATION_ITEM = [
 ];
 
 export const PROJECTS = [
+  {
+    title: "Harber Marketplace Frontend",
+    description:
+      "Harber Marketplace Frontend adalah aplikasi web (tampilan depan) yang menjadi pusat belanja online bagi UMKM Indonesia. Aplikasi ini menyatukan dan menampilkan produk dari berbagai toko UMKM ke dalam satu platform, memudahkan pembeli untuk menemukan dan berbelanja. Seluruh data dan logikanya diatur oleh sistem backend terpisah yang dibangun dengan Laravel.",
+
+    imageUrl:
+      "https://res.cloudinary.com/dxurnpbrc/image/upload/v1752733466/Marketplace_UMKM_HARBER_ynqv49.png",
+    href: "/projects/harber-marketplace",
+    stack: [
+      "Next.js",
+      "TypeScript",
+      "React Query",
+      "Zustand",
+      "Axios",
+      "Tailwind CSS",
+      "shadcn/ui",
+    ],
+    featured: true,
+    category: "WEB DEVELOPMENT",
+    role: ["Frontend Developer"],
+    useCase: ["Frontend E-commerce Marketplace", "Digitalisasi UMKM"],
+    ctaButtons: {
+      primary: {
+        label: "Kunjungi Marketplace",
+        href: "#",
+      },
+      secondary: {
+        label: "GitHub Repo",
+        href: "https://github.com/Marketplace-UMKM-Harapan-Bersama/harber-marketplace-frontend/",
+      },
+    },
+    team: [
+      {
+        name: "Ahmat Fauzy",
+        role: "Frontend Developer",
+        github: "https://github.com/ahmatfauzy",
+      },
+      {
+        name: "Fadil",
+        role: "Frontend Developer",
+        github: "https://github.com/fadilsflow",
+      },
+      {
+        name: "Jamal Apriadi",
+        role: "Mentor",
+        github: "https://github.com/jamalapriadi",
+      },
+      {
+        name: "Andika",
+        role: "Project Manager",
+        github: "https://github.com/not-dika",
+      },
+    ],
+  },
   {
     title: "Dya Collection",
     description:
