@@ -50,6 +50,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly" as const,
       priority: 0.6,
     },
+    {
+      url: `${BASE_URL}/resume`,
+      lastModified: new Date().toISOString(),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    },
   ];
 
   return [...routes, ...projects, ...blogs];
