@@ -123,62 +123,61 @@ export default async function Blog({ params }: Props) {
 
     return (
       <AnimatedSection delay={0.3}>
-      <article className="max-w-3xl mx-auto px-4 md:px-0 space-y-8 relative border-t border-border border-dashed pt-8 mt-5">
-        <Script
-          id="blog-post-jsonld"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(jsonLd),
-          }}
-        />
+        <article className="max-w-3xl mx-auto px-4 md:px-0 space-y-8 relative border-t border-border border-dashed pt-8 mt-5">
+          <Script
+            id="blog-post-jsonld"
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(jsonLd),
+            }}
+          />
 
-        <header className="text-center space-y-4">
-          <time
-            dateTime={post.metadata.publishedAt}
-            className="text-sm text-primary block mb-4"
-          >
-            {formatDate(post.metadata.publishedAt)}
-          </time>
+          <header className="text-center space-y-4">
+            <time
+              dateTime={post.metadata.publishedAt}
+              className="text-sm text-primary block mb-4"
+            >
+              {formatDate(post.metadata.publishedAt)}
+            </time>
 
-          <h1 className="title font-medium text-3xl md:text-5xl tracking-tighter">
-            {post.metadata.title}
-          </h1>
-        </header>
+            <h1 className="title font-medium text-3xl md:text-5xl tracking-tighter">
+              {post.metadata.title}
+            </h1>
+          </header>
 
-        {post.metadata.image && (
-          <figure className="relative aspect-video overflow-hidden rounded-xl mb-12 shadow-lg">
-            <Image
-              src={post.metadata.image}
-              alt={post.metadata.title}
-              fill
-              className="object-cover"
-              priority
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            />
-          </figure>
-        )}
+          {post.metadata.image && (
+            <figure className="relative aspect-video overflow-hidden rounded-xl mb-12 shadow-lg">
+              <Image
+                src={post.metadata.image}
+                alt={post.metadata.title}
+                fill
+                className="object-cover"
+                priority
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+            </figure>
+          )}
 
-        <div className="prose dark:prose-invert max-w-none ">
-          <CustomMDX source={post.content} />
-        </div>
+          <div className="prose dark:prose-invert max-w-none ">
+            <CustomMDX source={post.content} />
+          </div>
 
-        <footer className="text-sm pt-8 border-t border-border border-dashed">
-        <Link href="/blog" className="text-primary flex items-center gap-2">
-        <ArrowLeftIcon className="w-4 h-4 " /> Back
-
-        </Link>
-        </footer>
-      </article>
+          <footer className="text-sm pt-8 border-t border-border border-dashed">
+            <Link href="/blog" className="text-primary flex items-center gap-2">
+              <ArrowLeftIcon className="w-4 h-4 " /> Back
+            </Link>
+          </footer>
+        </article>
       </AnimatedSection>
     );
   } catch (error) {
     console.error("Error in Blog component:", error);
     return (
       <AnimatedSection delay={0.3}>
-      <section className="max-w-3xl mx-auto px-4 space-y-8">
-        <h1 className="text-3xl font-bold">Error loading blog post</h1>
-        <p>Sorry, there was an error loading this blog post.</p>
-      </section>
+        <section className="max-w-3xl mx-auto px-4 space-y-8">
+          <h1 className="text-3xl font-bold">Error loading blog post</h1>
+          <p>Sorry, there was an error loading this blog post.</p>
+        </section>
       </AnimatedSection>
     );
   }

@@ -29,6 +29,10 @@ export const NAVIGATION_LINKS = [
     href: "/links",
     label: "Links",
   },
+  {
+    href: "/resume",
+    label: "Resume",
+  },
 ];
 
 // Social links
