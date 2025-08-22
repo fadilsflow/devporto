@@ -3,7 +3,7 @@ export const NAME = "Wahyu Akhmad Fadillah";
 export const NICKNAME = "Fadil";
 export const AVAILABLE_FOR_WORK = true;
 export const BIO =
-  "19 year old fullstack developer based in Indonesia. Crafting apps with a strong focus on TypeScript and the modern web stack.";
+  "Experienced fullstack developer specializing in custom web application development. Providing end-to-end solutions using modern technologies like Next.js, TypeScript, and responsive design.";
 export const DESCRIPTION_LINKS_PAGE =
   "Hi, I'm Fadil. Mostly code, sometimes design. you're probably here for one of these things...";
 export const JOB = "Full Stack Developer";
@@ -17,6 +17,10 @@ export const TWITTER_USERNAME = "fadils";
 
 // Navigation links in the bottom of the page.
 export const NAVIGATION_LINKS = [
+  {
+    href: "/services",
+    label: "Services",
+  },
   {
     href: "/blog",
     label: "Blog",

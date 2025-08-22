@@ -1,32 +1,33 @@
 import { homeMetadata, websiteJsonLd } from "./config/seo";
 import { defaultViewport } from "./config/viewport";
-import {
-  AVAILABLE_FOR_WORK,
-  EDUCATION_ITEM,
-  WORK_EXPERIENCE_ITEM,
-} from "./data";
+// import {
+//   AVAILABLE_FOR_WORK,
+//   EDUCATION_ITEM,
+//   WORK_EXPERIENCE_ITEM,
+// } from "./data";
 import { ProjectGrid } from "@/components/project-grid";
 import { PROJECTS } from "./data";
 import Header from "@/components/header";
-import { GitHubStats } from "@/components/github-stats";
-import { StatusSection } from "@/components/status-section";
+// import { GitHubStats } from "@/components/github-stats";
+// import { StatusSection } from "@/components/status-section";
 import { BlogPosts } from "@/components/posts";
-import { calculateStats, getGitHubStats } from "@/lib/github";
+// import { calculateStats, getGitHubStats } from "@/lib/github";
 import { SkillsSection } from "@/components/skills-section";
-import ResumeCard from "@/components/resume-card";
+// import ResumeCard from "@/components/resume-card";
 import { BreadNav } from "@/components/bread-nav";
 import { ShareButton } from "@/components/share-button";
 import Script from "next/script";
 
 import AnimatedSection from "@/components/animated-section";
+import ServicesSection from "@/components/services-section";
 
 export const metadata = homeMetadata;
 export const viewport = defaultViewport;
 
 export default async function Home() {
-  const { contributions } = await getGitHubStats();
-  const { totalContributions, maxInDay, bestStreak } =
-    calculateStats(contributions);
+  // const { contributions } = await getGitHubStats();
+  // const { totalContributions, maxInDay, bestStreak } =
+  //   calculateStats(contributions);
 
   return (
     <>
@@ -35,8 +36,8 @@ export default async function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
       />
-      <div className="min-h-screen relative max-w-3xl mx-auto">
-        <main className="max-w-7xl mx-auto rounded-lg relative space-y-4">
+      <div className="min-h-screen relative ">
+        <main className=" rounded-lg relative space-y-4">
           {/* Hero Section */}
           <AnimatedSection delay={0.2}>
             <div className="p-8">
@@ -45,9 +46,9 @@ export default async function Home() {
           </AnimatedSection>
 
           {/* Status Section */}
-          <AnimatedSection delay={0.3}>
+          {/* <AnimatedSection delay={0.3}>
             <StatusSection isAvailable={AVAILABLE_FOR_WORK} />
-          </AnimatedSection>
+          </AnimatedSection> */}
 
           <AnimatedSection
             delay={0.4}
@@ -69,9 +70,19 @@ export default async function Home() {
             </h2>
             <SkillsSection />
           </AnimatedSection>
+          <AnimatedSection
+            delay={0.3}
+            className="p-8 flex flex-col gap-4 border rounded-lg"
+          >   <div className=" max-w-2xl space-y-6 text-left">
+                    <h1 className=" text-2xl font-semibold lg:text-3xl">Layanan Pembuatan Web Apps</h1>
+                    <p>Membangun aplikasi web modern dengan teknologi terkini seperti Next.js, TypeScript, dan Tailwind CSS untuk bisnis dan kebutuhan pribadi Anda.</p>
+                </div>
+            
+        <ServicesSection/>
+          </AnimatedSection>
 
           {/* GitHub Activity Section */}
-          <AnimatedSection
+          {/* <AnimatedSection
             delay={0.3}
             className="p-8 flex flex-col gap-4 border rounded-lg"
           >
@@ -83,10 +94,10 @@ export default async function Home() {
               maxInDay={maxInDay}
               bestStreak={bestStreak}
             />
-          </AnimatedSection>
+          </AnimatedSection> */}
 
           {/* Work Experience Section */}
-          <AnimatedSection
+          {/* <AnimatedSection
             delay={0.3}
             className="p-8 flex flex-col gap-4 border rounded-lg"
           >
@@ -101,10 +112,10 @@ export default async function Home() {
                 description: item.description,
               }))}
             />
-          </AnimatedSection>
+          </AnimatedSection> */}
 
           {/* Education Section */}
-          <AnimatedSection
+          {/* <AnimatedSection
             delay={0.3}
             className="p-8 flex flex-col gap-4 border rounded-lg"
           >
@@ -119,7 +130,7 @@ export default async function Home() {
                 description: item.description,
               }))}
             />
-          </AnimatedSection>
+          </AnimatedSection> */}
 
           {/* Projects Section */}
           <AnimatedSection
