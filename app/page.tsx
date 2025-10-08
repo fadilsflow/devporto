@@ -73,12 +73,19 @@ export default async function Home() {
           <AnimatedSection
             delay={0.3}
             className="p-8 flex flex-col gap-4 border rounded-lg"
-          >   <div className=" max-w-2xl space-y-6 text-left">
-                    <h1 className=" text-2xl font-semibold lg:text-3xl">Layanan Pembuatan Web Apps</h1>
-                    <p>Membangun aplikasi web modern dengan teknologi terkini seperti Next.js, TypeScript, dan Tailwind CSS untuk bisnis dan kebutuhan pribadi Anda.</p>
-                </div>
-            
-        <ServicesSection/>
+          >
+            {" "}
+            <div className=" max-w-2xl space-y-6 text-left">
+              <h1 className=" text-2xl font-semibold lg:text-3xl">
+                Layanan Pembuatan Web Apps
+              </h1>
+              <p>
+                Membangun aplikasi web modern dengan teknologi terkini seperti
+                Next.js, TypeScript, dan Tailwind CSS untuk bisnis dan kebutuhan
+                pribadi Anda.
+              </p>
+            </div>
+            <ServicesSection />
           </AnimatedSection>
 
           {/* GitHub Activity Section */}
