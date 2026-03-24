@@ -102,6 +102,4 @@ Google Search Console will now help you:
 Remember to check Search Console regularly to ensure your site maintains good visibility in Google Search.
 
 
-# License
-
-Licensed under the [MIT license](./LICENSE).
+[MIT license](./LICENSE).
