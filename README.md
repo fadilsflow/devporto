@@ -102,4 +102,4 @@ Google Search Console will now help you:
 Remember to check Search Console regularly to ensure your site maintains good visibility in Google Search.
 
 
-[MIT license](./LICENSE)
+[MIT](./LICENSE)
