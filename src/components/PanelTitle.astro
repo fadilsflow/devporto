@@ -1,10 +1,10 @@
 ---
 export interface Props {
-  className?: string;
+    className?: string;
 }
 const { className = "" } = Astro.props;
 ---
 
-<h2 data-slot="panel-title" class={`text-3xl font-semibold ${className}`}>
-  <slot />
+<h2 data-slot="panel-title" class={`text-xl font-semibold ${className}`}>
+    <slot />
 </h2>
