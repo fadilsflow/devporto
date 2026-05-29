@@ -11,26 +11,28 @@ import Separator from "../components/Separator.astro";
 ---
 
 <Layout>
-    <main class="mx-auto md:max-w-3xl">
-        <ProfileHeader />
-        <Separator />
+    <main class="mx-auto max-w-3xl px-2">
+        <div class="max-w-screen overflow-x-hidden">
+            <!-- <Separator /> -->
+            <ProfileHeader />
+            <SocialLinks />
+            <Separator />
 
-        <Overview />
-        <Separator />
+            <Overview />
+            <Separator />
 
-        <SocialLinks />
-        <Separator />
+            <About />
+            <Separator />
 
-        <About />
-        <Separator />
+            <TechStack />
+            <Separator />
 
-        <TechStack />
-        <Separator />
+            <Experiences />
+            <Separator />
 
-        <Experiences />
-        <Separator />
+            <Projects />
 
-        <Projects />
-        <Separator />
+            <Separator />
+        </div>
     </main>
 </Layout>

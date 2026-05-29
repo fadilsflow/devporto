@@ -38,8 +38,8 @@ export const USER: User = {
   jobs: [
     {
       title: "Full Stack Developer",
-      company: "Freelance",
-      website: "https://fadils.web.id",
+      company: "Raxza Global Technology",
+      website: "https://raxzaglobal.com/raxza-global-technology",
     },
   ],
   about: `

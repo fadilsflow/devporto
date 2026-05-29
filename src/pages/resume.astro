@@ -1,0 +1,43 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Panel from "../components/Panel.astro";
+
+const metadata = {
+    description:
+        "My professional resume showcasing experience, skills, and education.",
+};
+---
+
+<Layout title="Resume">
+    <main class="mx-auto max-w-3xl px-2">
+        <div class="max-w-screen overflow-x-hidden">
+            <div class="pt-4">
+                <h1 class="text-3xl font-semibold">Resume</h1>
+            </div>
+
+            <div class="py-4">
+                <p class="font-mono text-sm text-balance text-muted-foreground">
+                    {metadata.description}
+                </p>
+            </div>
+
+            <Panel>
+                <div class="relative pt-4">
+                    <div
+                        class="absolute inset-0 -z-1 grid grid-cols-1 gap-4 max-sm:hidden sm:grid-cols-2"
+                    >
+                        <div class="border-r border-edge"></div>
+                        <div class="border-l border-edge"></div>
+                    </div>
+
+                    <iframe
+                        src="https://drive.google.com/file/d/1lqikfdBvA24I6XRtXlsHYnU2jg2Bw2DQ/preview"
+                        allow="autoplay"
+                        class="h-[1000px] w-full"></iframe>
+                </div>
+
+                <div class="h-4"></div>
+            </Panel>
+        </div>
+    </main>
+</Layout>

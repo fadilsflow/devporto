@@ -1,0 +1,47 @@
+---
+import ThemeToggle from "./ThemeToggle.astro";
+import Logo from "./Logo.astro";
+
+const navItems = [
+    { title: "Portfolio", href: "/" },
+    { title: "Resume", href: "/resume" },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header
+    class="sticky top-0 z-50 max-w-screen overflow-x-hidden bg-background px-2"
+>
+    <div
+        class="mx-auto flex h-12 items-center justify-between gap-2 px-2 sm:gap-4 max-w-3xl"
+    >
+        <a href="/" class="flex items-center" aria-label="Home">
+            <!-- <Logo />/ -->
+        </a>
+
+        <div class="flex-1"></div>
+
+        <nav class="hidden sm:flex items-center gap-6">
+            {
+                navItems.map((item) => (
+                    <a
+                        href={item.href}
+                        class:list={[
+                            "text-sm font-medium transition-colors hover:text-foreground",
+                            currentPath === item.href
+                                ? "text-foreground"
+                                : "text-muted-foreground",
+                        ]}
+                    >
+                        {item.title}
+                    </a>
+                ))
+            }
+        </nav>
+
+        <div class="flex items-center gap-2">
+            <ThemeToggle />
+        </div>
+    </div>
+</header>

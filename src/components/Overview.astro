@@ -10,46 +10,53 @@ const email = decodeBase64(USER.email);
 const items: { icon: string; content: string; href?: string }[] = [];
 
 for (const job of USER.jobs) {
-  items.push({
-    icon: "briefcase",
-    content: `${job.title} at ${job.company}`,
-    href: job.website,
-  });
+    items.push({
+        icon: "briefcase",
+        content: `${job.title} at ${job.company}`,
+        href: job.website,
+    });
 }
 items.push({ icon: "map-pin", content: USER.address });
 items.push({ icon: "phone", content: phone, href: `tel:${phone}` });
 items.push({ icon: "mail", content: email, href: `mailto:${email}` });
 items.push({
-  icon: "globe",
-  content: urlToName(USER.website),
-  href: USER.website,
+    icon: "globe",
+    content: urlToName(USER.website),
+    href: USER.website,
 });
 items.push({ icon: "user", content: USER.pronouns });
 ---
 
 <Panel>
-  <h2 class="sr-only">Overview</h2>
-  <PanelContent className="space-y-2">
-    {
-      items.map((item) => (
-        <div class="flex items-center gap-2 text-sm">
-          <span class="size-4 shrink-0 text-muted-foreground" aria-hidden>
-            ◆
-          </span>
-          {item.href ? (
-            <a
-              href={item.href}
-              target={item.href.startsWith("http") ? "_blank" : undefined}
-              rel="noopener"
-              class="link"
-            >
-              {item.content}
-            </a>
-          ) : (
-            <span>{item.content}</span>
-          )}
-        </div>
-      ))
-    }
-  </PanelContent>
+    <h2 class="sr-only">Overview</h2>
+    <PanelContent className="space-y-2">
+        {
+            items.map((item) => (
+                <div class="flex items-center gap-2 text-sm">
+                    <span
+                        class="size-4 shrink-0 text-muted-foreground"
+                        aria-hidden
+                    >
+                        *
+                    </span>
+                    {item.href ? (
+                        <a
+                            href={item.href}
+                            target={
+                                item.href.startsWith("http")
+                                    ? "_blank"
+                                    : undefined
+                            }
+                            rel="noopener"
+                            class="link"
+                        >
+                            {item.content}
+                        </a>
+                    ) : (
+                        <span>{item.content}</span>
+                    )}
+                </div>
+            ))
+        }
+    </PanelContent>
 </Panel>

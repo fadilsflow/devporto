@@ -26,6 +26,32 @@ export type Experience = {
 
 export const EXPERIENCES: Experience[] = [
   {
+    id: "raxza-global-technology",
+    companyName: "Raxza Global Technology",
+    isCurrentEmployer: true,
+    positions: [
+      {
+        id: "raxza-fullstack",
+        title: "Fullstack Developer",
+        employmentPeriod: { start: "2026", end: "Present" },
+        employmentType: "Full-time",
+        description: `- Develop and maintain fullstack web applications by implementing company-provided blueprints and technical specifications to deliver scalable and efficient software solutions.
+- Execute assigned development tasks including frontend interface implementation, backend API integration, and database management following industry best practices.
+- Contribute to system functionality improvements through debugging, testing, and continuous refinement based on project requirements.`,
+        icon: "code",
+        skills: [
+          "React",
+          "Next.js",
+          "TypeScript",
+          "Tailwind CSS",
+          "PostgreSQL",
+          "API Integration",
+          "Database Management",
+        ],
+      },
+    ],
+  },
+  {
     id: "tegal-tourism",
     companyName: "Tegal Tourism",
     companyLogo: "/p/tegal-tourism.png",
