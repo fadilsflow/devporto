@@ -1,0 +1,20 @@
+---
+import Panel from "./Panel.astro";
+import PanelContent from "./PanelContent.astro";
+import PanelHeader from "./PanelHeader.astro";
+import PanelTitle from "./PanelTitle.astro";
+import { USER } from "../data/user";
+import { md } from "../lib/utils";
+
+const html = md(USER.about);
+---
+
+<Panel id="about">
+  <PanelHeader>
+    <PanelTitle>About</PanelTitle>
+  </PanelHeader>
+
+  <PanelContent>
+    <div class="prose prose-zinc dark:prose-invert max-w-none" set:html={html} />
+  </PanelContent>
+</Panel>

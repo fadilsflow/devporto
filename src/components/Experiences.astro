@@ -1,0 +1,86 @@
+---
+import Panel from "./Panel.astro";
+import PanelHeader from "./PanelHeader.astro";
+import PanelTitle from "./PanelTitle.astro";
+import { EXPERIENCES } from "../data/experiences";
+import { md } from "../lib/utils";
+
+function formatPeriod(p: { start: string; end?: string }) {
+  return `${p.start} — ${p.end ?? "Present"}`;
+}
+---
+
+<Panel id="experience">
+  <PanelHeader>
+    <PanelTitle>Experience</PanelTitle>
+  </PanelHeader>
+
+  <div class="pr-2 pl-4">
+    {
+      EXPERIENCES.map((exp) => (
+        <div class="screen-line-after space-y-4 py-4">
+          <div class="flex items-center gap-3">
+            <div class="flex size-6 shrink-0 items-center justify-center select-none">
+              {exp.companyLogo ? (
+                <img
+                  src={exp.companyLogo}
+                  alt={exp.companyName}
+                  width="24"
+                  height="24"
+                  class="rounded-full"
+                  loading="lazy"
+                />
+              ) : (
+                <span class="flex size-2 rounded-full bg-zinc-300 dark:bg-zinc-600" />
+              )}
+            </div>
+
+            <h3 class="text-lg leading-snug font-medium">{exp.companyName}</h3>
+
+            {exp.isCurrentEmployer && (
+              <span class="relative flex items-center justify-center">
+                <span class="absolute inline-flex size-3 animate-ping rounded-full bg-info opacity-50" />
+                <span class="relative inline-flex size-2 rounded-full bg-info" />
+                <span class="sr-only">Current Employer</span>
+              </span>
+            )}
+          </div>
+
+          <div class="relative space-y-4 before:absolute before:left-3 before:h-full before:w-px before:bg-border">
+            {exp.positions.map((pos) => (
+              <div class="relative pl-10">
+                <div class="absolute left-0 top-1 flex size-6 items-center justify-center rounded-full border border-edge bg-background text-muted-foreground text-xs">
+                  ◆
+                </div>
+                <div class="space-y-1">
+                  <h4 class="font-medium leading-snug">{pos.title}</h4>
+                  <p class="text-sm text-muted-foreground">
+                    {formatPeriod(pos.employmentPeriod)}
+                    {pos.employmentType && (
+                      <span> · {pos.employmentType}</span>
+                    )}
+                  </p>
+                </div>
+                {pos.description && (
+                  <div
+                    class="prose prose-sm prose-zinc dark:prose-invert mt-2 max-w-none"
+                    set:html={md(pos.description)}
+                  />
+                )}
+                {pos.skills && pos.skills.length > 0 && (
+                  <ul class="mt-2 flex flex-wrap gap-1.5">
+                    {pos.skills.map((skill) => (
+                      <li class="inline-flex items-center rounded-md border border-border bg-secondary px-2 py-0.5 text-xs text-secondary-foreground">
+                        {skill}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</Panel>

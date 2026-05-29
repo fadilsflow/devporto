@@ -1,0 +1,36 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ProfileHeader from "../components/ProfileHeader.astro";
+import Overview from "../components/Overview.astro";
+import SocialLinks from "../components/SocialLinks.astro";
+import About from "../components/About.astro";
+import TechStack from "../components/TechStack.astro";
+import Experiences from "../components/Experiences.astro";
+import Projects from "../components/Projects.astro";
+import Separator from "../components/Separator.astro";
+---
+
+<Layout>
+    <main class="mx-auto md:max-w-3xl">
+        <ProfileHeader />
+        <!-- <Separator /> -->
+
+        <!-- <Overview /> -->
+        <Separator />
+
+        <SocialLinks />
+        <Separator />
+
+        <About />
+        <Separator />
+
+        <TechStack />
+        <Separator />
+
+        <Experiences />
+        <Separator />
+
+        <Projects />
+        <Separator />
+    </main>
+</Layout>

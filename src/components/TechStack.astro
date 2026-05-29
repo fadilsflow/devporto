@@ -1,0 +1,32 @@
+---
+import Panel from "./Panel.astro";
+import PanelContent from "./PanelContent.astro";
+import PanelHeader from "./PanelHeader.astro";
+import PanelTitle from "./PanelTitle.astro";
+import { TECH_STACK } from "../data/tech-stack";
+---
+
+<Panel id="tech-stack">
+  <PanelHeader>
+    <PanelTitle>Tech Stack</PanelTitle>
+  </PanelHeader>
+
+  <PanelContent>
+    <ul class="flex flex-wrap gap-1.5">
+      {
+        TECH_STACK.map((tech) => (
+          <li>
+            <a
+              href={tech.href}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center rounded-md border border-border bg-secondary px-2 py-1 text-xs font-medium text-secondary-foreground hover:bg-accent"
+            >
+              {tech.title}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </PanelContent>
+</Panel>

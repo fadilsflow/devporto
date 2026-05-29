@@ -1,0 +1,43 @@
+---
+import "../styles/globals.css";
+import { USER } from "../data/user";
+
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = `${USER.displayName} — ${USER.jobTitle}`,
+  description = USER.bio,
+} = Astro.props;
+
+const ogImage = USER.ogImage;
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="canonical" href={canonical} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={USER.keywords.join(", ")} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="profile" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

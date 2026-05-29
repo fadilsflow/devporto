@@ -1,0 +1,21 @@
+---
+import { USER } from "../data/user";
+---
+
+<div class="screen-line-after relative flex border-x border-edge">
+    <div class="shrink-0 border-r border-edge mt-20">
+        <div class="flex flex-1 flex-col">
+            <div class="border-t border-edge">
+                <h1 class="flex items-center pl-4 text-3xl font-semibold">
+                    {USER.displayName}
+                </h1>
+
+                <div class="h-12 border-t border-edge py-1 pl-4 sm:h-auto">
+                    <span class="text-muted-foreground"
+                        >{USER.flipSentences[0]}</span
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

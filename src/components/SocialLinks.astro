@@ -1,0 +1,32 @@
+---
+import Panel from "./Panel.astro";
+import PanelContent from "./PanelContent.astro";
+import { SOCIAL_LINKS } from "../data/social-links";
+---
+
+<Panel>
+    <h2 class="sr-only">Social Links</h2>
+    <PanelContent>
+        <div class="text-sm">
+            {
+                SOCIAL_LINKS.filter((link) =>
+                    ["LinkedIn", "GitHub", "Threads"].includes(link.title),
+                ).map((link, index, array) => (
+                    <>
+                        <a
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener"
+                            class="underline hover:no-underline"
+                        >
+                            {link.title.toLowerCase()}
+                        </a>
+                        {index < array.length - 1 && (
+                            <span class="mx-2">/</span>
+                        )}
+                    </>
+                ))
+            }
+        </div>
+    </PanelContent>
+</Panel>

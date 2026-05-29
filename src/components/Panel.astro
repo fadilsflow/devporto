@@ -1,0 +1,15 @@
+---
+export interface Props {
+    id?: string;
+    className?: string;
+}
+const { id, className = "" } = Astro.props;
+---
+
+<section
+    id={id}
+    data-slot="panel"
+    class={`screen-line-before screen-line-after border-x border-edge ${className}`}
+>
+    <slot />
+</section>

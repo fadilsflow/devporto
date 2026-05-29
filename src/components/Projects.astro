@@ -1,0 +1,91 @@
+---
+import Panel from "./Panel.astro";
+import PanelHeader from "./PanelHeader.astro";
+import PanelTitle from "./PanelTitle.astro";
+import { PROJECTS } from "../data/projects";
+import { md } from "../lib/utils";
+---
+
+<Panel id="projects">
+  <PanelHeader>
+    <PanelTitle>
+      Projects
+      <sup class="ml-1 font-mono text-sm text-muted-foreground select-none">
+        ({PROJECTS.length})
+      </sup>
+    </PanelTitle>
+  </PanelHeader>
+
+  <div>
+    {
+      PROJECTS.map((project) => {
+        const isOngoing = !project.period.end;
+        return (
+          <details open={project.isExpanded} class="group/project border-b border-edge last:border-b-0">
+            <summary class="flex items-center hover:bg-accent2 cursor-pointer list-none">
+              {project.logo ? (
+                <img
+                  src={project.logo}
+                  alt={project.title}
+                  width="32"
+                  height="32"
+                  class="mx-4 size-6 shrink-0 select-none"
+                  loading="lazy"
+                />
+              ) : (
+                <div class="mx-4 flex size-6 shrink-0 items-center justify-center text-muted-foreground select-none">
+                  ◆
+                </div>
+              )}
+              <div class="flex-1 border-l border-dashed border-edge">
+                <div class="flex w-full items-center gap-4 p-4 pr-2 text-left">
+                  <div class="flex-1">
+                    <h3 class="mb-1 leading-snug font-medium text-balance">
+                      {project.title}
+                    </h3>
+                    <p class="text-sm text-muted-foreground">
+                      {project.period.start}
+                      <span class="font-mono"> — </span>
+                      {isOngoing ? "Present" : project.period.end}
+                    </p>
+                  </div>
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener"
+                    class="text-muted-foreground hover:text-foreground"
+                    aria-label="Open Project Link"
+                    onclick="event.stopPropagation()"
+                  >
+                    ↗
+                  </a>
+                  <span class="text-muted-foreground text-sm">
+                    <span class="hidden group-open/project:inline">▲</span>
+                    <span class="group-open/project:hidden">▼</span>
+                  </span>
+                </div>
+              </div>
+            </summary>
+            <div class="space-y-4 border-t border-dashed border-edge p-4 pl-14">
+              {project.description && (
+                <div
+                  class="prose prose-sm prose-zinc dark:prose-invert max-w-none"
+                  set:html={md(project.description)}
+                />
+              )}
+              {project.skills.length > 0 && (
+                <ul class="flex flex-wrap gap-1.5">
+                  {project.skills.map((skill) => (
+                    <li class="inline-flex items-center rounded-md border border-border bg-secondary px-2 py-0.5 text-xs text-secondary-foreground">
+                      {skill}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </details>
+        );
+      })
+    }
+  </div>
+</Panel>

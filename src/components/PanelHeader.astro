@@ -1,0 +1,10 @@
+---
+export interface Props {
+  className?: string;
+}
+const { className = "" } = Astro.props;
+---
+
+<div data-slot="panel-header" class={`screen-line-after px-4 ${className}`}>
+  <slot />
+</div>
