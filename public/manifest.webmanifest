@@ -1,0 +1,24 @@
+{
+  "name": "Wahyu Akhmad Fadillah — Full Stack Developer",
+  "short_name": "Fadil",
+  "description": "Portfolio of Wahyu Akhmad Fadillah — Full Stack Developer specializing in Next.js, TypeScript and modern web tooling.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "icons": [
+    {
+      "src": "/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

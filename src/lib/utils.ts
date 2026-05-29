@@ -10,7 +10,7 @@ export function md(input: string): string {
     escape(s)
       .replace(
         /\[([^\]]+)\]\(([^)]+)\)/g,
-        '<a href="$2" target="_blank" rel="noopener" class="link">$1</a>'
+        '<a href="$2" target="_blank" rel="noopener noreferrer" class="link">$1</a>'
       )
       .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
 

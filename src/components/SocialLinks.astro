@@ -16,7 +16,8 @@ import { SOCIAL_LINKS } from "../data/social-links";
                         <a
                             href={link.href}
                             target="_blank"
-                            rel="noopener"
+                            rel="noopener noreferrer me"
+                            aria-label={`${link.title}: ${link.description}`}
                             class="underline hover:no-underline"
                         >
                             {link.title.toLowerCase()}

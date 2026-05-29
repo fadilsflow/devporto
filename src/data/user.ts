@@ -32,7 +32,7 @@ export const USER: User = {
   address: "Tegal, Jawa Tengah, Indonesia",
   phoneNumber: "KzYyODUxNTc3Mzk5Nzg=",
   email: "d2FoeXVmYWRpbDExNDBAZ21haWwuY29t",
-  website: "https://fadils.xyz",
+  website: "https://fadils.web.id",
   jobTitle: "Full Stack Developer",
   flipSentences: ["Software Engineer"],
   jobs: [

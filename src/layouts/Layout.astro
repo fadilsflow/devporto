@@ -1,47 +1,79 @@
 ---
 import "../styles/globals.css";
-import { USER } from "../data/user";
 import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import SEO from "../components/SEO.astro";
 import { ClientRouter } from "astro:transitions";
 
 export interface Props {
     title?: string;
     description?: string;
+    pageType?: "WebSite" | "ProfilePage" | "WebPage";
+    image?: string;
+    noindex?: boolean;
 }
 
-const {
-    title = `${USER.displayName} — ${USER.jobTitle}`,
-    description = USER.bio,
-} = Astro.props;
-
-const ogImage = USER.ogImage;
-const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+const { title, description, pageType, image, noindex } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
         <meta name="generator" content={Astro.generator} />
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="canonical" href={canonical} />
-        <title>{title}</title>
-        <meta name="description" content={description} />
-        <meta name="keywords" content={USER.keywords.join(", ")} />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="og:image" content={ogImage} />
-        <meta property="og:url" content={canonical} />
-        <meta property="og:type" content="profile" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={title} />
-        <meta name="twitter:description" content={description} />
-        <meta name="twitter:image" content={ogImage} />
+        <meta name="color-scheme" content="dark light" />
+        <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0a0a0a" />
+        <meta name="format-detection" content="telephone=no" />
+
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/apple-icon.png" />
+        <link rel="manifest" href="/manifest.webmanifest" />
+
+        <!-- Preconnect to image CDNs for LCP avatar/og -->
+        <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
+        <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+        <link rel="dns-prefetch" href="https://assets.chanhdai.com" />
+
+        <!-- AI / LLM discoverability -->
+        <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-friendly site summary" />
+        <link rel="alternate" type="text/plain" href="/llms-full.txt" title="Full LLM-friendly site content" />
+
+        <!-- Prevent FOUC: set theme before paint -->
+        <script is:inline>
+            (function () {
+                try {
+                    var stored = localStorage.getItem("theme");
+                    var theme = stored || "dark";
+                    if (theme === "dark") document.documentElement.classList.add("dark");
+                    else document.documentElement.classList.remove("dark");
+                } catch (e) {
+                    document.documentElement.classList.add("dark");
+                }
+            })();
+        </script>
+
+        <SEO
+            title={title}
+            description={description}
+            pageType={pageType}
+            image={image}
+            noindex={noindex}
+        />
+
         <ClientRouter />
     </head>
     <body>
+        <a
+            href="#main-content"
+            class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-background focus:text-foreground focus:border focus:border-border focus:px-3 focus:py-2 focus:rounded-md"
+        >
+            Skip to main content
+        </a>
         <SiteHeader />
         <slot />
+        <SiteFooter />
     </body>
 </html>

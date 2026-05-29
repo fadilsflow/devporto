@@ -10,10 +10,9 @@ import Projects from "../components/Projects.astro";
 import Separator from "../components/Separator.astro";
 ---
 
-<Layout>
-    <main class="mx-auto max-w-3xl px-2">
+<Layout pageType="ProfilePage">
+    <main id="main-content" class="mx-auto max-w-3xl px-2">
         <div class="max-w-screen overflow-x-hidden">
-            <!-- <Separator /> -->
             <ProfileHeader />
             <SocialLinks />
             <Separator />

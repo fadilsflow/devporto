@@ -1,0 +1,151 @@
+---
+import { USER } from "../data/user";
+import { PROJECTS } from "../data/projects";
+import { SOCIAL_LINKS } from "../data/social-links";
+import { decodeBase64 } from "../lib/utils";
+
+export interface Props {
+    title?: string;
+    description?: string;
+    pageType?: "WebSite" | "ProfilePage" | "WebPage";
+    image?: string;
+    noindex?: boolean;
+}
+
+const {
+    title,
+    description = USER.bio,
+    pageType = "WebSite",
+    image = USER.ogImage,
+    noindex = false,
+} = Astro.props;
+
+const fullTitle = title
+    ? `${title} — ${USER.displayName}`
+    : `${USER.displayName} — ${USER.jobTitle}`;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+const siteUrl = Astro.site?.toString().replace(/\/$/, "") ?? "https://fadils.web.id";
+
+const email = decodeBase64(USER.email);
+const phone = decodeBase64(USER.phoneNumber);
+
+const person = {
+    "@type": "Person",
+    "@id": `${siteUrl}/#person`,
+    name: USER.displayName,
+    alternateName: USER.username,
+    givenName: USER.firstName,
+    familyName: USER.lastName,
+    gender: USER.gender,
+    jobTitle: USER.jobTitle,
+    description: USER.bio,
+    url: USER.website,
+    image: USER.avatar,
+    email,
+    telephone: phone,
+    address: {
+        "@type": "PostalAddress",
+        addressLocality: "Tegal",
+        addressRegion: "Jawa Tengah",
+        addressCountry: "ID",
+    },
+    worksFor: USER.jobs.map((j) => ({
+        "@type": "Organization",
+        name: j.company,
+        url: j.website,
+    })),
+    knowsAbout: USER.keywords,
+    sameAs: SOCIAL_LINKS.map((s) => s.href),
+};
+
+const website = {
+    "@type": "WebSite",
+    "@id": `${siteUrl}/#website`,
+    url: siteUrl,
+    name: USER.displayName,
+    description: USER.bio,
+    inLanguage: "en",
+    author: { "@id": `${siteUrl}/#person` },
+    publisher: { "@id": `${siteUrl}/#person` },
+};
+
+const itemList = {
+    "@type": "ItemList",
+    name: "Projects",
+    itemListElement: PROJECTS.map((p, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        item: {
+            "@type": "CreativeWork",
+            name: p.title,
+            url: p.link,
+            description: p.description,
+            keywords: p.skills.join(", "),
+            dateCreated: p.period.start,
+            author: { "@id": `${siteUrl}/#person` },
+        },
+    })),
+};
+
+const breadcrumb = {
+    "@type": "BreadcrumbList",
+    itemListElement: [
+        {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: siteUrl,
+        },
+        ...(Astro.url.pathname !== "/"
+            ? [
+                  {
+                      "@type": "ListItem",
+                      position: 2,
+                      name: title ?? "Page",
+                      item: canonical,
+                  },
+              ]
+            : []),
+    ],
+};
+
+const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [person, website, itemList, breadcrumb],
+};
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<meta name="author" content={USER.displayName} />
+<meta name="keywords" content={USER.keywords.join(", ")} />
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex,nofollow" />}
+{!noindex && <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />}
+
+<!-- Open Graph -->
+<meta property="og:site_name" content={USER.displayName} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={image} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={`${USER.displayName} — ${USER.jobTitle}`} />
+<meta property="og:url" content={canonical} />
+<meta property="og:type" content={pageType === "ProfilePage" ? "profile" : "website"} />
+<meta property="og:locale" content="en_US" />
+{pageType === "ProfilePage" && <meta property="profile:first_name" content={USER.firstName} />}
+{pageType === "ProfilePage" && <meta property="profile:last_name" content={USER.lastName} />}
+{pageType === "ProfilePage" && <meta property="profile:username" content={USER.username} />}
+{pageType === "ProfilePage" && <meta property="profile:gender" content={USER.gender} />}
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={image} />
+<meta name="twitter:image:alt" content={`${USER.displayName} — ${USER.jobTitle}`} />
+
+<!-- JSON-LD -->
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
