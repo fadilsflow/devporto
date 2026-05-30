@@ -1,0 +1,132 @@
+---
+import { USER } from "../data/user";
+import Layout from "../layouts/Layout.astro";
+import { decodeBase64 } from "../lib/utils";
+
+const phone = decodeBase64(USER.phoneNumber);
+const email = decodeBase64(USER.email);
+
+type LinkItem = {
+    title: string;
+    href: string;
+    external?: boolean;
+};
+
+const MAIN_LINKS: LinkItem[] = [
+    { title: "github", href: "https://github.com/fadilsflow", external: true },
+    {
+        title: "linkedin",
+        href: "https://www.linkedin.com/in/wahyu-akhmad-fadillah/",
+        external: true,
+    },
+    {
+        title: "threads",
+        href: "https://www.threads.com/@fadils.xyz",
+        external: true,
+    },
+    { title: "portfolio", href: "/", external: false },
+    { title: "resume", href: "/resume", external: false },
+];
+
+const SOCIAL_LINKS: LinkItem[] = [
+    {
+        title: "ig",
+        href: "https://www.instagram.com/fadils.xyz",
+        external: true,
+    },
+    {
+        title: "yt",
+        href: "https://www.youtube.com/@wahyuakhmadfadillah9882",
+        external: true,
+    },
+    {
+        title: "mail",
+        href: `mailto:${email}`,
+        external: true,
+    },
+    {
+        title: "ph",
+        href: `https://wa.me/${phone}`,
+        external: true,
+    },
+];
+---
+
+<Layout
+    title="Links"
+    description="All my links in one place."
+    pageType="WebPage"
+    bare
+>
+    <main
+        id="main-content"
+        class="min-h-screen flex flex-col justify-center mx-auto max-w-xs px-6 py-10 font-mono"
+    >
+        <header class="mb-10">
+            <h1 class="text-xl font-semibold text-foreground">
+                {USER.displayName}
+            </h1>
+            <p class="mt-1 text-xs text-foreground/40">
+                {USER.flipSentences[0]}
+            </p>
+        </header>
+
+        <ul class="space-y-3">
+            {
+                MAIN_LINKS.map((link) => (
+                    <li>
+                        <a
+                            href={link.href}
+                            target={link.external ? "_blank" : undefined}
+                            rel={
+                                link.external
+                                    ? "noopener noreferrer"
+                                    : undefined
+                            }
+                            class="group flex items-center justify-between border-b border-transparent pb-1 text-sm text-muted-foreground transition-colors hover:border-border hover:text-foreground"
+                        >
+                            <span>{link.title}</span>
+                            {link.external && (
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="14"
+                                    height="14"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="opacity-0 transition-opacity group-hover:opacity-100"
+                                >
+                                    <path d="M15 3h6v6" />
+                                    <path d="M10 14 21 3" />
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                </svg>
+                            )}
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+
+        <div class="mt-10 border-t border-edge pt-4">
+            <ul class="flex flex-wrap gap-6 text-xs text-foreground/40">
+                {
+                    SOCIAL_LINKS.map((link) => (
+                        <li>
+                            <a
+                                href={link.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="transition-colors hover:text-foreground"
+                            >
+                                {link.title}
+                            </a>
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
+    </main>
+</Layout>

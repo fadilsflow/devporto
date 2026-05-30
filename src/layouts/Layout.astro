@@ -11,9 +11,10 @@ export interface Props {
     pageType?: "WebSite" | "ProfilePage" | "WebPage";
     image?: string;
     noindex?: boolean;
+    bare?: boolean;
 }
 
-const { title, description, pageType, image, noindex } = Astro.props;
+const { title, description, pageType, image, noindex, bare } = Astro.props;
 ---
 
 <!doctype html>
@@ -72,8 +73,8 @@ const { title, description, pageType, image, noindex } = Astro.props;
         >
             Skip to main content
         </a>
-        <SiteHeader />
+        {!bare && <SiteHeader />}
         <slot />
-        <SiteFooter />
+        {!bare && <SiteFooter />}
     </body>
 </html>

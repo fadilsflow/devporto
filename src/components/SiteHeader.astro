@@ -4,6 +4,7 @@ import Logo from "./Logo.astro";
 
 const navItems = [
     { title: "Portfolio", href: "/" },
+    { title: "Link", href: "/link" },
     { title: "Resume", href: "/resume" },
 ];
 
@@ -16,7 +17,11 @@ const currentPath = Astro.url.pathname;
     <div
         class="mx-auto flex h-12 items-center justify-between gap-2 px-2 sm:gap-4 max-w-3xl"
     >
-        <a href="/" class="flex items-center" aria-label="Home — Wahyu Akhmad Fadillah">
+        <a
+            href="/"
+            class="flex items-center"
+            aria-label="Home — Wahyu Akhmad Fadillah"
+        >
             <span class="sr-only">Home</span>
             <!-- <Logo />/ -->
         </a>
@@ -28,7 +33,9 @@ const currentPath = Astro.url.pathname;
                 navItems.map((item) => (
                     <a
                         href={item.href}
-                        aria-current={currentPath === item.href ? "page" : undefined}
+                        aria-current={
+                            currentPath === item.href ? "page" : undefined
+                        }
                         class:list={[
                             "text-sm font-medium transition-colors hover:text-foreground",
                             currentPath === item.href
