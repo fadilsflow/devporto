@@ -4,7 +4,7 @@ import VerifiedIcon from "./VerifiedIcon.astro";
 ---
 
 <div class="screen-line-after relative flex">
-    <div class="flex flex-1 mt-40">
+    <div class="flex flex-1 sm:mt-40 pt-2">
         <div class="shrink-0 mx-[2px] my-[3px] pb-2">
             <img
                 class="size-15 ring-1 ring-border ring-offset-2 ring-offset-background select-none sm:size-20"
@@ -20,7 +20,7 @@ import VerifiedIcon from "./VerifiedIcon.astro";
         <div class="flex flex-1 flex-col">
             <div class="">
                 <h1 class="flex items-center pl-4 text-3xl font-semibold">
-                    {USER.displayName}
+                    {USER.username}
                     <VerifiedIcon
                         class="size-[0.6em] ml-2 translate-y-px text-info select-none"
                     />

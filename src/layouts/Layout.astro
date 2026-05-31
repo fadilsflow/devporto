@@ -15,17 +15,29 @@ export interface Props {
 }
 
 const { title, description, pageType, image, noindex, bare } = Astro.props;
+const bodyClass = bare ? undefined : "pb-[calc(5.5rem+env(safe-area-inset-bottom))] sm:pb-0";
 ---
 
 <!doctype html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+        />
         <meta name="generator" content={Astro.generator} />
         <meta name="color-scheme" content="dark light" />
-        <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
-        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0a0a0a" />
+        <meta
+            name="theme-color"
+            media="(prefers-color-scheme: light)"
+            content="#ffffff"
+        />
+        <meta
+            name="theme-color"
+            media="(prefers-color-scheme: dark)"
+            content="#0a0a0a"
+        />
         <meta name="format-detection" content="telephone=no" />
 
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -39,8 +51,18 @@ const { title, description, pageType, image, noindex, bare } = Astro.props;
         <link rel="dns-prefetch" href="https://assets.chanhdai.com" />
 
         <!-- AI / LLM discoverability -->
-        <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-friendly site summary" />
-        <link rel="alternate" type="text/plain" href="/llms-full.txt" title="Full LLM-friendly site content" />
+        <link
+            rel="alternate"
+            type="text/plain"
+            href="/llms.txt"
+            title="LLM-friendly site summary"
+        />
+        <link
+            rel="alternate"
+            type="text/plain"
+            href="/llms-full.txt"
+            title="Full LLM-friendly site content"
+        />
 
         <!-- Prevent FOUC: set theme before paint -->
         <script is:inline>
@@ -48,7 +70,8 @@ const { title, description, pageType, image, noindex, bare } = Astro.props;
                 try {
                     var stored = localStorage.getItem("theme");
                     var theme = stored || "dark";
-                    if (theme === "dark") document.documentElement.classList.add("dark");
+                    if (theme === "dark")
+                        document.documentElement.classList.add("dark");
                     else document.documentElement.classList.remove("dark");
                 } catch (e) {
                     document.documentElement.classList.add("dark");
@@ -66,7 +89,7 @@ const { title, description, pageType, image, noindex, bare } = Astro.props;
 
         <ClientRouter />
     </head>
-    <body>
+    <body class={bodyClass}>
         <a
             href="#main-content"
             class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-background focus:text-foreground focus:border focus:border-border focus:px-3 focus:py-2 focus:rounded-md"

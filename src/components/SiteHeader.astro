@@ -3,16 +3,28 @@ import ThemeToggle from "./ThemeToggle.astro";
 import Logo from "./Logo.astro";
 
 const navItems = [
-    { title: "Portfolio", href: "/" },
-    { title: "Link", href: "/link" },
-    { title: "Resume", href: "/resume" },
+    {
+        title: "Portfolio",
+        href: "/",
+        icon: "M3 10.5 12 3l9 7.5M5 10v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-9M9 21v-6h6v6",
+    },
+    {
+        title: "Link",
+        href: "/link",
+        icon: "M10 13a5 5 0 0 0 7.07 0l2.12-2.12a5 5 0 0 0-7.07-7.07L11 4.93M14 11a5 5 0 0 0-7.07 0L4.81 13.12a5 5 0 0 0 7.07 7.07L13 19.07",
+    },
+    {
+        title: "Resume",
+        href: "/resume",
+        icon: "M7 3h7l5 5v13H7zM14 3v5h5M10 13h6M10 17h6",
+    },
 ];
 
 const currentPath = Astro.url.pathname;
 ---
 
 <header
-    class="sticky top-0 z-50 max-w-screen overflow-x-hidden bg-background px-2"
+    class="sticky top-0 z-50 hidden max-w-screen overflow-x-hidden bg-background px-2 sm:block"
 >
     <div
         class="mx-auto flex h-12 items-center justify-between gap-2 px-2 sm:gap-4 max-w-3xl"
@@ -54,3 +66,48 @@ const currentPath = Astro.url.pathname;
         </div>
     </div>
 </header>
+
+<nav
+    class="fixed inset-x-0 bottom-0 z-50 border-t border-border/80 bg-background/95 px-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-2 shadow-[0_-12px_32px_color-mix(in_oklab,var(--foreground)_10%,transparent)] backdrop-blur sm:hidden"
+    aria-label="Primary"
+>
+    <div class="mx-auto grid max-w-md grid-cols-4 items-end gap-1">
+        {
+            navItems.map((item) => {
+                const isActive = currentPath === item.href;
+
+                return (
+                    <a
+                        href={item.href}
+                        aria-current={isActive ? "page" : undefined}
+                        class:list={[
+                            "flex min-h-14 flex-col items-center justify-center gap-1  px-2 text-[11px] font-medium leading-none transition-colors",
+                            isActive
+                                ? "bg-accent text-foreground"
+                                : "text-muted-foreground hover:bg-accent/70 hover:text-foreground",
+                        ]}
+                    >
+                        <svg
+                            class="size-5"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path d={item.icon} />
+                        </svg>
+                    </a>
+                );
+            })
+        }
+
+        <ThemeToggle
+            id="mobile-theme-toggle"
+            class="min-h-14 flex-col gap-1 bg-transparent px-2 text-[11px] leading-none text-muted-foreground hover:bg-accent/70 hover:text-foreground"
+        />
+    </div>
+</nav>
