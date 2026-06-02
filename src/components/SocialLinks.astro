@@ -1,7 +1,13 @@
 ---
 import Panel from "./Panel.astro";
 import PanelContent from "./PanelContent.astro";
-import { SOCIAL_LINKS } from "../data/social-links";
+import { PORTFOLIO, type SocialLink } from "../data/portfolio";
+
+interface Props {
+    links?: SocialLink[];
+}
+
+const { links = PORTFOLIO.socialLinks.filter((link) => link.placements.includes("home")) } = Astro.props;
 ---
 
 <Panel>
@@ -9,9 +15,7 @@ import { SOCIAL_LINKS } from "../data/social-links";
     <PanelContent>
         <div class="text-sm">
             {
-                SOCIAL_LINKS.filter((link) =>
-                    ["LinkedIn", "GitHub", "Threads"].includes(link.title),
-                ).map((link, index, array) => (
+                links.map((link, index, array) => (
                     <>
                         <a
                             href={link.href}

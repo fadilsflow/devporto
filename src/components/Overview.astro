@@ -1,30 +1,41 @@
 ---
 import Panel from "./Panel.astro";
 import PanelContent from "./PanelContent.astro";
-import { USER } from "../data/user";
-import { decodeBase64, urlToName } from "../lib/utils";
+import { PORTFOLIO, type Profile } from "../data/portfolio";
+import { decodeContact, urlToName } from "../lib/utils";
 
-const phone = decodeBase64(USER.phoneNumber);
-const email = decodeBase64(USER.email);
+interface Props {
+    profile?: Profile;
+}
+
+const { profile = PORTFOLIO.profile } = Astro.props;
+const phone = decodeContact(profile.phoneNumber, profile.contactEncoding);
+const email = decodeContact(profile.email, profile.contactEncoding);
 
 const items: { icon: string; content: string; href?: string }[] = [];
 
-for (const job of USER.jobs) {
+for (const job of profile.jobs) {
     items.push({
         icon: "briefcase",
         content: `${job.title} at ${job.company}`,
         href: job.website,
     });
 }
-items.push({ icon: "map-pin", content: USER.address });
-items.push({ icon: "phone", content: phone, href: `tel:${phone}` });
-items.push({ icon: "mail", content: email, href: `mailto:${email}` });
+items.push({ icon: "map-pin", content: profile.address.label });
+if (phone) {
+    items.push({ icon: "phone", content: phone, href: `tel:${phone}` });
+}
+if (email) {
+    items.push({ icon: "mail", content: email, href: `mailto:${email}` });
+}
 items.push({
     icon: "globe",
-    content: urlToName(USER.website),
-    href: USER.website,
+    content: urlToName(profile.website),
+    href: profile.website,
 });
-items.push({ icon: "user", content: USER.pronouns });
+if (profile.pronouns) {
+    items.push({ icon: "user", content: profile.pronouns });
+}
 ---
 
 <Panel>

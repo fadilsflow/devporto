@@ -1,8 +1,8 @@
 ---
-import { USER } from "../data/user";
+import { PORTFOLIO } from "../data/portfolio";
 
-const SOURCE_CODE_GITHUB_URL = "https://github.com/fadilsflow/dporto1408";
-const siteUrl = Astro.site?.toString().replace(/\/$/, "") ?? USER.website;
+const { footer, site } = PORTFOLIO;
+const siteUrl = Astro.site?.toString().replace(/\/$/, "") ?? site.url.replace(/\/$/, "");
 ---
 
 <footer class="max-w-screen overflow-x-hidden px-2">
@@ -11,23 +11,31 @@ const siteUrl = Astro.site?.toString().replace(/\/$/, "") ?? USER.website;
             class="mb-4 px-4 text-center font-mono text-sm text-balance text-muted-foreground"
         >
             Built by{" "}
-            <a
-                class="link"
-                href="https://github.com/fadilsflow"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                fadil
-            </a>
-            . The source code is available on{" "}
-            <a
-                class="link"
-                href={SOURCE_CODE_GITHUB_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                GitHub
-            </a>
+            {footer.builtByHref ? (
+                <a
+                    class="link"
+                    href={footer.builtByHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    {footer.builtByLabel}
+                </a>
+            ) : (
+                <span>{footer.builtByLabel}</span>
+            )}
+            {footer.sourceCodeUrl && (
+                <>
+                    . The source code is available on{" "}
+                    <a
+                        class="link"
+                        href={footer.sourceCodeUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        {footer.sourceCodeLabel ?? "source"}
+                    </a>
+                </>
+            )}
             .
         </p>
 

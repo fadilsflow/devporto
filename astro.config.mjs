@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
-  site: "https://fadils.web.id",
+  site: process.env.SITE_URL ?? "https://fadils.web.id",
   trailingSlash: "never",
   build: {
     inlineStylesheets: "auto",

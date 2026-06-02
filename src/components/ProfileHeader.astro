@@ -1,6 +1,12 @@
 ---
-import { USER } from "../data/user";
+import { PORTFOLIO, type Profile } from "../data/portfolio";
 import VerifiedIcon from "./VerifiedIcon.astro";
+
+interface Props {
+    profile?: Profile;
+}
+
+const { profile = PORTFOLIO.profile } = Astro.props;
 ---
 
 <div class="screen-line-after relative flex">
@@ -8,8 +14,8 @@ import VerifiedIcon from "./VerifiedIcon.astro";
         <div class="shrink-0 mx-[2px] my-[3px] pb-2">
             <img
                 class="size-15 ring-1 ring-border ring-offset-2 ring-offset-background select-none sm:size-20"
-                alt={`${USER.displayName}, ${USER.jobTitle} — profile photo`}
-                src={USER.avatar}
+                alt={`${profile.displayName}, ${profile.jobTitle} — profile photo`}
+                src={profile.avatar}
                 width="80"
                 height="80"
                 fetchpriority="high"
@@ -20,15 +26,17 @@ import VerifiedIcon from "./VerifiedIcon.astro";
         <div class="flex flex-1 flex-col">
             <div class="">
                 <h1 class="flex items-center pl-4 text-3xl font-semibold">
-                    {USER.username}
-                    <VerifiedIcon
-                        class="size-[0.6em] ml-2 translate-y-px text-info select-none"
-                    />
+                    {profile.username}
+                    {profile.verified && (
+                        <VerifiedIcon
+                            class="size-[0.6em] ml-2 translate-y-px text-info select-none"
+                        />
+                    )}
                 </h1>
 
                 <div class="h-12 py-1 pl-4 sm:h-auto">
                     <span class="text-muted-foreground">
-                        {USER.flipSentences[0]}
+                        {profile.flipSentences[0]}
                     </span>
                 </div>
             </div>

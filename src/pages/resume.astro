@@ -1,27 +1,25 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Panel from "../components/Panel.astro";
+import { PORTFOLIO } from "../data/portfolio";
 
-const metadata = {
-    description:
-        "My professional resume showcasing experience, skills, and education.",
-};
+const { resume } = PORTFOLIO;
 ---
 
 <Layout
-    title="Resume"
-    description="Professional resume of Wahyu Akhmad Fadillah — Full Stack Developer with 2+ years building production-ready, scalable web applications using Next.js and TypeScript."
+    title={resume.title}
+    description={resume.seoDescription}
     pageType="WebPage"
 >
     <main id="main-content" class="mx-auto max-w-3xl px-2">
         <div class="max-w-screen overflow-x-hidden">
             <div class="pt-2">
-                <h1 class="text-3xl font-semibold">Resume</h1>
+                <h1 class="text-3xl font-semibold">{resume.title}</h1>
             </div>
 
             <div class="py-4">
                 <p class="font-mono text-sm text-balance text-muted-foreground">
-                    {metadata.description}
+                    {resume.description}
                 </p>
             </div>
 
@@ -34,12 +32,23 @@ const metadata = {
                         <div class="border-l border-edge"></div>
                     </div>
 
-                    <iframe
-                        src="https://drive.google.com/file/d/1lqikfdBvA24I6XRtXlsHYnU2jg2Bw2DQ/preview"
-                        allow="autoplay"
-                        title="Wahyu Akhmad Fadillah resume PDF preview"
-                        loading="lazy"
-                        class="h-[1000px] w-full"></iframe>
+                    {resume.embedUrl ? (
+                        <iframe
+                            src={resume.embedUrl}
+                            allow="autoplay"
+                            title={`${resume.title} PDF preview`}
+                            loading="lazy"
+                            class="h-[1000px] w-full"></iframe>
+                    ) : (
+                        <div class="flex min-h-80 flex-col items-center justify-center gap-3 px-4 text-center text-muted-foreground">
+                            <p>Add a resume embed URL in <code>src/data/portfolio.ts</code>.</p>
+                            {resume.downloadUrl && (
+                                <a class="link" href={resume.downloadUrl} target="_blank" rel="noopener noreferrer">
+                                    Download resume
+                                </a>
+                            )}
+                        </div>
+                    )}
                 </div>
 
                 <div class="h-4"></div>

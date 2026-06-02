@@ -3,7 +3,13 @@ import Panel from "./Panel.astro";
 import PanelContent from "./PanelContent.astro";
 import PanelHeader from "./PanelHeader.astro";
 import PanelTitle from "./PanelTitle.astro";
-import { TECH_STACK } from "../data/tech-stack";
+import { PORTFOLIO, type TechStack as TechStackItem } from "../data/portfolio";
+
+interface Props {
+  techStack?: TechStackItem[];
+}
+
+const { techStack = PORTFOLIO.techStack } = Astro.props;
 ---
 
 <Panel id="tech-stack">
@@ -14,7 +20,7 @@ import { TECH_STACK } from "../data/tech-stack";
   <PanelContent>
     <ul class="flex flex-wrap gap-1.5">
       {
-        TECH_STACK.map((tech) => (
+        techStack.map((tech) => (
           <li>
             <a
               href={tech.href}
