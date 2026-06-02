@@ -1,5 +1,5 @@
 <div align="center">
-  <img alt="Devporto portfolio preview" src="https://res.cloudinary.com/dxurnpbrc/image/upload/v1747126424/1_ftwuie.png" width="90%" />
+  <img alt="Devporto portfolio preview" src="https://res.cloudinary.com/dxurnpbrc/image/upload/v1780378498/preview-devporto_nndhte.png" width="90%" />
 </div>
 
 # Devporto - Developer Portfolio
@@ -151,9 +151,9 @@ value in `src/data/portfolio.ts`.
 Devporto doesn't require secrets or private environment variables. One optional
 variable controls the production URL at build time.
 
-| Variable | Required | Purpose |
-| --- | --- | --- |
-| `SITE_URL` | No | Overrides the production site URL during build. |
+| Variable   | Required | Purpose                                         |
+| ---------- | -------- | ----------------------------------------------- |
+| `SITE_URL` | No       | Overrides the production site URL during build. |
 
 ## Deploy to Vercel
 

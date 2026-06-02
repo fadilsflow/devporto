@@ -77,7 +77,7 @@ Let's connect and collaborate!
     avatar:
       "https://res.cloudinary.com/dxurnpbrc/image/upload/v1758206850/profile_avsqcv.webp",
     ogImage:
-      "https://res.cloudinary.com/dxurnpbrc/image/upload/v1758294318/1_pojo5c.png",
+      "https://res.cloudinary.com/dxurnpbrc/image/upload/v1780378367/Screen_Shot_2026-06-02_at_12.29.08_vqbfiv.png",
     namePronunciationUrl: "/p/fadil.mp3",
     keywords: [
       "Wahyu Akhmad Fadillah",
