@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { PORTFOLIO } from "../data/portfolio";
+import { PORTFOLIO } from "../data";
 
 export const GET: APIRoute = ({ site }) => {
     const base = site?.toString().replace(/\/$/, "") ?? PORTFOLIO.site.url.replace(/\/$/, "");

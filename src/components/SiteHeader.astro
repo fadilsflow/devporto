@@ -1,6 +1,6 @@
 ---
 import ThemeToggle from "./ThemeToggle.astro";
-import { PORTFOLIO } from "../data/portfolio";
+import { PORTFOLIO } from "../data";
 
 const navItems = PORTFOLIO.navigation.filter((item) => item.enabled !== false);
 const currentPath = Astro.url.pathname;

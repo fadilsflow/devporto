@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { PORTFOLIO } from "../data/portfolio";
+import { PORTFOLIO } from "../data";
 import { decodeContact } from "../lib/utils";
 
 export const GET: APIRoute = () => {

@@ -1,6 +1,6 @@
 import rss from "@astrojs/rss";
 import type { APIRoute } from "astro";
-import { PORTFOLIO } from "../data/portfolio";
+import { PORTFOLIO } from "../data";
 
 function parsePeriod(p: string): Date {
     // format "MM.YYYY" or "YYYY"

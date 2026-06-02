@@ -3,13 +3,13 @@
 Astro Portfolio Template is a production-ready personal portfolio starter. It
 keeps the existing interface data-driven so you can update profile details,
 projects, experience, skills, navigation, SEO metadata, and public machine-readable
-files from one typed content file.
+files from one content file backed by a validation schema.
 
 ## Features
 
 This template includes the core pieces needed for a reusable public portfolio:
 
-- Centralized content in `src/data/portfolio.ts` with runtime validation.
+- Centralized content in `src/data/portfolio.ts` with validation in `src/data/portfolio.schema.ts`.
 - Data-driven profile, social links, overview, about, tech stack, experience,
   projects, links, resume, navigation, footer, and SEO metadata.
 - Open Graph, Twitter Card, canonical URL, robots metadata, JSON-LD structured
@@ -53,7 +53,7 @@ The project keeps presentation, content, and generated public files separate:
 ├── public/                  # Static icons and replaceable image assets
 ├── src/
 │   ├── components/          # Reusable Astro UI components
-│   ├── data/portfolio.ts    # Main content, config, types, and validation
+│   ├── data/               # Portfolio content, validation, and typed exports
 │   ├── layouts/             # Shared HTML shell and metadata wiring
 │   ├── pages/               # Routes and generated text/XML/manifest files
 │   ├── styles/globals.css   # Tailwind imports and theme tokens
@@ -83,17 +83,19 @@ Update these top-level sections:
 - `techStack`: configure skill badges.
 - `footer`: configure attribution and source-code links.
 
-The file exports typed data and validates it with `astro/zod`. If required
-fields are missing or URLs are invalid, the build fails early.
+`src/data/portfolio.ts` contains only the portfolio data. `src/data/portfolio.schema.ts`
+defines the validation schema and TypeScript types, and `src/data/index.ts`
+exports the parsed `PORTFOLIO` object used by the UI. If required fields are
+missing or URLs are invalid, the build fails early.
 
 ## Replace images and icons
 
 Replace the default static assets in `public/` with your own files:
 
-- `public/avatar.svg`: profile avatar used by the homepage.
-- `public/og-image.svg`: default Open Graph image.
 - `public/favicon.svg`, `public/favicon.ico`, and app icons: browser and app
   icons.
+- `public/p/*`: project logos, audio, and other portfolio assets.
+- Remote avatar and Open Graph URLs: configured in `src/data/portfolio.ts`.
 
 After replacing files, update matching paths in `src/data/portfolio.ts` if you
 use different filenames.
