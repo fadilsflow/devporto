@@ -2,8 +2,14 @@
 import Panel from "./Panel.astro";
 import PanelHeader from "./PanelHeader.astro";
 import PanelTitle from "./PanelTitle.astro";
-import { EXPERIENCES } from "../data/experiences";
+import { PORTFOLIO, type Experience } from "../data/portfolio";
 import { md } from "../lib/utils";
+
+interface Props {
+    experiences?: Experience[];
+}
+
+const { experiences = PORTFOLIO.experiences } = Astro.props;
 
 function formatPeriod(p: { start: string; end?: string }) {
     return `${p.start} — ${p.end ?? "Present"}`;
@@ -17,7 +23,7 @@ function formatPeriod(p: { start: string; end?: string }) {
 
     <div class="pr-2 pl-4">
         {
-            EXPERIENCES.map((exp) => (
+            experiences.map((exp) => (
                 <div class="screen-line-after space-y-4 py-4">
                     <div class="flex items-center gap-3">
                         <div class="flex size-6 shrink-0 items-center justify-center select-none">

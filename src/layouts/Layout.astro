@@ -4,6 +4,7 @@ import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import SEO from "../components/SEO.astro";
 import { ClientRouter } from "astro:transitions";
+import { PORTFOLIO } from "../data/portfolio";
 
 export interface Props {
     title?: string;
@@ -16,10 +17,18 @@ export interface Props {
 
 const { title, description, pageType, image, noindex, bare } = Astro.props;
 const bodyClass = bare ? undefined : "pb-[calc(5.5rem+env(safe-area-inset-bottom))] sm:pb-0";
+const { site, profile, socialLinks } = PORTFOLIO;
+const assetOrigins = Array.from(
+    new Set(
+        [profile.avatar, profile.ogImage, ...socialLinks.map((link) => link.icon)]
+            .filter((value) => value.startsWith("http"))
+            .map((value) => new URL(value).origin),
+    ),
+);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={site.language}>
     <head>
         <meta charset="UTF-8" />
         <meta
@@ -31,12 +40,12 @@ const bodyClass = bare ? undefined : "pb-[calc(5.5rem+env(safe-area-inset-bottom
         <meta
             name="theme-color"
             media="(prefers-color-scheme: light)"
-            content="#ffffff"
+            content={site.themeColor.light}
         />
         <meta
             name="theme-color"
             media="(prefers-color-scheme: dark)"
-            content="#0a0a0a"
+            content={site.themeColor.dark}
         />
         <meta name="format-detection" content="telephone=no" />
 
@@ -45,10 +54,15 @@ const bodyClass = bare ? undefined : "pb-[calc(5.5rem+env(safe-area-inset-bottom
         <link rel="apple-touch-icon" href="/apple-icon.png" />
         <link rel="manifest" href="/manifest.webmanifest" />
 
-        <!-- Preconnect to image CDNs for LCP avatar/og -->
-        <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
-        <link rel="dns-prefetch" href="https://res.cloudinary.com" />
-        <link rel="dns-prefetch" href="https://assets.chanhdai.com" />
+        <!-- Preconnect to configured remote assets -->
+        {
+            assetOrigins.map((origin) => (
+                <>
+                    <link rel="preconnect" href={origin} crossorigin />
+                    <link rel="dns-prefetch" href={origin} />
+                </>
+            ))
+        }
 
         <!-- AI / LLM discoverability -->
         <link

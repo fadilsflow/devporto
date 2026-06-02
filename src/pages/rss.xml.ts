@@ -1,7 +1,6 @@
 import rss from "@astrojs/rss";
 import type { APIRoute } from "astro";
-import { USER } from "../data/user";
-import { PROJECTS } from "../data/projects";
+import { PORTFOLIO } from "../data/portfolio";
 
 function parsePeriod(p: string): Date {
     // format "MM.YYYY" or "YYYY"
@@ -14,16 +13,16 @@ function parsePeriod(p: string): Date {
 
 export const GET: APIRoute = (context) => {
     return rss({
-        title: `${USER.displayName} — ${USER.jobTitle}`,
-        description: USER.bio,
-        site: context.site ?? USER.website,
-        items: PROJECTS.map((p) => ({
+        title: `${PORTFOLIO.profile.displayName} — ${PORTFOLIO.profile.jobTitle}`,
+        description: PORTFOLIO.profile.bio,
+        site: context.site ?? PORTFOLIO.site.url,
+        items: PORTFOLIO.projects.items.map((p) => ({
             title: p.title,
             description: p.description ?? "",
             link: p.link,
             pubDate: parsePeriod(p.period.start),
             categories: p.skills,
         })),
-        customData: `<language>en-us</language>`,
+        customData: `<language>${PORTFOLIO.site.language}</language>`,
     });
 };

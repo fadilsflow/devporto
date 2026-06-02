@@ -56,9 +56,15 @@ export function md(input: string): string {
   return out.join("\n");
 }
 
+
 export function decodeBase64(s: string): string {
   if (typeof atob !== "undefined") return atob(s);
   return Buffer.from(s, "base64").toString("utf-8");
+}
+
+export function decodeContact(value: string | undefined, encoding: "plain" | "base64" = "plain"): string | undefined {
+  if (!value) return undefined;
+  return encoding === "base64" ? decodeBase64(value) : value;
 }
 
 export function urlToName(url: string): string {

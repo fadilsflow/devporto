@@ -1,21 +1,19 @@
 import type { APIRoute } from "astro";
-import { USER } from "../data/user";
-import { PROJECTS } from "../data/projects";
-import { EXPERIENCES } from "../data/experiences";
-import { SOCIAL_LINKS } from "../data/social-links";
+import { PORTFOLIO } from "../data/portfolio";
 
 export const GET: APIRoute = ({ site }) => {
-    const base = site?.toString().replace(/\/$/, "") ?? "https://fadils.web.id";
+    const { profile, projects, experiences, socialLinks } = PORTFOLIO;
+    const base = site?.toString().replace(/\/$/, "") ?? PORTFOLIO.site.url.replace(/\/$/, "");
 
-    const body = `# ${USER.displayName}
+    const body = `# ${profile.displayName}
 
-> ${USER.bio}
+> ${profile.bio}
 
-- Name: ${USER.displayName}
-- Role: ${USER.jobTitle}
-- Location: ${USER.address}
-- Website: ${USER.website}
-- Pronouns: ${USER.pronouns}
+- Name: ${profile.displayName}
+- Role: ${profile.jobTitle}
+- Location: ${profile.address.label}
+- Website: ${profile.website}
+- Pronouns: ${profile.pronouns ?? ""}
 
 ## Pages
 
@@ -24,21 +22,21 @@ export const GET: APIRoute = ({ site }) => {
 
 ## Projects
 
-${PROJECTS.map(
+${projects.items.map(
     (p) =>
         `- [${p.title}](${p.link}) (${p.period.start}${p.period.end ? ` – ${p.period.end}` : " – present"}): ${(p.description ?? "").split("\n").join(" ").trim()}`,
 ).join("\n")}
 
 ## Experience
 
-${EXPERIENCES.map(
+${experiences.map(
     (e) =>
         `- ${e.companyName}${e.isCurrentEmployer ? " (current)" : ""}: ${e.positions.map((p) => `${p.title} (${p.employmentPeriod.start}${p.employmentPeriod.end ? ` – ${p.employmentPeriod.end}` : " – present"})`).join("; ")}`,
 ).join("\n")}
 
 ## Links
 
-${SOCIAL_LINKS.map((s) => `- [${s.title}](${s.href})`).join("\n")}
+${socialLinks.map((s) => `- [${s.title}](${s.href})`).join("\n")}
 
 ## Machine-readable
 

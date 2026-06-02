@@ -2,8 +2,18 @@
 import Panel from "./Panel.astro";
 import PanelHeader from "./PanelHeader.astro";
 import PanelTitle from "./PanelTitle.astro";
-import { PROJECTS } from "../data/projects";
+import { PORTFOLIO, type Project } from "../data/portfolio";
 import { md } from "../lib/utils";
+
+interface Props {
+    projects?: Project[];
+    initialVisible?: number;
+}
+
+const {
+    projects = PORTFOLIO.projects.items,
+    initialVisible = PORTFOLIO.projects.initialVisible,
+} = Astro.props;
 ---
 
 <Panel id="projects">
@@ -13,16 +23,16 @@ import { md } from "../lib/utils";
             <sup
                 class="ml-1 font-mono text-xs text-muted-foreground select-none"
             >
-                ({PROJECTS.length})
+                ({projects.length})
             </sup>
         </PanelTitle>
     </PanelHeader>
 
     <div>
         {
-            PROJECTS.map((project, index) => {
+            projects.map((project, index) => {
                 const isOngoing = !project.period.end;
-                const isHidden = index >= 4;
+                const isHidden = index >= initialVisible;
                 return (
                     <div
                         class:list={[
@@ -156,7 +166,7 @@ import { md } from "../lib/utils";
         }
 
         {
-            PROJECTS.length > 4 && (
+            projects.length > initialVisible && (
                 <div class="flex h-12 items-center justify-center pb-px">
                     <button
                         id="projects-show-more"

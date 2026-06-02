@@ -8,30 +8,40 @@ import TechStack from "../components/TechStack.astro";
 import Experiences from "../components/Experiences.astro";
 import Projects from "../components/Projects.astro";
 import Separator from "../components/Separator.astro";
+import { PORTFOLIO } from "../data/portfolio";
+
+const { profile, socialLinks, techStack, experiences, projects, sections } = PORTFOLIO;
 ---
 
 <Layout pageType="ProfilePage">
     <main id="main-content" class="mx-auto max-w-3xl px-2">
         <div class="max-w-screen overflow-x-hidden">
-            <ProfileHeader />
-            <SocialLinks />
-            <Separator />
+            {sections.profile && <ProfileHeader profile={profile} />}
+            {sections.socialLinks && (
+                <SocialLinks links={socialLinks.filter((link) => link.placements.includes("home"))} />
+            )}
+            {(sections.profile || sections.socialLinks) && <Separator />}
 
-            <Overview />
-            <Separator />
+            {sections.overview && <Overview profile={profile} />}
+            {sections.overview && <Separator />}
 
-            <About />
-            <Separator />
+            {sections.about && <About profile={profile} />}
+            {sections.about && <Separator />}
 
-            <TechStack />
-            <Separator />
+            {sections.techStack && <TechStack techStack={techStack} />}
+            {sections.techStack && <Separator />}
 
-            <Experiences />
-            <Separator />
+            {sections.experiences && <Experiences experiences={experiences} />}
+            {sections.experiences && <Separator />}
 
-            <Projects />
+            {sections.projects && (
+                <Projects
+                    projects={projects.items}
+                    initialVisible={projects.initialVisible}
+                />
+            )}
 
-            <Separator />
+            {sections.projects && <Separator />}
         </div>
     </main>
 </Layout>

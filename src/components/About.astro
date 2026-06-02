@@ -3,10 +3,15 @@ import Panel from "./Panel.astro";
 import PanelContent from "./PanelContent.astro";
 import PanelHeader from "./PanelHeader.astro";
 import PanelTitle from "./PanelTitle.astro";
-import { USER } from "../data/user";
+import { PORTFOLIO, type Profile } from "../data/portfolio";
 import { md } from "../lib/utils";
 
-const html = md(USER.about);
+interface Props {
+    profile?: Profile;
+}
+
+const { profile = PORTFOLIO.profile } = Astro.props;
+const html = md(profile.about);
 ---
 
 <Panel id="about">
