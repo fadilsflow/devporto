@@ -1,59 +1,83 @@
-# Astro Portfolio Template
+<div align="center">
+  <img alt="Devporto portfolio preview" src="https://res.cloudinary.com/dxurnpbrc/image/upload/v1747126424/1_ftwuie.png" width="90%" />
+</div>
 
-Astro Portfolio Template is a production-ready personal portfolio starter. It
-keeps the existing interface data-driven so you can update profile details,
-projects, experience, skills, navigation, SEO metadata, and public machine-readable
-files from one content file backed by a validation schema.
+# Devporto - Developer Portfolio
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/fadilsflow/devporto&env=SITE_URL&envDescription=Optional%20production%20site%20URL%20used%20for%20canonical%20URLs%20and%20sitemaps&project-name=devporto&repository-name=devporto)
+
+Devporto is a production-ready Astro portfolio template. It keeps the UI fully
+data-driven so you can update profile details, projects, experience, skills,
+navigation, SEO metadata, and machine-readable public files from one content
+file backed by a validation schema.
+
+Built with Astro 6, TypeScript, Tailwind CSS 4, and deployed easily on Vercel.
 
 ## Features
 
-This template includes the core pieces needed for a reusable public portfolio:
+Devporto includes the core pieces needed for a reusable public portfolio:
 
-- Centralized content in `src/data/portfolio.ts` with validation in `src/data/portfolio.schema.ts`.
+- Quick setup by editing a single content file: `src/data/portfolio.ts`.
+- Validation and TypeScript types in `src/data/portfolio.schema.ts`.
 - Data-driven profile, social links, overview, about, tech stack, experience,
   projects, links, resume, navigation, footer, and SEO metadata.
-- Open Graph, Twitter Card, canonical URL, robots metadata, JSON-LD structured
-  data, sitemap generation, RSS, `llms.txt`, and `llms-full.txt`.
-- A dynamic `robots.txt` and `manifest.webmanifest` generated from site config.
-- Theme tokens in `src/styles/globals.css` for fast visual customization.
-- Strict TypeScript configuration through Astro's strict preset.
+- Section enable or disable controls through the central `sections` config.
+- Linktree-style `/link` page for social or content navigation.
+- Resume page with configurable copy, embed URL, and download URL.
+- RSS feed generation based on project data.
+- `llms.txt` and `llms-full.txt` for AI and LLM discoverability.
+- Dynamic `robots.txt` and `manifest.webmanifest` generated from site config.
+- Open Graph, Twitter Cards, canonical URLs, JSON-LD, sitemap generation, and
+  crawl metadata.
+- Dark and light theme support with centralized CSS tokens.
+- Fully responsive design for desktop and mobile.
 
-## Requirements
+## Getting started locally
 
-Install the following tools before you start:
+You can run Devporto locally with Bun, npm, pnpm, or yarn. The repository
+includes `bun.lock`, so Bun is the default package manager.
 
-- Node.js `22.12.0` or later.
-- Bun, npm, pnpm, or yarn. The repository includes `bun.lock`, so Bun is the
-  default package manager.
+1. Clone this repository to your local machine:
 
-## Install and run
+   ```sh
+   git clone https://github.com/fadilsflow/devporto
+   ```
 
-Use these commands from the project root:
+2. Move to the cloned directory:
 
-```sh
-bun install
-bun run dev
-```
+   ```sh
+   cd devporto
+   ```
 
-Build and preview the production output with these commands:
+3. Install dependencies:
 
-```sh
-bun run build
-bun run preview
-```
+   ```sh
+   bun install
+   # or
+   npm install
+   ```
 
-If you use another package manager, replace `bun` with your tool of choice.
+4. Start the local development server:
+
+   ```sh
+   bun run dev
+   # or
+   npm run dev
+   ```
+
+5. Open `src/data/portfolio.ts` and customize your portfolio content.
 
 ## Project structure
 
-The project keeps presentation, content, and generated public files separate:
+The project separates content, validation, presentation, and generated public
+files so customization stays predictable:
 
 ```text
 /
-├── public/                  # Static icons and replaceable image assets
+├── public/                  # Static icons and portfolio assets
 ├── src/
 │   ├── components/          # Reusable Astro UI components
-│   ├── data/               # Portfolio content, validation, and typed exports
+│   ├── data/                # Portfolio content, schema, and typed exports
 │   ├── layouts/             # Shared HTML shell and metadata wiring
 │   ├── pages/               # Routes and generated text/XML/manifest files
 │   ├── styles/globals.css   # Tailwind imports and theme tokens
@@ -64,8 +88,9 @@ The project keeps presentation, content, and generated public files separate:
 
 ## Customize content
 
-Edit `src/data/portfolio.ts` to customize the template. You don't need to edit
-UI components for normal portfolio changes.
+Edit `src/data/portfolio.ts` for normal portfolio changes. You don't need to
+edit UI components to change names, links, projects, skills, SEO copy, or
+section visibility.
 
 Update these top-level sections:
 
@@ -83,22 +108,10 @@ Update these top-level sections:
 - `techStack`: configure skill badges.
 - `footer`: configure attribution and source-code links.
 
-`src/data/portfolio.ts` contains only the portfolio data. `src/data/portfolio.schema.ts`
-defines the validation schema and TypeScript types, and `src/data/index.ts`
-exports the parsed `PORTFOLIO` object used by the UI. If required fields are
-missing or URLs are invalid, the build fails early.
-
-## Replace images and icons
-
-Replace the default static assets in `public/` with your own files:
-
-- `public/favicon.svg`, `public/favicon.ico`, and app icons: browser and app
-  icons.
-- `public/p/*`: project logos, audio, and other portfolio assets.
-- Remote avatar and Open Graph URLs: configured in `src/data/portfolio.ts`.
-
-After replacing files, update matching paths in `src/data/portfolio.ts` if you
-use different filenames.
+`src/data/portfolio.ts` contains only the portfolio data.
+`src/data/portfolio.schema.ts` defines validation and TypeScript types.
+`src/data/index.ts` exports the parsed `PORTFOLIO` object used by the UI. If
+required fields are missing or URLs are invalid, the build fails early.
 
 ## Customize theme
 
@@ -107,10 +120,24 @@ fonts, shadows, borders, and semantic tokens. The design uses Tailwind CSS 4
 and maps theme tokens through `@theme inline`, so component classes keep working
 when you change the token values.
 
+## Set up your website icon
+
+A favicon is the small icon that appears in browser tabs and bookmarks. Replace
+the default icons before publishing your site.
+
+1. Create or prepare a square image for your favicon. Use at least 260 by 260
+   pixels.
+2. Open [RealFaviconGenerator](https://realfavicongenerator.net/).
+3. Upload your image and customize the generated icons.
+4. Download the favicon package.
+5. Replace the matching files in `public/`, including `favicon.svg`,
+   `favicon.ico`, `apple-icon.png`, and web app manifest icons.
+6. Run `bun run build` to confirm the generated manifest still works.
+
 ## Configure SEO and deployment URLs
 
-Set the production URL before deployment. Astro uses it for canonical URLs,
-sitemap entries, `robots.txt`, and generated metadata.
+Set the production URL before deployment. Astro uses this value for canonical
+URLs, sitemap entries, `robots.txt`, and generated metadata.
 
 ```sh
 SITE_URL="https://your-domain.com" bun run build
@@ -121,28 +148,41 @@ value in `src/data/portfolio.ts`.
 
 ## Environment variables
 
-This template doesn't require secrets or private environment variables.
+Devporto doesn't require secrets or private environment variables. One optional
+variable controls the production URL at build time.
 
 | Variable | Required | Purpose |
 | --- | --- | --- |
 | `SITE_URL` | No | Overrides the production site URL during build. |
 
-## Deploy
+## Deploy to Vercel
 
-Deploy the project as a static Astro site. Common hosts work without additional
-server code:
+The fastest deployment path is the Vercel clone flow. Use the deploy button at
+the top of this README, or deploy manually from your Git provider.
 
-1. Push the repository to your Git provider.
-2. Create a new project in Vercel, Netlify, Cloudflare Pages, or another static
-   hosting provider.
+1. Push your customized repository to GitHub.
+2. Create a new Vercel project from the repository.
 3. Set the build command to `bun run build`.
 4. Set the output directory to `dist`.
 5. Optional: Add `SITE_URL` with your production domain.
 6. Deploy the site.
 
+## Set up Google Search Console
+
+Google Search Console helps you monitor and improve your site's presence in
+Google Search results after deployment.
+
+1. Go to [Google Search Console](https://search.google.com/search-console).
+2. Click **Add property** and choose **URL prefix**.
+3. Enter your production URL, for example `https://yourdomain.com`.
+4. Verify ownership using the method that works best for your host.
+5. After verification, open **Sitemaps** in the sidebar.
+6. Submit your sitemap URL: `https://yourdomain.com/sitemap-index.xml`.
+7. Wait for Google to process the sitemap and start indexing your pages.
+
 ## Content validation checklist
 
-Before publishing, confirm these values are updated:
+Before publishing, confirm the main template values are updated for your site:
 
 - `site.url` and optional `SITE_URL`.
 - `profile.website`, `profile.email`, and `profile.phoneNumber`.
@@ -152,8 +192,14 @@ Before publishing, confirm these values are updated:
 - `resume.embedUrl` or `resume.downloadUrl`, if you want a resume page.
 - `footer.sourceCodeUrl`, if you publish the template source.
 
-## Next steps
+## Build and preview
 
-Run `bun run build` after every content change. If the build passes, the typed
-configuration, generated metadata, sitemap, RSS feed, and LLM text files are in
-sync with your portfolio data.
+Run these commands before shipping changes:
+
+```sh
+bun run build
+bun run preview
+```
+
+If the build passes, the validated configuration, generated metadata, sitemap,
+RSS feed, and LLM text files are in sync with your portfolio data.
