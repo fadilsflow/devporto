@@ -6,33 +6,33 @@ import PanelTitle from "./PanelTitle.astro";
 import { PORTFOLIO, type TechStack as TechStackItem } from "../data";
 
 interface Props {
-  techStack?: TechStackItem[];
+    techStack?: TechStackItem[];
 }
 
 const { techStack = PORTFOLIO.techStack } = Astro.props;
 ---
 
 <Panel id="tech-stack">
-  <PanelHeader>
-    <PanelTitle>Tech Stack</PanelTitle>
-  </PanelHeader>
+    <PanelHeader>
+        <PanelTitle>Tech Stack</PanelTitle>
+    </PanelHeader>
 
-  <PanelContent>
-    <ul class="flex flex-wrap gap-1.5">
-      {
-        techStack.map((tech) => (
-          <li>
-            <a
-              href={tech.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center rounded-md border border-border bg-secondary px-2 py-1 text-xs font-medium text-secondary-foreground hover:bg-accent"
-            >
-              {tech.title}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </PanelContent>
+    <PanelContent>
+        <ul class="flex flex-wrap gap-1.5">
+            {
+                techStack.map((tech) => (
+                    <li>
+                        <a
+                            href={tech.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center rounded-md border border-border bg-secondary px-2 py-1 text-xs font-medium text-secondary-foreground hover:bg-accent"
+                        >
+                            {tech.title}
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </PanelContent>
 </Panel>

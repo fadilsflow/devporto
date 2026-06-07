@@ -9,7 +9,7 @@ interface Props {
 const { profile = PORTFOLIO.profile } = Astro.props;
 ---
 
-<div class="screen-line-after relative flex">
+<div class="relative flex">
     <div class="flex flex-1 mt-40">
         <div class="shrink-0 mx-[2px] my-[3px] pb-2">
             <img
@@ -25,17 +25,19 @@ const { profile = PORTFOLIO.profile } = Astro.props;
 
         <div class="flex flex-1 flex-col">
             <div class="">
-                <h1 class="flex items-center pl-4 text-3xl font-semibold">
+                <h1
+                    class="flex items-center pl-4 text-2xl font-medium capitalize"
+                >
                     {profile.username}
-                    {profile.verified && (
-                        <VerifiedIcon
-                            class="size-[0.6em] ml-2 translate-y-px text-info select-none"
-                        />
-                    )}
+                    {
+                        profile.verified && (
+                            <VerifiedIcon class="size-[0.6em] ml-2 translate-y-px text-info select-none" />
+                        )
+                    }
                 </h1>
 
                 <div class="h-12 py-1 pl-4 sm:h-auto">
-                    <span class="text-muted-foreground">
+                    <span class="text-foreground/80">
                         {profile.flipSentences[0]}
                     </span>
                 </div>

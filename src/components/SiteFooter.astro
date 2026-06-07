@@ -1,93 +1,63 @@
 ---
 import { PORTFOLIO } from "../data";
 
-const { footer, site } = PORTFOLIO;
-const siteUrl = Astro.site?.toString().replace(/\/$/, "") ?? site.url.replace(/\/$/, "");
+const { footer, profile, site } = PORTFOLIO;
+const siteUrl =
+    Astro.site?.toString().replace(/\/$/, "") ?? site.url.replace(/\/$/, "");
+const year = new Date().getFullYear();
 ---
 
-<footer class="max-w-screen overflow-x-hidden px-2">
-    <div class="screen-line-before mx-auto pt-4 md:max-w-3xl">
-        <p
-            class="mb-4 px-4 text-center font-mono text-sm text-balance text-muted-foreground"
-        >
-            Built by{" "}
-            {footer.builtByHref ? (
+<footer class="py-20 flex justify-center text-center">
+    <p
+        class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-foreground"
+    >
+        <span>© {year}</span>
+        <span aria-hidden="true">/</span>
+        {
+            footer.builtByHref ? (
                 <a
-                    class="link"
                     href={footer.builtByHref}
                     target="_blank"
-                    rel="noopener noreferrer"
+                    rel="noopener noreferrer me"
                 >
-                    {footer.builtByLabel}
+                    {profile.displayName}
                 </a>
             ) : (
-                <span>{footer.builtByLabel}</span>
-            )}
-            {footer.sourceCodeUrl && (
-                <>
-                    . The source code is available on{" "}
-                    <a
-                        class="link"
-                        href={footer.sourceCodeUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        {footer.sourceCodeLabel ?? "source"}
-                    </a>
-                </>
-            )}
-            .
-        </p>
-
-        <div
-            class="screen-line-before screen-line-after flex w-full before:z-1 after:z-1 bg-[repeating-linear-gradient(315deg,var(--pattern-foreground)_0,var(--pattern-foreground)_1px,transparent_0,transparent_50%)] bg-size-[10px_10px] [--pattern-foreground:var(--color-edge)]/56"
+                <span class="text-foreground">{profile.displayName}</span>
+            )
+        }
+        <span aria-hidden="true">/</span>
+        <a
+            href={`${siteUrl}/llms.txt`}
+            target="_blank"
+            rel="noopener noreferrer"
         >
-            <div
-                class="mx-auto flex items-center justify-center gap-3 border-x border-edge bg-background px-4"
+            llms.txt
+        </a>
+        <span aria-hidden="true">/</span>
+        <a
+            href={`${siteUrl}/rss.xml`}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="RSS feed"
+            class={`inline-flex items-center`}
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
             >
-                <a
-                    class="flex font-mono text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
-                    href={`${siteUrl}/llms.txt`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    llms.txt
-                </a>
-
-                <div class="flex h-11 w-px bg-edge"></div>
-
-                <a
-                    class="flex items-center text-muted-foreground transition-colors hover:text-foreground"
-                    href={`${siteUrl}/rss.xml`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="RSS feed"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        class="size-4"
-                        aria-hidden="true"
-                    >
-                        <path d="M4 11a9 9 0 0 1 9 9"></path>
-                        <path d="M4 4a16 16 0 0 1 16 16"></path>
-                        <circle cx="5" cy="19" r="1"></circle>
-                    </svg>
-                    <span class="sr-only">RSS</span>
-                </a>
-
-                <div class="flex h-11 w-px bg-edge"></div>
-            </div>
-        </div>
-    </div>
-    <div class="pb-[env(safe-area-inset-bottom,0px)]">
-        <div class="flex h-2"></div>
-    </div>
+                <path d="M4 11a9 9 0 0 1 9 9"></path>
+                <path d="M4 4a16 16 0 0 1 16 16"></path>
+                <circle cx="5" cy="19" r="1"></circle>
+            </svg>
+        </a>
+    </p>
 </footer>

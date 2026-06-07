@@ -16,11 +16,17 @@ export interface Props {
 }
 
 const { title, description, pageType, image, noindex, bare } = Astro.props;
-const bodyClass = bare ? undefined : "pb-[calc(5.5rem+env(safe-area-inset-bottom))] sm:pb-0";
+const bodyClass = bare
+    ? undefined
+    : "pb-[calc(5.5rem+env(safe-area-inset-bottom))] sm:pb-0";
 const { site, profile, socialLinks } = PORTFOLIO;
 const assetOrigins = Array.from(
     new Set(
-        [profile.avatar, profile.ogImage, ...socialLinks.map((link) => link.icon)]
+        [
+            profile.avatar,
+            profile.ogImage,
+            ...socialLinks.map((link) => link.icon),
+        ]
             .filter((value) => value.startsWith("http"))
             .map((value) => new URL(value).origin),
     ),

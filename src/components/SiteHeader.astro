@@ -18,15 +18,20 @@ const currentPath = Astro.url.pathname;
             aria-label={`Home — ${PORTFOLIO.profile.displayName}`}
         >
             <span class="sr-only">Home</span>
-            {PORTFOLIO.site.logo?.src && (
-                <img
-                    src={PORTFOLIO.site.logo.src}
-                    alt={PORTFOLIO.site.logo.alt ?? `${PORTFOLIO.site.name} logo`}
-                    class="h-7 w-auto"
-                    width="64"
-                    height="32"
-                />
-            )}
+            {
+                PORTFOLIO.site.logo?.src && (
+                    <img
+                        src={PORTFOLIO.site.logo.src}
+                        alt={
+                            PORTFOLIO.site.logo.alt ??
+                            `${PORTFOLIO.site.name} logo`
+                        }
+                        class="h-7 w-auto"
+                        width="64"
+                        height="32"
+                    />
+                )
+            }
         </a>
 
         <div class="flex-1"></div>
@@ -59,7 +64,7 @@ const currentPath = Astro.url.pathname;
 </header>
 
 <nav
-    class="fixed inset-x-0 bottom-0 z-50 border-t border-border/80 bg-background/95 px-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-2 shadow-[0_-12px_32px_color-mix(in_oklab,var(--foreground)_10%,transparent)] backdrop-blur sm:hidden"
+    class="fixed inset-x-0 bottom-0 z-50 border-t border-edge bg-background px-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-2 sm:hidden"
     aria-label="Primary"
 >
     <div class="mx-auto grid max-w-md grid-cols-4 items-end gap-1">

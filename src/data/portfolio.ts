@@ -15,7 +15,7 @@ const portfolio = {
     socialLinks: true,
     overview: true,
     about: true,
-    techStack: true,
+    techStack: false,
     experiences: true,
     projects: true,
   },

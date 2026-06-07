@@ -15,11 +15,14 @@ const html = md(profile.about);
 ---
 
 <Panel id="about">
-  <PanelHeader>
-    <PanelTitle>About</PanelTitle>
-  </PanelHeader>
+    <PanelHeader>
+        <PanelTitle>About</PanelTitle>
+    </PanelHeader>
 
-  <PanelContent>
-    <div class="prose prose-zinc dark:prose-invert max-w-none" set:html={html} />
-  </PanelContent>
+    <PanelContent>
+        <div
+            class="prose prose-zinc dark:prose-invert max-w-none"
+            set:html={html}
+        />
+    </PanelContent>
 </Panel>

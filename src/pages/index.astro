@@ -10,16 +10,23 @@ import Projects from "../components/Projects.astro";
 import Separator from "../components/Separator.astro";
 import { PORTFOLIO } from "../data";
 
-const { profile, socialLinks, techStack, experiences, projects, sections } = PORTFOLIO;
+const { profile, socialLinks, techStack, experiences, projects, sections } =
+    PORTFOLIO;
 ---
 
 <Layout pageType="ProfilePage">
     <main id="main-content" class="mx-auto max-w-3xl px-2">
         <div class="max-w-screen overflow-x-hidden">
             {sections.profile && <ProfileHeader profile={profile} />}
-            {sections.socialLinks && (
-                <SocialLinks links={socialLinks.filter((link) => link.placements.includes("home"))} />
-            )}
+            {
+                sections.socialLinks && (
+                    <SocialLinks
+                        links={socialLinks.filter((link) =>
+                            link.placements.includes("home"),
+                        )}
+                    />
+                )
+            }
             {(sections.profile || sections.socialLinks) && <Separator />}
 
             {sections.overview && <Overview profile={profile} />}
@@ -34,14 +41,14 @@ const { profile, socialLinks, techStack, experiences, projects, sections } = POR
             {sections.experiences && <Experiences experiences={experiences} />}
             {sections.experiences && <Separator />}
 
-            {sections.projects && (
-                <Projects
-                    projects={projects.items}
-                    initialVisible={projects.initialVisible}
-                />
-            )}
-
-            {sections.projects && <Separator />}
+            {
+                sections.projects && (
+                    <Projects
+                        projects={projects.items}
+                        initialVisible={projects.initialVisible}
+                    />
+                )
+            }
         </div>
     </main>
 </Layout>
