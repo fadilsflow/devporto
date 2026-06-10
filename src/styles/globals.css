@@ -10,7 +10,7 @@
     --color-foreground: var(--foreground);
     --color-primary: var(--primary);
     --color-primary-foreground: var(--primary-foreground);
-    --color-secondary: var(--secondary);
+    --color-secondary: var(--secondarz);
     --color-secondary-foreground: var(--secondary-foreground);
     --color-muted: var(--muted);
     --color-muted-foreground: var(--muted-foreground);
@@ -37,7 +37,8 @@
     --color-selection: var(--selection);
     --color-selection-foreground: var(--selection-foreground);
 
-    --font-sans: var(--font-sans);
+    /*--font-sans: var(--font-sans);*/
+    --font-sans: var(--font-);
     --font-mono: var(--font-mono);
 
     --shadow-popover: var(--shadow-popover);

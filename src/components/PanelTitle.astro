@@ -5,6 +5,6 @@ export interface Props {
 const { className = "" } = Astro.props;
 ---
 
-<h2 data-slot="panel-title" class={`text-md font-medium ${className}`}>
+<h2 data-slot="panel-title" class={`text-md font-medium text-balance ${className}`}>
     <slot />
 </h2>

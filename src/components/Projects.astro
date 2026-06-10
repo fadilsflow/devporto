@@ -56,7 +56,7 @@ const {
                                     alt={`${project.title} logo`}
                                     width="32"
                                     height="32"
-                                    class="mx-4 size-6 shrink-0 select-none"
+                                    class="mx-4 size-6 shrink-0 select-none ring-1 ring-black/10 dark:ring-white/10 rounded"
                                     loading="lazy"
                                     decoding="async"
                                 />
@@ -83,10 +83,11 @@ const {
                                         href={project.link}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        class="text-muted-foreground hover:text-foreground"
+                                        class="text-muted-foreground hover:text-foreground active:scale-[0.96] transition-[transform,colors] duration-150 relative"
                                         aria-label={`Open ${project.title} project`}
                                         onclick="event.stopPropagation()"
                                     >
+                                        <span class="absolute -inset-2" aria-hidden="true"></span>
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="16"
@@ -102,7 +103,7 @@ const {
                                             <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
                                         </svg>
                                     </a>
-                                    <span class="text-muted-foreground">
+                                    <span class="relative size-4 shrink-0 text-muted-foreground">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="16"
@@ -113,10 +114,10 @@ const {
                                             stroke-width="2"
                                             stroke-linecap="round"
                                             stroke-linejoin="round"
-                                            class="hidden group-aria-expanded/project:block"
+                                            class="absolute inset-0 transition-all duration-200 group-aria-expanded/project:scale-[0.25] group-aria-expanded/project:opacity-0 [transition-property:scale,opacity]"
                                         >
-                                            <path d="m7 20 5-5 5 5" />
-                                            <path d="m7 4 5 5 5-5" />
+                                            <path d="m7 15 5 5 5-5" />
+                                            <path d="m7 9 5-5 5 5" />
                                         </svg>
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -128,17 +129,17 @@ const {
                                             stroke-width="2"
                                             stroke-linecap="round"
                                             stroke-linejoin="round"
-                                            class="block group-aria-expanded/project:hidden"
+                                            class="absolute inset-0 transition-all duration-200 scale-[0.25] opacity-0 group-aria-expanded/project:scale-100 group-aria-expanded/project:opacity-100 [transition-property:scale,opacity]"
                                         >
-                                            <path d="m7 15 5 5 5-5" />
-                                            <path d="m7 9 5-5 5 5" />
+                                            <path d="m7 20 5-5 5 5" />
+                                            <path d="m7 4 5 5 5-5" />
                                         </svg>
                                     </span>
                                 </div>
                             </div>
                         </div>
                         <div
-                            class="overflow-hidden transition-all duration-300"
+                            class="overflow-hidden transition-[max-height] duration-300"
                             data-collapse-content={`project-${index}`}
                             style={project.isExpanded ? "" : "max-height: 0;"}
                         >
@@ -170,7 +171,7 @@ const {
                 <div class="flex h-12 items-center justify-center pb-px">
                     <button
                         id="projects-show-more"
-                        class="group/showmore inline-flex items-center gap-2  border border-edge px-3 py-1.5 text-sm font-medium hover:bg-accent transition-colors"
+                        class="group/showmore inline-flex items-center gap-2 border border-edge px-3 py-1.5 text-sm font-medium hover:bg-accent active:scale-[0.96] transition-[transform,colors] duration-150"
                         aria-expanded="false"
                     >
                         <span class="block group-aria-expanded/showmore:hidden">

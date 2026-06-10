@@ -33,7 +33,7 @@ function formatPeriod(p: { start: string; end?: string }) {
                                     alt={`${exp.companyName} logo`}
                                     width="24"
                                     height="24"
-                                    class="rounded-full"
+                                    class="rounded-full ring-1 ring-black/10 dark:ring-white/10"
                                     loading="lazy"
                                     decoding="async"
                                 />
@@ -65,7 +65,7 @@ function formatPeriod(p: { start: string; end?: string }) {
                         {exp.positions.map((pos, index) => (
                             <div class="relative flex gap-2">
                                 <button
-                                    class="bg-muted rounded-md flex size-6 shrink-0 items-center justify-center text-muted-foreground hover:text-foreground transition-colors mt-2"
+                                    class="bg-muted rounded-md flex size-6 shrink-0 items-center justify-center text-muted-foreground hover:text-foreground transition-colors duration-150 mt-2 relative before:content-[''] before:absolute before:-inset-2"
                                     data-collapse-icon={`${exp.id}-${index}`}
                                     aria-label="Toggle details"
                                 >
@@ -123,7 +123,7 @@ function formatPeriod(p: { start: string; end?: string }) {
                                 </button>
                                 <div class="flex-1">
                                     <button
-                                        class="w-full text-left space-y-1 group px-3 py-2 rounded-md hover:bg-muted transition-colors"
+                                        class="w-full text-left space-y-1 group px-3 py-2 rounded-md hover:bg-muted transition-colors duration-150"
                                         data-collapse-trigger={`${exp.id}-${index}`}
                                         aria-expanded="false"
                                     >
@@ -131,36 +131,38 @@ function formatPeriod(p: { start: string; end?: string }) {
                                             <h4 class="font-medium leading-snug">
                                                 {pos.title}
                                             </h4>
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="16"
-                                                height="16"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                stroke-width="2"
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                class="text-muted-foreground transition-transform shrink-0 hidden group-aria-expanded:block"
-                                            >
-                                                <path d="m7 20 5-5 5 5" />
-                                                <path d="m7 4 5 5 5-5" />
-                                            </svg>
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="16"
-                                                height="16"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                stroke-width="2"
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                class="text-muted-foreground transition-transform shrink-0 block group-aria-expanded:hidden"
-                                            >
-                                                <path d="m7 15 5 5 5-5" />
-                                                <path d="m7 9 5-5 5 5" />
-                                            </svg>
+                                            <div class="relative size-4">
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="16"
+                                                    height="16"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    stroke-width="2"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    class="absolute inset-0 text-muted-foreground transition-all duration-200 group-aria-expanded:scale-[0.25] group-aria-expanded:opacity-0 [transition-property:scale,opacity]"
+                                                >
+                                                    <path d="m7 15 5 5 5-5" />
+                                                    <path d="m7 9 5-5 5 5" />
+                                                </svg>
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="16"
+                                                    height="16"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    stroke-width="2"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    class="absolute inset-0 text-muted-foreground transition-all duration-200 scale-[0.25] opacity-0 group-aria-expanded:scale-100 group-aria-expanded:opacity-100 [transition-property:scale,opacity]"
+                                                >
+                                                    <path d="m7 20 5-5 5 5" />
+                                                    <path d="m7 4 5 5 5-5" />
+                                                </svg>
+                                            </div>
                                         </div>
                                         <p class="text-sm text-muted-foreground">
                                             {formatPeriod(pos.employmentPeriod)}
@@ -173,7 +175,7 @@ function formatPeriod(p: { start: string; end?: string }) {
                                         </p>
                                     </button>
                                     <div
-                                        class="overflow-hidden transition-all duration-300"
+                                        class="overflow-hidden transition-[max-height] duration-300"
                                         data-collapse-content={`${exp.id}-${index}`}
                                         style="max-height: 0;"
                                     >

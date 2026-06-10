@@ -11,39 +11,41 @@ const { id = "theme-toggle", class: className = "" } = Astro.props;
     id={id}
     data-theme-toggle
     class:list={[
-        "inline-flex items-center justify-center bg-background p-1 text-sm font-medium hover:bg-accent hover:text-accent-foreground rounded-md",
+        "inline-flex items-center justify-center bg-background p-1.5 text-sm font-medium hover:bg-accent hover:text-accent-foreground rounded-md active:scale-[0.96] transition-[transform,colors] duration-150",
         className,
     ]}
     aria-label="Toggle theme"
 >
-    <svg
-        class="hidden dark:block size-4"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-    >
-        <path
-            d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"
-        ></path>
-    </svg>
-    <svg
-        class="block dark:hidden size-4"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-    >
-        <path
+    <div class="relative size-4">
+        <svg
+            class="absolute inset-0 transition-all duration-200 scale-[0.25] opacity-0 dark:scale-100 dark:opacity-100 [transition-property:scale,opacity]"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            stroke-width="2"
-            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-        ></path>
-    </svg>
+        >
+            <path
+                d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"
+            ></path>
+        </svg>
+        <svg
+            class="absolute inset-0 transition-all duration-200 scale-100 opacity-100 dark:scale-[0.25] dark:opacity-0 [transition-property:scale,opacity]"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+        >
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+            ></path>
+        </svg>
+    </div>
 </button>
 
 <script>
