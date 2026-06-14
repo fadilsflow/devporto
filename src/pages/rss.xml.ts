@@ -1,4 +1,5 @@
 import rss from "@astrojs/rss";
+import { getCollection } from "astro:content";
 import type { APIRoute } from "astro";
 import { PORTFOLIO } from "../data";
 
@@ -11,18 +12,35 @@ function parsePeriod(p: string): Date {
     return new Date(parseInt(parts[0]) || 2024, 0, 1);
 }
 
-export const GET: APIRoute = (context) => {
+export const GET: APIRoute = async (context) => {
+    const blogPosts = await getCollection("blog", ({ data }) =>
+        import.meta.env.PROD ? !data.draft : true,
+    );
+
+    const blogItems = blogPosts.sort(
+        (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
+    ).map((post) => ({
+        title: post.data.title,
+        description: post.data.description,
+        link: `/blog/${post.id}`,
+        pubDate: post.data.pubDate,
+        categories: post.data.tags,
+    }));
+
     return rss({
-        title: `${PORTFOLIO.profile.displayName} — ${PORTFOLIO.profile.jobTitle}`,
+        title: `${PORTFOLIO.profile.displayName} — Blog & Projects`,
         description: PORTFOLIO.profile.bio,
         site: context.site ?? PORTFOLIO.site.url,
-        items: PORTFOLIO.projects.items.map((p) => ({
-            title: p.title,
-            description: p.description ?? "",
-            link: p.link,
-            pubDate: parsePeriod(p.period.start),
-            categories: p.skills,
-        })),
+        items: [
+            ...blogItems,
+            ...PORTFOLIO.projects.items.map((p) => ({
+                title: p.title,
+                description: p.description ?? "",
+                link: p.link,
+                pubDate: parsePeriod(p.period.start),
+                categories: p.skills,
+            })),
+        ],
         customData: `<language>${PORTFOLIO.site.language}</language>`,
     });
 };

@@ -18,6 +18,7 @@ const portfolio = {
     techStack: false,
     experiences: true,
     projects: true,
+    blog: true,
   },
   navigation: [
     {
@@ -34,6 +35,11 @@ const portfolio = {
       title: "Resume",
       href: "/resume",
       icon: "M7 3h7l5 5v13H7zM14 3v5h5M10 13h6M10 17h6",
+    },
+    {
+      title: "Blog",
+      href: "/blog",
+      icon: "M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z",
     },
   ],
   profile: {
@@ -153,6 +159,11 @@ Let's connect and collaborate!
     embedUrl:
       "https://drive.google.com/file/d/1lqikfdBvA24I6XRtXlsHYnU2jg2Bw2DQ/preview",
     downloadUrl: "",
+  },
+  blogPage: {
+    title: "Blog",
+    description: "Thoughts, tutorials, and insights on web development, design, and technology.",
+    seoDescription: "Blog posts by Wahyu Akhmad Fadillah — Full Stack Developer writing about web development, TypeScript, Next.js, and modern web tooling.",
   },
   projects: {
     initialVisible: 4,

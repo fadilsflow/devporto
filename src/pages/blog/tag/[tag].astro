@@ -1,0 +1,77 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+    const posts = await getCollection("blog", ({ data }) =>
+        import.meta.env.PROD ? !data.draft : true,
+    );
+    const tags = new Set(posts.flatMap((post) => post.data.tags));
+    return Array.from(tags).map((tag) => ({
+        params: { tag: tag.toLowerCase().replace(/\s+/g, "-") },
+        props: { tag },
+    }));
+}
+
+const { tag } = Astro.props;
+const tagParam = Astro.params.tag;
+
+const allPosts = await getCollection("blog", ({ data }) => {
+    if (import.meta.env.PROD && data.draft) return false;
+    return data.tags.some(
+        (t) => t.toLowerCase().replace(/\s+/g, "-") === tagParam,
+    );
+});
+
+allPosts.sort(
+    (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
+);
+
+const capitalizedTag = tag.charAt(0).toUpperCase() + tag.slice(1);
+---
+
+<Layout
+    title={`Posts tagged "${capitalizedTag}"`}
+    description={`Blog posts tagged with "${capitalizedTag}"`}
+    pageType="WebPage"
+>
+    <main id="main-content" class="mx-auto max-w-3xl px-2">
+        <div class="max-w-screen overflow-x-hidden">
+            <nav class="pt-4">
+                <a
+                    href="/blog"
+                    class="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                >
+                    Back to blog
+                </a>
+            </nav>
+
+            <div class="pt-4">
+                <h1 class="text-3xl font-semibold">#{capitalizedTag}</h1>
+            </div>
+
+            <ul class="py-6 divide-y divide-edge">
+                {allPosts.map((post) => (
+                    <li>
+                        <a
+                            href={`/blog/${post.id}`}
+                            class="flex items-center justify-between py-3 text-sm transition-colors hover:text-foreground/80"
+                        >
+                            <span class="font-medium">{post.data.title}</span>
+                            <time
+                                datetime={post.data.pubDate.toISOString()}
+                                class="shrink-0 text-muted-foreground"
+                            >
+                                {post.data.pubDate.toLocaleDateString("en-US", {
+                                    year: "numeric",
+                                    month: "short",
+                                    day: "numeric",
+                                })}
+                            </time>
+                        </a>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    </main>
+</Layout>

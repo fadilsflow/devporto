@@ -40,7 +40,7 @@ export const portfolioSchema = z.object({
     techStack: z.boolean(),
     experiences: z.boolean(),
     projects: z.boolean(),
-  }),
+    blog: z.boolean(),  }),
   navigation: z.array(
     z.object({
       title: z.string().min(1),
@@ -108,7 +108,11 @@ export const portfolioSchema = z.object({
     embedUrl: z.string().optional(),
     downloadUrl: z.string().optional(),
   }),
-  projects: z.object({
+  blogPage: z.object({
+    title: z.string().min(1),
+    description: z.string().min(1),
+    seoDescription: z.string().min(1),
+  }),  projects: z.object({
     initialVisible: z.number().int().positive(),
     items: z.array(
       z.object({
