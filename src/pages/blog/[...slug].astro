@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
 import { PORTFOLIO } from "../../data";
 
 export async function getStaticPaths() {
@@ -24,39 +25,15 @@ const { Content } = await render(post);
     image={post.data.image}
     bare
 >
-    <main id="main-content" class="mx-auto max-w-3xl px-2">
+    <main id="main-content" class="mx-auto max-w-3xl px-2 mt-20">
         <div class="max-w-screen overflow-x-hidden">
-            <nav class="pt-4">
-                <a
-                    href="/blog"
-                    class="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="14"
-                        height="14"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    >
-                        <path d="m15 18-6-6 6-6"></path>
-                    </svg>
-                    Back
-                </a>
-            </nav>
-
             <article class="py-6">
-                <header class="mb-8">
-                    <h1
-                        class="text-3xl font-semibold text-balance tracking-tight"
-                    >
+                <header class="mb-10 font-mono border-b pb-5">
+                    <h1 class="text-2xl font-medium tracking-tight">
                         {post.data.title}
                     </h1>
                     <div
-                        class="mt-2 flex items-center gap-2 text-sm text-muted-foreground"
+                        class="mt-5 flex items-center gap-2 text-sm text-foreground/30"
                     >
                         <time datetime={post.data.pubDate.toISOString()}>
                             {
@@ -75,10 +52,10 @@ const { Content } = await render(post);
                 </div>
             </article>
 
-            <nav class="pb-8">
+            <div class="flex justify-center pt-20">
                 <a
-                    href="/blog"
-                    class="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    href="/"
+                    class="inline-flex items-center gap-1 text-sm text-foreground/30 transition-colors hover:text-foreground"
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -93,9 +70,10 @@ const { Content } = await render(post);
                     >
                         <path d="m15 18-6-6 6-6"></path>
                     </svg>
-                    Back to all posts
+                    Back
                 </a>
-            </nav>
+            </div>
+            <SiteFooter class:list={"text-foreground/30"} />
         </div>
     </main>
 </Layout>
