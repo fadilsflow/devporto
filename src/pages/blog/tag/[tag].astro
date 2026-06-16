@@ -55,7 +55,7 @@ const capitalizedTag = tag.charAt(0).toUpperCase() + tag.slice(1);
                     <li>
                         <a
                             href={`/blog/${post.id}`}
-                            class="flex items-center justify-between py-3 text-sm transition-colors hover:text-foreground/80"
+                            class="group relative flex items-center justify-between py-3 text-sm transition-colors hover:text-foreground/80"
                         >
                             <span class="font-medium">{post.data.title}</span>
                             <time
@@ -68,6 +68,7 @@ const capitalizedTag = tag.charAt(0).toUpperCase() + tag.slice(1);
                                     day: "numeric",
                                 })}
                             </time>
+                            <span class="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-foreground/20 transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
                         </a>
                     </li>
                 ))}

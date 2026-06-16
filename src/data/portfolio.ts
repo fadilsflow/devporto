@@ -161,9 +161,10 @@ Let's connect and collaborate!
     downloadUrl: "",
   },
   blogPage: {
-    title: "Blog",
-    description: "Thoughts, tutorials, and insights on web development, design, and technology.",
-    seoDescription: "Blog posts by Wahyu Akhmad Fadillah — Full Stack Developer writing about web development, TypeScript, Next.js, and modern web tooling.",
+    title: "blog",
+    description: "thoughts on tech",
+    seoDescription:
+      "Blog posts by Wahyu Akhmad Fadillah — Full Stack Developer writing about web development, TypeScript, Next.js, and modern web tooling.",
   },
   projects: {
     initialVisible: 4,

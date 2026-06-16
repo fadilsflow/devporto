@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import { PORTFOLIO } from "../../data";
+import SiteFooter from "../../components/SiteFooter.astro";
 
 const { blogPage } = PORTFOLIO;
 
@@ -9,54 +10,88 @@ const allPosts = await getCollection("blog", ({ data }) =>
     import.meta.env.PROD ? !data.draft : true,
 );
 
-allPosts.sort(
-    (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
-);
+allPosts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 ---
 
 <Layout
     title={blogPage.title}
     description={blogPage.seoDescription}
     pageType="WebPage"
+    bare
 >
-    <main id="main-content" class="mx-auto max-w-3xl px-2">
+    <main
+        id="main-content"
+        class="mx-auto max-w-3xl px-6 md:px-2 mt-20 font-mono"
+    >
         <div class="max-w-screen overflow-x-hidden">
             <div class="pt-2">
-                <h1 class="text-3xl font-semibold">{blogPage.title}</h1>
+                <h1 class="text-xl font-medium">{blogPage.title}</h1>
             </div>
 
-            <div class="py-4">
-                <p class="font-mono text-sm text-balance text-muted-foreground">
+            <div class="py-4 pb-15">
+                <p class="font-mono text-sm text-balance text-foreground/30">
                     {blogPage.description}
                 </p>
             </div>
 
-            {allPosts.length === 0 && (
-                <p class="text-sm text-muted-foreground">No posts yet.</p>
-            )}
+            {
+                allPosts.length === 0 && (
+                    <p class="text-sm text-muted-foreground">No posts yet.</p>
+                )
+            }
 
-            <ul class="divide-y divide-edge">
-                {allPosts.map((post) => (
-                    <li>
-                        <a
-                            href={`/blog/${post.id}`}
-                            class="flex items-center justify-between py-3 text-sm transition-colors hover:text-foreground/80"
-                        >
-                            <span class="font-medium">{post.data.title}</span>
-                            <time
-                                datetime={post.data.pubDate.toISOString()}
-                                class="shrink-0 text-muted-foreground"
+            <ul class="space-y-6">
+                {
+                    allPosts.map((post) => (
+                        <li>
+                            <a
+                                href={`/blog/${post.id}`}
+                                class="group relative flex items-center justify-between py-1 text-sm text-foreground/70 transition-colors hover:text-foreground"
                             >
-                                {post.data.pubDate.toLocaleDateString("en-US", {
-                                    year: "numeric",
-                                    month: "short",
-                                    day: "numeric",
-                                })}
-                            </time>
-                        </a>
-                    </li>
-                ))}
+                                <span class="font-medium">
+                                    {post.data.title}
+                                </span>
+                                <time
+                                    datetime={post.data.pubDate.toISOString()}
+                                    class="shrink-0 text-foreground/30 text-xs"
+                                >
+                                    {post.data.pubDate.toLocaleDateString(
+                                        "en-US",
+                                        {
+                                            year: "numeric",
+                                            month: "short",
+                                            day: "numeric",
+                                        },
+                                    )}
+                                </time>
+                                <span class="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-foreground/20 transition-transform duration-300 ease-out group-hover:scale-x-100" />
+                            </a>
+                        </li>
+                    ))
+                }
             </ul>
         </div>
+        <div class="flex justify-center pt-20">
+            <a
+                href="/"
+                class="inline-flex items-center gap-1 text-sm text-foreground/30 transition-colors hover:text-foreground"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <path d="m15 18-6-6 6-6"></path>
+                </svg>
+                Back
+            </a>
+        </div>
+        <SiteFooter class:list={"text-foreground/30"} />
     </main>
 </Layout>

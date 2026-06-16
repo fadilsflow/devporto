@@ -22,6 +22,7 @@ const { Content } = await render(post);
     description={post.data.description}
     pageType="WebPage"
     image={post.data.image}
+    bare
 >
     <main id="main-content" class="mx-auto max-w-3xl px-2">
         <div class="max-w-screen overflow-x-hidden">
@@ -41,7 +42,7 @@ const { Content } = await render(post);
                         stroke-linecap="round"
                         stroke-linejoin="round"
                     >
-                        <path d="m15 18-6-6 6-6" />
+                        <path d="m15 18-6-6 6-6"></path>
                     </svg>
                     Back
                 </a>
@@ -49,16 +50,22 @@ const { Content } = await render(post);
 
             <article class="py-6">
                 <header class="mb-8">
-                    <h1 class="text-3xl font-semibold text-balance tracking-tight">
+                    <h1
+                        class="text-3xl font-semibold text-balance tracking-tight"
+                    >
                         {post.data.title}
                     </h1>
-                    <div class="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
+                    <div
+                        class="mt-2 flex items-center gap-2 text-sm text-muted-foreground"
+                    >
                         <time datetime={post.data.pubDate.toISOString()}>
-                            {post.data.pubDate.toLocaleDateString("en-US", {
-                                year: "numeric",
-                                month: "long",
-                                day: "numeric",
-                            })}
+                            {
+                                post.data.pubDate.toLocaleDateString("en-US", {
+                                    year: "numeric",
+                                    month: "long",
+                                    day: "numeric",
+                                })
+                            }
                         </time>
                     </div>
                 </header>
@@ -84,7 +91,7 @@ const { Content } = await render(post);
                         stroke-linecap="round"
                         stroke-linejoin="round"
                     >
-                        <path d="m15 18-6-6 6-6" />
+                        <path d="m15 18-6-6 6-6"></path>
                     </svg>
                     Back to all posts
                 </a>

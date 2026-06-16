@@ -9,7 +9,7 @@ const year = new Date().getFullYear();
 
 <footer class="py-20 flex justify-center text-center">
     <p
-        class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-foreground"
+        class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-foreground/30"
     >
         <span>© {year}</span>
         <span aria-hidden="true">/</span>
@@ -23,7 +23,7 @@ const year = new Date().getFullYear();
                     {profile.displayName}
                 </a>
             ) : (
-                <span class="text-foreground">{profile.displayName}</span>
+                <span class="text-foreground/30">{profile.displayName}</span>
             )
         }
         <span aria-hidden="true">/</span>
