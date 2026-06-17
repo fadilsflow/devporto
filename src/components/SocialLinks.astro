@@ -7,7 +7,7 @@ interface Props {
     links?: SocialLink[];
 }
 
-const { links = PORTFOLIO.socialLinks.filter((link) => link.placements.includes("home")) } = Astro.props;
+const { links = PORTFOLIO.computed.homeSocialLinks } = Astro.props;
 ---
 
 <Panel>

@@ -1,11 +1,10 @@
 import type { APIRoute } from "astro";
 import { PORTFOLIO } from "../data";
-import { decodeContact } from "../lib/utils";
 
 export const GET: APIRoute = () => {
     const { profile } = PORTFOLIO;
-    const email = decodeContact(profile.email, profile.contactEncoding);
-    const phone = decodeContact(profile.phoneNumber, profile.contactEncoding);
+    const email = PORTFOLIO.computed.email;
+    const phone = PORTFOLIO.computed.phone;
     const job = profile.jobs[0];
 
     // RFC 6350 vCard 3.0

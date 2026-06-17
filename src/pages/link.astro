@@ -1,25 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { PORTFOLIO, type LinkItem } from "../data";
-import { decodeContact } from "../lib/utils";
+import { PORTFOLIO } from "../data";
+import { buildLinkPageData } from "../lib/link-page";
 
-const { profile, linkPage, socialLinks } = PORTFOLIO;
-const email = decodeContact(profile.email, profile.contactEncoding);
-const phone = decodeContact(profile.phoneNumber, profile.contactEncoding);
-const primaryLinks: LinkItem[] = [
-    ...socialLinks
-        .filter((link) => link.placements.includes("linksPrimary"))
-        .map((link) => ({ title: link.title.toLowerCase(), href: link.href, external: true })),
-    ...linkPage.primaryLinks,
-];
-const secondaryLinks: LinkItem[] = [
-    ...socialLinks
-        .filter((link) => link.placements.includes("linksSecondary"))
-        .map((link) => ({ title: link.title.toLowerCase(), href: link.href, external: true })),
-    ...linkPage.secondaryLinks,
-    ...(email ? [{ title: "mail", href: `mailto:${email}`, external: true }] : []),
-    ...(phone ? [{ title: "ph", href: `https://wa.me/${phone}`, external: true }] : []),
-];
+const { profile, linkPage } = PORTFOLIO;
+const { primaryLinks, secondaryLinks } = buildLinkPageData(PORTFOLIO);
 ---
 
 <Layout

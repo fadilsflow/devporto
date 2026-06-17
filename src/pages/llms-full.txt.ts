@@ -1,11 +1,10 @@
 import type { APIRoute } from "astro";
 import { PORTFOLIO } from "../data";
-import { decodeContact } from "../lib/utils";
 
 export const GET: APIRoute = ({ site }) => {
     const { profile, projects, experiences, socialLinks, techStack } = PORTFOLIO;
-    const base = site?.toString().replace(/\/$/, "") ?? PORTFOLIO.site.url.replace(/\/$/, "");
-    const email = decodeContact(profile.email, profile.contactEncoding);
+    const base = site?.toString().replace(/\/$/, "") ?? PORTFOLIO.computed.siteUrl;
+    const email = PORTFOLIO.computed.email;
 
     const body = `# ${profile.displayName}
 

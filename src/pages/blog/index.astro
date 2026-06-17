@@ -1,16 +1,11 @@
 ---
-import { getCollection } from "astro:content";
+import { getPublishedPosts } from "../../lib/blog";
 import Layout from "../../layouts/Layout.astro";
 import { PORTFOLIO } from "../../data";
 import SiteFooter from "../../components/SiteFooter.astro";
 
 const { blogPage } = PORTFOLIO;
-
-const allPosts = await getCollection("blog", ({ data }) =>
-    import.meta.env.PROD ? !data.draft : true,
-);
-
-allPosts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+const allPosts = await getPublishedPosts();
 ---
 
 <Layout

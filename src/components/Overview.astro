@@ -2,15 +2,16 @@
 import Panel from "./Panel.astro";
 import PanelContent from "./PanelContent.astro";
 import { PORTFOLIO, type Profile } from "../data";
-import { decodeContact, urlToName } from "../lib/utils";
+import { urlToName } from "../lib/utils";
 
 interface Props {
     profile?: Profile;
 }
 
-const { profile = PORTFOLIO.profile } = Astro.props;
-const phone = decodeContact(profile.phoneNumber, profile.contactEncoding);
-const email = decodeContact(profile.email, profile.contactEncoding);
+const { profile: configProfile = PORTFOLIO.profile } = Astro.props;
+const phone = PORTFOLIO.computed.phone;
+const email = PORTFOLIO.computed.email;
+const profile = configProfile;
 
 const items: { icon: string; content: string; href?: string }[] = [];
 

@@ -1,6 +1,6 @@
 import rss from "@astrojs/rss";
-import { getCollection } from "astro:content";
 import type { APIRoute } from "astro";
+import { getPublishedPosts } from "../lib/blog";
 import { PORTFOLIO } from "../data";
 
 function parsePeriod(p: string): Date {
@@ -13,13 +13,9 @@ function parsePeriod(p: string): Date {
 }
 
 export const GET: APIRoute = async (context) => {
-    const blogPosts = await getCollection("blog", ({ data }) =>
-        import.meta.env.PROD ? !data.draft : true,
-    );
+    const blogPosts = await getPublishedPosts();
 
-    const blogItems = blogPosts.sort(
-        (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
-    ).map((post) => ({
+    const blogItems = blogPosts.map((post) => ({
         title: post.data.title,
         description: post.data.description,
         link: `/blog/${post.id}`,

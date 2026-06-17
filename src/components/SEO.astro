@@ -1,6 +1,6 @@
 ---
-import { PORTFOLIO } from "../data";
 import { decodeContact } from "../lib/utils";
+import type { Profile, SocialLink, Project, PortfolioConfig } from "../data";
 
 export interface Props {
     title?: string;
@@ -8,11 +8,17 @@ export interface Props {
     pageType?: "WebSite" | "ProfilePage" | "WebPage";
     image?: string;
     noindex?: boolean;
+    profile: Profile;
+    site: PortfolioConfig["site"];
+    socialLinks: SocialLink[];
+    projects: PortfolioConfig["projects"];
 }
 
-const { site, profile, projects, socialLinks } = PORTFOLIO;
-
 const {
+    profile,
+    site,
+    socialLinks,
+    projects,
     title,
     description = profile.bio,
     pageType = "WebSite",
