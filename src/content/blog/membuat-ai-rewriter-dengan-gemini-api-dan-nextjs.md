@@ -1,0 +1,762 @@
+---
+title: "Membuat AI Rewriter dengan Gemini API dan Next.js"
+description: "Tutorial lengkap membuat AI Rewriter untuk Chat, Email, Komentar, dengan Gemini API + Next.js"
+pubDate: 2025-06-04
+updatedDate: 2025-06-04
+tags: ["Next.js", "Gemini API", "TypeScript", "Tailwind CSS", "Tutorial"]
+image: "https://res.cloudinary.com/dxurnpbrc/image/upload/v1758294320/4_y0ih6i.png"
+draft: false
+---
+
+![Rightsponse AI Rewriter](https://res.cloudinary.com/dxurnpbrc/image/upload/v1758294320/4_y0ih6i.png)
+
+Pernah nggak sih kamu bingung nyari kata-kata yang pas buat nge-chat orang, bales komentar di media sosial, atau mungkin pas nulis email yang sopan dan tepat?.
+Melalui blog ini kita bakalan buat aplikasi yang dapat mengatasi masalah tersebut dengan cepat dan tepat loh! Kamu bisa memilih gaya bahasa sesuai kebutuhan, baik formal maupun santai.
+
+Meskipun sebenarnya sudah banyak chatbot yang bisa kamu pakai, tapi kamu masih harus nge-prompt dulu, ribet banget gak sih. Tapi dengan aplikasi ini kamu gak akan kerepotan, aplikasi Rightsponse akan membantu kamu dengan memberikan respon yang cepat dan tepat!
+
+### Tech Stack
+
+- **Next.js 15.3.3**: React Framework
+- **Gemini API**: Model AI dari Google
+- **TypeScript**: JavaScript Super Set
+- **Tailwind CSS**: CSS Framework
+- **Shadcn/ui**: UI Library
+
+### Requirements
+
+Pastikan di Laptop/Komputer km udah ada beberapa software ini. Ini alat-alat yang bakal kita pake.
+
+1.  **Node.js** : JavaScript Runtime
+2.  **Text Editor** : Visual Studio Code / Cursor / VSCodium / Notepad++ / etc
+3.  **Gemini API Key** : Key buat akses AI nya Google
+
+### Dapetin API Key
+
+API Key itu seperti KTP buat aplikasi kita biar bisa akses layanan AI dari Google. Cara dapetinnya gampang kok:
+
+1.  Akses [Google AI Studio](https://aistudio.google.com/apikey).
+2.  Login pake akun Google-mu.
+3.  Ikutin aja petunjuk buat bikin API key baru. Biasanya sih disuruh bikin proyek baru dulu kalo belum punya.
+4.  **Simpen API key-nya baik-baik, jangan sampe ilang atau kesebar!** Bentar lagi kita pake nih. Anggep aja seperti password, jangan kasih tau siapa-siapa.
+
+## Setup Project
+
+### Bikin Proyek Next.js
+
+Kita bakal pake `create-next-app`. command buat bikin project next.js. Buka terminal atau command prompt-mu, terus ketik ini:
+
+```bash
+npx create-next-app@latest rightsponse --typescript --tailwind --app
+
+# masuk ke folder project nya
+cd rightsponse
+```
+
+ikuti pilihan di bawah ini:
+
+- Would you like to use ESLint? … Yes
+- Would you like your code inside a `src/` directory? … No
+- Would you like to use Turbopack for `next dev`? … Yes
+- Would you like to customize the import alias (`@/*` by default)? … Yes
+
+Perintah pertama itu bakal bikin folder baru namanya `rightsponse` isinya semua file awal proyek Next.js. Kelar itu, perintah `cd rightsponse` bakal ngebawa kamu masuk ke dalem folder proyek yang baru aja jadi, biar kita bisa mulai ngoprek di situ.
+
+### Install Gemini API library
+
+```bash
+npm install @google/genai
+```
+
+### Setup Shadcn/ui
+
+```bash
+npx shadcn@latest init
+```
+
+Nanti dia bakal nanya beberapa hal soal settingan awal [shadcn/ui](https://ui.shadcn.com/) di proyek ini, warna dasarnya apa, dan lain-lain. Buat tutorial ini, ikutin aja pilihan defaultnya.
+
+### Add UI Components
+
+Kelar ngesetup `shadcn/ui`, kita bisa mulai nambahin komponen-komponen UI spesifik yang kita butuhin buat ngebangun tampilan Rightsponse. Gak perlu install semua komponennya, yang kita perluin aja.
+
+```bash
+# Install semua komponen yang kita butuhin
+  npx shadcn@latest add button tabs input textarea select card sonner badge
+```
+
+Perintah ini otomatis bakal bikin file-file komponen itu (seperti `button.tsx`, `tabs.tsx`, dll.) di dalem folder `components/ui` di proyekmu. Kita pilih:
+
+- `button`: Buat macem-macem tombol interaktif.
+- `tabs`: Buat pindah-pindah mode "Message", "Email", sama "Comment".
+- `input` dan `textarea`: Buat tempat user ngetik.
+- `select`: Buat dropdown pilihan bahasa sama nada.
+- `card`: Buat ngelompokin dan nata elemen UI.
+- `sonner`: Buat nampilin notifikasi (pesan kecil) yang informatif.
+- `badge`: Buat nampilin label kecil seperti bahasa dan nada yang dipilih.
+
+nah kalo udah, kita lanjut liat struktur project yang akan kita buat.
+
+### Struktur Project
+
+```text
+rightsponse/
+├── app/                            // Folder utama buat halaman/page dan API
+│   ├── api/
+│   │   └── rewrite/
+│   │       └── route.ts          // Logika backend buat ngobrol sama Gemini API kita
+│   ├── globals.css               // global css style
+│   ├── layout.tsx                // template utama aplikasi
+│   └── page.tsx                  // halaman root atau home page
+├── components/                     // tempat nyimpen komponen UI
+│   ├── ui/                         // Komponen dari Shadcn/ui (misal: button.tsx, card.tsx)
+│   ├── language-select.tsx       // Komponen custom kita buat milih bahasa
+│   └── tone-select.tsx           // Komponen custom kita buat milih nada
+├── public/                         // tempat nyimpen file statis (gambar, ikon, dll.)
+├── .env                            // File PENTING buat API Key Gemini (RAHASIA!)
+├── next.config.mjs                 // settingan buat Next.js
+├── package.json                    // daftar "bahan-bahan" proyek & skrip (npm/bun)
+└── tsconfig.json                   // settingan buat TypeScript
+```
+
+### Global Layout: `app/layout.tsx`
+
+Di arsitektur Next.js yang pake App Router, file `app/layout.tsx` ini perannya vital banget. Anggap aja ini seperti cetakan dasar yang bakal dipake sama semua halaman di aplikasi kamu. Makanya, `layout.tsx` ini tempat paling pas buat naruh elemen UI atau fungsi yang sifatnya global dan sama di semua halaman, contohnya:
+
+- Deklarasi tag `<html>` dan `<body>`.
+- Settingan metadata standar buat SEO (biar gampang dicari Google) lewat objek `metadata`.
+- Impor dan pake font buat seluruh aplikasi.
+- Naruh komponen UI yang nongol di semua halaman (seperti header, footer, atau sistem notif seperti `Toaster`).
+
+```typescript
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "Right Sponse ",
+  description: "Your ai for a better response",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        {children}
+        <Toaster />
+      </body>
+    </html>
+  );
+}
+```
+
+Dengan adanya `layout.tsx` ini, kita mastiin semua halaman di Rightsponse punya tampilan dasar, font, dan fungsi notifikasi yang seragam, jadi nggak perlu nulis kode yang sama berulang-ulang di tiap halaman.
+
+## Implementasi Komponen UI
+
+Komponen itu ibarat LEGO-nya aplikasi React. Mereka itu potongan UI yang bisa berdiri sendiri dan dipake ulang. Buat Rightsponse, kita bakal bikin beberapa komponen khusus buat ngatur pilihan bahasa dan nada, plus make komponen-komponen dari `shadcn/ui`.
+
+### Komponen Pemilih Bahasa: `components/language-select.tsx`
+
+Komponen ini, yang bakal kita simpen di `components/language-select.tsx`, punya peran penting buat ngasih kebebasan ke user. Tugasnya nampilin daftar bahasa yang disupport sama aplikasi kita, jadi user bisa gampang milih bahasa target buat teks yang bakal dikeluarin sama AI. Dasarnya, komponen ini manfaatin komponen `Select` dari `shadcn/ui` yang udah kita pasang tadi. Desainnya yang bersih dan fungsinya yang udah kebukti bakal ngebantu banget.
+
+```typescript
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectGroup,
+  SelectLabel,
+  SelectItem,
+} from "./ui/select";
+
+interface LanguageSelectProps {
+  value: string;
+  onValueChange: (value: string) => void;
+}
+
+const languages = [
+  { value: "en", label: "English", group: "Language" },
+  { value: "id", label: "Indonesian", group: "Language" },
+];
+
+const groupedLanguages = languages.reduce((acc, lang) => {
+  if (!acc[lang.group]) {
+    acc[lang.group] = [];
+  }
+  acc[lang.group].push(lang);
+  return acc;
+}, {} as Record<string, typeof languages>);
+
+export const LanguageSelect = ({
+  value,
+  onValueChange,
+}: LanguageSelectProps) => {
+  return (
+    <Select value={value} onValueChange={onValueChange}>
+      <SelectTrigger className="w-[130px]">
+        <SelectValue placeholder="Language" />
+      </SelectTrigger>
+      <SelectContent>
+        {Object.entries(groupedLanguages).map(([group, langs]) => (
+          <SelectGroup key={group}>
+            <SelectLabel>{group}</SelectLabel>
+            {langs.map((lang) => (
+              <SelectItem key={lang.value} value={lang.value}>
+                {lang.label}
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        ))}
+      </SelectContent>
+    </Select>
+  );
+};
+```
+
+### Pengatur Nada Bicara: `components/tone-select.tsx`
+
+Mirip sama pemilih bahasa, komponen `ToneSelect` (disimpen di `components/tone-select.tsx`) ngasih lapisan kustomisasi lain buat user. Komponen ini bikin user bisa milih 'nada' atau 'gaya bahasa' yang dimau buat teks yang dikeluarin AI. Mau respons yang super profesional buat email bisnis, nada yang lebih santai buat temen, atau mungkin gaya persuasif buat materi promosi? `ToneSelect` solusinya.
+
+```typescript
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectGroup,
+  SelectLabel,
+  SelectItem,
+} from "./ui/select";
+
+interface ToneSelectProps {
+  value: string;
+  onValueChange: (value: string) => void;
+}
+
+const tones = [
+  { value: "professional", label: "Professional", group: "Business" },
+  { value: "formal", label: "Formal", group: "Business" },
+  { value: "polite", label: "Polite", group: "Business" },
+  { value: "confident", label: "Confident", group: "Business" },
+  { value: "friendly", label: "Friendly", group: "Casual" },
+  { value: "casual", label: "Casual", group: "Casual" },
+  { value: "enthusiastic", label: "Enthusiastic", group: "Casual" },
+  { value: "empathetic", label: "Empathetic", group: "Emotional" },
+  { value: "apologetic", label: "Apologetic", group: "Emotional" },
+  { value: "grateful", label: "Grateful", group: "Emotional" },
+  { value: "diplomatic", label: "Diplomatic", group: "Special" },
+  { value: "persuasive", label: "Persuasive", group: "Special" },
+  { value: "urgent", label: "Urgent", group: "Special" },
+];
+
+const groupedTones = tones.reduce((acc, tone) => {
+  if (!acc[tone.group]) {
+    acc[tone.group] = [];
+  }
+  acc[tone.group].push(tone);
+  return acc;
+}, {} as Record<string, typeof tones>);
+
+export const ToneSelect = ({ value, onValueChange }: ToneSelectProps) => {
+  return (
+    <Select value={value} onValueChange={onValueChange}>
+      <SelectTrigger className="w-[130px]">
+        <SelectValue placeholder="Tone" />
+      </SelectTrigger>
+      <SelectContent>
+        {Object.entries(groupedTones).map(([group, tones]) => (
+          <SelectGroup key={group}>
+            <SelectLabel>{group}</SelectLabel>
+            {tones.map((tone) => (
+              <SelectItem key={tone.value} value={tone.value}>
+                {tone.label}
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        ))}
+      </SelectContent>
+    </Select>
+  );
+};
+```
+
+### Implementasi API
+
+Kelar nyiapin komponen tampilan, sekarang waktunya kita sambungin aplikasi kita sama "otak"-nya, yaitu Gemini API. Ini termasuk nyimpen API key kita dengan aman pake variabel lingkungan dan bikin API route di Next.js buat ngurusin permintaan ke Gemini.
+
+#### 1. API Key
+
+API key-mu itu info sensitif. **Jangan pernah** nulis langsung di kode (hardcoding)! Cara yang bener dan aman itu pake variabel lingkungan. Next.js otomatis ngeload variabel dari file `.env`.
+
+Bikin file namanya `.env` di folder root proyekmu (sejajar sama `package.json`), terus isi API key Gemini-mu seperti gini:
+
+```env
+GEMINI_API_KEY=your_api_key_here
+```
+
+Pastikan kamu ganti `your_api_key_here` sama API key yang udah kamu dapet dari Google AI Studio. File `.env` ini secara default udah masuk di `.gitignore` sama `create-next-app`, jadi nggak bakal ke-upload ke repository Git-mu. Ini penting banget buat keamanan.
+
+#### API Route (`app/api/rewrite/route.ts`)
+
+Di Next.js App Router, file yang namanya `route.ts` (atau `route.js`) di dalem folder `app` bakal jadi endpoint API. Kita bakal bikin endpoint di `app/api/rewrite/route.ts` yang bakal nerima teks dari user, plus pilihan bahasa, nada, dan tipe konten, terus ngirimnya ke Gemini API buat diolah.
+
+```typescript
+import { GoogleGenAI } from "@google/genai";
+import { NextResponse } from "next/server";
+
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "" });
+
+const languageMap = {
+  en: "English",
+  id: "Indonesian",
+};
+
+// System instructions for different types of content
+const systemInstructions = {
+  message:
+    "You are a writing assistant. Provide ONE direct rewrite of the text. Do not provide multiple options or explanations. Just rewrite the text once in the requested style.",
+  email:
+    "You are an email expert. Provide ONE direct email format. Do not provide multiple options or explanations. Format the email once with subject, greeting, and closing.",
+  comment:
+    "You are a response expert. Provide ONE direct response. Do not provide multiple options or explanations. Just write one clear response.",
+};
+
+// Maximum output length constraints
+const MAX_OUTPUT_TOKENS = 250;
+const TEMPERATURE = 0.3; // Reduced temperature for more focused outputs
+
+export async function POST(req: Request) {
+  try {
+    const { text, tone, language, type, comment } = await req.json();
+
+    if (!text?.trim()) {
+      return NextResponse.json({ error: "Text is required" }, { status: 400 });
+    }
+
+    const targetLanguage =
+      languageMap[language as keyof typeof languageMap] || "English";
+
+    // Build prompt based on content type
+    const prompt = buildPrompt(type, targetLanguage, tone, text, comment);
+
+    const response = await ai.models.generateContent({
+      model: "gemini-2.0-flash",
+      contents: prompt,
+      config: {
+        temperature: TEMPERATURE,
+        maxOutputTokens: MAX_OUTPUT_TOKENS,
+        systemInstruction:
+          systemInstructions[type as keyof typeof systemInstructions],
+      },
+    });
+
+    const rewrittenText = response.text;
+
+    return NextResponse.json({ result: rewrittenText });
+  } catch (error) {
+    console.error("Error:", error);
+    return NextResponse.json(
+      { error: "Failed to process the request" },
+      { status: 500 }
+    );
+  }
+}
+
+function buildPrompt(
+  type: string,
+  language: string,
+  tone: string,
+  text: string,
+  comment?: string
+): string {
+  const prompts = {
+    email: `
+Rewrite this content as ONE professional email in ${language} with a ${tone} tone.
+IMPORTANT: 
+- Provide only ONE version
+- Do not explain or give options
+- Include subject, greeting, and closing
+- Keep it concise and culturally appropriate for ${language}
+
+Content to rewrite:
+${text}`,
+
+    comment: `
+Write ONE ${tone} response in ${language}.
+IMPORTANT:
+- Provide only ONE direct response
+- Do not explain or give options
+- Maximum 2-3 sentences
+- Keep it contextual and appropriate
+
+Original Comment: ${comment}
+Your message: ${text}`,
+
+    message: `
+Rewrite this message ONCE in ${language} with a ${tone} tone.
+IMPORTANT:
+- Provide only ONE rewritten version
+- Do not explain or give options
+- Keep the core message intact
+- Be concise and clear
+
+Message to rewrite:
+${text}`,
+  };
+
+  return prompts[type as keyof typeof prompts] || prompts.message;
+}
+```
+
+### Tampilan Utama: Halaman Depan (`app/page.tsx`)
+
+Ini halaman yang pertama kali nongol pas user buka aplikasi. Di sinilah semua komponen UI yang udah kita siapin (`LanguageSelect`, `ToneSelect`, `Textarea`, `Button`, dll.) dirangkai jadi satu kesatuan yang berfungsi. File `app/page.tsx` ini adalah React Client Component karena kita pake hook seperti `useState` dan ngurusin interaksi user langsung di browser.
+
+```typescript
+"use client";
+
+import { LanguageSelect } from "@/components/language-select";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { ToneSelect } from "@/components/tone-select";
+import {
+  CopyIcon,
+  Loader2,
+  Mail,
+  MessageSquare,
+  MessagesSquare,
+  Sparkles,
+} from "lucide-react";
+import { useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { toast } from "sonner";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { cn } from "@/lib/utils";
+
+type TabType = "message" | "email" | "comment";
+
+const tabDescriptions = {
+  message: "Improve your message with AI assistance",
+  email: "Create professional emails with proper formatting",
+  comment: "Generate appropriate responses to comments",
+};
+
+const placeholders = {
+  message: "Write your message here...",
+  email:
+    "Write your email content here. The AI will format it with a subject line, greeting, and closing.",
+  comment: "Write your reply here...",
+};
+
+export default function Home() {
+  const [inputText, setInputText] = useState("");
+  const [comment, setComment] = useState("");
+  const [outputText, setOutputText] = useState("");
+  const [language, setLanguage] = useState("en");
+  const [tone, setTone] = useState("professional");
+  const [isLoading, setIsLoading] = useState(false);
+  const [activeTab, setActiveTab] = useState<TabType>("message");
+
+  const validateInput = (type: TabType): boolean => {
+    if (!inputText.trim()) {
+      toast.error("Please enter your message");
+      return false;
+    }
+
+    if (type === "comment" && !comment.trim()) {
+      toast.error("Please enter the comment you're replying to");
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleSubmit = async (type: TabType) => {
+    if (!validateInput(type)) return;
+
+    setIsLoading(true);
+    try {
+      const response = await fetch("/api/rewrite", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          text: inputText,
+          comment: type === "comment" ? comment : undefined,
+          tone,
+          language,
+          type,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to process request");
+      }
+
+      if (data.result) {
+        setOutputText(data.result);
+        toast.success("Your text has been improved");
+      }
+    } catch (error) {
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : "Failed to process your request"
+      );
+      console.error("Error:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(outputText);
+      toast.success("Text copied to clipboard");
+    } catch (error) {
+      toast.error("Failed to copy text");
+    }
+  };
+
+  return (
+    <main className="min-h-screen bg-gradient-to-b from-background to-muted/50">
+      <div className="container mx-auto px-4 py-8 max-w-6xl">
+        <div className="flex flex-col gap-8">
+          <div className="text-center space-y-3">
+            <h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+              Rightsponse
+            </h1>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Transform your communication with AI-powered writing assistance.
+              Perfect for emails, messages, and responses.
+            </p>
+          </div>
+
+          <Tabs
+            value={activeTab}
+            onValueChange={(v) => setActiveTab(v as TabType)}
+            className="w-full"
+          >
+            <TabsList className="grid w-full grid-cols-3 mb-8">
+              <TabsTrigger value="message" className="flex items-center gap-2">
+                <MessageSquare className="h-4 w-4" />
+                Message
+              </TabsTrigger>
+              <TabsTrigger value="email" className="flex items-center gap-2">
+                <Mail className="h-4 w-4" />
+                Email
+              </TabsTrigger>
+              <TabsTrigger value="comment" className="flex items-center gap-2">
+                <MessagesSquare className="h-4 w-4" />
+                Comment
+              </TabsTrigger>
+            </TabsList>
+
+            <div className="grid gap-6 lg:grid-cols-2">
+              <Card className="lg:sticky lg:top-8 h-fit">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <span>Input</span>
+                    <div className="flex-1" />
+                    <div className="flex items-center gap-2">
+                      <LanguageSelect
+                        value={language}
+                        onValueChange={setLanguage}
+                      />
+                      <ToneSelect value={tone} onValueChange={setTone} />
+                    </div>
+                  </CardTitle>
+                  <CardDescription>
+                    {tabDescriptions[activeTab]}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {activeTab === "comment" && (
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium">
+                          Original Comment
+                        </label>
+                        <Textarea
+                          placeholder="Paste the comment you're replying to..."
+                          value={comment}
+                          onChange={(e) => setComment(e.target.value)}
+                          className="h-24 resize-none"
+                        />
+                      </div>
+                    )}
+
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">
+                        {activeTab === "message" && "Your Message"}
+                        {activeTab === "email" && "Email Content"}
+                        {activeTab === "comment" && "Your Reply"}
+                      </label>
+                      <div className="relative">
+                        <Textarea
+                          placeholder={placeholders[activeTab]}
+                          className="min-h-[200px] pr-12 resize-none"
+                          value={inputText}
+                          onChange={(e) => setInputText(e.target.value)}
+                        />
+                        <Button
+                          size="sm"
+                          className={cn(
+                            "absolute bottom-2 right-2 transition-opacity",
+                            !inputText && "opacity-0"
+                          )}
+                          onClick={() => handleSubmit(activeTab)}
+                          disabled={isLoading}
+                        >
+                          {isLoading ? (
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                          ) : (
+                            <Sparkles className="h-4 w-4" />
+                          )}
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Improved Version</CardTitle>
+                  <CardDescription>
+                    AI-enhanced text with your selected style
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="relative">
+                      <div className="absolute top-2 right-2">
+                        {outputText && (
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={copyToClipboard}
+                          >
+                            <CopyIcon className="h-4 w-4" />
+                          </Button>
+                        )}
+                      </div>
+                      <div className="min-h-[300px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm whitespace-pre-wrap">
+                        {outputText || (
+                          <span className="text-muted-foreground">
+                            Your improved text will appear here...
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    {outputText && (
+                      <div className="flex gap-2">
+                        <Badge variant="secondary">
+                          {language.toUpperCase()}
+                        </Badge>
+                        <Badge variant="secondary">{tone}</Badge>
+                      </div>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </Tabs>
+        </div>
+      </div>
+    </main>
+  );
+}
+```
+
+### Run the project
+
+Buat mulai, pastiin kamu udah buka terminal atau command prompt dan lagi ada di dalem folder utama proyek Rightsponse kita (folder `rightsponse` yang pertama kita bikin).
+
+Kita punya dua mode utama buat jalanin aplikasi Next.js:
+
+1.  **Mode Pengembangan (Development Mode)**
+    Mode ini pas banget kalo kamu lagi faase development aplikasi nya.
+
+    ```bash
+    npm run dev
+    ```
+
+2.  **Mode Produksi (Production Mode)**
+    Mode ini dipake kalo aplikasi kamu udah siap buat Hosting .
+
+    ```bash
+    npm run build # build aplikasi
+    npm start # jalankan aplikasi
+    ```
+
+buka `http://localhost:3000` di browser.
+
+![Rightsponse AI Rewriter](https://res.cloudinary.com/dxurnpbrc/image/upload/v1749031764/RIGHTSPONSE_jzqpkh.png)
+
+### Note
+
+AI bukanlah masa depan — AI adalah masa kini.
+Teknologi ini sudah menjadi bagian dari kehidupan sehari-hari kita, dan sebagai programmer di era sekarang, kita punya peluang besar untuk memanfaatkannya sebaik mungkin. Baik itu dalam pengembangan website, aplikasi, software, atau sistem lainnya, AI bisa jadi alat bantu yang luar biasa.
+
+Namun penting untuk diingat: AI hanyalah alat, bukan pengganti pemahaman kita.
+Untuk menghasilkan karya yang maksimal, kita tetap harus menguasai dasar-dasar pemrograman, logika sistem, dan struktur program yang kita bangun. AI bisa mempercepat proses, memberikan solusi, bahkan menginspirasi ide baru — tapi arah dan kontrol tetap ada di tangan kita.
+
+Jadi, jangan hanya terpaku pada hasil instan dari AI. Teruslah belajar, kembangkan kemampuan teknis dan kreativitasmu, karena yang bertahan di masa depan bukan hanya yang bisa menggunakan AI, tapi yang mampu berpikir kritis, beradaptasi, dan terus berkembang di tengah perubahan teknologi yang cepat.
+
+## Rencana Pengembangan Lanjutan
+
+1. Auth
+2. Pricing & Custom Model
+3. History
+4. Database Implementation
+5. Browser Extension
+6. Mobile Version
+
+---
+
+Resources:
+
+- [Next.js](https://nextjs.org/)
+- [Shadcn/ui](https://ui.shadcn.com/)
+- [Lucide](https://lucide.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+
+Github:
+
+- [Rightsponse](https://github.com/fadilsflow/rightsponse)
+
+Terima kasih sudah meluangkan waktu buat baca tutorial ini. Ini adalah proyek pertama saya yang mencoba menggabungkan API dengan AI, jadi kalau masih ada kekurangan atau hal-hal yang bisa dikembangkan, saya sangat terbuka untuk masukan.
+
+kalo ada ide pengembangan aplikasi atau mau kerja sama, silahkan hubungi saya lewat [wahyufadil1140@gmail.com](mailto:wahyufadil1140@gmail.com)
+
+sampai bertemu di tulisan saya selanjutnya, semoga.
